@@ -55,7 +55,7 @@ export function OgFrame({ children }: { children: ReactNode }) {
             <circle cx="16.75" cy="16.25" r="1.75" fill="#ffffff" />
           </svg>
           <div style={{ display: "flex", fontSize: 30, fontWeight: 600, letterSpacing: "-0.02em" }}>
-            alibar<span style={{ color: "#71717a" }}>/ui</span>
+            hantui
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>{children}</div>

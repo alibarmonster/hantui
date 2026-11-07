@@ -18,12 +18,12 @@ export interface RippleRingsProps extends Omit<ComponentProps<"div">, "children"
   variant?: "outline" | "filled";
 }
 
-const KEYFRAMES = "@keyframes alibar-ripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(var(--ripple-scale));opacity:0}}";
+const KEYFRAMES = "@keyframes hantui-ripple{0%{transform:scale(1);opacity:.55}100%{transform:scale(var(--ripple-scale));opacity:0}}";
 
 export function RippleRings({ children, count = 3, color = "var(--primary)", duration = 2.4, scale = 2.6, variant = "outline", className, style, ...props }: RippleRingsProps) {
   return (
     <div className={cn("relative inline-grid place-items-center", className)} style={{ "--ripple": color, "--ripple-scale": scale, ...style } as CSSProperties} {...props}>
-      <style href="alibar-ripple-rings" precedence="alibar">
+      <style href="hantui-ripple-rings" precedence="hantui">
         {KEYFRAMES}
       </style>
       {Array.from({ length: count }, (_, i) => (
@@ -31,7 +31,7 @@ export function RippleRings({ children, count = 3, color = "var(--primary)", dur
           key={i}
           aria-hidden="true"
           className={cn(
-            "absolute inset-0 rounded-full [animation:alibar-ripple_var(--ripple-duration)_cubic-bezier(0.22,1,0.36,1)_infinite] motion-reduce:[animation:none]",
+            "absolute inset-0 rounded-full [animation:hantui-ripple_var(--ripple-duration)_cubic-bezier(0.22,1,0.36,1)_infinite] motion-reduce:[animation:none]",
             variant === "outline" ? "border-2 border-[var(--ripple)]" : "bg-[color-mix(in_oklab,var(--ripple)_30%,transparent)]",
           )}
           style={

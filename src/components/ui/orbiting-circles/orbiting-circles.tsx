@@ -41,7 +41,7 @@ export interface OrbitingCirclesProps extends Omit<ComponentProps<"div">, "child
 // path (rotate out, then counter-rotate to stay upright), so no full-size box ever spins: a spinning ring box
 // makes browsers count its rotated bounds as page overflow and widens narrow screens.
 const KEYFRAMES =
-  "@keyframes alibar-orbit-path{from{transform:rotate(var(--a)) translateX(var(--radius)) rotate(calc(var(--a) * -1))}to{transform:rotate(calc(var(--a) + 360deg)) translateX(var(--radius)) rotate(calc(var(--a) * -1 - 360deg))}}";
+  "@keyframes hantui-orbit-path{from{transform:rotate(var(--a)) translateX(var(--radius)) rotate(calc(var(--a) * -1))}to{transform:rotate(calc(var(--a) + 360deg)) translateX(var(--radius)) rotate(calc(var(--a) * -1 - 360deg))}}";
 
 export function OrbitingCircles({
   center,
@@ -60,7 +60,7 @@ export function OrbitingCircles({
       style={{ maxWidth: designSize, "--orbit-unit": `min(1px, 100cqw / ${designSize})`, ...style } as CSSProperties}
       {...props}
     >
-      <style href="alibar-orbiting-circles" precedence="alibar">
+      <style href="hantui-orbiting-circles" precedence="hantui">
         {KEYFRAMES}
       </style>
       {rings.map((ring, r) => {
@@ -91,7 +91,7 @@ export function OrbitingCircles({
                   <li
                     key={item.name}
                     className={cn(
-                      "absolute top-0 left-0 [animation-iteration-count:infinite] [animation-name:alibar-orbit-path] [animation-timing-function:linear] motion-reduce:[animation-name:none]",
+                      "absolute top-0 left-0 [animation-iteration-count:infinite] [animation-name:hantui-orbit-path] [animation-timing-function:linear] motion-reduce:[animation-name:none]",
                       paused,
                     )}
                     // The inline transform is the resting position, used when reduced motion turns the animation off.

@@ -133,7 +133,7 @@ export function ThemeToggle({
 
   return (
     <>
-      <style href="alibar-theme-toggle" precedence="default">
+      <style href="hantui-theme-toggle" precedence="default">
         {REVEAL_CSS}
       </style>
       <button

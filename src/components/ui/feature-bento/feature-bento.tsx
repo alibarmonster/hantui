@@ -20,7 +20,7 @@ export interface BentoFeature {
 }
 
 export interface FeatureBentoProps extends Omit<ComponentProps<"section">, "children" | "title"> {
-  /** Tiles. Defaults to five tiles built from alibar/ui components. */
+  /** Tiles. Defaults to five tiles built from hantui components. */
   features?: BentoFeature[];
   /** Small line above the title. @default "Features" */
   eyebrow?: string;

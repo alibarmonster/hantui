@@ -37,7 +37,7 @@ export interface PreviewCopy {
 
 function promptFor(copy: PreviewCopy) {
   return [
-    `Add the ${copy.name} component from alibar/ui to my React + Tailwind project.`,
+    `Add the ${copy.name} component from hantui to my React + Tailwind project.`,
     copy.description,
     "",
     `Install it with:\n${copy.install}`,
@@ -277,7 +277,7 @@ function SampleLanding({ dark }: { dark: boolean }) {
       </div>
       <div className="mt-auto max-w-md pb-10">
         <p className={cn("text-[clamp(1.75rem,4vw,2.75rem)] leading-[1.05] font-semibold tracking-[-0.03em]", ink)}>Backgrounds that feel alive.</p>
-        <p className={cn("mt-3 max-w-sm text-[14px] leading-6", muted)}>Drop one behind your hero and ship. Every alibar/ui background is a copy-paste React component.</p>
+        <p className={cn("mt-3 max-w-sm text-[14px] leading-6", muted)}>Drop one behind your hero and ship. Every hantui background is a copy-paste React component.</p>
         <div className="mt-5 flex gap-2">
           <span className={cn("rounded-lg px-4 py-2 text-[13px] font-medium", dark ? "bg-white text-[#0b0b0c]" : "bg-[#0b0b0c] text-white")}>Start building</span>
           <span className={cn("rounded-lg border px-4 py-2 text-[13px] font-medium", dark ? "border-white/30 text-white" : "border-black/10 bg-white text-[#0b0b0c]")}>Browse components</span>

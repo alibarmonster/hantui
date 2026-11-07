@@ -22,7 +22,7 @@ import { TumblingTags } from "@/components/ui/tumbling-tags/tumbling-tags";
 import { mockCategories, mockCycle, mockDailyUsage } from "@/lib/usage/mock";
 
 /*
- * Pennant is a fictional company. Everything on this page is a template built from alibar/ui
+ * Pennant is a fictional company. Everything on this page is a template built from hantui
  * components with invented copy, people and numbers.
  */
 
@@ -399,7 +399,7 @@ export function PennantSite() {
               <Mark className="size-5 text-[#0f7a5f]" />
               Pennant
             </p>
-            <p className="mt-3 max-w-xs text-[14px] text-[#6b7572]">A fictional company. This page is a template built with alibar/ui.</p>
+            <p className="mt-3 max-w-xs text-[14px] text-[#6b7572]">A fictional company. This page is a template built with hantui.</p>
           </div>
           {[
             ["Product", ["Cards", "Agent budgets", "Bill pay", "Pricing"]],
@@ -423,7 +423,7 @@ export function PennantSite() {
         <div className={`${container} flex flex-wrap justify-between gap-2 border-t border-black/[0.06] py-6 text-[13px] text-[#6b7572]`}>
           <p>© 2026 Pennant (fictional)</p>
           <Link href="/templates" className="hover:text-[#0b0f0e]">
-            Built with alibar/ui · More templates
+            Built with hantui · More templates
           </Link>
         </div>
       </footer>

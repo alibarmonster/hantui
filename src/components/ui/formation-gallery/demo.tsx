@@ -7,7 +7,7 @@ export function Showcase() {
   return (
     <div className="h-[34rem] w-full">
       <FormationGallery items={galleryItems} ariaLabel="Prints in formation">
-        <p className="text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase">alibar/ui</p>
+        <p className="text-[11px] font-medium tracking-[0.12em] text-muted-foreground uppercase">hantui</p>
         <p className="mt-2 text-xl font-semibold tracking-tight text-balance text-foreground sm:text-2xl">Ninety-six prints, four formations</p>
         <button type="button" className="mt-4 h-9 cursor-pointer rounded-full bg-foreground px-4 text-sm font-medium text-background">
           Explore the set

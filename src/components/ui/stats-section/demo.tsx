@@ -12,7 +12,7 @@ export function Default() {
         { value: 151, label: "Components", description: "Animated and accessible." },
         { value: 4.9, decimals: 1, suffix: "/5", label: "Average rating", description: "From 2,400 reviews." },
         { value: 38, suffix: "%", label: "Faster launches", description: "Median across teams." },
-        { value: 12, suffix: "M+", label: "Monthly views", description: "Rendered with alibar/ui." },
+        { value: 12, suffix: "M+", label: "Monthly views", description: "Rendered with hantui." },
       ]}
     />
   );

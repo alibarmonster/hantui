@@ -27,7 +27,7 @@ export interface RadarSweepProps extends Omit<ComponentProps<"div">, "children">
 
 // Keyframes ship with the component (React 19 hoists and de-duplicates this <style>).
 const KEYFRAMES =
-  "@keyframes alibar-radar-spin{to{transform:rotate(360deg)}}@keyframes alibar-radar-blip{0%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}6%{opacity:1;transform:translate(-50%,-50%) scale(1)}70%,100%{opacity:.12;transform:translate(-50%,-50%) scale(1)}}";
+  "@keyframes hantui-radar-spin{to{transform:rotate(360deg)}}@keyframes hantui-radar-blip{0%{opacity:1;transform:translate(-50%,-50%) scale(1.5)}6%{opacity:1;transform:translate(-50%,-50%) scale(1)}70%,100%{opacity:.12;transform:translate(-50%,-50%) scale(1)}}";
 
 export function RadarSweep({ blips = [], duration = 4, color = "var(--primary)", rings = 4, label = "Radar", className, style, ...props }: RadarSweepProps) {
   return (
@@ -38,7 +38,7 @@ export function RadarSweep({ blips = [], duration = 4, color = "var(--primary)",
       style={{ "--radar": color, ...style } as CSSProperties}
       {...props}
     >
-      <style href="alibar-radar-sweep" precedence="alibar">
+      <style href="hantui-radar-sweep" precedence="hantui">
         {KEYFRAMES}
       </style>
       {Array.from({ length: rings }, (_, i) => (
@@ -54,7 +54,7 @@ export function RadarSweep({ blips = [], duration = 4, color = "var(--primary)",
       {/* The sweep: a conic gradient whose bright leading edge sits at 0°, with a fading trail behind it. */}
       <span
         aria-hidden="true"
-        className="absolute inset-0 rounded-full [animation:alibar-radar-spin_var(--radar-duration)_linear_infinite] motion-reduce:[animation:none] motion-reduce:rotate-[210deg]"
+        className="absolute inset-0 rounded-full [animation:hantui-radar-spin_var(--radar-duration)_linear_infinite] motion-reduce:[animation:none] motion-reduce:rotate-[210deg]"
         style={
           {
             "--radar-duration": `${duration}s`,
@@ -73,7 +73,7 @@ export function RadarSweep({ blips = [], duration = 4, color = "var(--primary)",
             key={i}
             title={blip.label}
             aria-hidden="true"
-            className="absolute size-2.5 rounded-full shadow-[0_0_10px_var(--radar)] [animation:alibar-radar-blip_var(--radar-duration)_linear_infinite] motion-reduce:[animation:none] motion-reduce:-translate-1/2 motion-reduce:opacity-70"
+            className="absolute size-2.5 rounded-full shadow-[0_0_10px_var(--radar)] [animation:hantui-radar-blip_var(--radar-duration)_linear_infinite] motion-reduce:[animation:none] motion-reduce:-translate-1/2 motion-reduce:opacity-70"
             style={{ left: `${x}%`, top: `${y}%`, background: "var(--radar)", "--radar-duration": `${duration}s`, animationDelay: `${delay}s` } as CSSProperties}
           />
         );

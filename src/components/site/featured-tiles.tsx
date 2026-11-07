@@ -64,7 +64,7 @@ export function TiltTile() {
       <div className="flex h-full flex-col justify-between [transform:translateZ(30px)]">
         <div className="flex items-start justify-between">
           <span className="h-6 w-9 rounded-md bg-gradient-to-br from-amber-200 to-amber-500" aria-hidden="true" />
-          <span className="text-xs font-semibold tracking-wide">alibar</span>
+          <span className="text-xs font-semibold tracking-wide">hantui</span>
         </div>
         <p className="font-mono text-sm tracking-[0.16em] tabular-nums">4021 •••• 7718</p>
       </div>

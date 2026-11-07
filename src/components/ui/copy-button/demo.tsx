@@ -17,7 +17,7 @@ export function WithLabel() {
   return (
     <div className="flex flex-wrap items-center justify-center gap-3">
       <CopyButton value="https://example.com/invite/7f3a" label="Copy link" copiedLabel="Link copied" />
-      <CopyButton value="ALIBAR-2026" label="Copy code" variant="solid" />
+      <CopyButton value="HANTUI-2026" label="Copy code" variant="solid" />
     </div>
   );
 }

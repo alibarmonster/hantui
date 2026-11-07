@@ -9,14 +9,14 @@ function resolveSiteUrl() {
 }
 
 export const siteConfig = {
-  name: "alibar/ui",
-  shortName: "alibar",
+  name: "hantui",
+  shortName: "hantui",
   /** Current release. Keep in sync with package.json (`bun run check` verifies it). */
   version: "0.4.0",
   description:
     "Animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
   url: resolveSiteUrl(),
-  github: "https://github.com/alibarmonster/alibar-ui",
+  github: "https://github.com/alibarmonster/hantui",
 };
 
 /** Absolute URL of a component's shadcn registry item. */

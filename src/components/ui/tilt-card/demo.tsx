@@ -9,7 +9,7 @@ export function Default() {
       <div className="flex h-full flex-col justify-between [transform:translateZ(36px)]">
         <div className="flex items-start justify-between">
           <span className="h-7 w-10 rounded-md bg-gradient-to-br from-amber-200 to-amber-500 shadow-inner" aria-hidden="true" />
-          <span className="text-sm font-semibold tracking-wide">alibar</span>
+          <span className="text-sm font-semibold tracking-wide">hantui</span>
         </div>
         <div>
           <p className="font-mono text-lg tracking-[0.18em] tabular-nums">4021 •••• •••• 7718</p>

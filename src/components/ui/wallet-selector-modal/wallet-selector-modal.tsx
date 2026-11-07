@@ -96,7 +96,7 @@ export function WalletSelectorModal({
   selectedWalletId,
   view,
   onViewChange,
-  qrValue = "wc:alibar-demo@2?relay-protocol=irn",
+  qrValue = "wc:hantui-demo@2?relay-protocol=irn",
   renderQrCode,
   title = "Connect a wallet",
   errorMessage = "Request rejected in your wallet.",

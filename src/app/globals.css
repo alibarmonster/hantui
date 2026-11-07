@@ -5,7 +5,7 @@
  *
  * Token names follow the shadcn/ui convention so every component installed
  * from the registry picks up the host project's theme. The palette maps to
- * the alibar/ui spec like this:
+ * the hantui spec like this:
  *
  *   spec --surface   (#FAFAFA)  -> --surface            (site chrome, preview frames)
  *   spec --surface-2 (#F4F4F5)  -> --surface-2, --muted, --secondary, --accent

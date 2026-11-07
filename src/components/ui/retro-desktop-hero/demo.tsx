@@ -59,7 +59,7 @@ const windows: DesktopWindowConfig[] = [
 ];
 
 export function Portfolio() {
-  return <RetroDesktopHero owner={owner} windows={windows} persistKey="alibar-demo-desktop" />;
+  return <RetroDesktopHero owner={owner} windows={windows} persistKey="hantui-demo-desktop" />;
 }
 
 export function DitherWallpaper() {

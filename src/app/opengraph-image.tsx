@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { categories, readyComponents } from "@/content/components";
 import { OG_SIZE, OgFrame, ogFonts } from "@/lib/og";
 
-export const alt = "alibar/ui: animated, accessible React components";
+export const alt = "hantui: animated, accessible React components";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 

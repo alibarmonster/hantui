@@ -9,7 +9,7 @@ import { categories, components, readyComponents } from "@/content/components";
 
 export const metadata: Metadata = {
   title: "Introduction",
-  description: "What alibar/ui is and the principles behind it.",
+  description: "What hantui is and the principles behind it.",
 };
 
 const toc = [

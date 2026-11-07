@@ -12,7 +12,7 @@ export type TerminalCommand = (args: string[]) => string | string[];
 export interface CrtTerminalProps {
   /** "crt" glows green on black; "paper" is a light e-ink terminal with grain. @default "crt" */
   variant?: "crt" | "paper";
-  /** Prompt before the input. @default "guest@alibar:~$" */
+  /** Prompt before the input. @default "guest@hantui:~$" */
   prompt?: string;
   /** Lines printed after boot. */
   welcome?: string[];
@@ -110,8 +110,8 @@ type Line = { id: number; kind: "out" | "in" | "err"; text: string };
  */
 export function CrtTerminal({
   variant: variantProp = "crt",
-  prompt = "guest@alibar:~$",
-  welcome = ["alibar/ui terminal v0.3.0", "Type 'help' to see what this shell can do."],
+  prompt = "guest@hantui:~$",
+  welcome = ["hantui terminal", "Type 'help' to see what this shell can do."],
   commands = {},
   about = "A live DOM terminal rendered through the experimental HTML-in-Canvas API. Select any line to copy it.",
   height = 320,

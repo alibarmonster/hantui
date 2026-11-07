@@ -27,6 +27,7 @@ Work toward 0.4.0: ten components (#213–222) in one new category, Studio Piece
 
 ### Changed
 
+- The project is now **hantui** (formerly alibar/ui), at hantui.dev: the site, OG images, package name, README, contributing and security docs use the new name, and repository links point to github.com/alibarmonster/hantui. Internal prefixes follow (`hantui-` keyframe and style names in Radar Sweep, Ripple Rings, Orbiting Circles and Theme Toggle; CRT Terminal's default prompt is `guest@hantui:~$`). The saved package-manager choice carries over from the old storage key.
 - ASCII Koi Pond (#189) is redrawn from above in the same style as ASCII Shark Sea: shaded blocks for pale scales, orange and red patches and dark markings under glyphs that thicken into shadow, soft sub-sampled edges, a dorsal ridge, translucent fanned fins and a forked tail, and wakes and food ripples that light dots in the water. Koi glide in wide arcs instead of turning on the spot, lily pads are notched discs, and `cell` now defaults to 8 (cell width; cells are 1.45 times as tall). The props and palette keys are unchanged.
 - ASCII Aquarium Background lights its creatures from the top left (denser squares and glyphs on the shaded side, rare accent glints), leaves wakes that light accent dots behind rays, fish and pulsing jellyfish, and has fish dart away from a nearby cursor. Its look, props and handle are otherwise unchanged.
 - Dither Wildlife draws its horses, flock and grove as ASCII by default: sub-sampled glyph cells, blocks shaded smoothly along the `tones` under glyphs ordered-dithered by density, edge glyphs along silhouettes, ground and shadows as sparse glyph texture, birds and leaves as glyph sprites, and dust from the hooves and trails behind the flock that fade. The new `look` prop (`"ascii"` or `"dither"`) keeps the pixel look; `cell` now defaults to 8 in ascii (glyph cell width) and stays 5 in dither.
@@ -108,7 +109,7 @@ Work toward 0.4.0: ten components (#213–222) in one new category, Studio Piece
 - SEO metadata, a sitemap, `robots.txt` and generated Open Graph images for the site and every component.
 - An experimental WebGL2 playground at `/lab`.
 
-[Unreleased]: https://github.com/alibarmonster/alibar-ui/compare/v0.3.0...HEAD
-[0.3.0]: https://github.com/alibarmonster/alibar-ui/compare/v0.2.0...v0.3.0
-[0.2.0]: https://github.com/alibarmonster/alibar-ui/compare/v0.1.0...v0.2.0
-[0.1.0]: https://github.com/alibarmonster/alibar-ui/releases/tag/v0.1.0
+[Unreleased]: https://github.com/alibarmonster/hantui/compare/v0.3.0...HEAD
+[0.3.0]: https://github.com/alibarmonster/hantui/compare/v0.2.0...v0.3.0
+[0.2.0]: https://github.com/alibarmonster/hantui/compare/v0.1.0...v0.2.0
+[0.1.0]: https://github.com/alibarmonster/hantui/releases/tag/v0.1.0

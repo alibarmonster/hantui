@@ -104,7 +104,7 @@ export default function ComponentsVaultPage() {
           <div className="flex items-center gap-3">
             <span className="h-2.5 w-2.5 rounded-full bg-[#c8ff4d] shadow-[0_0_12px_#c8ff4d]" />
             <span className="font-mono text-sm font-semibold tracking-tight">
-              alibar/components
+              hantui
             </span>
             <span className="text-[11px] font-mono px-2 py-0.5 rounded bg-white/5 border border-white/10 text-zinc-400">
               v1.0.0 · 20 Primitives

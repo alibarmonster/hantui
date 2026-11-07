@@ -2,7 +2,7 @@ import { ImageResponse } from "next/og";
 import { categories, getComponent, readyComponents } from "@/content/components";
 import { OG_SIZE, OgFrame, ogFonts } from "@/lib/og";
 
-export const alt = "Component preview from alibar/ui";
+export const alt = "Component preview from hantui";
 export const size = OG_SIZE;
 export const contentType = "image/png";
 
@@ -17,7 +17,7 @@ export default async function ComponentImage({ params }: { params: Promise<{ slu
     (
       <OgFrame>
         <div style={{ display: "flex", fontSize: 24, fontWeight: 600, letterSpacing: "0.08em", textTransform: "uppercase", color: "#2563eb" }}>{category}</div>
-        <div style={{ display: "flex", marginTop: 14, fontSize: 92, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02 }}>{entry?.name ?? "alibar/ui"}</div>
+        <div style={{ display: "flex", marginTop: 14, fontSize: 92, fontWeight: 600, letterSpacing: "-0.035em", lineHeight: 1.02 }}>{entry?.name ?? "hantui"}</div>
         <div style={{ display: "flex", marginTop: 24, fontSize: 32, color: "#71717a", maxWidth: 940, lineHeight: 1.35 }}>{entry?.description ?? ""}</div>
         <div
           style={{

@@ -42,7 +42,7 @@ export function DynamicIslandNav({ className }: { className?: string }) {
             >
               <span className="h-2 w-2 rounded-full bg-[#c8ff4d]" />
               <span className="font-mono text-xs text-zinc-200">
-                alibar.node
+                hantui.node
               </span>
               <span className="font-mono text-[10px] text-zinc-500">99.98%</span>
             </motion.div>

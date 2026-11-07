@@ -1,9 +1,9 @@
-# alibar/ui
+# hantui
 
-[![CI](https://github.com/alibarmonster/alibar-ui/actions/workflows/ci.yml/badge.svg)](https://github.com/alibarmonster/alibar-ui/actions/workflows/ci.yml)
+[![CI](https://github.com/alibarmonster/hantui/actions/workflows/ci.yml/badge.svg)](https://github.com/alibarmonster/hantui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-222 animated, accessible React components for Next.js and Tailwind CSS. Copy the source or install a component with the shadcn CLI. Once a component is in your project, the code is yours to edit.
+hantui (formerly alibar/ui) is 222 animated, accessible React components for Next.js and Tailwind CSS. The name is *hantu*, Indonesian for "ghost", plus *ui*. Copy the source or install a component with the shadcn CLI. Once a component is in your project, the code is yours to edit.
 
 - **222 components** in 22 categories, each with live demos, variants, a props table and accessibility notes.
 - **Modern stack**: React 19, Next.js 16 (App Router), TypeScript (strict), Tailwind CSS v4, [Motion](https://motion.dev), [Radix UI](https://www.radix-ui.com) and [lucide-react](https://lucide.dev).
@@ -24,7 +24,7 @@ npx shadcn@latest init
 npx shadcn@latest add <site-url>/r/spring-press-button.json
 ```
 
-`<site-url>` is the address of the docs site. Every component page shows its exact command. The CLI installs the npm dependencies, the shared `cn` and motion helpers, the design tokens and any other alibar/ui components it relies on.
+`<site-url>` is the address of the docs site. Every component page shows its exact command. The CLI installs the npm dependencies, the shared `cn` and motion helpers, the design tokens and any other hantui components it relies on.
 
 ### Manually
 
@@ -55,8 +55,8 @@ Each component page lists the packages to install, the helper files (`lib/utils.
 Requirements: Node.js 20.9 or newer and [Bun](https://bun.sh) 1.2 or newer. The lockfile is `bun.lock`.
 
 ```bash
-git clone https://github.com/alibarmonster/alibar-ui.git
-cd alibar-ui
+git clone https://github.com/alibarmonster/hantui.git
+cd hantui
 bun install
 bun dev
 ```
@@ -119,7 +119,7 @@ Issues and pull requests are welcome. Please read the [contributing guide](./CON
 
 ## Acknowledgments
 
-alibar/ui was built and is maintained with help from [Claude](https://www.anthropic.com/claude) by Anthropic. Claude worked as a pair programmer through the whole process: designing and implementing the components and the docs site, testing accessibility and performance, and preparing the repository for open source.
+hantui was built and is maintained with help from [Claude](https://www.anthropic.com/claude) by Anthropic. Claude worked as a pair programmer through the whole process: designing and implementing the components and the docs site, testing accessibility and performance, and preparing the repository for open source.
 
 ASCII Shark Sea, ASCII Koi Pond, ASCII Aquarium Background and the ASCII look of Dither Wildlife learn their top-down bodies, shaded blocks with density-matched glyphs, soft sub-sampled edges and glowing wake field from [ascii-sharks](https://github.com/stackedlol/ascii-sharks) by drewdi (MIT). The implementations are our own; ASCII Shark Sea carries the ascii-sharks copyright and MIT notice in its source.
 

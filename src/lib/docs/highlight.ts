@@ -2,7 +2,7 @@ import { createHighlighter, type Highlighter, type ThemeRegistration } from "shi
 
 /** A quiet light theme tuned to the site palette. */
 const theme: ThemeRegistration = {
-  name: "alibar-light",
+  name: "hantui-light",
   type: "light",
   colors: { "editor.background": "#ffffff", "editor.foreground": "#3f3f46" },
   tokenColors: [
@@ -33,5 +33,5 @@ let highlighter: Promise<Highlighter> | undefined;
 
 export async function highlight(code: string, lang: CodeLanguage = "tsx") {
   highlighter ??= createHighlighter({ themes: [theme], langs: ["tsx", "ts", "bash", "css", "json"] });
-  return (await highlighter).codeToHtml(code.trimEnd(), { lang, theme: "alibar-light" });
+  return (await highlighter).codeToHtml(code.trimEnd(), { lang, theme: "hantui-light" });
 }

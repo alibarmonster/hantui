@@ -1,12 +1,12 @@
-# Contributing to alibar/ui
+# Contributing to hantui
 
 Thanks for helping out! This guide covers setup, naming conventions and the bar every component has to clear.
 
 ## Setup
 
 ```bash
-git clone https://github.com/alibarmonster/alibar-ui.git
-cd alibar-ui
+git clone https://github.com/alibarmonster/hantui.git
+cd hantui
 bun install
 bun dev
 ```

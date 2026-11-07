@@ -1,8 +1,8 @@
 {
-  "name": "alibar-ui",
+  "name": "hantui",
   "version": "0.4.0",
   "private": true,
-  "description": "alibar/ui: 222 animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
+  "description": "hantui: 222 animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
   "keywords": [
     "react",
     "nextjs",
@@ -15,13 +15,13 @@
     "shadcn-registry",
     "accessibility"
   ],
-  "homepage": "https://github.com/alibarmonster/alibar-ui#readme",
+  "homepage": "https://github.com/alibarmonster/hantui#readme",
   "bugs": {
-    "url": "https://github.com/alibarmonster/alibar-ui/issues"
+    "url": "https://github.com/alibarmonster/hantui/issues"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/alibarmonster/alibar-ui.git"
+    "url": "git+https://github.com/alibarmonster/hantui.git"
   },
   "license": "MIT",
   "author": "alibar (https://github.com/alibarmonster)",

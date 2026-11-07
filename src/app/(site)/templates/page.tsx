@@ -7,7 +7,7 @@ import { siteConfig } from "@/config/site";
 
 export const metadata: Metadata = {
   title: "Templates",
-  description: "Complete websites built from alibar/ui components. Open one, then copy the parts you need.",
+  description: "Complete websites built from hantui components. Open one, then copy the parts you need.",
 };
 
 const templates = [
@@ -25,7 +25,7 @@ const templates = [
 export default function TemplatesPage() {
   return (
     <div className="mx-auto w-full max-w-6xl px-4 pt-10 pb-24 sm:px-6">
-      <PageHeader title="Templates" description="Complete websites built from alibar/ui components. Open one to see it live, then copy the parts you need." />
+      <PageHeader title="Templates" description="Complete websites built from hantui components. Open one to see it live, then copy the parts you need." />
       <ul className="mt-10 grid gap-8">
         {templates.map((t) => (
           <li key={t.slug} className="overflow-hidden rounded-2xl border border-border bg-background">

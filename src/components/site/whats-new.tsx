@@ -59,7 +59,7 @@ export function OrbitPanel() {
       designSize={420}
       center={
         <span className="grid size-14 place-items-center rounded-2xl bg-foreground text-background shadow-lg">
-          <svg viewBox="0 0 24 24" className="size-7" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" aria-label="alibar/ui">
+          <svg viewBox="0 0 24 24" className="size-7" fill="none" stroke="currentColor" strokeWidth={2.2} strokeLinecap="round" aria-label="hantui">
             <path d="M6.5 16.75c2.6 0 3.7-1.5 4.6-4.1l.5-1.4c.9-2.5 2-4 4.9-4" />
           </svg>
         </span>
