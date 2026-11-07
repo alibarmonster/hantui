@@ -10,8 +10,31 @@ export const duration = {
 
 /** Cubic-bezier curves. */
 export const ease = {
+  /** Entering, UI response. */
   out: [0.22, 1, 0.36, 1],
+  /** Moving on screen. */
   inOut: [0.65, 0, 0.35, 1],
+  /** Sheets and the mobile menu. */
+  drawer: [0.32, 0.72, 0, 1],
+} as const;
+
+/** Everyday UI: presses, icon swaps, popovers and modals. Exits run at `exitFactor` of the enter. */
+export const ui = {
+  press: { scale: 0.96, duration: 0.12 },
+  icon: { type: "spring", duration: 0.3, bounce: 0 },
+  popover: { duration: 0.18, ease: ease.out },
+  modal: { duration: 0.24, ease: ease.out },
+  exitFactor: 0.6,
+} as const;
+
+/** Once-per-visit motion on the landing page: hero letters, the reel and the afterimage. */
+export const kinetic = {
+  heroLetter: { duration: 0.6, ease: ease.out },
+  /** Delay per letter, eased so the wave slows toward the end. */
+  heroStep: 0.035,
+  reelSwap: { type: "spring", duration: 0.5, bounce: 0.1 },
+  /** Two afterimages: lag in seconds and opacity of each. */
+  ghost: { lag: [0.04, 0.09], opacity: [0.14, 0.06] },
 } as const;
 
 /** Spring presets. */

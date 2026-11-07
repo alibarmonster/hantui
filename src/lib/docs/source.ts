@@ -175,8 +175,8 @@ export function extractDependencies(source: string): SourceDependencies {
 
 /** Theme tokens beyond the shadcn defaults that a component relies on. */
 export const EXTRA_TOKENS = {
-  success: { light: "#16a34a", dark: "#22c55e" },
-  warning: { light: "#d97706", dark: "#f59e0b" },
+  success: { light: "#15803d", dark: "#4ade80" },
+  warning: { light: "#b45309", dark: "#fbbf24" },
 } as const;
 
 export type ExtraToken = keyof typeof EXTRA_TOKENS;

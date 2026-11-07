@@ -33,33 +33,33 @@ export function OgFrame({ children }: { children: ReactNode }) {
         height: "100%",
         display: "flex",
         position: "relative",
-        background: "#ffffff",
+        background: "#fafaf9",
         fontFamily: "Geist",
-        color: "#09090b",
+        color: "#1c1917",
       }}
     >
       <div
         style={{
           position: "absolute",
           inset: 0,
-          backgroundImage: "radial-gradient(circle, #e4e4e7 1.6px, transparent 1.6px)",
+          backgroundImage: "radial-gradient(circle, #d6d3d1 1.6px, transparent 1.6px)",
           backgroundSize: "28px 28px",
         }}
       />
-      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(ellipse at 30% 40%, rgba(255,255,255,0.2), #ffffff 75%)" }} />
+      <div style={{ position: "absolute", inset: 0, backgroundImage: "radial-gradient(ellipse at 30% 40%, rgba(250,250,249,0.2), #fafaf9 75%)" }} />
       <div style={{ position: "relative", display: "flex", flexDirection: "column", width: "100%", height: "100%", padding: "64px 72px" }}>
         <div style={{ display: "flex", alignItems: "center", gap: 14 }}>
           <svg width="44" height="44" viewBox="0 0 24 24">
-            <rect width="24" height="24" rx="7" fill="#09090b" />
-            <path d="M6.5 16.75c2.6 0 3.7-1.5 4.6-4.1l.5-1.4c.9-2.5 2-4 4.9-4" fill="none" stroke="#ffffff" strokeWidth="2.2" strokeLinecap="round" />
-            <circle cx="16.75" cy="16.25" r="1.75" fill="#ffffff" />
+            <rect width="24" height="24" rx="7" fill="#1c1917" />
+            <path d="M6.5 16.75c2.6 0 3.7-1.5 4.6-4.1l.5-1.4c.9-2.5 2-4 4.9-4" fill="none" stroke="#fafaf9" strokeWidth="2.2" strokeLinecap="round" />
+            <circle cx="16.75" cy="16.25" r="1.75" fill="#fafaf9" />
           </svg>
           <div style={{ display: "flex", fontSize: 30, fontWeight: 600, letterSpacing: "-0.02em" }}>
             hantui
           </div>
         </div>
         <div style={{ display: "flex", flexDirection: "column", flex: 1, justifyContent: "center" }}>{children}</div>
-        <div style={{ display: "flex", justifyContent: "flex-end", fontFamily: "Geist Mono", fontSize: 22, color: "#71717a" }}>{host}</div>
+        <div style={{ display: "flex", justifyContent: "flex-end", fontFamily: "Geist Mono", fontSize: 22, color: "#6b635d" }}>{host}</div>
       </div>
     </div>
   );

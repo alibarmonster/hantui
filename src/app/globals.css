@@ -3,57 +3,128 @@
 /*
  * Design tokens.
  *
- * Token names follow the shadcn/ui convention so every component installed
- * from the registry picks up the host project's theme. The palette maps to
- * the hantui spec like this:
+ * Token names follow the shadcn/ui convention, so every component installed from the registry
+ * picks up the host project's theme; only the values are hantui's. Palette: warm stone neutrals,
+ * terracotta for actions and current state (one filled primary per view), amber only for New.
+ * Every text pair is measured at 4.5:1 or better and control borders at 3:1.
  *
- *   spec --surface   (#FAFAFA)  -> --surface            (site chrome, preview frames)
- *   spec --surface-2 (#F4F4F5)  -> --surface-2, --muted, --secondary, --accent
- *   spec --muted     (#71717A)  -> --muted-foreground   (secondary text)
- *   spec --accent    (#2563EB)  -> --primary, --ring    (use sparingly)
- *   spec --danger    (#DC2626)  -> --destructive
+ * Light ships. The dark values below apply only once something sets data-theme="dark" on <html>;
+ * nothing does yet. Do not also define tokens under a prefers-color-scheme media query.
  */
 :root {
-  --radius: 10px;
+  --radius: 8px;
 
-  --background: #ffffff;
-  --foreground: #09090b;
-  --surface: #fafafa;
-  --surface-2: #f4f4f5;
+  --background: #fafaf9;
+  --foreground: #1c1917;
+  --surface: #f5f5f4;
+  --surface-2: #e7e5e4;
 
-  --card: #ffffff;
-  --card-foreground: #09090b;
-  --popover: #ffffff;
-  --popover-foreground: #09090b;
+  --card: #fafaf9;
+  --card-foreground: #1c1917;
+  --popover: #fafaf9;
+  --popover-foreground: #1c1917;
 
-  --primary: #2563eb;
-  --primary-foreground: #ffffff;
-  --secondary: #f4f4f5;
-  --secondary-foreground: #09090b;
-  --muted: #f4f4f5;
-  --muted-foreground: #71717a;
-  --accent: #f4f4f5;
-  --accent-foreground: #09090b;
+  --primary: #c2410c;
+  --primary-foreground: #fafaf9;
+  --primary-hover: #9a3412;
+  --link: #c2410c;
+  --secondary: #f5f5f4;
+  --secondary-foreground: #1c1917;
+  --muted: #f5f5f4;
+  --muted-foreground: #6b635d;
+  --text-secondary: #57534e;
+  --accent: #e7e5e4;
+  --accent-foreground: #1c1917;
+
+  /* Amber marks New only (badge, latest changelog entry), always with its label. */
+  --highlight: #f59e0b;
+  --highlight-foreground: #1c1917;
+  --highlight-text: #b45309;
+  --selected: #fbefe9;
 
   --destructive: #dc2626;
-  --success: #16a34a;
-  --warning: #d97706;
+  --destructive-text: #b91c1c;
+  --success: #15803d;
+  --warning: #b45309;
 
-  /* Chart series, in this fixed order (validated for colour-blind separation on white). */
-  --chart-1: #2563eb;
-  --chart-2: #eb6834;
-  --chart-3: #1baf7a;
-  --chart-4: #eda100;
-  --chart-5: #e87ba4;
-  --chart-6: #7c3aed;
+  /* Chart series, in this fixed order. Validated (OKLab, Machado 2009 protan/deutan) on #fafaf9:
+     worst adjacent CVD ΔE 12.7, normal-vision 15.6, every slot at least 3:1 against the page. */
+  --chart-1: #c1400a;
+  --chart-2: #0784a4;
+  --chart-3: #b95712;
+  --chart-4: #9d0f38;
+  --chart-5: #699a36;
+  --chart-6: #865803;
 
-  --border: #e4e4e7;
-  --input: #e4e4e7;
-  --ring: #2563eb;
+  /* --border is decorative (dividers, card edges); controls use --input, which clears 3:1. */
+  --border: #d6d3d1;
+  --input: #8a827c;
+  --ring: #c2410c;
 
-  --dot: #e4e4e7;
+  --dot: #d6d3d1;
+  --code: #efedeb;
+
+  --duration-press: 120ms;
+  --duration-popover: 180ms;
+  --duration-modal: 240ms;
 
   color-scheme: light;
+}
+
+:root[data-theme="dark"] {
+  --background: #161412;
+  --foreground: #f5f5f4;
+  --surface: #1e1b18;
+  --surface-2: #2a2623;
+
+  --card: #1e1b18;
+  --card-foreground: #f5f5f4;
+  --popover: #1e1b18;
+  --popover-foreground: #f5f5f4;
+
+  --primary: #c2410c;
+  --primary-foreground: #fafaf9;
+  --primary-hover: #b83c0a;
+  --link: #fb923c;
+  --secondary: #2a2623;
+  --secondary-foreground: #f5f5f4;
+  --muted: #1e1b18;
+  --muted-foreground: #9a928b;
+  --text-secondary: #a8a29e;
+  --accent: #2a2623;
+  --accent-foreground: #f5f5f4;
+
+  --highlight: #fbbf24;
+  --highlight-foreground: #1c1917;
+  --highlight-text: #fbbf24;
+  --selected: #2b1c15;
+
+  --destructive: #dc2626;
+  --destructive-text: #f87171;
+  --success: #4ade80;
+  --warning: #fbbf24;
+
+  /* Validated on #161412: worst adjacent CVD ΔE 12.2, normal-vision 15.6, all at least 3:1. */
+  --chart-1: #c1400a;
+  --chart-2: #0784a4;
+  --chart-3: #d16d30;
+  --chart-4: #b62e4b;
+  --chart-5: #6a9e34;
+  --chart-6: #8a5b09;
+
+  --border: #3a3532;
+  --input: #7a726c;
+  --ring: #f97316;
+
+  --dot: #3a3532;
+  --code: #1e1b18;
+
+  color-scheme: dark;
+}
+
+/* Components that ask for Geist Serif get the display serif. */
+:root {
+  --font-geist-serif: var(--font-playfair);
 }
 
 @theme inline {
@@ -67,13 +138,21 @@
   --color-popover-foreground: var(--popover-foreground);
   --color-primary: var(--primary);
   --color-primary-foreground: var(--primary-foreground);
+  --color-primary-hover: var(--primary-hover);
+  --color-link: var(--link);
   --color-secondary: var(--secondary);
   --color-secondary-foreground: var(--secondary-foreground);
   --color-muted: var(--muted);
   --color-muted-foreground: var(--muted-foreground);
+  --color-text-secondary: var(--text-secondary);
   --color-accent: var(--accent);
   --color-accent-foreground: var(--accent-foreground);
+  --color-highlight: var(--highlight);
+  --color-highlight-foreground: var(--highlight-foreground);
+  --color-highlight-text: var(--highlight-text);
+  --color-selected: var(--selected);
   --color-destructive: var(--destructive);
+  --color-destructive-text: var(--destructive-text);
   --color-success: var(--success);
   --color-warning: var(--warning);
   --color-chart-1: var(--chart-1);
@@ -85,26 +164,33 @@
   --color-border: var(--border);
   --color-input: var(--input);
   --color-ring: var(--ring);
+  --color-code: var(--code);
 
-  --font-sans: var(--font-geist-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: var(--font-geist-mono), ui-monospace, "SFMono-Regular", Menlo, monospace;
+  /* Source Sans 3 for UI and body, Playfair Display for display type, Fira Code for code and figures. */
+  --font-sans: var(--font-source-sans), ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-display: var(--font-playfair), ui-serif, Georgia, "Times New Roman", serif;
+  --font-serif: var(--font-playfair), ui-serif, Georgia, "Times New Roman", serif;
+  --font-mono: var(--font-fira-code), ui-monospace, "SFMono-Regular", Menlo, monospace;
 
-  /* Radius scale: 6 / 10 / 14 / 20 / full */
+  /* Radius scale: 4 / 8 / 12 / 16 / full. Nested corners stay concentric (outer = inner + padding). */
   --radius-sm: calc(var(--radius) - 4px);
   --radius-md: var(--radius);
   --radius-lg: calc(var(--radius) + 4px);
-  --radius-xl: calc(var(--radius) + 10px);
+  --radius-xl: calc(var(--radius) + 8px);
 
-  /* Soft, layered shadows */
-  --shadow-xs: 0 1px 2px rgb(0 0 0 / 0.04);
-  --shadow-sm: 0 1px 2px rgb(0 0 0 / 0.04), 0 2px 6px rgb(0 0 0 / 0.04);
-  --shadow-md: 0 1px 2px rgb(0 0 0 / 0.04), 0 4px 12px rgb(0 0 0 / 0.06);
-  --shadow-lg: 0 2px 4px rgb(0 0 0 / 0.04), 0 12px 32px rgb(0 0 0 / 0.08);
-  --shadow-xl: 0 4px 8px rgb(0 0 0 / 0.04), 0 24px 56px rgb(0 0 0 / 0.12);
+  /* Flat by default; shadows only where something lifts. Warm-tinted (stone-900). */
+  --shadow-xs: 0 1px 2px rgb(28 25 23 / 0.04);
+  --shadow-sm: 0 1px 2px rgb(28 25 23 / 0.04), 0 2px 6px rgb(28 25 23 / 0.05);
+  --shadow-md: 0 4px 16px rgb(28 25 23 / 0.06);
+  --shadow-lg: 0 8px 24px rgb(28 25 23 / 0.1);
+  --shadow-xl: 0 24px 48px rgb(28 25 23 / 0.12);
+  /* The only glow on the site: primary button hover. */
+  --shadow-glow: 0 4px 12px rgb(194 65 12 / 0.25);
 
   /* Motion curves (mirrors src/lib/motion.ts) */
   --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
   --ease-in-out: cubic-bezier(0.65, 0, 0.35, 1);
+  --ease-drawer: cubic-bezier(0.32, 0.72, 0, 1);
   --default-transition-duration: 180ms;
   --default-transition-timing-function: cubic-bezier(0.22, 1, 0.36, 1);
 }
@@ -119,6 +205,20 @@
   html {
     -webkit-text-size-adjust: 100%;
     text-rendering: optimizeLegibility;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  :where(h1, h2, h3, h4) {
+    text-wrap: balance;
+  }
+
+  :where(p) {
+    text-wrap: pretty;
+  }
+
+  /* Code gets copied: draw !== and => as typed, not as ligatures. */
+  :where(code, kbd, samp, pre, .font-mono) {
+    font-variant-ligatures: none;
   }
 
   body {
