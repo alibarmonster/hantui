@@ -24,7 +24,7 @@ export interface ScrollAwareNavProps {
   hideOnScroll?: boolean;
   /** Show a reading progress line along the bottom edge. @default true */
   progress?: boolean;
-  /** Color of the progress line. @default "#2563eb" */
+  /** Color of the progress line. @default "var(--primary)" */
   accent?: string;
   /** Accessible name for the navigation. @default "Main" */
   label?: string;
@@ -37,7 +37,7 @@ export interface ScrollAwareNavProps {
  * scrolls, tucked away while you read down and back the moment you scroll up, with a thin progress
  * line along its bottom edge.
  */
-export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, solidAfter = 24, hideOnScroll = true, progress = true, accent = "#2563eb", label = "Main", className }: ScrollAwareNavProps) {
+export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, solidAfter = 24, hideOnScroll = true, progress = true, accent = "var(--primary)", label = "Main", className }: ScrollAwareNavProps) {
   const id = useId();
   const reduceMotion = useReducedMotion();
   const root = useRef<HTMLElement>(null);

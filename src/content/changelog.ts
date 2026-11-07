@@ -39,6 +39,7 @@ export const releases: Release[] = [
         type: "Changed",
         items: [
           "The project is now hantui (formerly alibar/ui), at hantui.dev.",
+          "Accent colors in components follow your theme's primary color instead of a fixed blue.",
           "ASCII Koi Pond is redrawn from above with shaded, patterned bodies, translucent fins, soft edges and wakes that light the water. Its props are unchanged.",
           "ASCII Aquarium Background lights its creatures from the top left, leaves glowing wakes behind them and has fish dart away from the cursor.",
           "Dither Wildlife now draws its horses, flock and grove as shaded, dithered ASCII with dust and trails; look=\"dither\" keeps the pixel look.",

@@ -87,7 +87,7 @@ export interface SleeveRailProps {
 
 const TICK = 14;
 const RECORD_ID = -2;
-const DEFAULT_ACCENT = "#2563EB";
+const DEFAULT_ACCENT = "var(--primary)";
 const toRad = (deg: number) => (deg * Math.PI) / 180;
 
 /** A vinyl record (grooves, track gaps, rim) drawn once to a data URL. */

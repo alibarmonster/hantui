@@ -505,8 +505,8 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
   /* ---------------------------------------------------------- render */
 
   const theme = (dark
-    ? { "--rd-bg": "#16181f", "--rd-surface": "#23262f", "--rd-ink": "#0b0c10", "--rd-text": "#eceef4", "--rd-muted": "#a3a8b8", "--rd-light": "#3a3e4b", "--rd-shade": "#08090c", "--rd-accent": "#6d8dff", "--rd-title": "#2a3a8f" }
-    : { "--rd-bg": "#efece4", "--rd-surface": "#f8f6f0", "--rd-ink": "#1d2130", "--rd-text": "#1d2130", "--rd-muted": "#5d6272", "--rd-light": "#ffffff", "--rd-shade": "#b9b3a5", "--rd-accent": "#2563eb", "--rd-title": "#2563eb" }) as CSSProperties;
+    ? { "--rd-bg": "#16181f", "--rd-surface": "#23262f", "--rd-ink": "#0b0c10", "--rd-text": "#eceef4", "--rd-muted": "#a3a8b8", "--rd-light": "#3a3e4b", "--rd-shade": "#08090c", "--rd-accent": "color-mix(in oklab, var(--primary) 62%, white)", "--rd-title": "color-mix(in oklab, var(--primary) 55%, black)" }
+    : { "--rd-bg": "#efece4", "--rd-surface": "#f8f6f0", "--rd-ink": "#1d2130", "--rd-text": "#1d2130", "--rd-muted": "#5d6272", "--rd-light": "#ffffff", "--rd-shade": "#b9b3a5", "--rd-accent": "var(--primary)", "--rd-title": "var(--primary)" }) as CSSProperties;
 
   const contentFor = (id: string) => {
     if (id === HELLO) return null;

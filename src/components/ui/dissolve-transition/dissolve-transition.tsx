@@ -4,7 +4,8 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ease } from "@/lib/motion";
-import { createGrid, createProgram, drawMesh, PROJECT_GLSL, rgb, type Mesh, type Program } from "@/lib/html-canvas/gl";
+import { cssColorToVec3, type Vec3 } from "@/lib/color";
+import { createGrid, createProgram, drawMesh, PROJECT_GLSL, type Mesh, type Program } from "@/lib/html-canvas/gl";
 import { createElementTexture, uploadElementTexture, type ElementTexture } from "@/lib/html-canvas/texture-webgl";
 import { syncElementGeometry } from "@/lib/html-canvas/sync-geometry";
 import { useHtmlCanvas, type HtmlCanvasMode } from "@/lib/html-canvas/use-html-canvas";
@@ -20,7 +21,7 @@ export interface DissolveTransitionProps {
   duration?: number;
   /** Where the dissolve starts sweeping from; "none" dissolves everywhere at once. @default "none" */
   direction?: "none" | "up" | "down" | "left" | "right";
-  /** Color of the glowing edge in noise mode. @default "#2563eb" */
+  /** Color of the glowing edge in noise mode. @default "var(--primary)" */
   edgeColor?: string;
   /** "auto" uses HTML-in-Canvas when available, "fallback" never does. @default "auto" */
   rendering?: HtmlCanvasMode;
@@ -133,7 +134,7 @@ export function DissolveTransition({
   mode = "pixel",
   duration = 0.9,
   direction = "none",
-  edgeColor = "#2563eb",
+  edgeColor = "var(--primary)",
   rendering = "auto",
   onModeChange,
   onTransitionEnd,
@@ -154,6 +155,8 @@ export function DissolveTransition({
   const outRef = useRef<HTMLDivElement>(null);
   const [height, setHeight] = useState<number | null>(null);
   const transition = useRef({ start: -1, captured: false, frames: 0 });
+  // The edge color resolved to RGB (it may be a theme variable), recomputed only when it changes.
+  const edge = useRef<{ color: string; rgb: Vec3 } | null>(null);
   const gl = useRef<{ program: Program; mesh: Mesh; tin: ElementTexture; tout: ElementTexture } | null>(null);
 
   const { native, canvasRef, canvasProps, invalidate } = useHtmlCanvas({
@@ -209,7 +212,8 @@ export function DissolveTransition({
       ctx.uniform1f(u("u_p"), out ? p : 1);
       ctx.uniform1i(u("u_mode"), MODES[mode]);
       ctx.uniform2f(u("u_dir"), DIRS[direction][0], DIRS[direction][1]);
-      ctx.uniform3f(u("u_edge"), ...rgb(edgeColor));
+      if (edge.current?.color !== edgeColor) edge.current = { color: edgeColor, rgb: cssColorToVec3(edgeColor, canvas) };
+      ctx.uniform3f(u("u_edge"), ...edge.current.rgb);
       ctx.activeTexture(ctx.TEXTURE0);
       ctx.bindTexture(ctx.TEXTURE_2D, g.tout.texture);
       ctx.uniform1i(u("u_out"), 0);

@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { duration, ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
+import { cssColorToVec3 } from "@/lib/color";
 import { GalleryA11y } from "@/lib/gallery/gallery-a11y";
 import { chromeScheme } from "@/lib/gallery/gallery-chrome";
 import { GalleryFallback } from "@/lib/gallery/gallery-fallback";
@@ -58,7 +59,7 @@ export interface FormationGalleryProps {
   hoverScale?: number;
   /** Soft shadow strength, 0–1. @default 0.45 */
   shadow?: number;
-  /** Ring around the hovered card. @default "#2563EB" */
+  /** Ring around the hovered card (any CSS color, including a theme variable). @default "var(--primary)" */
   accentColor?: string;
   /** Click a card to enlarge it in the center with its caption. @default true */
   openOnClick?: boolean;
@@ -229,7 +230,7 @@ export function FormationGallery({
   tilt = 10,
   hoverScale = 1.6,
   shadow = 0.45,
-  accentColor = "#2563EB",
+  accentColor = "var(--primary)",
   openOnClick = true,
   seed = 7,
   pauseOnHover = true,
@@ -254,7 +255,8 @@ export function FormationGallery({
   const [formationIndex, setFormationIndex] = useState(0);
   const [open, setOpen] = useState<OpenState>(null);
   const scheme = chromeScheme(backgroundColor);
-  const accent = useMemo(() => toRgb(accentColor), [accentColor]);
+  // Hover ring color; a theme variable is resolved against the gallery once it has mounted.
+  const accent = useRef(toRgb(accentColor));
   const formation = list[formationIndex % list.length];
   // Drag spin/pan with inertia, shared between pointer handlers and the render loop.
   const drag = useRef({ angle: 0, angleV: 0, panX: 0, panY: 0, panVX: 0, panVY: 0, last: 0 });
@@ -587,7 +589,7 @@ export function FormationGallery({
       return {
         cards: out,
         animating: moving,
-        scene: { fov: 30, ring: accent, shadowOffset: 6, shadowBlur: 12, shadowOpacity: 0.22 },
+        scene: { fov: 30, ring: accent.current, shadowOffset: 6, shadowBlur: 12, shadowOpacity: 0.22 },
       };
     },
   });
@@ -627,6 +629,10 @@ export function FormationGallery({
 
   const fallback = status === "fallback";
   const openedItem = open ? items[open.item] : undefined;
+  useEffect(() => {
+    if (hostRef.current) accent.current = cssColorToVec3(accentColor, hostRef.current);
+  }, [accentColor, hostRef]);
+
   return (
     <div
       ref={bind}

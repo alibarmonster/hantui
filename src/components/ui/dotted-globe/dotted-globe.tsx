@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type ComponentProps } from "react";
 import { cn } from "@/lib/utils";
+import { cssColorToRgb } from "@/lib/color";
 
 export interface GlobeMarker {
   lat: number;
@@ -20,9 +21,9 @@ export interface DottedGlobeProps extends Omit<ComponentProps<"div">, "children"
   markers?: GlobeMarker[];
   /** Arcs between locations, drawn as lifted great circles. */
   arcs?: GlobeArc[];
-  /** Land dot color. @default "#09090B" */
+  /** Land dot color (any CSS color, including a theme variable). @default "var(--foreground)" */
   dotColor?: string;
-  /** Marker and arc color. @default "#2563EB" */
+  /** Marker and arc color (any CSS color, including a theme variable). @default "var(--primary)" */
   accentColor?: string;
   /** Auto-rotation in degrees per second. @default 8 */
   speed?: number;
@@ -64,8 +65,8 @@ const toVector = (lat: number, lon: number): [number, number, number] => [Math.c
 export function DottedGlobe({
   markers = [],
   arcs = [],
-  dotColor = "#09090B",
-  accentColor = "#2563EB",
+  dotColor = "var(--foreground)",
+  accentColor = "var(--primary)",
   speed = 8,
   draggable = true,
   label = "Globe",
@@ -95,6 +96,16 @@ export function DottedGlobe({
     let visible = true;
     let size = 0;
     let dpr = 1;
+    // Colors may be theme variables, which a canvas can't read: resolve them when they change.
+    const resolved = new Map<string, string>();
+    const paint = (color: string) => {
+      let value = resolved.get(color);
+      if (!value) {
+        value = `rgb(${cssColorToRgb(color, el).join(",")})`;
+        resolved.set(color, value);
+      }
+      return value;
+    };
 
     const resize = () => {
       dpr = Math.min(window.devicePixelRatio || 1, 2);
@@ -116,7 +127,9 @@ export function DottedGlobe({
     };
 
     const draw = (time: number) => {
-      const { markers: m, arcs: a, dotColor: dc, accentColor: ac } = latest.current;
+      const { markers: m, arcs: a } = latest.current;
+      const dc = paint(latest.current.dotColor);
+      const ac = paint(latest.current.accentColor);
       const R = size * 0.46;
       const c = size / 2;
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);

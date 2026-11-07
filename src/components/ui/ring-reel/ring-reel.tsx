@@ -1,7 +1,8 @@
 "use client";
 
-import { useCallback, useImperativeHandle, useMemo, useState, type CSSProperties, type ReactNode, type Ref } from "react";
+import { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, type CSSProperties, type ReactNode, type Ref } from "react";
 import { cn } from "@/lib/utils";
+import { cssColorToVec3 } from "@/lib/color";
 import { GalleryA11y } from "@/lib/gallery/gallery-a11y";
 import { GalleryCaption, GalleryControls, chromeScheme } from "@/lib/gallery/gallery-chrome";
 import { GalleryFallback } from "@/lib/gallery/gallery-fallback";
@@ -54,7 +55,7 @@ export interface RingReelProps {
   lean?: boolean;
   /** Cards turn over in a wave from the top when the view changes, and now and then in ring view. @default true */
   flipWave?: boolean;
-  /** Color of the card backs shown by the flip wave. @default "#2563EB" */
+  /** Color of the card backs shown by the flip wave (any CSS color, including a theme variable). @default "var(--primary)" */
   accentColor?: string;
   /** Clicking a card in ring view zooms into the arc with that card on top. @default true */
   zoomOnClick?: boolean;
@@ -136,7 +137,7 @@ export function RingReel({
   gap = 8,
   lean = true,
   flipWave = true,
-  accentColor = "#2563EB",
+  accentColor = "var(--primary)",
   zoomOnClick = true,
   captions = true,
   controls = true,
@@ -155,7 +156,8 @@ export function RingReel({
   const slots = Math.max(3, Math.round(count ?? Math.min(items.length, 16)));
   const wheelItems = useMemo(() => Array.from({ length: slots }, (_, i) => items[i % items.length]).filter(Boolean), [items, slots]);
   const [view, setViewState] = useState<RingReelView>(defaultView);
-  const back = useMemo(() => toRgb(accentColor), [accentColor]);
+  // Card-back color; a theme variable is resolved against the gallery once it has mounted.
+  const back = useRef(toRgb(accentColor));
   const scheme = chromeScheme(backgroundColor);
   const itemIndex = (slot: number) => wrap(slot, items.length || 1);
 
@@ -304,7 +306,7 @@ export function RingReel({
           radius: radius,
           shadow: 0.55,
           dim: zoomT * 0.35 * smoothstep(0.6, 3, Math.abs(rel)),
-          fill: Math.cos(flip) < 0 ? [back[0], back[1], back[2], 1] : undefined,
+          fill: Math.cos(flip) < 0 ? [...back.current, 1] : undefined,
         });
       }
       if (waving) moving = true;
@@ -331,6 +333,10 @@ export function RingReel({
   const fallback = status === "fallback";
   const arcView = view === "arc";
   const activeItem = wheelItems[input.index];
+  useEffect(() => {
+    if (hostRef.current) back.current = cssColorToVec3(accentColor, hostRef.current);
+  }, [accentColor, hostRef]);
+
   return (
     <div
       ref={bind}

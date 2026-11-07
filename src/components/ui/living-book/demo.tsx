@@ -27,7 +27,7 @@ function Signup() {
           <label className="text-[12px] font-medium" htmlFor="book-email">
             Email
           </label>
-          <input id="book-email" type="email" required placeholder="you@studio.dev" className="h-9 rounded-md border border-[#d8d1c4] bg-white px-2.5 text-[13px] outline-none focus-visible:ring-2 focus-visible:ring-[#2563eb]" />
+          <input id="book-email" type="email" required placeholder="you@studio.dev" className="h-9 rounded-md border border-[#d8d1c4] bg-white px-2.5 text-[13px] outline-none focus-visible:ring-2 focus-visible:ring-ring" />
           <button type="submit" className="h-9 cursor-pointer rounded-md bg-[#2a2723] text-[13px] font-medium text-white">
             Notify me
           </button>
