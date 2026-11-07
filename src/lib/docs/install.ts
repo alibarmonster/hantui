@@ -13,6 +13,7 @@ import {
 const LIB_FILES: Record<string, string> = {
   "@/lib/motion": "src/lib/motion.ts",
   "@/lib/color": "src/lib/color.ts",
+  "@/lib/random": "src/lib/random.ts",
   "@/lib/webgl/use-shader-canvas": "src/lib/webgl/use-shader-canvas.ts",
   "@/lib/webgl/noise.glsl": "src/lib/webgl/noise.glsl.ts",
   "@/lib/web3/format": "src/lib/web3/format.ts",

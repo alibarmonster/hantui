@@ -165,6 +165,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["star-rating", "Star Rating", "Hover preview, staggered pops and half-star support.", "ready"],
     ["color-picker", "Color Picker", "Swatches, a hue slider and a hex input.", "ready"],
     ["animated-select", "Animated Select", "A filterable list that scales from its trigger.", "ready"],
+    ["merge-filter-chips", "Merge Filter Chips", "Filter chips that melt into a results pill and pinch back out, with a rolling count.", "planned", V040],
   ],
   overlays: [
     ["morphing-modal", "Morphing Modal", "One panel morphs between inner views with a blur cross-fade.", "ready"],
@@ -219,6 +220,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["streaming-text", "Streaming Text", "Words resolve through a soft cross-blur, like an AI stream.", "ready"],
     ["annotated-text", "Annotated Text", "Hand-drawn underlines, circles and highlights.", "ready"],
     ["gradient-text", "Gradient Text", "A slow gradient wash moves across the letters.", "ready"],
+    ["misprint-text", "Misprint Text", "A paragraph that prints like a misregistered press, with stickers and glitches.", "planned", V040],
   ],
   data: [
     ["number-ticker", "Number Ticker", "Counts up when it scrolls into view.", "ready"],
@@ -243,6 +245,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["spotlight-card", "Spotlight Card", "A radial glow follows the cursor across the surface.", "ready"],
     ["bento-grid", "Bento Grid", "Tiles lift on hover and animate their contents.", "ready"],
     ["sortable-list", "Sortable List", "Drag to reorder with layout animation.", "ready"],
+    ["foil-ticket-reel", "Foil Ticket Reel", "Holographic event tickets in a shuffling reel; tilt them and tear off the stub.", "planned", V040],
   ],
   media: [
     ["draggable-marquee", "Draggable Marquee", "An infinite loop you can pause and scrub.", "ready"],
@@ -305,6 +308,9 @@ const rows: Record<CategoryId, Row[]> = {
     ["cta-section", "CTA with Border Beam", "A light beam travels around the call-to-action card.", "ready", V020],
     ["icon-headline", "Icon Headline", "A headline with app-icon tiles inline that pop in and flip.", "ready", V030],
     ["tumbling-tags", "Tumbling Tags", "Labelled blocks drop in, tumble and settle into a tilted pile.", "ready", V030],
+    ["dot-burst-feature-tabs", "Dot Burst Feature Tabs", "Autoplaying feature tabs beside a color stage with dot bursts and a product card.", "planned", V040],
+    ["coin-crew-hero", "Coin Crew Hero", "A hero card with a parade of coin characters you can poke, flip and fling.", "planned", V040],
+    ["ink-bloom-footer", "Ink Bloom Footer", "A footer where dragging drops ink that blooms behind a giant wordmark.", "planned", V040],
   ],
   shaders: [
     ["cloud-shader", "Cloud Shader", "Soft procedural clouds drifting across a sky gradient.", "ready", V020],
