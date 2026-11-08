@@ -152,7 +152,7 @@ function GalleryView({
         aria-checked={active}
         onClick={() => choose(id)}
         className={cn(
-          "focus-ring inline-flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 text-[14px] font-semibold transition-colors duration-150",
+          "focus-ring inline-flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 text-[14px] font-semibold transition-colors duration-150 pointer-coarse:h-11",
           active ? "bg-primary text-primary-foreground" : "bg-surface-2 text-text-secondary hover:text-foreground",
           className,
         )}
@@ -178,7 +178,7 @@ function GalleryView({
                   aria-current={active ? "true" : undefined}
                   onClick={() => choose(id)}
                   className={cn(
-                    "focus-ring relative flex h-9 w-full cursor-pointer items-center justify-between gap-3 rounded-md pr-2.5 pl-3.5 text-left text-[14px] transition-colors duration-150",
+                    "focus-ring relative flex h-9 w-full cursor-pointer items-center justify-between gap-3 rounded-md pr-2.5 pl-3.5 text-left text-[14px] transition-colors duration-150 pointer-coarse:h-11",
                     active ? "bg-selected font-semibold text-foreground" : "text-text-secondary hover:bg-surface-2 hover:text-foreground",
                   )}
                 >
@@ -202,7 +202,7 @@ function GalleryView({
               onChange={(event) => setQuery(event.target.value)}
               placeholder="Filter by name or behavior…"
               aria-label="Filter components"
-              className="h-10 w-full rounded-md border border-input bg-surface pr-10 pl-10 text-[16px] text-foreground transition-[border-color,box-shadow] outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_3px_rgb(194_65_12/0.12)] sm:text-[15px] [&::-webkit-search-cancel-button]:hidden"
+              className="h-10 w-full rounded-md border border-input bg-surface pr-10 pl-10 text-[16px] pointer-coarse:h-11 text-foreground transition-[border-color,box-shadow] outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_3px_rgb(194_65_12/0.12)] sm:text-[15px] [&::-webkit-search-cancel-button]:hidden"
             />
             {query ? (
               <button
@@ -239,7 +239,7 @@ function GalleryView({
                 setQuery("");
                 choose("all");
               }}
-              className="focus-ring inline-flex h-10 cursor-pointer items-center rounded-md border border-input bg-transparent px-4 text-[15px] font-semibold text-foreground transition-colors hover:bg-surface-2 active:scale-[0.96]"
+              className="focus-ring touch-target inline-flex h-10 cursor-pointer items-center rounded-md border border-input bg-transparent px-4 text-[15px] font-semibold text-foreground transition-colors hover:bg-surface-2 active:scale-[0.96]"
             >
               Clear
             </button>

@@ -53,7 +53,7 @@ function HeaderLinks() {
             href={link.href}
             aria-current={active ? "page" : undefined}
             className={cn(
-              "focus-ring relative inline-flex h-10 items-center rounded-md px-3 text-[15px] transition-colors duration-150",
+              "focus-ring touch-target relative inline-flex h-10 items-center rounded-md px-3 text-[15px] transition-colors duration-150",
               active ? "font-semibold text-foreground" : "text-text-secondary hover:text-foreground",
             )}
           >
@@ -109,27 +109,27 @@ export function SiteHeader() {
             setLoaded((l) => (l.nav ? l : { ...l, nav: true }));
             setNavOpen(true);
           }}
-          className="focus-ring -ml-2 inline-flex size-10 cursor-pointer items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 md:hidden"
+          className="focus-ring touch-target -ml-2 inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 md:hidden"
         >
           <Menu className="size-5" aria-hidden="true" />
         </button>
         {loaded.nav ? <MobileNav open={navOpen} onOpenChange={setNavOpen} returnFocusRef={menuButton} /> : null}
-        <Link href="/" className="focus-ring mr-1 rounded-md" aria-label={`${siteConfig.name} home`}>
+        <Link href="/" className="focus-ring touch-target mr-1 inline-flex h-10 shrink-0 items-center rounded-md" aria-label={`${siteConfig.name} home`}>
           <Logo />
         </Link>
-        <Link href="/changelog" className="focus-ring mr-4 rounded-sm px-1 font-mono text-[12px] text-muted-foreground tabular-nums transition-colors hover:text-foreground">
+        <Link href="/changelog" className="focus-ring touch-target mr-4 hidden h-10 shrink-0 items-center rounded-sm px-1 font-mono text-[12px] text-muted-foreground tabular-nums transition-colors hover:text-foreground min-[400px]:inline-flex">
           v{siteConfig.version}
           <span className="sr-only"> changelog</span>
         </Link>
         <HeaderLinks />
 
-        <div className="ml-auto flex items-center gap-1.5">
+        <div className="ml-auto flex shrink-0 items-center gap-1.5">
           <button
             type="button"
             onClick={openSearch}
             aria-haspopup="dialog"
             aria-keyshortcuts={isMac ? "Meta+K" : "Control+K"}
-            className="focus-ring group inline-flex size-10 cursor-pointer items-center justify-center gap-2 rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground sm:w-60 sm:justify-start sm:border sm:border-input sm:bg-surface sm:pr-2 sm:pl-3 sm:hover:bg-surface"
+            className="focus-ring touch-target group inline-flex size-10 cursor-pointer items-center justify-center gap-2 rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground sm:w-60 sm:justify-start sm:border sm:border-input sm:bg-surface sm:pr-2 sm:pl-3 sm:hover:bg-surface"
           >
             <Search className="size-4 shrink-0" aria-hidden="true" />
             <span className="sr-only flex-1 text-left text-[13px] sm:not-sr-only">Search components…</span>
@@ -143,7 +143,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub repository"
-            className="focus-ring inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
+            className="focus-ring touch-target inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
           >
             <GitHubIcon className="size-[18px]" />
           </a>

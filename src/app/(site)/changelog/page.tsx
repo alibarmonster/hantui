@@ -41,7 +41,7 @@ function ReleaseComponents({ version }: { version: string }) {
                   <Link
                     key={item.slug}
                     href={`/components/${item.slug}`}
-                    className="focus-ring rounded-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground"
+                    className="focus-ring rounded-sm text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground pointer-coarse:min-w-11 pointer-coarse:py-2.5"
                   >
                     {item.name}
                   </Link>

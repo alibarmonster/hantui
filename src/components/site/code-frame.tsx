@@ -68,7 +68,7 @@ export function CodeFrame({
               setExpanded((value) => !value);
               if (expanded) frameRef.current?.scrollIntoView({ block: "nearest" });
             }}
-            className="focus-ring inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background px-3.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-surface"
+            className="focus-ring touch-target inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background px-3.5 text-xs font-medium text-foreground shadow-sm transition-colors hover:bg-surface"
           >
             {expanded ? "Collapse" : `Show all ${lines} lines`}
             <ChevronDown className={cn("size-3.5 transition-transform", expanded && "rotate-180")} aria-hidden="true" />

@@ -24,7 +24,7 @@ export function SectionHeading({
         className,
       )}
     >
-      <a href={`#${id}`} className="focus-ring inline-flex items-center gap-2 rounded-sm">
+      <a href={`#${id}`} className="focus-ring touch-target inline-flex items-center gap-2 rounded-sm">
         {children}
         <span aria-hidden="true" className="text-muted-foreground opacity-0 transition-opacity group-hover:opacity-100">
           #

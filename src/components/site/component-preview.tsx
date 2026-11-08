@@ -71,7 +71,7 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
   const done = (key: string) => copied === key;
 
   return (
-    <div className="inline-flex h-9 items-stretch rounded-[10px] border border-border bg-surface">
+    <div className="inline-flex h-9 items-stretch rounded-[10px] border border-border bg-surface pointer-coarse:h-[46px]">
       {/* One click: the prompt. The caret opens everything else. */}
       <button
         type="button"
@@ -82,7 +82,7 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
         {done("prompt") ? "Prompt copied" : "Copy prompt"}
       </button>
       <Popover.Root>
-        <Popover.Trigger aria-label="More ways to use this with AI" className="focus-ring inline-flex w-8 cursor-pointer items-center justify-center rounded-r-[9px] border-l border-border text-muted-foreground hover:bg-surface-2 hover:text-foreground data-[state=open]:bg-surface-2">
+        <Popover.Trigger aria-label="More ways to use this with AI" className="focus-ring inline-flex w-8 cursor-pointer items-center justify-center rounded-r-[9px] pointer-coarse:w-11 border-l border-border text-muted-foreground hover:bg-surface-2 hover:text-foreground data-[state=open]:bg-surface-2">
           <ChevronDown className="size-3.5" aria-hidden="true" />
         </Popover.Trigger>
         <Popover.Portal>
@@ -164,7 +164,7 @@ function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void
       onClick={onReplay}
       aria-label="Replay animation"
       title="Replay"
-      className="focus-ring relative inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-muted-foreground transition-colors hover:text-foreground active:scale-[0.96]"
+      className="focus-ring touch-target relative inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-muted-foreground transition-colors hover:text-foreground active:scale-[0.96]"
     >
       <m.span animate={{ rotate: reduceMotion ? 0 : -360 * count }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="inline-flex">
         <RotateCcw className="size-4" aria-hidden="true" />
@@ -199,7 +199,7 @@ function ModeToggle({ modes, value, onChange }: { modes: Mode[]; value: Mode; on
             value={mode}
             aria-label={label}
             title={label}
-            className={cn("focus-ring relative inline-flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors", active ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
+            className={cn("focus-ring relative inline-flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors pointer-coarse:size-11", active ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
           >
             {active ? <m.span layoutId="preview-mode" transition={reduceMotion ? { duration: 0 } : spring.snappy} className="absolute inset-0 rounded-lg border border-border bg-background shadow-xs" /> : null}
             <Icon className="relative size-4" aria-hidden="true" />
@@ -214,7 +214,7 @@ function StyleMenu({ variants, value, onChange }: { variants: PreviewVariant[]; 
   const current = variants.find((v) => v.name === value) ?? variants[0];
   return (
     <DropdownMenu.Root>
-      <DropdownMenu.Trigger className="focus-ring inline-flex h-9 cursor-pointer items-center gap-2 rounded-[10px] border border-border bg-background px-3 text-[13px] font-medium text-foreground shadow-xs hover:bg-surface data-[state=open]:bg-surface">
+      <DropdownMenu.Trigger className="focus-ring inline-flex h-9 cursor-pointer items-center gap-2 rounded-[10px] pointer-coarse:h-11 border border-border bg-background px-3 text-[13px] font-medium text-foreground shadow-xs hover:bg-surface data-[state=open]:bg-surface">
         <span className="text-muted-foreground">Style</span>
         {current.label}
         <ChevronDown className="size-3.5 text-muted-foreground" aria-hidden="true" />
@@ -227,7 +227,7 @@ function StyleMenu({ variants, value, onChange }: { variants: PreviewVariant[]; 
               <DropdownMenu.RadioItem
                 key={v.name}
                 value={v.name}
-                className="relative flex h-8 cursor-pointer items-center rounded-lg pr-8 pl-2.5 text-[13px] text-foreground outline-none select-none data-[highlighted]:bg-surface-2"
+                className="relative flex h-8 cursor-pointer items-center rounded-lg pr-8 pl-2.5 text-[13px] pointer-coarse:h-11 text-foreground outline-none select-none data-[highlighted]:bg-surface-2"
               >
                 {v.label}
                 <DropdownMenu.ItemIndicator className="absolute right-2.5">
@@ -437,7 +437,7 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
                 onClick={() => setFullscreen(true)}
                 aria-label="Open the preview full screen"
                 title="Full screen"
-                className="focus-ring inline-flex size-10 cursor-pointer items-center justify-center rounded-md border border-input bg-transparent text-muted-foreground hover:bg-surface-2 hover:text-foreground active:scale-[0.96]"
+                className="focus-ring touch-target inline-flex size-10 cursor-pointer items-center justify-center rounded-md border border-input bg-transparent text-muted-foreground hover:bg-surface-2 hover:text-foreground active:scale-[0.96]"
               >
                 <Maximize2 className="size-4" aria-hidden="true" />
               </button>
@@ -470,7 +470,7 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
             <div className="absolute inset-0 overflow-auto">
               <StageContent mode={mode} slug={slug} variant={variant.name} replays={replays} tall />
             </div>
-            <Dialog.Close className="focus-ring absolute top-4 right-4 z-30 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background/90 px-3 text-[13px] font-medium text-foreground shadow-sm backdrop-blur">
+            <Dialog.Close className="focus-ring absolute top-4 right-4 z-30 inline-flex h-9 cursor-pointer pointer-coarse:h-11 items-center gap-1.5 rounded-full border border-border bg-background/90 px-3 text-[13px] font-medium text-foreground shadow-sm backdrop-blur">
               <X className="size-4" aria-hidden="true" />
               Close
             </Dialog.Close>

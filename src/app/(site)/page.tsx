@@ -123,7 +123,7 @@ export default async function HomePage() {
               <li>Copy the file into components/ui in your project.</li>
               <li>Install the packages listed under Manual on the same page.</li>
             </ol>
-            <Link href="/docs/installation" className="focus-ring group inline-flex w-fit items-center gap-1.5 rounded-sm text-[15px] font-semibold text-link underline-offset-4 hover:underline">
+            <Link href="/docs/installation" className="focus-ring touch-target group inline-flex w-fit items-center gap-1.5 rounded-sm text-[15px] font-semibold text-link underline-offset-4 hover:underline">
               Installation guide
               <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true" />
             </Link>

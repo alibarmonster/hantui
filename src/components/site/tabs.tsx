@@ -78,7 +78,7 @@ export function TabsTrigger({
       }}
       className={cn(
         "focus-ring relative inline-flex cursor-pointer items-center justify-center gap-1.5 font-semibold whitespace-nowrap transition-colors duration-150 select-none",
-        context.variant === "pill" ? "h-8 rounded-[7px] px-3 text-[13px]" : "h-10 rounded-sm px-1 text-[14px]",
+        context.variant === "pill" ? "h-8 rounded-[7px] px-3 text-[13px] pointer-coarse:h-11" : "touch-target h-10 rounded-sm px-1 text-[14px]",
         context.variant === "pill" ? (active ? "text-foreground" : "text-foreground/65 hover:text-foreground") : active ? "text-link" : "text-text-secondary hover:text-foreground",
         className,
       )}

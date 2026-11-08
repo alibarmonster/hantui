@@ -58,13 +58,13 @@ export function MobileNav({
               >
                 <div className="flex h-16 shrink-0 items-center justify-between border-b border-border px-4">
                   <Dialog.Title asChild>
-                    <Link href="/" onClick={close} className="focus-ring rounded-md">
+                    <Link href="/" onClick={close} className="focus-ring touch-target inline-flex h-10 items-center rounded-md">
                       <Logo />
                     </Link>
                   </Dialog.Title>
                   <Dialog.Close
                     aria-label="Close navigation"
-                    className="focus-ring -mr-2 inline-flex size-10 cursor-pointer items-center justify-center rounded-md text-muted-foreground hover:bg-surface-2 hover:text-foreground"
+                    className="focus-ring touch-target -mr-2 inline-flex size-10 cursor-pointer items-center justify-center rounded-md text-muted-foreground hover:bg-surface-2 hover:text-foreground"
                   >
                     <X className="size-5" aria-hidden="true" />
                   </Dialog.Close>

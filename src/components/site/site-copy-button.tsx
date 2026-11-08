@@ -119,7 +119,7 @@ export function SiteCopyButton({
           "transition-[background-color,border-color,color,box-shadow,transform] duration-150 active:scale-[0.96]",
           "focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background",
           "disabled:pointer-events-none disabled:opacity-50",
-          size === "sm" && "after:absolute after:-inset-1 after:content-['']",
+          size === "sm" && "after:absolute after:-inset-1 after:content-[''] pointer-coarse:after:-inset-1.5",
           variantClasses[variant],
           iconOnly ? sizeClasses[size].icon : sizeClasses[size].base,
           className,

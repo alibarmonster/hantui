@@ -28,7 +28,7 @@ function NavLink({
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "focus-ring relative flex h-8 items-center gap-2 rounded-md px-2.5 text-[14px] transition-colors duration-150",
+        "focus-ring relative flex h-8 items-center gap-2 rounded-md px-2.5 text-[14px] transition-colors duration-150 pointer-coarse:h-11",
         active ? "bg-selected font-semibold text-foreground" : "text-text-secondary hover:bg-surface-2 hover:text-foreground",
       )}
     >
@@ -61,7 +61,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
         <Link
           href="/components"
           onClick={onNavigate}
-          className="focus-ring flex h-9 items-center gap-2 rounded-lg bg-surface-2 px-2.5 text-[13px] font-medium text-foreground transition-colors hover:bg-[color-mix(in_oklab,var(--surface-2)_80%,var(--foreground)_6%)]"
+          className="focus-ring flex h-9 items-center gap-2 rounded-lg bg-surface-2 px-2.5 text-[13px] pointer-coarse:h-11 font-medium text-foreground transition-colors hover:bg-[color-mix(in_oklab,var(--surface-2)_80%,var(--foreground)_6%)]"
         >
           <LayoutGrid className="size-3.5 text-muted-foreground" aria-hidden="true" />
           Browse all components
@@ -74,7 +74,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Filter ${ready.length} components…`}
-            className="h-9 w-full rounded-lg border border-border bg-background pr-2.5 pl-8 text-[13px] text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="h-9 w-full rounded-lg border border-border bg-background pr-2.5 pl-8 text-[13px] pointer-coarse:h-11 text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
           />
         </label>
       </div>

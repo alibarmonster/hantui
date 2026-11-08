@@ -282,6 +282,26 @@
   background-position: -8px -8px;
 }
 
+/*
+ * Touch screens need a 44px target. On a coarse pointer this centers an invisible hit box of at least
+ * 44×44 on a smaller control, without moving anything. Only for controls with room around them; rows of
+ * tight neighbors grow the control itself instead (pointer-coarse:h-11).
+ */
+@utility touch-target {
+  position: relative;
+  @media (pointer: coarse) {
+    &::after {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: max(100%, 44px);
+      height: max(100%, 44px);
+      translate: -50% -50%;
+    }
+  }
+}
+
 @utility no-scrollbar {
   scrollbar-width: none;
   &::-webkit-scrollbar {

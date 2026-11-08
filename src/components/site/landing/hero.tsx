@@ -172,7 +172,7 @@ export function LandingHero({ headline, subhead, installCommand, release }: Land
             >
               Browse components
             </Link>
-            <Link href="/docs" className="focus-ring rounded-sm text-[16px] font-semibold text-link underline-offset-4 hover:underline">
+            <Link href="/docs" className="focus-ring touch-target inline-flex rounded-sm text-[16px] font-semibold text-link underline-offset-4 hover:underline">
               Read the docs
             </Link>
           </div>

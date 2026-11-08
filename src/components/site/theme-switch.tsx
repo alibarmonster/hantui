@@ -68,7 +68,7 @@ export function ThemeSwitch() {
       }}
       aria-label={`Theme: ${LABELS[choice]}. Switch to ${LABELS[next]}`}
       title={`Theme: ${LABELS[choice]}`}
-      className="focus-ring inline-flex size-10 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
+      className="focus-ring touch-target inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
     >
       <Icon className="size-[18px]" aria-hidden="true" />
     </button>

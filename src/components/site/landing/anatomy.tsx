@@ -102,7 +102,7 @@ export function Anatomy({ files, source, sourceLines }: { files: string[]; sourc
           <div className="max-h-[17rem] overflow-hidden">{source}</div>
           <div className="pointer-events-none absolute inset-x-0 bottom-0 h-20 bg-gradient-to-t from-code to-transparent" />
         </div>
-        <Link href="/components/hold-to-confirm-button" className="focus-ring group inline-flex w-fit items-center gap-1.5 rounded-sm text-[15px] font-semibold text-link underline-offset-4 hover:underline">
+        <Link href="/components/hold-to-confirm-button" className="focus-ring touch-target group inline-flex w-fit items-center gap-1.5 rounded-sm text-[15px] font-semibold text-link underline-offset-4 hover:underline">
           Read the whole component
           <ArrowRight className="size-4 transition-transform duration-150 group-hover:translate-x-0.5" aria-hidden="true" />
         </Link>
