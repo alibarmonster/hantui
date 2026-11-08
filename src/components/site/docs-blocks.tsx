@@ -98,14 +98,14 @@ export function PropsTable({ groups }: { groups: PropsGroup[] }) {
                       <code className="font-mono text-[13px] font-medium text-foreground">
                         {prop.name}
                         {prop.required ? (
-                          <span className="text-destructive" aria-label="required">
+                          <span className="text-destructive-text" aria-label="required">
                             *
                           </span>
                         ) : null}
                       </code>
                     </td>
                     <td className="px-4 py-3">
-                      <code className="font-mono text-[12.5px] leading-5 break-words text-[#0e7490]">{prop.type}</code>
+                      <code className="font-mono text-[12.5px] leading-5 break-words text-[#0b6a83] dark:text-[#22d3ee]">{prop.type}</code>
                     </td>
                     <td className="px-4 py-3">
                       {prop.defaultValue ? (

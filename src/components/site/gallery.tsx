@@ -158,7 +158,7 @@ function GalleryView({
         )}
       >
         {label}
-        <span className={cn("font-mono text-[12px] font-normal tabular-nums", active ? "text-primary-foreground/80" : "text-muted-foreground")}>{counts.get(id)}</span>
+        <span className={cn("font-mono text-[12px] font-normal tabular-nums", active ? "text-primary-foreground" : "text-muted-foreground")}>{counts.get(id)}</span>
       </button>
     );
   };
