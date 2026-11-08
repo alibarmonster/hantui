@@ -3,7 +3,7 @@ import type { ComponentDocs } from "@/lib/docs/types";
 export const docs: ComponentDocs = {
   usage: `import { CenterPillNav } from "@/components/ui/center-pill-nav/center-pill-nav";
 
-<CenterPillNav brand={<Logo />} items={items} actions={[{ label: "Log in", href: "/login" }, { label: "Sign up", href: "/signup" }]} accent="#ff5b14" />`,
+<CenterPillNav brand={<Logo />} items={items} actions={[{ label: "Log in", href: "/login" }, { label: "Sign up", href: "/signup" }]} accent="#d4400a" />`,
   a11y: [
     "The highlight follows both hover and keyboard focus.",
     "Dropdown triggers expose `aria-expanded` and `aria-controls`; Escape closes and returns focus.",

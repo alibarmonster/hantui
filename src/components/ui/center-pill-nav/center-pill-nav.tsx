@@ -15,7 +15,7 @@ export interface CenterPillNavProps {
   items: NavItem[];
   /** Actions in the right pill; the last one is the accent button. */
   actions?: NavAction[];
-  /** Accent button color. @default "#ff5b14" */
+  /** Accent button color. @default "#d4400a" */
   accent?: string;
   /** Accessible name for the navigation. @default "Main" */
   label?: string;
@@ -27,7 +27,7 @@ export interface CenterPillNavProps {
  * Brand on the left, the links in a centered pill with a soft highlight that glides between them,
  * and a second pill on the right holding the quiet actions and a bright accent button.
  */
-export function CenterPillNav({ brand, items, actions = [], accent = "#ff5b14", label = "Main", className }: CenterPillNavProps) {
+export function CenterPillNav({ brand, items, actions = [], accent = "#d4400a", label = "Main", className }: CenterPillNavProps) {
   const id = useId();
   const reduceMotion = useReducedMotion();
   const root = useRef<HTMLElement>(null);
@@ -122,7 +122,7 @@ export function CenterPillNav({ brand, items, actions = [], accent = "#ff5b14", 
               {primary ? (
                 <a
                   href={primary.href}
-                  className="flex h-9 whitespace-nowrap items-center rounded-full px-4 text-[14px] font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)] outline-none transition-[filter] hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="flex h-9 whitespace-nowrap items-center rounded-full px-4 text-[14px] font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)] outline-none transition-[filter] hover:brightness-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   style={{ background: accent }}
                 >
                   {primary.label}
