@@ -39,6 +39,8 @@ export const releases: Release[] = [
           "Foil Ticket Reel: holographic event tickets that shuffle through a reel on a grainy grid; tilt them and tear off the stub to get stamped in.",
           "Coin Crew Hero: a hero card with a parade of coin characters that blink, follow your pointer, flip when poked and tumble when flung.",
           "Ink Bloom Footer: a footer on warm paper where dragging drops watercolor ink that blooms, mixes and dries behind a giant wordmark.",
+          "Dark mode for the site: a Light, Dark and System switch in the header, applied before the first paint so pages never flash the wrong theme. All 228 components were checked in dark.",
+          "Theme tokens --success-foreground, for text on solid success fills, plus --link and --destructive-text for terracotta and red text. Installed components map the last two with a fallback to --primary and --destructive, so your theme looks the same unless you set them.",
         ],
       },
       {
@@ -51,6 +53,14 @@ export const releases: Release[] = [
           "ASCII Aquarium Background lights its creatures from the top left, leaves glowing wakes behind them and has fish dart away from the cursor.",
           "Dither Wildlife now draws its horses, flock and grove as shaded, dithered ASCII with dust and trails; look=\"dither\" keeps the pixel look.",
           "The New badge moves to 0.4.0 components; components from 0.3.0 no longer show it.",
+        ],
+      },
+      {
+        type: "Fixed",
+        items: [
+          "Canvases that draw with theme colors (Dot Grid, Particle Field, Shimmering Dots, Dotted Globe, Ring Reel, Formation Gallery, Dissolve Transition, Dot Burst Feature Tabs and the ASCII scenes) repaint when the theme switches instead of keeping the old colors.",
+          "Text that fell short of 4.5:1 in dark or light now passes: success states and Swipe Row actions, small terracotta and red text in 24 components, the Center Pill Nav button, Tumbling Tags tones, Market Leaderboard ranks, the ember Glyph Map Card and the Living Book demo.",
+          "Stacked Cards and Swipe Cards demos use theme tokens instead of hardcoded white cards.",
         ],
       },
     ],
