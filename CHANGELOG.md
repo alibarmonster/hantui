@@ -4,7 +4,7 @@ All notable changes to this project are documented here. The format follows [Kee
 
 ## [Unreleased]
 
-Work toward 0.4.0: ten components (#213–222) in one new category, Studio Pieces & Glyph Art, built on a shared glyph engine. No breaking changes so far.
+Work toward 0.4.0: sixteen components. Ten (#213–222) form a new category, Studio Pieces & Glyph Art, built on a shared glyph engine; six more (#223–228) join existing categories. No breaking changes so far.
 
 ### Added
 
@@ -40,7 +40,7 @@ Work toward 0.4.0: ten components (#213–222) in one new category, Studio Piece
 - ASCII Aquarium Background lights its creatures from the top left (denser squares and glyphs on the shaded side, rare accent glints), leaves wakes that light accent dots behind rays, fish and pulsing jellyfish, and has fish dart away from a nearby cursor. Its look, props and handle are otherwise unchanged.
 - Dither Wildlife draws its horses, flock and grove as ASCII by default: sub-sampled glyph cells, blocks shaded smoothly along the `tones` under glyphs ordered-dithered by density, edge glyphs along silhouettes, ground and shadows as sparse glyph texture, birds and leaves as glyph sprites, and dust from the hooves and trails behind the flock that fade. The new `look` prop (`"ascii"` or `"dither"`) keeps the pixel look; `cell` now defaults to 8 in ascii (glyph cell width) and stays 5 in dither.
 - The README credits ascii-sharks (MIT), which ASCII Shark Sea, ASCII Koi Pond, ASCII Aquarium Background and the ASCII look of Dither Wildlife learn from.
-- The README and package description count 222 components in 22 categories, and the last category card on the landing page fills the rest of its row.
+- The README and package description count 228 components in 22 categories, and the last category card on the landing page fills the rest of its row.
 - Version 0.4.0 in progress: the navbar badge and the New badges follow it, so components from 0.3.0 no longer show New. The landing page showcases 0.3.0, the latest shipped release.
 
 ## [0.3.0] - 2026-11-07
