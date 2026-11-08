@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import { ChevronDown } from "lucide-react";
 import { useReducedMotion } from "motion/react";
 import * as m from "motion/react-m";
 import { cn } from "@/lib/utils";
@@ -80,5 +81,37 @@ export function TableOfContents({ items }: { items: TocItem[] }) {
         })}
       </ul>
     </nav>
+  );
+}
+
+/**
+ * "On this page" below the wide layout: a native select at the top of the article (DESIGN 8.4), so the
+ * section list stays reachable without a rail. Choosing a section jumps to it and resets the select.
+ */
+export function TocSelect({ items, className }: { items: TocItem[]; className?: string }) {
+  if (items.length < 2) return null;
+  return (
+    <label className={cn("relative block", className)}>
+      <span className="sr-only">Jump to a section</span>
+      <select
+        defaultValue=""
+        onChange={(event) => {
+          const id = event.target.value;
+          event.target.value = "";
+          if (id) window.location.hash = id;
+        }}
+        className="focus-ring h-11 w-full cursor-pointer appearance-none rounded-md border border-input bg-surface pr-10 pl-3 text-[16px] text-foreground"
+      >
+        <option value="" disabled>
+          On this page
+        </option>
+        {items.map((item) => (
+          <option key={item.id} value={item.id}>
+            {item.depth === 3 ? ` ${item.title}` : item.title}
+          </option>
+        ))}
+      </select>
+      <ChevronDown className="pointer-events-none absolute top-1/2 right-3 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+    </label>
   );
 }

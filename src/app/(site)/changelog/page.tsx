@@ -3,7 +3,6 @@ import Link from "next/link";
 import { PageHeader, SectionHeading } from "@/components/site/docs-blocks";
 import { DocsPage } from "@/components/site/docs-layout";
 import { NewBadge } from "@/components/site/sidebar-nav";
-import { TableOfContents } from "@/components/site/toc";
 import { siteConfig } from "@/config/site";
 import { releaseAnchor, releases, type Release } from "@/content/changelog";
 import { categories, components } from "@/content/components";
@@ -99,7 +98,7 @@ function ReleaseEntry({ release }: { release: Release }) {
 export default function ChangelogPage() {
   const toc = releases.map((release) => ({ id: releaseAnchor(release.version), title: `v${release.version}` }));
   return (
-    <DocsPage toc={<TableOfContents items={toc} />}>
+    <DocsPage toc={toc}>
       <PageHeader
         title="Changelog"
         description="New components, changes and fixes in every release. Breaking changes, when there are any, are listed first."

@@ -2,7 +2,6 @@ import type { Metadata } from "next";
 import { CodeBlock } from "@/components/site/code-block";
 import { PageHeader, Pager, Prose, SectionHeading } from "@/components/site/docs-blocks";
 import { DocsPage } from "@/components/site/docs-layout";
-import { TableOfContents } from "@/components/site/toc";
 import { readProjectFile } from "@/lib/docs/source";
 
 export const metadata: Metadata = {
@@ -94,7 +93,7 @@ export default async function ThemingPage() {
   const { colors, css } = await readTokens();
 
   return (
-    <DocsPage toc={<TableOfContents items={toc} />}>
+    <DocsPage toc={toc}>
       <PageHeader
         title="Theming"
         description="Components are styled with CSS variables that follow the shadcn/ui naming, so they adopt your project's theme as-is."

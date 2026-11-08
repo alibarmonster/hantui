@@ -3,7 +3,6 @@ import Link from "next/link";
 import { CodeBlock, InstallTabs } from "@/components/site/code-block";
 import { Callout, PageHeader, Pager, Prose, SectionHeading, Step, Steps } from "@/components/site/docs-blocks";
 import { DocsPage } from "@/components/site/docs-layout";
-import { TableOfContents } from "@/components/site/toc";
 import { registryUrl } from "@/config/site";
 import { readyComponents } from "@/content/components";
 import { readProjectFile } from "@/lib/docs/source";
@@ -30,7 +29,7 @@ export default async function InstallationPage() {
   const example = readyComponents[0]?.slug ?? "copy-button";
 
   return (
-    <DocsPage toc={<TableOfContents items={toc} />}>
+    <DocsPage toc={toc}>
       <PageHeader title="Installation" description="Add components with the shadcn CLI, or copy them in by hand." />
 
       <SectionHeading id="requirements" className="mt-0">

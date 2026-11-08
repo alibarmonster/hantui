@@ -3,7 +3,6 @@ import { CodeBlock } from "@/components/site/code-block";
 import { PageHeader, Pager, Prose, SectionHeading } from "@/components/site/docs-blocks";
 import { DocsPage } from "@/components/site/docs-layout";
 import { MotionSample } from "@/components/site/motion-samples";
-import { TableOfContents } from "@/components/site/toc";
 import { duration, ease, spring, stagger } from "@/lib/motion";
 import { readProjectFile } from "@/lib/docs/source";
 
@@ -62,7 +61,7 @@ export default async function MotionPage() {
   const source = await readProjectFile("src/lib/motion.ts");
 
   return (
-    <DocsPage toc={<TableOfContents items={toc} />}>
+    <DocsPage toc={toc}>
       <PageHeader
         title="Motion"
         description="One shared vocabulary of durations, curves and springs, defined in lib/motion.ts and used by every component."

@@ -3,7 +3,6 @@ import Link from "next/link";
 import { ArrowUpRight } from "lucide-react";
 import { PageHeader, Pager, Prose, SectionHeading } from "@/components/site/docs-blocks";
 import { DocsPage } from "@/components/site/docs-layout";
-import { TableOfContents } from "@/components/site/toc";
 import { siteConfig } from "@/config/site";
 import { categories, components, readyComponents } from "@/content/components";
 
@@ -20,7 +19,7 @@ const toc = [
 
 export default function IntroductionPage() {
   return (
-    <DocsPage toc={<TableOfContents items={toc} />}>
+    <DocsPage toc={toc}>
       <PageHeader
         title="Introduction"
         description={`${siteConfig.name} is a library of ${readyComponents.length} animated, accessible React components. You don't install it as a package. You copy each component into your codebase and own it from there.`}

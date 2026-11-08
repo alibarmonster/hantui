@@ -7,7 +7,7 @@ import { Callout, PageHeader, Pager, PropsTable, SectionHeading, Step, Steps } f
 import { DocsPage } from "@/components/site/docs-layout";
 import { HtmlCanvasNotice } from "@/components/site/html-canvas-status";
 import { NewBadge } from "@/components/site/sidebar-nav";
-import { TableOfContents, type TocItem } from "@/components/site/toc";
+import type { TocItem } from "@/components/site/toc";
 import { registryUrl, siteConfig } from "@/config/site";
 import { getCategory, getComponent, getSiblings, readyComponents } from "@/content/components";
 import { docsLoaders } from "@/content/docs";
@@ -73,7 +73,7 @@ export default async function ComponentPage({ params }: Params) {
   ];
 
   return (
-    <DocsPage toc={<TableOfContents items={toc} />}>
+    <DocsPage toc={toc}>
       <PageHeader
         title={entry.name}
         description={entry.description}

@@ -1,6 +1,7 @@
 import Image from "next/image";
 import Link from "next/link";
 import { SidebarNav } from "./sidebar-nav";
+import { TableOfContents, TocSelect, type TocItem } from "./toc";
 
 /** Left sidebar + content column shared by /docs and /components/[slug]. */
 export function DocsLayout({ children }: { children: React.ReactNode }) {
@@ -18,14 +19,19 @@ export function DocsLayout({ children }: { children: React.ReactNode }) {
   );
 }
 
-/** Article column with a sticky "On this page" rail on wide screens. */
-export function DocsPage({ toc, children }: { toc: React.ReactNode; children: React.ReactNode }) {
+/** Article column with a sticky "On this page" rail on wide screens, and a select at the top below that. */
+export function DocsPage({ toc, children }: { toc: TocItem[]; children: React.ReactNode }) {
   return (
     <div className="xl:grid xl:grid-cols-[minmax(0,1fr)_17rem] xl:gap-10 2xl:gap-16">
-      <article className="min-w-0 pt-8 pb-20 sm:pt-12">{children}</article>
+      <article className="min-w-0 pt-8 pb-20 sm:pt-12">
+        <TocSelect items={toc} className="mb-8 xl:hidden" />
+        {children}
+      </article>
       <aside className="hidden xl:block">
         <div className="sticky top-14 space-y-4 py-5">
-          <div className="rounded-2xl border border-border bg-background p-4">{toc}</div>
+          <div className="rounded-2xl border border-border bg-background p-4">
+            <TableOfContents items={toc} />
+          </div>
           <TemplatesCard />
         </div>
       </aside>

@@ -74,7 +74,7 @@ export function SidebarNav({ onNavigate }: { onNavigate?: () => void }) {
             value={query}
             onChange={(e) => setQuery(e.target.value)}
             placeholder={`Filter ${ready.length} components…`}
-            className="h-9 w-full rounded-lg border border-border bg-background pr-2.5 pl-8 text-[13px] pointer-coarse:h-11 text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="h-9 w-full rounded-lg border border-border bg-background pr-2.5 pl-8 text-[13px] pointer-coarse:h-11 pointer-coarse:text-[16px] text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring"
           />
         </label>
       </div>
