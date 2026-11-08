@@ -93,7 +93,7 @@ export function CategoryIndex({ categories }: { categories: IndexCategory[] }) {
             transition={{ duration: 0.2, ease: [0.22, 1, 0.36, 1] }}
           >
             {/* A live preview, scaled down to fit the card. */}
-            <div className="bg-dot-grid absolute top-1/2 left-1/2 flex h-[180%] w-[180%] -translate-x-1/2 -translate-y-1/2 scale-[0.555] items-center justify-center">
+            <div className="dot-grid absolute top-1/2 left-1/2 flex h-[180%] w-[180%] -translate-x-1/2 -translate-y-1/2 scale-[0.555] items-center justify-center">
               <DemoRenderer key={active.preview.slug} slug={active.preview.slug} name={active.preview.variant} />
             </div>
           </motion.div>

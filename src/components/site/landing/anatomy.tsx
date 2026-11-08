@@ -45,7 +45,7 @@ export function Anatomy({ files, source, sourceLines }: { files: string[]; sourc
         <div
           data-theme={dark ? "dark" : undefined}
           className={cn(
-            "bg-dot-grid relative flex min-h-[18rem] items-center justify-center rounded-lg border border-border bg-background p-10 transition-colors duration-200",
+            "dot-grid relative flex min-h-[18rem] items-center justify-center rounded-lg border border-border bg-background p-10 transition-colors duration-200",
             // Shows the focus style the button gets from the keyboard, without moving focus there.
             focusRing && "[&_button]:outline-2 [&_button]:outline-offset-2 [&_button]:outline-ring [&_button]:outline-solid",
           )}

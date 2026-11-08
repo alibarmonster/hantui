@@ -104,7 +104,7 @@ export function LandingReel({ items, nextId }: { items: ReelItem[]; nextId: stri
               </Link>
             </div>
           </div>
-          <div className="bg-dot-grid relative mx-auto w-full max-w-[1200px] flex-1 overflow-hidden rounded-xl border border-border bg-surface">
+          <div className="dot-grid relative mx-auto w-full max-w-[1200px] flex-1 overflow-hidden rounded-xl border border-border bg-surface">
             <AnimatePresence initial={false} custom={direction} mode="popLayout">
               <motion.div
                 key={item.slug}

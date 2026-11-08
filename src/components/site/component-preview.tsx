@@ -153,7 +153,7 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
 
 /** The preview stage: surface fill and faint dots, which show its bounds and that a component's background is transparent. */
 export function PreviewStage({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("bg-dot-grid relative overflow-hidden rounded-lg border border-border bg-surface", className)}>{children}</div>;
+  return <div className={cn("dot-grid relative overflow-hidden rounded-lg border border-border bg-surface", className)}>{children}</div>;
 }
 
 function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void }) {

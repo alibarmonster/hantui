@@ -267,7 +267,7 @@
   }
 }
 
-@utility bg-dot-grid {
+@utility dot-grid {
   background-image: radial-gradient(circle at 1px 1px, var(--dot) 1px, transparent 0);
   background-size: 16px 16px;
   background-position: -8px -8px;
