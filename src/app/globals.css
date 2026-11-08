@@ -280,69 +280,9 @@
   }
 }
 
-/* Landing hero (CSS so it runs before hydration) */
-@keyframes landing-marquee {
-  to {
-    translate: -50% 0;
-  }
-}
-
-@keyframes hero-word-in {
-  from {
-    opacity: 0;
-    transform: translateY(14px);
-    filter: blur(6px);
-  }
-}
-/* The headline is the page's main content: its words start visible (soft and low) and sharpen into place,
-   so it paints with the first frame instead of after an opacity fade. */
-@keyframes hero-word-focus {
-  from {
-    opacity: 0.35;
-    transform: translateY(12px);
-    filter: blur(8px);
-  }
-}
-
 @keyframes hero-fade-in {
   from {
     opacity: 0;
-  }
-}
-
-@keyframes hero-draw {
-  from {
-    stroke-dashoffset: 1;
-  }
-  to {
-    stroke-dashoffset: 0;
-  }
-}
-
-.hero-word {
-  animation: hero-word-focus 0.7s var(--ease-out) both;
-  animation-delay: calc(var(--i, 0) * 60ms + 40ms);
-}
-
-.hero-rise {
-  animation: hero-word-in 0.6s var(--ease-out) both;
-  animation-delay: var(--delay, 0ms);
-}
-
-.hero-underline {
-  stroke-dasharray: 1;
-  stroke-dashoffset: 1;
-  animation: hero-draw 0.65s var(--ease-in-out) var(--delay, 0ms) forwards;
-}
-
-@media (prefers-reduced-motion: reduce) {
-  .hero-word,
-  .hero-rise {
-    animation-name: hero-fade-in;
-  }
-  .hero-underline {
-    animation: none;
-    stroke-dashoffset: 0;
   }
 }
 

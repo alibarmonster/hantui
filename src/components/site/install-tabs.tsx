@@ -13,7 +13,7 @@ export function InstallTabsClient({ commands }: { commands: Record<PackageManage
       value={packageManager}
       onValueChange={(value) => setPackageManager(value as PackageManager)}
       variant="underline"
-      className="code-block overflow-hidden rounded-xl border border-border bg-background"
+      className="code-block overflow-hidden rounded-lg border border-border bg-code"
     >
       <div className="flex h-11 items-center justify-between gap-2 border-b border-border bg-surface pr-1.5 pl-2">
         <TabsList aria-label="Package manager">
@@ -26,7 +26,7 @@ export function InstallTabsClient({ commands }: { commands: Record<PackageManage
         <SiteCopyButton value={commands[packageManager].text} variant="ghost" size="sm" aria-label="Copy command" />
       </div>
       {packageManagers.map((pm) => (
-        <TabsContent key={pm} value={pm} className="rounded-b-xl">
+        <TabsContent key={pm} value={pm} className="rounded-b-lg">
           <div dangerouslySetInnerHTML={{ __html: commands[pm].html }} />
         </TabsContent>
       ))}
