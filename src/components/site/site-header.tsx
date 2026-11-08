@@ -75,8 +75,11 @@ export function SiteHeader() {
   const menuButton = useRef<HTMLButtonElement>(null);
   const isMac = useIsMac();
 
-  const openSearch = () => {
-    lastFocus.current = document.activeElement as HTMLElement | null;
+  // Focus returns to the search button when it opened the palette (Safari doesn't focus buttons on
+  // click), otherwise to wherever focus was when the shortcut was pressed.
+  const preloadSearch = () => setLoaded((l) => (l.search ? l : { ...l, search: true }));
+  const openSearch = (trigger?: HTMLElement) => {
+    lastFocus.current = trigger ?? (document.activeElement as HTMLElement | null);
     setLoaded((l) => (l.search ? l : { ...l, search: true }));
     setSearchOpen(true);
   };
@@ -89,6 +92,9 @@ export function SiteHeader() {
         if (!searchOpen) lastFocus.current = document.activeElement as HTMLElement | null;
         setLoaded((l) => (l.search ? l : { ...l, search: true }));
         setSearchOpen((open) => !open);
+      } else if (event.key === "Escape" && searchOpen) {
+        // The first open loads the palette; an Escape pressed before it appears would otherwise be lost.
+        setSearchOpen(false);
       }
     };
     window.addEventListener("keydown", onKeyDown);
@@ -126,7 +132,10 @@ export function SiteHeader() {
         <div className="ml-auto flex shrink-0 items-center gap-1.5">
           <button
             type="button"
-            onClick={openSearch}
+            onClick={(event) => openSearch(event.currentTarget)}
+            // Start loading the palette on intent, so the first open is ready by the click.
+            onPointerEnter={preloadSearch}
+            onFocus={preloadSearch}
             aria-haspopup="dialog"
             aria-keyshortcuts={isMac ? "Meta+K" : "Control+K"}
             className="focus-ring touch-target group inline-flex size-10 cursor-pointer items-center justify-center gap-2 rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground sm:w-60 sm:justify-start sm:border sm:border-input sm:bg-surface sm:pr-2 sm:pl-3 sm:hover:bg-surface"
