@@ -228,4 +228,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "merge-filter-chips": () => import("@/components/ui/merge-filter-chips/demo"),
   "misprint-text": () => import("@/components/ui/misprint-text/demo"),
   "dot-burst-feature-tabs": () => import("@/components/ui/dot-burst-feature-tabs/demo"),
+  "foil-ticket-reel": () => import("@/components/ui/foil-ticket-reel/demo"),
 };
