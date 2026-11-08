@@ -165,7 +165,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["star-rating", "Star Rating", "Hover preview, staggered pops and half-star support.", "ready"],
     ["color-picker", "Color Picker", "Swatches, a hue slider and a hex input.", "ready"],
     ["animated-select", "Animated Select", "A filterable list that scales from its trigger.", "ready"],
-    ["merge-filter-chips", "Merge Filter Chips", "Filter chips that melt into a results pill and pinch back out, with a rolling count.", "planned", V040],
+    ["merge-filter-chips", "Merge Filter Chips", "Filter chips that melt into a results pill and pinch back out, with a rolling count.", "ready", V040],
   ],
   overlays: [
     ["morphing-modal", "Morphing Modal", "One panel morphs between inner views with a blur cross-fade.", "ready"],

@@ -33,6 +33,7 @@ export const releases: Release[] = [
           "Retro Desktop Hero: a tiny retro desktop with draggable pixel icons, windows you can move, minimize and maximize, a hello window and a taskbar.",
           "Flow Line Chat Card and Multiplayer Canvas Card: a pair of animated feature cards for a chat and a collaboration product, sharing a FlowLines background of flowing, pointer-bending lines.",
           "Crumple Notes: paper notes that crumple into WebGL paper balls and unfold again, keeping faint creases.",
+          "Merge Filter Chips: filter chips that melt into a results pill through a gooey neck and pinch back out, while the count rolls.",
         ],
       },
       {

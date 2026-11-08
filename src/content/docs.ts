@@ -224,4 +224,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "flow-line-chat-card": () => import("@/components/ui/flow-line-chat-card/docs"),
   "multiplayer-canvas-card": () => import("@/components/ui/multiplayer-canvas-card/docs"),
   "crumple-notes": () => import("@/components/ui/crumple-notes/docs"),
+  "merge-filter-chips": () => import("@/components/ui/merge-filter-chips/docs"),
 };
