@@ -5,11 +5,15 @@ import { RadioCard, RadioCardGroup } from "@/components/ui/radio-card-group/radi
 
 export function Default() {
   return (
-    <RadioCardGroup defaultValue="pro" aria-label="Plan" className="w-full max-w-2xl sm:grid-cols-3">
-      <RadioCard value="starter" title="Starter" description="For side projects." aside="$0" />
-      <RadioCard value="pro" title="Pro" description="For growing teams." aside="$24" />
-      <RadioCard value="scale" title="Scale" description="SSO and audit logs." aside="$79" />
-    </RadioCardGroup>
+    // Three across only when the container has room for them, wherever the group is placed. In a small
+    // gallery card the third plan steps aside so the other two fit.
+    <div className="@container w-full max-w-2xl">
+      <RadioCardGroup defaultValue="pro" aria-label="Plan" className="@lg:grid-cols-3">
+        <RadioCard value="starter" title="Starter" description="For side projects." aside="$0" />
+        <RadioCard value="pro" title="Pro" description="For growing teams." aside="$24" />
+        <RadioCard value="scale" title="Scale" description="SSO and audit logs." aside="$79" className="[[data-preview-card]_&]:hidden" />
+      </RadioCardGroup>
+    </div>
   );
 }
 

@@ -14,7 +14,8 @@ export function MobileBar() {
     { value: "profile", label: "Profile", icon: <User />, activeIcon: <User className="fill-current" /> },
   ];
   return (
-    <div className="flex h-[26rem] w-[22rem] max-w-full flex-col overflow-hidden rounded-[2rem] border border-border bg-surface">
+    // In a gallery card the phone takes the card's height, so the bar stays in view.
+    <div className="flex h-[26rem] w-[22rem] max-w-full flex-col overflow-hidden rounded-[2rem] border border-border bg-surface [[data-preview-card]_&]:h-full">
       {tabs.map((tab) => (
         <div key={tab.value} role="tabpanel" id={lensPanelId("phone", tab.value)} aria-labelledby={lensTabId("phone", tab.value)} hidden={tab.value !== value} className="flex-1 p-6">
           <p className="text-lg font-semibold tracking-tight text-foreground">{tab.label}</p>
