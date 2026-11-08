@@ -7,11 +7,12 @@ import { readProjectFile } from "@/lib/docs/source";
 
 export const metadata: Metadata = {
   title: "Theming",
-  description: "Color, radius and shadow tokens.",
+  description: "Color, dark mode, radius and shadow tokens.",
 };
 
 const toc = [
   { id: "colors", title: "Colors" },
+  { id: "dark-mode", title: "Dark mode" },
   { id: "radius", title: "Radius" },
   { id: "shadows", title: "Shadows" },
   { id: "css", title: "CSS variables" },
@@ -24,14 +25,23 @@ const roles: Record<string, string> = {
   "surface-2": "Subtle fills, hovers",
   card: "Card surface",
   popover: "Menus, dialogs, tooltips",
-  primary: "Accent, used sparingly",
+  primary: "Accent: the one filled action per view, current state",
   "primary-foreground": "Text on accent",
+  "primary-hover": "Accent on hover",
+  link: "Terracotta text and links",
   secondary: "Secondary fills",
   muted: "Muted fills",
   "muted-foreground": "Secondary text",
+  "text-secondary": "Body text a step quieter",
   accent: "Hover and active rows",
+  highlight: "New badge fill",
+  "highlight-foreground": "Text on the New badge",
+  "highlight-text": "Amber text",
+  selected: "Selected rows and items",
   destructive: "Danger",
+  "destructive-text": "Danger text",
   success: "Success",
+  "success-foreground": "Text on success fills",
   warning: "Warning",
   "chart-1": "Chart series 1",
   "chart-2": "Chart series 2",
@@ -42,29 +52,46 @@ const roles: Record<string, string> = {
   border: "Hairline borders",
   input: "Input borders",
   ring: "Focus ring",
+  code: "Code blocks",
+  dot: "Dot grid on preview stages",
 };
 
 const radii = [
-  { name: "sm", value: "6px", className: "rounded-sm" },
-  { name: "md", value: "10px", className: "rounded-md" },
-  { name: "lg", value: "14px", className: "rounded-lg" },
-  { name: "xl", value: "20px", className: "rounded-xl" },
+  { name: "sm", value: "4px", className: "rounded-sm" },
+  { name: "md", value: "8px", className: "rounded-md" },
+  { name: "lg", value: "12px", className: "rounded-lg" },
+  { name: "xl", value: "16px", className: "rounded-xl" },
   { name: "full", value: "9999px", className: "rounded-full" },
 ];
 
 const shadows = ["shadow-xs", "shadow-sm", "shadow-md", "shadow-lg", "shadow-xl"];
 
-/** Reads the :root block from globals.css so the docs never drift from the real tokens. */
-async function readRootTokens() {
+const LIGHT = ':root,\n[data-theme="light"]';
+const DARK = ':root[data-theme="dark"],\n[data-theme="dark"]';
+
+/** Reads the light and dark token blocks from globals.css so the docs never drift from the real tokens. */
+async function readTokens() {
   const css = await readProjectFile("src/app/globals.css");
-  const block = css.match(/:root\s*\{([\s\S]*?)\n\}/)?.[1] ?? "";
-  const tokens = [...block.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(([, name, value]) => ({ name, value: value.trim() }));
-  return { tokens, block: `:root {${block}\n}` };
+  const read = (selector: string) => {
+    const at = css.indexOf(`${selector} {`);
+    const body = at < 0 ? "" : css.slice(at + selector.length + 2, css.indexOf("\n}", at));
+    const values = new Map([...body.matchAll(/--([\w-]+):\s*([^;]+);/g)].map(([, name, value]) => [name, value.trim()]));
+    return { values, block: `${selector} {${body}\n}` };
+  };
+  const light = read(LIGHT);
+  const dark = read(DARK);
+  const colors = [...light.values]
+    .filter(([name, value]) => value.startsWith("#") && roles[name])
+    .map(([name, value]) => ({ name, light: value, dark: dark.values.get(name) ?? value }));
+  return { colors, css: `${light.block}\n\n${dark.block}` };
+}
+
+function Swatch({ color, label }: { color: string; label: string }) {
+  return <span className="size-9 shrink-0 rounded-md shadow-[inset_0_0_0_1px_var(--border)]" style={{ backgroundColor: color }} role="img" aria-label={`${label} ${color}`} />;
 }
 
 export default async function ThemingPage() {
-  const { tokens, block } = await readRootTokens();
-  const colors = tokens.filter((t) => t.value.startsWith("#") && roles[t.name]);
+  const { colors, css } = await readTokens();
 
   return (
     <DocsPage toc={<TableOfContents items={toc} />}>
@@ -75,9 +102,10 @@ export default async function ThemingPage() {
 
       <Prose>
         <p>
-          The palette is white and zinc with a single blue accent. The accent is exposed as <code>--primary</code>{" "}
-          and <code>--ring</code>, because shadcn reserves <code>--accent</code> for subtle hover fills. Override any
-          variable in your own CSS and every component follows.
+          The palette is warm stone neutrals with one terracotta accent. The accent is exposed as{" "}
+          <code>--primary</code> and <code>--ring</code>, because shadcn reserves <code>--accent</code> for subtle hover
+          fills; terracotta text uses <code>--link</code>, which stays readable in dark mode. Override any variable in
+          your own CSS and every component follows.
         </p>
       </Prose>
 
@@ -86,25 +114,42 @@ export default async function ThemingPage() {
         <ul className="divide-y divide-border">
           {colors.map((token) => (
             <li key={token.name} className="flex items-center gap-4 px-4 py-3">
-              <span
-                className="size-9 shrink-0 rounded-md shadow-[inset_0_0_0_1px_rgb(0_0_0/0.08)]"
-                style={{ backgroundColor: token.value }}
-                aria-hidden="true"
-              />
+              <span className="flex shrink-0 gap-1">
+                <Swatch color={token.light} label="Light" />
+                <Swatch color={token.dark} label="Dark" />
+              </span>
               <span className="min-w-0 flex-1">
                 <code className="block font-mono text-[13px] font-medium text-foreground">--{token.name}</code>
                 <span className="block text-[13px] text-muted-foreground">{roles[token.name]}</span>
               </span>
-              <code className="font-mono text-xs text-muted-foreground uppercase">{token.value}</code>
+              <code className="hidden font-mono text-xs text-muted-foreground uppercase sm:block">
+                {token.light}
+                {token.dark !== token.light ? ` / ${token.dark}` : ""}
+              </code>
             </li>
           ))}
         </ul>
       </div>
 
+      <SectionHeading id="dark-mode">Dark mode</SectionHeading>
+      <Prose>
+        <p>
+          Every color has a dark value, shown on the right of each swatch pair. They apply under{" "}
+          <code>data-theme=&quot;dark&quot;</code>, on <code>&lt;html&gt;</code> for the page or on any element for a
+          dark island inside a light page (and <code>data-theme=&quot;light&quot;</code> the other way round). This site
+          sets it in an inline script before the first paint, from your choice in the header or your system setting,
+          so a page never flashes the wrong theme.
+        </p>
+        <p>
+          Components only read the variables. In a shadcn project they follow your <code>.dark</code> class as they
+          are, and canvases repaint with the new colors when the theme switches.
+        </p>
+      </Prose>
+
       <SectionHeading id="radius">Radius</SectionHeading>
       <Prose>
         <p>
-          A single <code>--radius</code> of 10px drives the scale: 6, 10, 14 and 20px, plus full for pills.
+          A single <code>--radius</code> of 8px drives the scale: 4, 8, 12 and 16px, plus full for pills.
         </p>
       </Prose>
       <ul className="mt-5 grid grid-cols-2 gap-3 sm:grid-cols-5">
@@ -135,11 +180,11 @@ export default async function ThemingPage() {
       <SectionHeading id="css">CSS variables</SectionHeading>
       <Prose className="mb-4">
         <p>
-          The full set, as defined in this site&apos;s <code>globals.css</code>. Each one is mapped to a Tailwind color
-          in <code>@theme inline</code>, e.g. <code>--color-primary: var(--primary)</code>.
+          The full set, light and dark, as defined in this site&apos;s <code>globals.css</code>. Each one is mapped to a
+          Tailwind color in <code>@theme inline</code>, e.g. <code>--color-primary: var(--primary)</code>.
         </p>
       </Prose>
-      <CodeBlock code={block} lang="css" title="app/globals.css" collapsible />
+      <CodeBlock code={css} lang="css" title="app/globals.css" collapsible />
 
       <Pager prev={{ href: "/docs/installation", title: "Installation" }} next={{ href: "/docs/motion", title: "Motion" }} />
     </DocsPage>

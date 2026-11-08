@@ -41,7 +41,7 @@ export function Prose({ children, className }: { children: ReactNode; className?
         "space-y-4 text-[15px] leading-7 text-muted-foreground",
         "[&_a]:font-medium [&_a]:text-foreground [&_a]:underline [&_a]:decoration-border [&_a]:underline-offset-4 [&_a:hover]:decoration-foreground",
         "[&_strong]:font-medium [&_strong]:text-foreground",
-        "[&_:not(pre)>code]:rounded-[5px] [&_:not(pre)>code]:bg-surface-2 [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.85em] [&_:not(pre)>code]:text-foreground",
+        "[&_:not(pre)>code]:rounded-[5px] [&_:not(pre)>code]:bg-surface-2 [&_:not(pre)>code]:px-1.5 [&_:not(pre)>code]:py-0.5 [&_:not(pre)>code]:font-mono [&_:not(pre)>code]:text-[0.85em] [&_:not(pre)>code]:text-foreground [&_:not(pre)>code]:whitespace-nowrap",
         className,
       )}
     >
