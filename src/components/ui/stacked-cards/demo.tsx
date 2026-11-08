@@ -11,11 +11,11 @@ const PLACES = [
 
 function Postcard({ name, country, tint }: { name: string; country: string; tint: string }) {
   return (
-    <div className="flex aspect-[3/4] w-48 flex-col overflow-hidden rounded-2xl border border-black/5 bg-white p-2 shadow-md sm:w-56">
+    <div className="flex aspect-[3/4] w-48 flex-col overflow-hidden rounded-2xl border border-border bg-card p-2 shadow-md sm:w-56">
       <div className={`flex-1 rounded-xl bg-gradient-to-br ${tint}`} />
       <div className="px-1.5 pt-2.5 pb-1">
-        <p className="text-sm font-semibold text-zinc-900">{name}</p>
-        <p className="text-xs text-zinc-500">{country}</p>
+        <p className="text-sm font-semibold text-card-foreground">{name}</p>
+        <p className="text-xs text-muted-foreground">{country}</p>
       </div>
     </div>
   );

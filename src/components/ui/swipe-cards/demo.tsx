@@ -41,11 +41,11 @@ export function Default() {
           </div>
         }
         renderCard={(p) => (
-          <div className="flex size-full flex-col overflow-hidden rounded-2xl border border-black/5 bg-white shadow-lg select-none">
+          <div className="flex size-full flex-col overflow-hidden rounded-2xl border border-border bg-card shadow-lg select-none">
             <div className={`flex-1 bg-gradient-to-br ${p.tint}`} />
             <div className="p-4">
-              <p className="font-semibold text-zinc-900">{p.name}</p>
-              <p className="text-sm text-zinc-500">
+              <p className="font-semibold text-card-foreground">{p.name}</p>
+              <p className="text-sm text-muted-foreground">
                 {p.role} · {p.city}
               </p>
             </div>
