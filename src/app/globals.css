@@ -356,6 +356,12 @@
   background-color: transparent !important;
 }
 
+/* Code follows the theme: every token carries its dark color in --shiki-dark (lib/docs/highlight.ts). */
+[data-theme="dark"] .shiki,
+[data-theme="dark"] .shiki span {
+  color: var(--shiki-dark) !important;
+}
+
 .code-block pre {
   margin: 0;
   padding: 1rem 1.125rem;
@@ -375,4 +381,22 @@
 /* Each line is a grid row, so give blank lines their height back. */
 .code-block pre code .line:empty::before {
   content: "\200b";
+}
+
+/* Line numbers on blocks of more than one line (a one-line command doesn't need a "1"); they can't be selected. */
+.code-block pre code:has(.line + .line) {
+  counter-reset: line;
+}
+.code-block pre code:has(.line + .line) .line::before {
+  counter-increment: line;
+  content: counter(line);
+  display: inline-block;
+  width: 2ch;
+  margin-right: 1.25rem;
+  text-align: right;
+  color: var(--muted-foreground);
+  user-select: none;
+}
+.code-block pre code:has(.line:nth-child(100)) .line::before {
+  width: 3ch;
 }
