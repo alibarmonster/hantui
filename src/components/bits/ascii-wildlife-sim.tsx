@@ -13,12 +13,10 @@ export interface WildlifeSpec {
 
 const TAU = Math.PI * 2;
 const NODES = 20;
-const ALPHA_LEVELS = 6;
 const BOID_ALPHAS = [0.28, 0.42, 0.58, 0.74, 0.9];
 
 const clamp = (v: number, lo: number, hi: number) => (v < lo ? lo : v > hi ? hi : v);
 const rand = (lo: number, hi: number) => lo + Math.random() * (hi - lo);
-const randInt = (lo: number, hi: number) => Math.floor(rand(lo, hi + 1));
 
 function smoothstep(e0: number, e1: number, x: number) {
   const t = clamp((x - e0) / (e1 - e0), 0, 1);
