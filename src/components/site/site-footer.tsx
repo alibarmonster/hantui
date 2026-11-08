@@ -1,57 +1,45 @@
 import Link from "next/link";
 import { siteConfig } from "@/config/site";
-import { categories } from "@/content/components";
-import { docsPages } from "@/content/docs-nav";
+import { GitHubIcon } from "./icons";
 import { Logo } from "./logo";
 
+const links = [
+  { href: "/components", label: "Components" },
+  { href: "/docs", label: "Docs" },
+  { href: "/templates", label: "Templates" },
+  { href: "/changelog", label: "Changelog" },
+];
+
+/** One row on desktop, stacked on mobile: the wordmark and one line, the links that exist, the version. */
 export function SiteFooter() {
   return (
-    <footer className="border-t border-border bg-surface">
-      <div className="mx-auto grid max-w-[1400px] grid-cols-1 gap-10 px-4 py-14 sm:px-6 md:grid-cols-[1.4fr_1fr_1fr]">
-        <div className="max-w-xs space-y-3">
-          <Logo />
-          <p className="text-sm leading-6 text-muted-foreground">{siteConfig.description}</p>
+    <footer className="border-t border-border">
+      <div className="mx-auto flex max-w-[1440px] flex-col gap-6 px-4 py-10 sm:px-6 md:flex-row md:items-center md:justify-between">
+        <div className="flex flex-col gap-1.5 md:flex-row md:items-center md:gap-4">
+          <Link href="/" className="focus-ring w-fit rounded-md" aria-label={`${siteConfig.name} home`}>
+            <Logo />
+          </Link>
+          <p className="text-[14px] text-text-secondary">Built by alibar. MIT licensed.</p>
         </div>
-        <div>
-          <p className="mb-3 text-sm font-medium text-foreground">Docs</p>
-          <ul className="space-y-2 text-sm">
-            {docsPages.map((page) => (
-              <li key={page.href}>
-                <Link href={page.href} className="focus-ring rounded-sm text-muted-foreground transition-colors hover:text-foreground">
-                  {page.title}
-                </Link>
-              </li>
-            ))}
-            <li>
-              <Link href="/lab" className="focus-ring rounded-sm text-muted-foreground transition-colors hover:text-foreground">
-                WebGL lab
-              </Link>
-            </li>
-          </ul>
-        </div>
-        <div>
-          <p className="mb-3 text-sm font-medium text-foreground">Components</p>
-          <ul className="grid grid-cols-1 gap-2 text-sm sm:grid-cols-2 md:grid-cols-1 lg:grid-cols-2">
-            {categories.map((category) => (
-              <li key={category.id}>
-                <Link
-                  href={`/components?category=${category.id}`}
-                  className="focus-ring rounded-sm text-muted-foreground transition-colors hover:text-foreground"
-                >
-                  {category.name}
-                </Link>
-              </li>
-            ))}
-          </ul>
-        </div>
-      </div>
-      <div className="border-t border-border">
-        <div className="mx-auto flex max-w-[1400px] flex-wrap items-center justify-between gap-2 px-4 py-5 text-xs text-muted-foreground sm:px-6">
-          <span>© {new Date().getFullYear()} {siteConfig.name}. Built with Next.js, Tailwind CSS and Motion.</span>
-          <a href={siteConfig.github} target="_blank" rel="noreferrer" className="focus-ring rounded-sm hover:text-foreground">
+        <nav aria-label="Footer" className="flex flex-wrap items-center gap-x-1 gap-y-1">
+          {links.map((link) => (
+            <Link key={link.href} href={link.href} className="focus-ring inline-flex h-10 items-center rounded-md px-2.5 text-[14px] text-text-secondary transition-colors duration-150 hover:text-foreground">
+              {link.label}
+            </Link>
+          ))}
+          <a
+            href={siteConfig.github}
+            target="_blank"
+            rel="noreferrer"
+            className="focus-ring inline-flex h-10 items-center gap-1.5 rounded-md px-2.5 text-[14px] text-text-secondary transition-colors duration-150 hover:text-foreground"
+          >
+            <GitHubIcon className="size-4" />
             GitHub
           </a>
-        </div>
+          <Link href="/changelog" className="focus-ring ml-1 rounded-sm px-1 font-mono text-[12px] text-muted-foreground tabular-nums hover:text-foreground">
+            v{siteConfig.version}
+          </Link>
+        </nav>
       </div>
     </footer>
   );

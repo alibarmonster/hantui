@@ -4,12 +4,9 @@ import { useEffect, useRef, useState, useSyncExternalStore } from "react";
 import dynamic from "next/dynamic";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-import { useReducedMotion } from "motion/react";
-import * as m from "motion/react-m";
 import { Menu, Search } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
-import { spring } from "@/lib/motion";
 import { GitHubIcon } from "./icons";
 import { Kbd } from "./kbd";
 import { Logo } from "./logo";
@@ -22,6 +19,7 @@ const links = [
   { href: "/components", label: "Components" },
   { href: "/docs", label: "Docs" },
   { href: "/templates", label: "Templates" },
+  { href: "/changelog", label: "Changelog" },
 ];
 
 function isEditable(target: EventTarget | null) {
@@ -41,13 +39,11 @@ function useIsMac() {
   );
 }
 
+/** Used many times a day, so it doesn't animate: color changes only, and a terracotta underline marks the current page. */
 function HeaderLinks() {
   const pathname = usePathname();
-  const reduceMotion = useReducedMotion();
-  const [hovered, setHovered] = useState<string | null>(null);
-
   return (
-    <nav aria-label="Main" className="hidden items-center md:flex" onPointerLeave={() => setHovered(null)}>
+    <nav aria-label="Main" className="hidden items-center gap-1 md:flex">
       {links.map((link) => {
         const active = pathname === link.href || pathname.startsWith(`${link.href}/`);
         return (
@@ -55,22 +51,13 @@ function HeaderLinks() {
             key={link.href}
             href={link.href}
             aria-current={active ? "page" : undefined}
-            onPointerEnter={() => setHovered(link.href)}
-            onFocus={() => setHovered(link.href)}
-            onBlur={() => setHovered(null)}
             className={cn(
-              "focus-ring relative inline-flex h-8 items-center rounded-md px-3 text-sm transition-colors",
-              active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
+              "focus-ring relative inline-flex h-10 items-center rounded-md px-3 text-[15px] transition-colors duration-150",
+              active ? "font-semibold text-foreground" : "text-text-secondary hover:text-foreground",
             )}
           >
-            {hovered === link.href ? (
-              <m.span
-                layoutId="header-hover"
-                transition={reduceMotion ? { duration: 0 } : spring.snappy}
-                className="absolute inset-0 rounded-md bg-surface-2"
-              />
-            ) : null}
-            <span className="relative">{link.label}</span>
+            {link.label}
+            {active ? <span aria-hidden="true" className="absolute inset-x-3 -bottom-[13px] h-0.5 rounded-full bg-primary" /> : null}
           </Link>
         );
       })}
@@ -108,8 +95,9 @@ export function SiteHeader() {
   }, [searchOpen]);
 
   return (
-    <header className="sticky top-0 z-40 border-b border-border/80 bg-background/80 backdrop-blur-xl supports-[backdrop-filter]:bg-background/70">
-      <div className="mx-auto flex h-14 max-w-[1760px] items-center gap-2 px-4 sm:px-6">
+    // Glass header: the only place with a backdrop blur. Its border appears once the page scrolls (see .site-header).
+    <header className="site-header sticky top-0 z-40 bg-background/75 backdrop-blur-md">
+      <div className="mx-auto flex h-16 max-w-[1440px] items-center gap-2 px-4 sm:px-6">
         <button
           ref={menuButton}
           type="button"
@@ -120,18 +108,15 @@ export function SiteHeader() {
             setLoaded((l) => (l.nav ? l : { ...l, nav: true }));
             setNavOpen(true);
           }}
-          className="focus-ring -ml-2 inline-flex size-10 cursor-pointer items-center justify-center rounded-[10px] text-foreground transition-colors hover:bg-surface-2 md:hidden"
+          className="focus-ring -ml-2 inline-flex size-10 cursor-pointer items-center justify-center rounded-md text-foreground transition-colors hover:bg-surface-2 md:hidden"
         >
           <Menu className="size-5" aria-hidden="true" />
         </button>
         {loaded.nav ? <MobileNav open={navOpen} onOpenChange={setNavOpen} returnFocusRef={menuButton} /> : null}
-        <Link href="/" className="focus-ring mr-2 rounded-md" aria-label={`${siteConfig.name} home`}>
+        <Link href="/" className="focus-ring mr-1 rounded-md" aria-label={`${siteConfig.name} home`}>
           <Logo />
         </Link>
-        <Link
-          href="/changelog"
-          className="focus-ring mr-3 inline-flex h-6 items-center rounded-full border border-border bg-surface px-2 font-mono text-[11px] font-medium text-muted-foreground tabular-nums transition-colors hover:border-foreground/20 hover:text-foreground"
-        >
+        <Link href="/changelog" className="focus-ring mr-4 rounded-sm px-1 font-mono text-[12px] text-muted-foreground tabular-nums transition-colors hover:text-foreground">
           v{siteConfig.version}
           <span className="sr-only"> changelog</span>
         </Link>
@@ -143,7 +128,7 @@ export function SiteHeader() {
             onClick={openSearch}
             aria-haspopup="dialog"
             aria-keyshortcuts={isMac ? "Meta+K" : "Control+K"}
-            className="focus-ring group inline-flex size-10 cursor-pointer items-center justify-center gap-2 rounded-[10px] text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground sm:h-9 sm:w-60 sm:justify-start sm:border sm:border-border sm:bg-surface sm:pr-1.5 sm:pl-3 sm:hover:bg-surface-2"
+            className="focus-ring group inline-flex size-10 cursor-pointer items-center justify-center gap-2 rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground sm:w-60 sm:justify-start sm:border sm:border-input sm:bg-surface sm:pr-2 sm:pl-3 sm:hover:bg-surface"
           >
             <Search className="size-4 shrink-0" aria-hidden="true" />
             <span className="sr-only flex-1 text-left text-[13px] sm:not-sr-only">Search components…</span>
@@ -157,7 +142,7 @@ export function SiteHeader() {
             target="_blank"
             rel="noreferrer"
             aria-label="GitHub repository"
-            className="focus-ring inline-flex size-10 items-center justify-center rounded-[10px] text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground sm:size-9"
+            className="focus-ring inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
           >
             <GitHubIcon className="size-[18px]" />
           </a>

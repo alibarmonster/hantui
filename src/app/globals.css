@@ -238,6 +238,25 @@
 }
 
 /* Site-only helpers (not shipped with registry components) */
+/* The header's border appears once the page scrolls: a scroll-driven animation, no JS. Browsers
+   without scroll timelines keep the border all the time. */
+@keyframes site-header-border {
+  to {
+    border-bottom-color: var(--border);
+  }
+}
+.site-header {
+  border-bottom: 1px solid var(--border);
+}
+@supports (animation-timeline: scroll()) {
+  .site-header {
+    border-bottom-color: transparent;
+    animation: site-header-border linear both;
+    animation-timeline: scroll(root);
+    animation-range: 0 24px;
+  }
+}
+
 @utility focus-ring {
   outline: none;
   &:focus-visible {
