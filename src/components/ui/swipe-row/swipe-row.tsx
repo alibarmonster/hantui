@@ -31,7 +31,7 @@ export interface SwipeRowProps
   actionWidth?: number;
 }
 
-const TONE = { neutral: "bg-zinc-500", success: "bg-success", destructive: "bg-destructive" } as const;
+const TONE = { neutral: "bg-zinc-500 text-white", success: "bg-success text-success-foreground", destructive: "bg-destructive text-white" } as const;
 const SNAP = { type: "spring", stiffness: 420, damping: 38 } as const;
 
 function ActionButton({
@@ -64,7 +64,7 @@ function ActionButton({
       type="button"
       onClick={onRun}
       onFocus={onFocus}
-      className={cn("flex h-full shrink-0 cursor-pointer flex-col items-center justify-center gap-1 text-xs font-medium text-white outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-inset", TONE[action.tone ?? "neutral"])}
+      className={cn("flex h-full shrink-0 cursor-pointer flex-col items-center justify-center gap-1 text-xs font-medium outline-none focus-visible:ring-2 focus-visible:ring-current focus-visible:ring-inset", TONE[action.tone ?? "neutral"])}
       style={{ width }}
     >
       <motion.span aria-hidden="true" className="flex [&_svg]:size-5" style={{ scale }}>

@@ -311,7 +311,7 @@ export function TradeTicket({
           disabled={disabled}
           className={cn(
             "relative flex h-11 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-xl text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed",
-            status === "success" ? "bg-[color-mix(in_oklab,var(--success)_78%,var(--foreground))] text-white" : disabled ? "bg-surface-2 text-muted-foreground" : side === "buy" && (!binary || choice === "yes") ? "bg-foreground text-background" : "bg-foreground text-background",
+            status === "success" ? "bg-[color-mix(in_oklab,var(--success)_78%,var(--foreground))] text-success-foreground" : disabled ? "bg-surface-2 text-muted-foreground" : side === "buy" && (!binary || choice === "yes") ? "bg-foreground text-background" : "bg-foreground text-background",
           )}
         >
           {status === "confirming" ? <span aria-hidden="true" className="size-4 animate-spin rounded-full border-2 border-current border-t-transparent motion-reduce:animate-none" /> : null}

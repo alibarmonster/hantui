@@ -210,7 +210,7 @@ export function LiquidityPoolCard({
               onClick={() => onAddLiquidity?.(current)}
               className={cn(
                 "mt-4 flex h-12 w-full cursor-pointer items-center justify-center gap-2 overflow-hidden rounded-2xl text-sm font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-default",
-                status === "added" ? "bg-success text-white" : "bg-foreground text-background enabled:hover:bg-foreground/90",
+                status === "added" ? "bg-success text-success-foreground" : "bg-foreground text-background enabled:hover:bg-foreground/90",
               )}
             >
               <AnimatePresence mode="popLayout" initial={false}>

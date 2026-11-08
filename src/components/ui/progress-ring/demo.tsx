@@ -67,7 +67,7 @@ export function Inline() {
       {TASKS.map((task) => (
         <li key={task.title} className="flex items-center gap-3 px-4 py-3">
           {task.done === task.total ? (
-            <span className="flex size-5 items-center justify-center rounded-full bg-success text-white" aria-label={`${task.title}: complete`} role="img">
+            <span className="flex size-5 items-center justify-center rounded-full bg-success text-success-foreground" aria-label={`${task.title}: complete`} role="img">
               <Check className="size-3" strokeWidth={3} aria-hidden="true" />
             </span>
           ) : (

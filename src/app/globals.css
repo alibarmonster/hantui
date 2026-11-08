@@ -48,6 +48,7 @@
   --warning: #b45309;
 
   /* Chart series, in this fixed order. Validated (OKLab, Machado 2009 protan/deutan) on #fafaf9:
+  --success-foreground: #ffffff;
      worst adjacent CVD ΔE 12.7, normal-vision 15.6, every slot at least 3:1 against the page. */
   --chart-1: #c1400a;
   --chart-2: #0784a4;
@@ -106,6 +107,7 @@
   --warning: #fbbf24;
 
   /* Validated on #161412: worst adjacent CVD ΔE 12.2, normal-vision 15.6, all at least 3:1. */
+  --success-foreground: #052e16;
   --chart-1: #c1400a;
   --chart-2: #0784a4;
   --chart-3: #d16d30;
@@ -158,6 +160,7 @@
   --color-warning: var(--warning);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
+  --color-success-foreground: var(--success-foreground);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);

@@ -341,7 +341,7 @@ export function TokenSwapWidget({
           stage.tone === "error"
             ? "bg-destructive/10 text-[color-mix(in_oklab,var(--destructive)_80%,var(--foreground))] enabled:hover:bg-destructive/15"
             : stage.done
-              ? "bg-success text-white"
+              ? "bg-success text-success-foreground"
               : stage.disabled && !stage.busy
                 ? "bg-muted text-muted-foreground"
                 : "bg-foreground text-background enabled:hover:bg-foreground/90",

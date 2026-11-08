@@ -192,7 +192,7 @@ export function OtpInput({
             animate={{ opacity: 1, scale: 1 }}
             exit={{ opacity: 0 }}
             transition={reduceMotion ? { duration: duration.quick } : { ...spring.bouncy, delay: length * 0.04 }}
-            className="absolute top-1/2 -right-9 flex size-6 -translate-y-1/2 items-center justify-center rounded-full bg-success text-white"
+            className="absolute top-1/2 -right-9 flex size-6 -translate-y-1/2 items-center justify-center rounded-full bg-success text-success-foreground"
           >
             <svg viewBox="0 0 24 24" fill="none" className="size-3.5">
               <motion.path

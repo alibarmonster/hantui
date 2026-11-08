@@ -28,7 +28,7 @@ export interface NotificationBadgeProps
 const tones = {
   destructive: "bg-destructive text-white",
   primary: "bg-primary text-primary-foreground",
-  success: "bg-success text-white",
+  success: "bg-success text-success-foreground",
 } as const;
 
 const ringTones = { destructive: "bg-destructive", primary: "bg-primary", success: "bg-success" } as const;

@@ -70,7 +70,7 @@ export function ResolutionCard({ market, stage = "open", disputeEndsAt, resolves
             <li key={step.id} aria-current={i === current ? "step" : undefined} className="flex flex-col items-center gap-1.5 text-center">
               <span className="relative flex w-full items-center">
                 <span className={cn("h-0.5 flex-1", i === 0 ? "opacity-0" : i <= current ? "bg-success" : "bg-border")} />
-                <span className={cn("relative grid size-6 shrink-0 place-items-center rounded-full border-2", done ? "border-success bg-success text-white" : active ? "border-primary bg-background" : "border-border bg-background")}>
+                <span className={cn("relative grid size-6 shrink-0 place-items-center rounded-full border-2", done ? "border-success bg-success text-success-foreground" : active ? "border-primary bg-background" : "border-border bg-background")}>
                   {active ? <span className="absolute inset-0 animate-ping rounded-full border-2 border-primary opacity-60 motion-reduce:animate-none" /> : null}
                   {done ? (
                     <svg viewBox="0 0 24 24" className="size-3.5" fill="none" stroke="currentColor" strokeWidth="3.5" strokeLinecap="round" strokeLinejoin="round" aria-hidden="true">

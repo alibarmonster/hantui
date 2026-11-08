@@ -285,7 +285,7 @@ export function BridgeWidget({
                     <span
                       className={cn(
                         "relative grid size-7 shrink-0 place-items-center rounded-full border-2 transition-colors",
-                        done && "border-success bg-success text-white",
+                        done && "border-success bg-success text-success-foreground",
                         failed && "border-destructive bg-destructive text-white",
                         current && !failed && "border-primary text-primary",
                         !done && !current && "border-border text-muted-foreground",

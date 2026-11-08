@@ -148,7 +148,7 @@ export function StakingCard({
             disabled={status === "claiming" || status === "claimed" || liveRewards === BigInt(0)}
             className={cn(
               "relative inline-flex h-9 min-w-24 cursor-pointer items-center justify-center gap-1.5 overflow-hidden rounded-full px-4 text-[13px] font-semibold outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-default",
-              status === "claimed" ? "bg-success text-white" : "bg-foreground text-background enabled:hover:bg-foreground/90 disabled:opacity-60",
+              status === "claimed" ? "bg-success text-success-foreground" : "bg-foreground text-background enabled:hover:bg-foreground/90 disabled:opacity-60",
             )}
           >
             <AnimatePresence mode="popLayout" initial={false}>

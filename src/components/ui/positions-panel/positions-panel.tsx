@@ -188,7 +188,7 @@ export function PositionsPanel({ positions, cash = 0, valueHistory = [], onSell,
                           type="button"
                           disabled={claimed[p.id]}
                           onClick={() => claim(p)}
-                          className="h-8 shrink-0 cursor-pointer rounded-full bg-[color-mix(in_oklab,var(--success)_78%,var(--foreground))] px-3 text-[12px] font-semibold text-white outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-default disabled:bg-surface-2 disabled:text-muted-foreground"
+                          className="h-8 shrink-0 cursor-pointer rounded-full bg-[color-mix(in_oklab,var(--success)_78%,var(--foreground))] px-3 text-[12px] font-semibold text-success-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-default disabled:bg-surface-2 disabled:text-muted-foreground"
                         >
                           {claimed[p.id] ? "Claimed" : `Claim ${formatUsd(p.shares)}`}
                         </button>

@@ -176,6 +176,8 @@ export function extractDependencies(source: string): SourceDependencies {
 /** Theme tokens beyond the shadcn defaults that a component relies on. */
 export const EXTRA_TOKENS = {
   success: { light: "#15803d", dark: "#4ade80" },
+  /** Text and icons on a solid success fill: the dark-mode green is too light for white. */
+  "success-foreground": { light: "#ffffff", dark: "#052e16" },
   warning: { light: "#b45309", dark: "#fbbf24" },
 } as const;
 
@@ -184,8 +186,8 @@ export type ExtraToken = keyof typeof EXTRA_TOKENS;
 export function extractExtraTokens(source: string): ExtraToken[] {
   const found = new Set<ExtraToken>();
   const utility =
-    /(?:bg|text|border|ring|fill|stroke|from|via|to|outline|shadow|decoration|divide|caret|accent)-(success|warning)\b/g;
+    /(?:bg|text|border|ring|fill|stroke|from|via|to|outline|shadow|decoration|divide|caret|accent)-(success-foreground|success|warning)\b/g;
   for (const match of source.matchAll(utility)) found.add(match[1] as ExtraToken);
-  for (const match of source.matchAll(/var\(--(success|warning)\)/g)) found.add(match[1] as ExtraToken);
+  for (const match of source.matchAll(/var\(--(success-foreground|success|warning)\)/g)) found.add(match[1] as ExtraToken);
   return [...found].sort();
 }

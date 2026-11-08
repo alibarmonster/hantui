@@ -203,7 +203,7 @@ export function PasswordInput({
                 aria-hidden="true"
                 className={cn(
                   "relative flex size-4 shrink-0 items-center justify-center rounded-full border transition-colors duration-200",
-                  met[i] ? "border-success bg-success text-white" : "border-border",
+                  met[i] ? "border-success bg-success text-success-foreground" : "border-border",
                 )}
               >
                 <svg viewBox="0 0 24 24" fill="none" className="size-2.5">
