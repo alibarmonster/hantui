@@ -122,7 +122,7 @@ export function MarketLeaderboard({ data, currentUser, limit = 7, className }: M
                 {entry.trader === currentUser ? <span className="text-muted-foreground"> (you)</span> : null}
               </p>
               <p className="text-[12px] text-muted-foreground tabular-nums">{show(entry, metric)}</p>
-              <div className={cn("flex w-full items-start justify-center rounded-t-xl pt-1.5 text-sm font-bold tabular-nums", heights[slot], slot === 0 ? "bg-[#F2C14E]/30 text-[#8A6516]" : slot === 1 ? "bg-zinc-300/40 text-zinc-600" : "bg-[#C8834B]/25 text-[#8A5426]")}>
+              <div className={cn("flex w-full items-start justify-center rounded-t-xl pt-1.5 text-sm font-bold tabular-nums", heights[slot], slot === 0 ? "bg-[#F2C14E]/30 text-[color-mix(in_oklab,#B8860B_45%,var(--foreground))]" : slot === 1 ? "bg-foreground/15 text-[color-mix(in_oklab,#71717a_45%,var(--foreground))]" : "bg-[#C8834B]/25 text-[color-mix(in_oklab,#A0522D_45%,var(--foreground))]")}>
                 <span className="sr-only">Rank </span>
                 {slot + 1}
               </div>
