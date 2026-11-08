@@ -1,5 +1,8 @@
 @import "tailwindcss";
 
+/* Tailwind's dark: variant follows the same switch as the tokens: data-theme="dark" on any ancestor. */
+@custom-variant dark (&:where([data-theme="dark"], [data-theme="dark"] *));
+
 /*
  * Design tokens.
  *
@@ -8,10 +11,13 @@
  * terracotta for actions and current state (one filled primary per view), amber only for New.
  * Every text pair is measured at 4.5:1 or better and control borders at 3:1.
  *
- * Light ships. The dark values below apply only once something sets data-theme="dark" on <html>;
- * nothing does yet. Do not also define tokens under a prefers-color-scheme media query.
+ * data-theme on <html> picks the theme: an inline script in <head> sets it before the first paint
+ * from the stored choice or the OS preference, and the header switch cycles Light, Dark and System.
+ * Either value also works on any element, for a light or dark island inside the other theme. Do not
+ * also define tokens under a prefers-color-scheme media query.
  */
-:root {
+:root,
+[data-theme="light"] {
   --radius: 8px;
 
   --background: #fafaf9;
@@ -45,10 +51,10 @@
   --destructive: #dc2626;
   --destructive-text: #b91c1c;
   --success: #15803d;
+  --success-foreground: #ffffff;
   --warning: #b45309;
 
   /* Chart series, in this fixed order. Validated (OKLab, Machado 2009 protan/deutan) on #fafaf9:
-  --success-foreground: #ffffff;
      worst adjacent CVD ΔE 12.7, normal-vision 15.6, every slot at least 3:1 against the page. */
   --chart-1: #c1400a;
   --chart-2: #0784a4;
@@ -104,10 +110,10 @@
   --destructive: #dc2626;
   --destructive-text: #f87171;
   --success: #4ade80;
+  --success-foreground: #052e16;
   --warning: #fbbf24;
 
   /* Validated on #161412: worst adjacent CVD ΔE 12.2, normal-vision 15.6, all at least 3:1. */
-  --success-foreground: #052e16;
   --chart-1: #c1400a;
   --chart-2: #0784a4;
   --chart-3: #d16d30;
@@ -157,10 +163,10 @@
   --color-destructive: var(--destructive);
   --color-destructive-text: var(--destructive-text);
   --color-success: var(--success);
+  --color-success-foreground: var(--success-foreground);
   --color-warning: var(--warning);
   --color-chart-1: var(--chart-1);
   --color-chart-2: var(--chart-2);
-  --color-success-foreground: var(--success-foreground);
   --color-chart-3: var(--chart-3);
   --color-chart-4: var(--chart-4);
   --color-chart-5: var(--chart-5);

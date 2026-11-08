@@ -8,6 +8,7 @@ import { Menu, Search } from "lucide-react";
 import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { GitHubIcon } from "./icons";
+import { ThemeSwitch } from "./theme-switch";
 import { Kbd } from "./kbd";
 import { Logo } from "./logo";
 
@@ -146,6 +147,7 @@ export function SiteHeader() {
           >
             <GitHubIcon className="size-[18px]" />
           </a>
+          <ThemeSwitch />
         </div>
       </div>
       {loaded.search ? <CommandMenu open={searchOpen} onOpenChange={setSearchOpen} returnFocusRef={lastFocus} /> : null}

@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from "next";
 import { siteConfig } from "@/config/site";
 import { caveat, firaCode, geistMono, geistPixel, playfair, sourceSans } from "@/lib/fonts";
 import { cn } from "@/lib/utils";
+import { themeScript } from "@/components/site/theme-switch";
 import "./globals.css";
 
 export const metadata: Metadata = {
@@ -25,20 +26,24 @@ export const metadata: Metadata = {
 };
 
 export const viewport: Viewport = {
-  themeColor: "#fafaf9",
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#fafaf9" },
+    { media: "(prefers-color-scheme: dark)", color: "#161412" },
+  ],
 };
 
 const originTrialToken = process.env.NEXT_PUBLIC_HTML_IN_CANVAS_OT_TOKEN;
 
 export default function RootLayout({ children }: Readonly<{ children: React.ReactNode }>) {
   return (
-    <html lang="en" className={cn(sourceSans.variable, playfair.variable, firaCode.variable, geistMono.variable, geistPixel.variable, caveat.variable)}>
-      {/* Opts the site into the HTML-in-Canvas origin trial when a token is configured. */}
-      {originTrialToken ? (
-        <head>
-          <meta httpEquiv="origin-trial" content={originTrialToken} />
-        </head>
-      ) : null}
+    // data-theme is set by the inline script before React hydrates, hence suppressHydrationWarning.
+    <html lang="en" suppressHydrationWarning className={cn(sourceSans.variable, playfair.variable, firaCode.variable, geistMono.variable, geistPixel.variable, caveat.variable)}>
+      <head>
+        {/* Applies the stored theme (or the OS preference) before the first paint, so nothing flashes. */}
+        <script dangerouslySetInnerHTML={{ __html: themeScript }} />
+        {/* Opts the site into the HTML-in-Canvas origin trial when a token is configured. */}
+        {originTrialToken ? <meta httpEquiv="origin-trial" content={originTrialToken} /> : null}
+      </head>
       <body className="min-h-dvh bg-background font-sans text-foreground antialiased">{children}</body>
     </html>
   );

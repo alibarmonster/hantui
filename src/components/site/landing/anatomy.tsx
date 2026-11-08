@@ -1,6 +1,6 @@
 "use client";
 
-import { useState, type ReactNode } from "react";
+import { useState, useSyncExternalStore, type ReactNode } from "react";
 import Link from "next/link";
 import { MotionConfig } from "motion/react";
 import { ArrowRight, FileCode2, Folder, Trash2 } from "lucide-react";
@@ -27,15 +27,26 @@ function Toggle({ checked, onChange, label, hint }: { checked: boolean; onChange
   );
 }
 
+/** Whether the page is in dark mode, following the theme switch. */
+function subscribeTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
+const pageIsDark = () => document.documentElement.dataset.theme === "dark";
+
 /**
  * "Anatomy of a component": the real Hold to Confirm button, with switches that change it live
- * (reduced motion, a visible keyboard focus ring, a dark preview, 10% speed), and under it the files
+ * (reduced motion, a visible keyboard focus ring, the other theme, 10% speed), and under it the files
  * it ships with and the first lines of its source.
  */
 export function Anatomy({ files, source, sourceLines }: { files: string[]; source: ReactNode; sourceLines: number }) {
   const [reduced, setReduced] = useState(false);
   const [focusRing, setFocusRing] = useState(false);
-  const [dark, setDark] = useState(false);
+  const [flip, setFlip] = useState(false);
+  // The preview switch shows whichever theme the page isn't in.
+  const darkPage = useSyncExternalStore(subscribeTheme, pageIsDark, () => false);
+  const other = darkPage ? "light" : "dark";
   const [slow, setSlow] = useState(false);
   const [confirmed, setConfirmed] = useState(0);
 
@@ -43,7 +54,7 @@ export function Anatomy({ files, source, sourceLines }: { files: string[]; sourc
     <div className="grid grid-cols-[minmax(0,1fr)] gap-8 lg:grid-cols-[minmax(0,1.2fr)_minmax(0,1fr)]">
       <div className="flex flex-col gap-4">
         <div
-          data-theme={dark ? "dark" : undefined}
+          data-theme={flip ? other : undefined}
           className={cn(
             "dot-grid relative flex min-h-[18rem] items-center justify-center rounded-lg border border-border bg-background p-10 transition-colors duration-200",
             // Shows the focus style the button gets from the keyboard, without moving focus there.
@@ -62,7 +73,7 @@ export function Anatomy({ files, source, sourceLines }: { files: string[]; sourc
         <div className="grid gap-2 sm:grid-cols-2">
           <Toggle checked={reduced} onChange={setReduced} label="Reduced motion" hint="Fades instead of moving" />
           <Toggle checked={focusRing} onChange={setFocusRing} label="Keyboard focus visible" hint="The ring you see when tabbing" />
-          <Toggle checked={dark} onChange={setDark} label="Dark preview" hint="Same tokens, dark values" />
+          <Toggle checked={flip} onChange={setFlip} label={darkPage ? "Light preview" : "Dark preview"} hint={`Same tokens, ${other} values`} />
           <Toggle checked={slow} onChange={setSlow} label="Slow motion" hint="The hold at 10% speed" />
         </div>
       </div>
