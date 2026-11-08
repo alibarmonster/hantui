@@ -220,7 +220,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["streaming-text", "Streaming Text", "Words resolve through a soft cross-blur, like an AI stream.", "ready"],
     ["annotated-text", "Annotated Text", "Hand-drawn underlines, circles and highlights.", "ready"],
     ["gradient-text", "Gradient Text", "A slow gradient wash moves across the letters.", "ready"],
-    ["misprint-text", "Misprint Text", "A paragraph that prints like a misregistered press, with stickers and glitches.", "planned", V040],
+    ["misprint-text", "Misprint Text", "A paragraph that prints like a misregistered press, with stickers and glitches.", "ready", V040],
   ],
   data: [
     ["number-ticker", "Number Ticker", "Counts up when it scrolls into view.", "ready"],

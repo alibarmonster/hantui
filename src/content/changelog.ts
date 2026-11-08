@@ -34,6 +34,7 @@ export const releases: Release[] = [
           "Flow Line Chat Card and Multiplayer Canvas Card: a pair of animated feature cards for a chat and a collaboration product, sharing a FlowLines background of flowing, pointer-bending lines.",
           "Crumple Notes: paper notes that crumple into WebGL paper balls and unfold again, keeping faint creases.",
           "Merge Filter Chips: filter chips that melt into a results pill through a gooey neck and pinch back out, while the count rolls.",
+          "Misprint Text: a paragraph that prints like a misregistered press, with shattering words, peeling stickers, plate offsets and band tears, then reprints on demand.",
         ],
       },
       {

@@ -226,4 +226,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "multiplayer-canvas-card": () => import("@/components/ui/multiplayer-canvas-card/demo"),
   "crumple-notes": () => import("@/components/ui/crumple-notes/demo"),
   "merge-filter-chips": () => import("@/components/ui/merge-filter-chips/demo"),
+  "misprint-text": () => import("@/components/ui/misprint-text/demo"),
 };
