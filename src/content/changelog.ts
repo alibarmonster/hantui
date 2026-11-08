@@ -37,6 +37,7 @@ export const releases: Release[] = [
           "Misprint Text: a paragraph that prints like a misregistered press, with shattering words, peeling stickers, plate offsets and band tears, then reprints on demand.",
           "Dot Burst Feature Tabs: an autoplaying feature list beside a color stage where dot clusters burst and regrow and a product card blurs from one feature to the next.",
           "Foil Ticket Reel: holographic event tickets that shuffle through a reel on a grainy grid; tilt them and tear off the stub to get stamped in.",
+          "Coin Crew Hero: a hero card with a parade of coin characters that blink, follow your pointer, flip when poked and tumble when flung.",
         ],
       },
       {

@@ -309,7 +309,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["icon-headline", "Icon Headline", "A headline with app-icon tiles inline that pop in and flip.", "ready", V030],
     ["tumbling-tags", "Tumbling Tags", "Labelled blocks drop in, tumble and settle into a tilted pile.", "ready", V030],
     ["dot-burst-feature-tabs", "Dot Burst Feature Tabs", "Autoplaying feature tabs beside a color stage with dot bursts and a product card.", "ready", V040],
-    ["coin-crew-hero", "Coin Crew Hero", "A hero card with a parade of coin characters you can poke, flip and fling.", "planned", V040],
+    ["coin-crew-hero", "Coin Crew Hero", "A hero card with a parade of coin characters you can poke, flip and fling.", "ready", V040],
     ["ink-bloom-footer", "Ink Bloom Footer", "A footer where dragging drops ink that blooms behind a giant wordmark.", "planned", V040],
   ],
   shaders: [

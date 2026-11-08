@@ -229,4 +229,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "misprint-text": () => import("@/components/ui/misprint-text/demo"),
   "dot-burst-feature-tabs": () => import("@/components/ui/dot-burst-feature-tabs/demo"),
   "foil-ticket-reel": () => import("@/components/ui/foil-ticket-reel/demo"),
+  "coin-crew-hero": () => import("@/components/ui/coin-crew-hero/demo"),
 };
