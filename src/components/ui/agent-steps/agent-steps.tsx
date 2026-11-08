@@ -54,7 +54,7 @@ export function AgentSteps({ steps, className, "aria-label": ariaLabel = "Progre
                   "text-sm font-medium",
                   step.status === "pending" && "text-muted-foreground/70",
                   step.status === "done" && "text-foreground",
-                  step.status === "error" && "text-destructive",
+                  step.status === "error" && "text-destructive-text",
                 )}
               >
                 {step.status === "running" ? <ShimmerText>{step.title}</ShimmerText> : step.title}

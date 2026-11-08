@@ -12,8 +12,8 @@ import { registryUrl, siteConfig } from "@/config/site";
 import { getCategory, getComponent, getSiblings, readyComponents } from "@/content/components";
 import { docsLoaders } from "@/content/docs";
 import { highlight } from "@/lib/docs/highlight";
-import { getInstallInfo } from "@/lib/docs/install";
-import { componentFiles, EXTRA_TOKENS, extractDemoVariants, extractProps, readProjectFile } from "@/lib/docs/source";
+import { getInstallInfo, tokenCssSnippet, tokenStepIntro } from "@/lib/docs/install";
+import { componentFiles, extractDemoVariants, extractProps, readProjectFile } from "@/lib/docs/source";
 
 export const dynamicParams = false;
 
@@ -63,21 +63,7 @@ export default async function ComponentPage({ params }: Params) {
   const libFiles = await Promise.all(
     install.libFiles.map(async (path) => ({ path, source: await readProjectFile(path) })),
   );
-  const tokenCss = install.tokens.length
-    ? [
-        ":root {",
-        ...install.tokens.map((t) => `  --${t}: ${EXTRA_TOKENS[t].light};`),
-        "}",
-        "",
-        ".dark {",
-        ...install.tokens.map((t) => `  --${t}: ${EXTRA_TOKENS[t].dark};`),
-        "}",
-        "",
-        "@theme inline {",
-        ...install.tokens.map((t) => `  --color-${t}: var(--${t});`),
-        "}",
-      ].join("\n")
-    : null;
+  const tokenCss = tokenCssSnippet(install.tokens);
 
   const toc: TocItem[] = [
     { id: "installation", title: "Installation" },
@@ -144,8 +130,7 @@ export default async function ComponentPage({ params }: Params) {
         {tokenCss ? (
           <Step title="Add the theme tokens">
             <p className="text-sm leading-6 text-muted-foreground">
-              This component uses {install.tokens.map((t) => `--${t}`).join(" and ")}, which shadcn does not define by
-              default. Add it to your global CSS:
+              {tokenStepIntro(install.tokens)}
             </p>
             <CodeBlock code={tokenCss} lang="css" title="app/globals.css" />
           </Step>

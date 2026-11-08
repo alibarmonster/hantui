@@ -32,7 +32,7 @@ export interface BannerStackProps
 }
 
 const toneStyles = {
-  info: { chip: "bg-primary/10 text-primary", icon: Info },
+  info: { chip: "bg-primary/10 text-link", icon: Info },
   success: { chip: "bg-success/12 text-[color-mix(in_oklab,var(--success)_70%,var(--foreground))]", icon: CircleCheck },
   warning: { chip: "bg-warning/12 text-warning", icon: CircleAlert },
   promo: { chip: "bg-foreground text-background", icon: Sparkles },

@@ -31,7 +31,7 @@ export function Default() {
         getLabel={(p) => p.name}
         onSwipe={(p, direction) => direction === "right" && setKept((k) => [...k, p.name])}
         labels={{
-          left: <span className="rounded-md border-2 border-destructive px-2 py-0.5 text-sm font-bold tracking-wider text-destructive uppercase">Pass</span>,
+          left: <span className="rounded-md border-2 border-destructive px-2 py-0.5 text-sm font-bold tracking-wider text-destructive-text uppercase">Pass</span>,
           right: <span className="rounded-md border-2 border-success px-2 py-0.5 text-sm font-bold tracking-wider text-success uppercase">Keep</span>,
         }}
         empty={

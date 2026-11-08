@@ -144,7 +144,7 @@ export function OriginDropdownItem({
         variants={itemEnter}
         className={cn(
           "relative flex h-9 cursor-pointer items-center gap-2.5 rounded-md px-2.5 text-sm outline-none select-none data-[disabled]:pointer-events-none data-[disabled]:opacity-45 [&_svg]:size-4 [&_svg]:shrink-0",
-          destructive ? "text-destructive" : "text-foreground",
+          destructive ? "text-destructive-text" : "text-foreground",
           className,
         )}
       >

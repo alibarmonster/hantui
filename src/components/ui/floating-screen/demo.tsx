@@ -75,7 +75,7 @@ export function Phone() {
                 +
               </button>
             </div>
-            <a href="#" onClick={(e) => e.preventDefault()} className="text-[12px] font-medium text-primary underline underline-offset-4">
+            <a href="#" onClick={(e) => e.preventDefault()} className="text-[12px] font-medium text-link underline underline-offset-4">
               Checkout
             </a>
           </div>

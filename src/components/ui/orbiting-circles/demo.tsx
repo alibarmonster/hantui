@@ -16,7 +16,7 @@ const Hub = () => (
 export function Integrations() {
   return (
     <div className="w-full max-w-lg text-center">
-      <p className="text-sm font-medium text-primary">Integrations</p>
+      <p className="text-sm font-medium text-link">Integrations</p>
       <p className="mt-1 text-2xl font-semibold tracking-tight text-foreground">Connects to the tools you already use</p>
       <OrbitingCircles
         className="mt-4"

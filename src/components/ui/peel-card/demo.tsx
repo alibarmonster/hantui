@@ -26,7 +26,7 @@ export function Default() {
                 <p className="mt-1 font-mono text-2xl font-semibold tracking-widest text-foreground">KILN-25</p>
                 <p className="mt-1 text-[13px] text-muted-foreground">25% off your next order, until Dec 31.</p>
               </div>
-              <a href="#" onClick={(e) => e.preventDefault()} className="text-[13px] font-medium text-primary underline underline-offset-4">
+              <a href="#" onClick={(e) => e.preventDefault()} className="text-[13px] font-medium text-link underline underline-offset-4">
                 Apply at checkout
               </a>
             </div>

@@ -34,7 +34,7 @@ export function Default() {
       />
       <p className="text-[13px] text-muted-foreground">
         {status === "error" ? (
-          <span className="text-destructive">That code didn&apos;t match. Try again.</span>
+          <span className="text-destructive-text">That code didn&apos;t match. Try again.</span>
         ) : status === "success" ? (
           "Verified."
         ) : (

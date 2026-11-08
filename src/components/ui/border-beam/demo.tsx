@@ -5,7 +5,7 @@ import { BorderBeam } from "@/components/ui/border-beam/border-beam";
 export function Default() {
   return (
     <BorderBeam className="w-full max-w-sm p-6">
-      <p className="text-sm font-medium text-primary">Pro plan</p>
+      <p className="text-sm font-medium text-link">Pro plan</p>
       <p className="mt-1 text-2xl font-semibold tracking-tight text-foreground">$24 / month</p>
       <p className="mt-2 text-[13px] leading-5 text-muted-foreground">Unlimited projects, priority support and early access to new components.</p>
       <button type="button" className="mt-5 h-10 w-full cursor-pointer rounded-xl bg-foreground text-sm font-semibold text-background">

@@ -66,7 +66,7 @@ export function Selected() {
             }
           >
             {/* `active` holds the flipped state for the selected option. */}
-            <FlipText active={selected} flippedClassName="text-primary">
+            <FlipText active={selected} flippedClassName="text-link">
               {label}
             </FlipText>
           </button>

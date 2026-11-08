@@ -41,7 +41,7 @@ export function Default() {
             </table>
             <p className="mt-3 text-[10px] leading-4 text-muted-foreground">
               Storage is pooled across the workspace. Annual plans save 20%. Taxes may apply. See the{" "}
-              <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-primary underline underline-offset-2">
+              <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-link underline underline-offset-2">
                 full terms
               </a>
               .

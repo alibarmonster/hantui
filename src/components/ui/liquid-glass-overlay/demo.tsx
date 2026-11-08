@@ -16,7 +16,7 @@ function Article() {
         Light bends where glass gets thin. That is why the rim of a lens shows the world pulled outward with a fringe of color, while the middle stays clear enough to read through. Drag the toolbar across this text to see it.
       </p>
       <p className="mt-2 text-sm leading-6 text-muted-foreground">
-        Every word here is still real text: <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-primary underline underline-offset-4">links work</a>, and you can select a sentence right under the glass.
+        Every word here is still real text: <a href="#" onClick={(e) => e.preventDefault()} className="font-medium text-link underline underline-offset-4">links work</a>, and you can select a sentence right under the glass.
       </p>
     </article>
   );

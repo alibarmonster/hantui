@@ -287,7 +287,7 @@ export function BridgeWidget({
                         "relative grid size-7 shrink-0 place-items-center rounded-full border-2 transition-colors",
                         done && "border-success bg-success text-success-foreground",
                         failed && "border-destructive bg-destructive text-white",
-                        current && !failed && "border-primary text-primary",
+                        current && !failed && "border-primary text-link",
                         !done && !current && "border-border text-muted-foreground",
                       )}
                       aria-hidden="true"

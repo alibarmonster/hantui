@@ -95,7 +95,7 @@ export function FloatingLabelInput({
             "pointer-events-none absolute top-1/2 left-3 max-w-[calc(100%-1.5rem)] origin-[left_center] -translate-y-1/2 truncate text-sm text-muted-foreground",
             "transition-[translate,scale,color] duration-200 ease-out motion-reduce:transition-[color] group-focus-within/field:text-primary",
             floated,
-            invalid && "text-destructive group-focus-within/field:text-destructive",
+            invalid && "text-destructive-text group-focus-within/field:text-destructive-text",
           )}
         >
           {label}
@@ -113,7 +113,7 @@ export function FloatingLabelInput({
           <p
             id={messageId}
             aria-live="polite"
-            className={cn("px-3 pt-1.5 text-[13px] leading-5", error ? "text-destructive" : "text-muted-foreground")}
+            className={cn("px-3 pt-1.5 text-[13px] leading-5", error ? "text-destructive-text" : "text-muted-foreground")}
           >
             {message}
           </p>

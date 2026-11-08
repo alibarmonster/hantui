@@ -53,7 +53,7 @@ export function ErrorShakeField({
 
   return (
     <div className={cn("w-full space-y-1.5", className)}>
-      <label htmlFor={inputId} className={cn("block text-sm font-medium transition-colors", error ? "text-destructive" : "text-foreground")}>
+      <label htmlFor={inputId} className={cn("block text-sm font-medium transition-colors", error ? "text-destructive-text" : "text-foreground")}>
         {label}
       </label>
       <div ref={scope} className="relative">
@@ -101,7 +101,7 @@ export function ErrorShakeField({
                 animate={{ opacity: 1, y: 0 }}
                 exit={{ opacity: 0, transition: { duration: duration.instant } }}
                 transition={{ duration: duration.base, ease: ease.out }}
-                className={cn("text-[13px] leading-5", error ? "text-destructive" : "text-muted-foreground")}
+                className={cn("text-[13px] leading-5", error ? "text-destructive-text" : "text-muted-foreground")}
               >
                 {message}
               </motion.p>

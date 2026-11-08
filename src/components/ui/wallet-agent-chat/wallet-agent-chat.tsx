@@ -237,10 +237,10 @@ function ActionCard({
           className={cn(
             "inline-flex h-6 items-center gap-1.5 rounded-full px-2 text-[11px] font-medium",
             status === "review" && "bg-surface-2 text-foreground",
-            signing && "bg-primary/10 text-primary",
+            signing && "bg-primary/10 text-link",
             status === "pending" && "bg-warning/12 text-[color-mix(in_oklab,var(--warning)_65%,var(--foreground))]",
             done && "bg-success/12 text-[color-mix(in_oklab,var(--success)_70%,var(--foreground))]",
-            status === "failed" && "bg-destructive/10 text-destructive",
+            status === "failed" && "bg-destructive/10 text-destructive-text",
             status === "cancelled" && "bg-surface-2 text-muted-foreground",
           )}
         >
@@ -339,7 +339,7 @@ function ActionCard({
             <Row label="Route">{card.route.join(" → ")}</Row>
             <Row label="Fees">
               {formatBps(card.feeBps)} · impact{" "}
-              <span className={cn(card.priceImpactBps >= 300 && "text-destructive")}>{formatBps(card.priceImpactBps)}</span>
+              <span className={cn(card.priceImpactBps >= 300 && "text-destructive-text")}>{formatBps(card.priceImpactBps)}</span>
             </Row>
           </>
         ) : null}
@@ -390,7 +390,7 @@ function ActionCard({
               </svg>
               <span className="font-medium text-foreground">Confirmed</span>
               {href ? (
-                <a href={href} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 rounded font-medium text-primary outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring">
+                <a href={href} target="_blank" rel="noreferrer" className="ml-auto inline-flex items-center gap-1 rounded font-medium text-link outline-none hover:underline focus-visible:ring-2 focus-visible:ring-ring">
                   View on explorer <ExternalLink className="size-3" aria-hidden="true" />
                 </a>
               ) : (
@@ -399,7 +399,7 @@ function ActionCard({
             </motion.div>
           ) : status === "failed" ? (
             <motion.div key="failed" className="flex items-center gap-2" initial={{ opacity: 0 }} animate={{ opacity: 1 }}>
-              <p className="flex-1 text-[12px] text-destructive">{error}</p>
+              <p className="flex-1 text-[12px] text-destructive-text">{error}</p>
               <button type="button" onClick={cancel} className={cn(button, "h-8 border border-border px-3 text-foreground hover:bg-surface-2")}>
                 Dismiss
               </button>

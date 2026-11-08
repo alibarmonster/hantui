@@ -140,7 +140,7 @@ export function FeatureBento({
   return (
     <section className={cn("@container w-full", className)} {...props}>
       <div className="mb-8 max-w-xl">
-        {eyebrow ? <p className="text-sm font-medium text-primary">{eyebrow}</p> : null}
+        {eyebrow ? <p className="text-sm font-medium text-link">{eyebrow}</p> : null}
         <Heading className="mt-1.5 text-2xl font-semibold tracking-tight text-balance text-foreground @[40rem]:text-3xl">{title}</Heading>
         {description ? <p className="mt-2 text-[15px] leading-7 text-muted-foreground">{description}</p> : null}
       </div>

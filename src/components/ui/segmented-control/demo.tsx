@@ -49,7 +49,7 @@ export function Billing() {
             label: (
               <>
                 Yearly
-                <span className="rounded-full bg-primary/10 px-1.5 py-px text-[11px] font-medium text-primary">−20%</span>
+                <span className="rounded-full bg-primary/10 px-1.5 py-px text-[11px] font-medium text-link">−20%</span>
               </>
             ),
           },

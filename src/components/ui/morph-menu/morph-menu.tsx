@@ -212,7 +212,7 @@ export function MorphMenu({
                 transition={{ duration: duration.quick, ease: ease.out, delay: reduceMotion ? 0 : 0.08 + index * 0.025 }}
                 className={cn(
                   "relative flex h-9 w-full cursor-pointer items-center gap-2.5 rounded-md px-2.5 text-left text-sm outline-none select-none [&_svg]:size-4 [&_svg]:shrink-0",
-                  item.destructive && "text-destructive",
+                  item.destructive && "text-destructive-text",
                   item.disabled && "cursor-not-allowed opacity-45",
                 )}
               >

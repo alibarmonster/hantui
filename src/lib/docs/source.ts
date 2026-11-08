@@ -181,13 +181,38 @@ export const EXTRA_TOKENS = {
   warning: { light: "#b45309", dark: "#fbbf24" },
 } as const;
 
-export type ExtraToken = keyof typeof EXTRA_TOKENS;
+/**
+ * Text versions of shadcn fill tokens. hantui defines them so terracotta and red stay readable as
+ * small text in dark mode; a project that doesn't define them falls back to the fill token, so
+ * installing a component never recolors it.
+ */
+export const TEXT_TOKENS = {
+  link: "primary",
+  "destructive-text": "destructive",
+} as const;
+
+export type ValuedToken = keyof typeof EXTRA_TOKENS;
+export type TextToken = keyof typeof TEXT_TOKENS;
+export type ExtraToken = ValuedToken | TextToken;
+
+export function isValuedToken(token: ExtraToken): token is ValuedToken {
+  return token in EXTRA_TOKENS;
+}
+
+/** The value a component's `--color-*` utility resolves to, with the fallback for text tokens. */
+export function tokenVar(token: ExtraToken) {
+  return isValuedToken(token) ? `var(--${token})` : `var(--${token}, var(--${TEXT_TOKENS[token]}))`;
+}
+
+const TOKEN_NAMES = "success-foreground|success|warning|destructive-text|link";
 
 export function extractExtraTokens(source: string): ExtraToken[] {
   const found = new Set<ExtraToken>();
-  const utility =
-    /(?:bg|text|border|ring|fill|stroke|from|via|to|outline|shadow|decoration|divide|caret|accent)-(success-foreground|success|warning)\b/g;
+  const utility = new RegExp(
+    `(?:bg|text|border|ring|fill|stroke|from|via|to|outline|shadow|decoration|divide|caret|accent)-(${TOKEN_NAMES})\\b(?!-)`,
+    "g",
+  );
   for (const match of source.matchAll(utility)) found.add(match[1] as ExtraToken);
-  for (const match of source.matchAll(/var\(--(success-foreground|success|warning)\)/g)) found.add(match[1] as ExtraToken);
+  for (const match of source.matchAll(new RegExp(`var\\(--(${TOKEN_NAMES})\\)`, "g"))) found.add(match[1] as ExtraToken);
   return [...found].sort();
 }

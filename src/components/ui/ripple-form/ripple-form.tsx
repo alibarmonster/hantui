@@ -326,7 +326,7 @@ export function RippleForm({
               </label>
             </div>
             {error ? (
-              <p id={`${id}-error`} role="alert" className="mt-3 text-[13px] text-destructive">
+              <p id={`${id}-error`} role="alert" className="mt-3 text-[13px] text-destructive-text">
                 {error}
               </p>
             ) : null}

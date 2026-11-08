@@ -34,7 +34,7 @@ export function StatsSection({ stats, eyebrow, title, description, className, ..
     <section className={cn("@container w-full", className)} {...props}>
       {eyebrow || title || description ? (
         <div className="mb-10 max-w-xl">
-          {eyebrow ? <p className="text-sm font-medium text-primary">{eyebrow}</p> : null}
+          {eyebrow ? <p className="text-sm font-medium text-link">{eyebrow}</p> : null}
           {title ? <h2 className="mt-1.5 text-2xl font-semibold tracking-tight text-balance text-foreground @[40rem]:text-3xl">{title}</h2> : null}
           {description ? <p className="mt-2 text-[15px] leading-7 text-muted-foreground">{description}</p> : null}
         </div>

@@ -5,8 +5,12 @@ import {
   EXTRA_TOKENS,
   extractDependencies,
   extractExtraTokens,
+  isValuedToken,
   readProjectFile,
+  TEXT_TOKENS,
+  tokenVar,
   type ExtraToken,
+  type TextToken,
 } from "./source";
 
 /** Shared lib files that ship inside each registry item that imports them. */
@@ -124,11 +128,49 @@ export async function getInstallInfo(slug: string): Promise<InstallInfo> {
 
 export function tokenCssVars(tokens: ExtraToken[]) {
   if (tokens.length === 0) return undefined;
+  // Text tokens only map a utility (with its fallback); they never add values to the project's theme.
+  const valued = tokens.filter(isValuedToken);
   return {
-    theme: Object.fromEntries(tokens.map((t) => [`color-${t}`, `var(--${t})`])),
-    light: Object.fromEntries(tokens.map((t) => [t, EXTRA_TOKENS[t].light])),
-    dark: Object.fromEntries(tokens.map((t) => [t, EXTRA_TOKENS[t].dark])),
+    theme: Object.fromEntries(tokens.map((t) => [`color-${t}`, tokenVar(t)])),
+    ...(valued.length
+      ? {
+          light: Object.fromEntries(valued.map((t) => [t, EXTRA_TOKENS[t].light])),
+          dark: Object.fromEntries(valued.map((t) => [t, EXTRA_TOKENS[t].dark])),
+        }
+      : {}),
   };
+}
+
+/** The same tokens as CSS to paste into globals.css, for the manual install steps. */
+export function tokenCssSnippet(tokens: ExtraToken[]) {
+  if (tokens.length === 0) return null;
+  const valued = tokens.filter(isValuedToken);
+  const values = valued.length
+    ? [
+        ":root {",
+        ...valued.map((t) => `  --${t}: ${EXTRA_TOKENS[t].light};`),
+        "}",
+        "",
+        ".dark {",
+        ...valued.map((t) => `  --${t}: ${EXTRA_TOKENS[t].dark};`),
+        "}",
+        "",
+      ]
+    : [];
+  return [...values, "@theme inline {", ...tokens.map((t) => `  --color-${t}: ${tokenVar(t)};`), "}"].join("\n");
+}
+
+const listVars = (names: readonly string[]) =>
+  new Intl.ListFormat("en", { type: "conjunction" }).format(names.map((n) => `--${n}`));
+
+/** The sentence above that snippet, naming the tokens and what the text tokens fall back to. */
+export function tokenStepIntro(tokens: ExtraToken[]) {
+  const fallbacks = tokens.filter((t): t is TextToken => !isValuedToken(t));
+  const many = (list: readonly unknown[], one: string, more: string) => (list.length > 1 ? more : one);
+  const fallbackNote = fallbacks.length
+    ? ` (${listVars(fallbacks)} ${many(fallbacks, "falls", "fall")} back to your ${listVars(fallbacks.map((t) => TEXT_TOKENS[t]))} unless you set ${many(fallbacks, "it", "them")})`
+    : "";
+  return `This component uses ${listVars(tokens)}, which shadcn does not define by default. Add ${many(tokens, "it", "them")} to your global CSS${fallbackNote}:`;
 }
 
 export async function buildRegistryItem(entry: ComponentEntry) {

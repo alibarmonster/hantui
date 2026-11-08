@@ -136,7 +136,7 @@ export function CtaSection({
           </g>
         </svg>
         <div className="relative mx-auto max-w-xl">
-          {eyebrow ? <p className="text-sm font-medium text-primary">{eyebrow}</p> : null}
+          {eyebrow ? <p className="text-sm font-medium text-link">{eyebrow}</p> : null}
           <h2 className="mt-2 text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-4xl">{title}</h2>
           {description ? <p className="mx-auto mt-3 max-w-md text-[15px] leading-7 text-pretty text-muted-foreground">{description}</p> : null}
           {primaryAction || secondaryAction ? (

@@ -20,7 +20,7 @@ export function Pill() {
         words={["faster", "safer", "together", "on Fridays"]}
         align="center"
         interval={2000}
-        className="rounded-full bg-primary/10 px-4 py-1 text-primary"
+        className="rounded-full bg-primary/10 px-4 py-1 text-link"
       />
       every week.
     </p>

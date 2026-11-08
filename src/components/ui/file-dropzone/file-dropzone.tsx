@@ -379,7 +379,7 @@ export function FileDropzone({
                       {formatBytes(item.file.size)}
                       {" · "}
                       {item.status === "error" ? (
-                        <span className="text-destructive">{item.error}</span>
+                        <span className="text-destructive-text">{item.error}</span>
                       ) : item.status === "done" ? (
                         "Uploaded"
                       ) : (
