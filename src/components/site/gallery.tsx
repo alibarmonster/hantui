@@ -2,20 +2,17 @@
 
 import { useEffect, useMemo, useRef, useState, useSyncExternalStore } from "react";
 import Link from "next/link";
-import { useReducedMotion } from "motion/react";
-import * as m from "motion/react-m";
-import { ArrowUpRight, Clock3, Search, X } from "lucide-react";
-import { categories, components, type CategoryId, type ComponentEntry } from "@/content/components";
+import { Clock3, Search, X } from "lucide-react";
+import { categories, components, getCategory, type CategoryId, type ComponentEntry } from "@/content/components";
 import { cn } from "@/lib/utils";
-import { spring } from "@/lib/motion";
 import { DemoRenderer } from "./demo-renderer";
 import { PreviewStage } from "./component-preview";
 import { NewBadge } from "./sidebar-nav";
 
-type Filter = CategoryId | "all";
+type Filter = CategoryId | "all" | "new";
 
-function isCategory(value: string | null): value is CategoryId {
-  return categories.some((c) => c.id === value);
+function isFilter(value: string | null): value is Filter {
+  return value === "new" || categories.some((c) => c.id === value);
 }
 
 /** Mounts children once the element comes near the viewport. */
@@ -47,31 +44,23 @@ function WhenVisible({ children }: { children: React.ReactNode }) {
   );
 }
 
+/** A gallery card: every card the same size (it's an index), a 4:3 live preview, the name and category. */
 function ReadyCard({ entry, preview }: { entry: ComponentEntry; preview?: string }) {
   return (
-    <article className="group flex min-w-0 flex-col rounded-[14px] border border-border bg-surface p-1.5 transition-shadow duration-300 hover:shadow-md">
-      <PreviewStage className="h-60 rounded-[10px]">
+    <article className="group flex min-w-0 flex-col overflow-hidden rounded-lg border border-border bg-surface transition-[translate,box-shadow] duration-200 ease-out [@media(hover:hover)_and_(pointer:fine)]:hover:-translate-y-0.5 [@media(hover:hover)_and_(pointer:fine)]:hover:shadow-md">
+      <PreviewStage className="aspect-[4/3] rounded-none border-0 border-b">
         {preview ? (
           <WhenVisible>
             <DemoRenderer slug={entry.slug} name={preview} />
           </WhenVisible>
         ) : null}
       </PreviewStage>
-      <Link
-        href={`/components/${entry.slug}`}
-        className="focus-ring mt-1.5 flex items-start justify-between gap-3 rounded-[10px] px-2.5 pt-2 pb-2"
-      >
-        <span className="min-w-0">
-          <span className="flex items-center gap-2">
-            <span className="truncate text-sm font-medium text-foreground">{entry.name}</span>
-            {entry.isNew ? <NewBadge /> : null}
-          </span>
-          <span className="mt-0.5 line-clamp-1 block text-[13px] text-muted-foreground">{entry.description}</span>
+      <Link href={`/components/${entry.slug}`} className="focus-ring flex min-h-16 flex-col justify-center gap-0.5 px-4 py-3 transition-transform duration-120 active:scale-[0.98]">
+        <span className="flex items-center gap-2">
+          <span className="truncate text-[16px] font-semibold text-foreground">{entry.name}</span>
+          {entry.isNew ? <NewBadge /> : null}
         </span>
-        <ArrowUpRight
-          aria-hidden="true"
-          className="mt-0.5 size-4 shrink-0 text-muted-foreground transition-transform duration-200 group-hover:translate-x-0.5 group-hover:-translate-y-0.5 group-hover:text-foreground"
-        />
+        <span className="truncate text-[14px] text-muted-foreground">{getCategory(entry.category).name}</span>
       </Link>
     </article>
   );
@@ -113,7 +102,7 @@ export function Gallery({ previews }: { previews: Record<string, string> }) {
     window.history.replaceState(window.history.state, "", url);
     window.dispatchEvent(new Event(CATEGORY_EVENT));
   };
-  return <GalleryView previews={previews} filter={isCategory(param) ? param : "all"} onFilterChange={choose} />;
+  return <GalleryView previews={previews} filter={isFilter(param) ? param : "all"} onFilterChange={choose} />;
 }
 
 function GalleryView({
@@ -126,10 +115,12 @@ function GalleryView({
   onFilterChange?: (filter: Filter) => void;
 }) {
   const [query, setQuery] = useState("");
-  const reduceMotion = useReducedMotion();
 
   const counts = useMemo(() => {
-    const map = new Map<Filter, number>([["all", components.length]]);
+    const map = new Map<Filter, number>([
+      ["all", components.length],
+      ["new", components.filter((c) => c.isNew).length],
+    ]);
     for (const c of components) map.set(c.category, (map.get(c.category) ?? 0) + 1);
     return map;
   }, []);
@@ -138,7 +129,7 @@ function GalleryView({
     const q = query.trim().toLowerCase();
     const matches = components.filter(
       (c) =>
-        (filter === "all" || c.category === filter) &&
+        (filter === "all" || (filter === "new" ? c.isNew : c.category === filter)) &&
         (!q || c.name.toLowerCase().includes(q) || c.description.toLowerCase().includes(q)),
     );
     return {
@@ -149,121 +140,136 @@ function GalleryView({
   const total = results.ready.length + results.planned.length;
 
   const choose = (next: Filter) => onFilterChange?.(next);
+  const readyTotal = components.filter((c) => c.status === "ready").length;
 
-  const chips: { id: Filter; label: string }[] = [
-    { id: "all", label: "All" },
-    ...categories.map((c) => ({ id: c.id, label: c.name })),
-  ];
+  const chip = (id: Filter, label: string, className?: string) => {
+    const active = id === filter;
+    return (
+      <button
+        key={id}
+        type="button"
+        role="radio"
+        aria-checked={active}
+        onClick={() => choose(id)}
+        className={cn(
+          "focus-ring inline-flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 text-[14px] font-semibold transition-colors duration-150",
+          active ? "bg-primary text-primary-foreground" : "bg-surface-2 text-text-secondary hover:text-foreground",
+          className,
+        )}
+      >
+        {label}
+        <span className={cn("font-mono text-[12px] font-normal tabular-nums", active ? "text-primary-foreground/80" : "text-muted-foreground")}>{counts.get(id)}</span>
+      </button>
+    );
+  };
 
   return (
-    <div>
-      <div className="mb-8 flex flex-col gap-4">
-        <div className="relative max-w-md">
-          <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
-          <input
-            type="search"
-            value={query}
-            onChange={(event) => setQuery(event.target.value)}
-            placeholder="Filter by name or behavior…"
-            aria-label="Filter components"
-            className="h-10 w-full rounded-[10px] border border-border bg-background pr-10 pl-10 text-sm text-foreground shadow-xs transition-shadow outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:ring-3 focus-visible:ring-ring/15 [&::-webkit-search-cancel-button]:hidden"
-          />
-          {query ? (
-            <button
-              type="button"
-              onClick={() => setQuery("")}
-              aria-label="Clear filter"
-              className="focus-ring absolute top-1/2 right-1.5 inline-flex size-7 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md text-muted-foreground hover:bg-surface-2 hover:text-foreground"
-            >
-              <X className="size-3.5" aria-hidden="true" />
-            </button>
-          ) : null}
-        </div>
-
-        <div
-          role="radiogroup"
-          aria-label="Category"
-          className="no-scrollbar -mx-4 flex gap-1 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0"
-        >
-          {chips.map((chip) => {
-            const active = chip.id === filter;
+    <div className="grid gap-10 lg:grid-cols-[16rem_minmax(0,1fr)]">
+      {/* Categories with their counts. The current one gets the selected fill and a terracotta bar. */}
+      <nav aria-label="Categories" className="hidden lg:block">
+        <ul className="sticky top-24 space-y-px">
+          {(["all", ...categories.map((c) => c.id)] as Filter[]).map((id) => {
+            const active = id === filter;
+            const label = id === "all" ? "All components" : getCategory(id as CategoryId).name;
             return (
-              <button
-                key={chip.id}
-                type="button"
-                role="radio"
-                aria-checked={active}
-                onClick={() => choose(chip.id)}
-                className={cn(
-                  "focus-ring relative inline-flex h-9 shrink-0 cursor-pointer items-center gap-1.5 rounded-full px-3.5 text-[13px] font-medium transition-colors",
-                  active ? "text-background" : "text-muted-foreground hover:bg-surface-2 hover:text-foreground",
-                )}
-              >
-                {active ? (
-                  <m.span
-                    layoutId="gallery-chip"
-                    transition={reduceMotion ? { duration: 0 } : spring.snappy}
-                    className="absolute inset-0 rounded-full bg-foreground"
-                  />
-                ) : null}
-                <span className="relative">{chip.label}</span>
-                <span className={cn("relative font-mono text-[11px] tabular-nums", active ? "text-background/70" : "text-muted-foreground")}>
-                  {counts.get(chip.id)}
-                </span>
-              </button>
+              <li key={id}>
+                <button
+                  type="button"
+                  aria-current={active ? "true" : undefined}
+                  onClick={() => choose(id)}
+                  className={cn(
+                    "focus-ring relative flex h-9 w-full cursor-pointer items-center justify-between gap-3 rounded-md pr-2.5 pl-3.5 text-left text-[14px] transition-colors duration-150",
+                    active ? "bg-selected font-semibold text-foreground" : "text-text-secondary hover:bg-surface-2 hover:text-foreground",
+                  )}
+                >
+                  {active ? <span aria-hidden="true" className="absolute inset-y-1.5 left-0 w-[3px] rounded-full bg-primary" /> : null}
+                  <span className="truncate">{label}</span>
+                  <span className="font-mono text-[12px] font-normal text-muted-foreground tabular-nums">{counts.get(id)}</span>
+                </button>
+              </li>
             );
           })}
-        </div>
-      </div>
+        </ul>
+      </nav>
 
-      <p className="sr-only" role="status">
-        {total} component{total === 1 ? "" : "s"}
-      </p>
-
-      {total === 0 ? (
-        <div className="flex flex-col items-center gap-3 rounded-[14px] border border-dashed border-border py-20 text-center">
-          <p className="text-sm text-muted-foreground">No components match “{query.trim()}”.</p>
-          <button
-            type="button"
-            onClick={() => {
-              setQuery("");
-              choose("all");
-            }}
-            className="focus-ring h-9 cursor-pointer rounded-[10px] border border-border bg-background px-3.5 text-sm font-medium text-foreground shadow-xs hover:bg-surface"
-          >
-            Reset filters
-          </button>
-        </div>
-      ) : (
-        <>
-          {results.ready.length ? (
-            <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-              {results.ready.map((entry) => (
-                <ReadyCard key={entry.slug} entry={entry} preview={previews[entry.slug]} />
-              ))}
-            </div>
-          ) : null}
-          {results.planned.length ? (
-            <section aria-labelledby="in-progress-heading" className={cn(results.ready.length && "mt-14")}>
-              <h2
-                id="in-progress-heading"
-                className="mb-4 flex items-center gap-2 text-sm font-medium text-foreground"
+      <div className="min-w-0">
+        <div className="mb-8 flex flex-col gap-4">
+          <div className="relative max-w-md">
+            <Search className="pointer-events-none absolute top-1/2 left-3.5 size-4 -translate-y-1/2 text-muted-foreground" aria-hidden="true" />
+            <input
+              type="search"
+              value={query}
+              onChange={(event) => setQuery(event.target.value)}
+              placeholder="Filter by name or behavior…"
+              aria-label="Filter components"
+              className="h-10 w-full rounded-md border border-input bg-surface pr-10 pl-10 text-[16px] text-foreground transition-[border-color,box-shadow] outline-none placeholder:text-muted-foreground focus-visible:border-ring focus-visible:shadow-[0_0_0_3px_rgb(194_65_12/0.12)] sm:text-[15px] [&::-webkit-search-cancel-button]:hidden"
+            />
+            {query ? (
+              <button
+                type="button"
+                onClick={() => setQuery("")}
+                aria-label="Clear filter"
+                className="focus-ring absolute top-1/2 right-1 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-md text-muted-foreground hover:bg-surface-2 hover:text-foreground"
               >
-                <Clock3 className="size-4 text-muted-foreground" aria-hidden="true" />
-                In progress
-                <span className="font-mono text-xs font-normal text-muted-foreground tabular-nums">
-                  {results.planned.length}
-                </span>
-              </h2>
-              <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
-                {results.planned.map((entry) => (
-                  <PlannedItem key={entry.slug} entry={entry} />
+                <X className="size-4" aria-hidden="true" />
+              </button>
+            ) : null}
+          </div>
+
+          <div role="radiogroup" aria-label="Quick filters" className="no-scrollbar -mx-4 flex gap-2 overflow-x-auto px-4 sm:mx-0 sm:flex-wrap sm:px-0">
+            {chip("all", "All")}
+            {chip("new", "New")}
+            {/* Categories are chips only where the sidebar isn't shown. */}
+            {categories.map((c) => chip(c.id, c.name, "lg:hidden"))}
+          </div>
+        </div>
+
+        <p className="sr-only" role="status">
+          {total} component{total === 1 ? "" : "s"}
+        </p>
+
+        {total === 0 ? (
+          <div className="flex flex-col items-center gap-4 rounded-lg border border-border bg-surface px-6 py-20 text-center">
+            <p className="max-w-md text-[16px] text-text-secondary">
+              {query.trim() ? `No components match “${query.trim()}”. Clear the search to see all ${readyTotal}.` : `Nothing here yet. Show all ${readyTotal} components instead.`}
+            </p>
+            <button
+              type="button"
+              onClick={() => {
+                setQuery("");
+                choose("all");
+              }}
+              className="focus-ring inline-flex h-10 cursor-pointer items-center rounded-md border border-input bg-transparent px-4 text-[15px] font-semibold text-foreground transition-colors hover:bg-surface-2 active:scale-[0.96]"
+            >
+              Clear
+            </button>
+          </div>
+        ) : (
+          <>
+            {results.ready.length ? (
+              <div className="grid grid-cols-1 gap-5 md:grid-cols-2 xl:grid-cols-3">
+                {results.ready.map((entry) => (
+                  <ReadyCard key={entry.slug} entry={entry} preview={previews[entry.slug]} />
                 ))}
-              </ul>
-            </section>
-          ) : null}
-        </>
-      )}
+              </div>
+            ) : null}
+            {results.planned.length ? (
+              <section aria-labelledby="in-progress-heading" className={cn(results.ready.length && "mt-14")}>
+                <h2 id="in-progress-heading" className="mb-4 flex items-center gap-2 text-[16px] font-semibold text-foreground">
+                  <Clock3 className="size-4 text-muted-foreground" aria-hidden="true" />
+                  In progress
+                  <span className="font-mono text-[12px] font-normal text-muted-foreground tabular-nums">{results.planned.length}</span>
+                </h2>
+                <ul className="grid grid-cols-1 gap-2 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+                  {results.planned.map((entry) => (
+                    <PlannedItem key={entry.slug} entry={entry} />
+                  ))}
+                </ul>
+              </section>
+            ) : null}
+          </>
+        )}
+      </div>
     </div>
   );
 }

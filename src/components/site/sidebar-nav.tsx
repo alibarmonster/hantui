@@ -4,12 +4,9 @@ import { useState } from "react";
 import Link from "next/link";
 import { LayoutGrid, Search } from "lucide-react";
 import { usePathname } from "next/navigation";
-import { useReducedMotion } from "motion/react";
-import * as m from "motion/react-m";
 import { categories, components } from "@/content/components";
 import { docsPages } from "@/content/docs-nav";
 import { cn } from "@/lib/utils";
-import { spring } from "@/lib/motion";
 
 function NavLink({
   href,
@@ -24,38 +21,28 @@ function NavLink({
   children: React.ReactNode;
   badge?: React.ReactNode;
 }) {
-  const reduceMotion = useReducedMotion();
+  // Used many times a day, so nothing slides: the current page gets the selected fill and a terracotta bar.
   return (
     <Link
       href={href}
       onClick={onNavigate}
       aria-current={active ? "page" : undefined}
       className={cn(
-        "focus-ring relative flex h-8 items-center gap-2 rounded-md px-2.5 text-[13.5px] transition-colors",
-        active ? "font-medium text-foreground" : "text-muted-foreground hover:text-foreground",
+        "focus-ring relative flex h-8 items-center gap-2 rounded-md px-2.5 text-[14px] transition-colors duration-150",
+        active ? "bg-selected font-semibold text-foreground" : "text-text-secondary hover:bg-surface-2 hover:text-foreground",
       )}
     >
-      {active ? (
-        <m.span
-          layoutId="sidebar-active"
-          transition={reduceMotion ? { duration: 0 } : spring.snappy}
-          className="absolute inset-0 rounded-md bg-surface-2"
-        />
-      ) : null}
+      {active ? <span aria-hidden="true" className="absolute inset-y-1 left-0 w-[3px] rounded-full bg-primary" /> : null}
       <span className="relative truncate">{children}</span>
       {badge}
     </Link>
   );
 }
 
+/** Amber marks "new" only: a 4px badge with dark text and the word, never just the color. */
 export function NewBadge({ className }: { className?: string }) {
   return (
-    <span
-      className={cn(
-        "relative inline-flex h-[18px] shrink-0 items-center rounded-full bg-primary/10 px-1.5 text-[10.5px] font-medium text-[color-mix(in_oklab,var(--primary)_78%,var(--foreground))]",
-        className,
-      )}
-    >
+    <span className={cn("relative inline-flex h-[18px] shrink-0 items-center rounded-sm bg-highlight px-1.5 text-[11px] leading-none font-semibold text-highlight-foreground", className)}>
       New
     </span>
   );
