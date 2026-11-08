@@ -1,6 +1,7 @@
 "use client";
 
-import { useEffect, useRef, type ComponentProps, type ReactNode } from "react";
+import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
+import { observeTheme } from "@/lib/color";
 import { cn } from "@/lib/utils";
 import { runCanvasLoop, type CanvasLoop } from "@/lib/glyph/canvas-loop";
 import { getGlyphAtlas, loadGlyphFont, monoFontFamily, resolveCanvasColors, type GlyphAtlas } from "@/lib/glyph/glyph-atlas";
@@ -374,6 +375,10 @@ export function DitherWildlife({
     live.current.loop?.wake();
   });
   const toneKey = tones.join(",");
+  // A palette made of theme variables is re-resolved after a theme switch.
+  const themed = /var\(|color-mix\(|currentcolor/i.test(toneKey);
+  const [themeKey, setThemeKey] = useState(0);
+  useEffect(() => (themed ? observeTheme(() => setThemeKey((k) => k + 1)) : undefined), [themed]);
 
   useEffect(() => {
     const root = rootRef.current;
@@ -802,7 +807,7 @@ export function DitherWildlife({
       root.removeEventListener("pointermove", onMove);
       root.removeEventListener("pointerleave", onLeave);
     };
-  }, [scene, look, cell, count, toneKey]);
+  }, [scene, look, cell, count, toneKey, themeKey]);
 
   return (
     <div ref={rootRef} className={cn("relative isolate overflow-hidden", className)} style={{ background, ...style }} {...props}>

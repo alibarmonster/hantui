@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ComponentProps } from "react";
+import { observeTheme } from "@/lib/color";
 import { cn } from "@/lib/utils";
 
 export interface DotGridProps extends ComponentProps<"div"> {
@@ -151,11 +152,18 @@ export function DotGrid({
     layout();
     const observer = new ResizeObserver(layout);
     observer.observe(root);
+    // A theme switch changes what the colors resolve to.
+    const unobserveTheme = observeTheme(() => {
+      base = resolveColor(root, color);
+      active = resolveColor(root, activeColor);
+      draw();
+    });
     root.addEventListener("pointermove", onMove);
     root.addEventListener("pointerleave", onLeave);
     return () => {
       cancelAnimationFrame(frame);
       observer.disconnect();
+      unobserveTheme();
       root.removeEventListener("pointermove", onMove);
       root.removeEventListener("pointerleave", onLeave);
     };

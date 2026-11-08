@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, type ComponentProps } from "react";
 import { cn } from "@/lib/utils";
-import { cssColorToRgb } from "@/lib/color";
+import { cssColorToRgb, observeTheme } from "@/lib/color";
 
 export interface GlobeMarker {
   lat: number;
@@ -237,6 +237,11 @@ export function DottedGlobe({
     intersection.observe(el);
     const onVisibility = () => document.visibilityState === "visible" && run();
     document.addEventListener("visibilitychange", onVisibility);
+    // A theme switch changes what the variables resolve to.
+    const unobserveTheme = observeTheme(() => {
+      resolved.clear();
+      draw(performance.now());
+    });
 
     const onDown = (event: PointerEvent) => {
       if (!draggable) return;
@@ -270,6 +275,7 @@ export function DottedGlobe({
       resizeObserver.disconnect();
       intersection.disconnect();
       document.removeEventListener("visibilitychange", onVisibility);
+      unobserveTheme();
       el.removeEventListener("pointerdown", onDown);
       el.removeEventListener("pointermove", onMove);
       el.removeEventListener("pointerup", onUp);

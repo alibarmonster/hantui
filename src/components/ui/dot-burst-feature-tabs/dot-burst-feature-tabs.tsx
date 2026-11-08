@@ -4,7 +4,7 @@ import { useEffect, useId, useRef, useState, type ComponentProps, type KeyboardE
 import { AnimatePresence, motion, useMotionValue, useReducedMotion } from "motion/react";
 import { Coffee, Pause, Play, ShieldCheck, Sun, Users, Wallet, Zap } from "lucide-react";
 import { cn } from "@/lib/utils";
-import { cssColorToRgb, mixOklch, type Vec3 } from "@/lib/color";
+import { cssColorToRgb, mixOklch, observeTheme, type Vec3 } from "@/lib/color";
 import { runCanvasLoop } from "@/lib/glyph/canvas-loop";
 import { createRandom } from "@/lib/random";
 
@@ -309,6 +309,10 @@ export function DotBurstFeatureTabs({
     return () => cancelAnimationFrame(raf);
   }, [autoplaying, interval, progress]);
 
+  // Feature colors may be theme variables: re-resolve them after a theme switch.
+  const [themeKey, setThemeKey] = useState(0);
+  useEffect(() => observeTheme(() => setThemeKey((k) => k + 1)), []);
+
   // Stage color: tween in OKLCH so the midpoints stay saturated.
   const colorRef = useRef<{ from: Vec3; to: Vec3; start: number } | null>(null);
   useEffect(() => {
@@ -327,7 +331,7 @@ export function DotBurstFeatureTabs({
     };
     paint();
     return () => cancelAnimationFrame(raf);
-  }, [active.color, reduceMotion]);
+  }, [active.color, reduceMotion, themeKey]);
 
   // Dots: one canvas, seeded clusters per feature, scattered and regrown on each change.
   const dotsRef = useRef<{ current: Dot[]; leaving: Dot[]; changedAt: number; key: string; tint: string; redraw: () => void } | null>(null);
@@ -340,6 +344,7 @@ export function DotBurstFeatureTabs({
     let clock = 0;
     const state = { current: [] as Dot[], leaving: [] as Dot[], changedAt: -10, key: "", tint: "#ffffff", redraw: () => {} };
     dotsRef.current = state;
+    const tintFor = (feature: DotBurstFeature) => `rgb(${mixOklch(cssColorToRgb(feature.color, stage), [255, 255, 255], 0.55).join(",")})`;
 
     const relayout = (feature: DotBurstFeature, animate: boolean) => {
       const key = `${feature.id}:${Math.round(size)}`;
@@ -352,8 +357,7 @@ export function DotBurstFeatureTabs({
           })
         : [];
       state.current = layoutDots(`${id}:${feature.id}`, size, live.current.dotDensity);
-      const rgb = cssColorToRgb(feature.color, stage);
-      state.tint = `rgb(${mixOklch(rgb, [255, 255, 255], 0.55).join(",")})`;
+      state.tint = tintFor(feature);
       state.changedAt = animate ? clock : -10;
       state.key = key;
     };
@@ -401,9 +405,16 @@ export function DotBurstFeatureTabs({
       pause.current.inView = entry?.isIntersecting ?? true;
     });
     io.observe(stage);
+    // A theme switch only retints the dots; it doesn't burst them again.
+    const unobserveTheme = observeTheme(() => {
+      const { items: list, index: i } = live.current;
+      state.tint = tintFor(list[Math.min(i, list.length - 1)]);
+      loop.redraw();
+    });
     return () => {
       loop.dispose();
       io.disconnect();
+      unobserveTheme();
       dotsRef.current = null;
     };
   }, [id]);

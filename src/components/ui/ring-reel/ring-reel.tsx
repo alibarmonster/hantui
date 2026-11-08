@@ -2,7 +2,7 @@
 
 import { useCallback, useEffect, useImperativeHandle, useMemo, useRef, useState, type CSSProperties, type ReactNode, type Ref } from "react";
 import { cn } from "@/lib/utils";
-import { cssColorToVec3 } from "@/lib/color";
+import { cssColorToVec3, observeTheme } from "@/lib/color";
 import { GalleryA11y } from "@/lib/gallery/gallery-a11y";
 import { GalleryCaption, GalleryControls, chromeScheme } from "@/lib/gallery/gallery-chrome";
 import { GalleryFallback } from "@/lib/gallery/gallery-fallback";
@@ -334,7 +334,12 @@ export function RingReel({
   const arcView = view === "arc";
   const activeItem = wheelItems[input.index];
   useEffect(() => {
-    if (hostRef.current) back.current = cssColorToVec3(accentColor, hostRef.current);
+    const host = hostRef.current;
+    if (!host) return;
+    const resolve = () => (back.current = cssColorToVec3(accentColor, host));
+    resolve();
+    // A theme switch changes what the color resolves to.
+    return observeTheme(resolve);
   }, [accentColor, hostRef]);
 
   return (

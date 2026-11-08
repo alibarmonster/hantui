@@ -7,6 +7,7 @@
  */
 
 import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
+import { observeTheme } from "@/lib/color";
 import { cn } from "@/lib/utils";
 import { runCanvasLoop, type CanvasLoop } from "@/lib/glyph/canvas-loop";
 import { getGlyphAtlas, loadGlyphFont, monoFontFamily, resolveCanvasColors, type GlyphAtlas } from "@/lib/glyph/glyph-atlas";
@@ -182,6 +183,10 @@ export function AsciiKoiPond({
   const [fed, setFed] = useState(0);
   const colors = resolvePalette(palette);
   const colorKey = JSON.stringify(colors);
+  // A palette made of theme variables is re-resolved after a theme switch.
+  const themed = /var\(|color-mix\(|currentcolor/i.test(colorKey);
+  const [themeKey, setThemeKey] = useState(0);
+  useEffect(() => (themed ? observeTheme(() => setThemeKey((k) => k + 1)) : undefined), [themed]);
   const live = useRef({ paused, interactive, onFeed, loop: null as CanvasLoop | null });
   useEffect(() => {
     live.current.paused = paused;
@@ -620,7 +625,7 @@ export function AsciiKoiPond({
       root.removeEventListener("pointerleave", onLeave);
       root.removeEventListener("pointerdown", onDown);
     };
-  }, [koiCount, cell, lilyPads, colorKey]);
+  }, [koiCount, cell, lilyPads, colorKey, themeKey]);
 
   return (
     <div ref={rootRef} className={cn("relative isolate overflow-hidden font-mono", className)} style={{ background: colors.background, ...style }} {...props}>

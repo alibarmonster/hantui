@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useImperativeHandle, useRef, type ComponentProps, type CSSProperties, type Ref, type RefObject } from "react";
+import { observeTheme } from "@/lib/color";
 import { cn } from "@/lib/utils";
 import { hash3, WakeField } from "@/lib/glyph/ascii-life";
 
@@ -1088,9 +1089,15 @@ export function AsciiAquariumBackground({
     host.addEventListener("pointermove", onPointerMove);
     host.addEventListener("pointerleave", onPointerLeave);
     host.addEventListener("click", onClick);
+    // Palette colors may be theme variables: re-resolve them after a theme switch.
+    const unobserveTheme = observeTheme(() => {
+      paletteKey = "";
+      if (!raf) render();
+    });
 
     return () => {
       disposed = true;
+      unobserveTheme();
       cancelAnimationFrame(raf);
       api.current = null;
       resizeObserver.disconnect();

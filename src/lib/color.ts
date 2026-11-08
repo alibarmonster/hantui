@@ -45,6 +45,24 @@ export function cssColorToRgb(color: string, element: Element): Vec3 {
   return [r, g, b];
 }
 
+/**
+ * Calls `onChange` when the page theme may have changed: a class or data-theme change on <html> or
+ * <body> (shadcn's `.dark`, next-themes, a data-theme switch) or a change of the OS color scheme.
+ * Resolved colors are cached, so re-resolve them here. Browser only; returns the unsubscribe.
+ */
+export function observeTheme(onChange: () => void): () => void {
+  const observer = new MutationObserver(onChange);
+  const options = { attributes: true, attributeFilter: ["class", "data-theme"] };
+  observer.observe(document.documentElement, options);
+  if (document.body) observer.observe(document.body, options);
+  const scheme = window.matchMedia("(prefers-color-scheme: dark)");
+  scheme.addEventListener("change", onChange);
+  return () => {
+    observer.disconnect();
+    scheme.removeEventListener("change", onChange);
+  };
+}
+
 /** `cssColorToRgb` as a normalized vec3 (each channel 0–1) for shader uniforms. */
 export function cssColorToVec3(color: string, element: Element): Vec3 {
   const [r, g, b] = cssColorToRgb(color, element);

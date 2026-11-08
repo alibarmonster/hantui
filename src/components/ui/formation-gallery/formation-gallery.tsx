@@ -5,7 +5,7 @@ import { AnimatePresence, motion } from "motion/react";
 import { X } from "lucide-react";
 import { duration, ease } from "@/lib/motion";
 import { cn } from "@/lib/utils";
-import { cssColorToVec3 } from "@/lib/color";
+import { cssColorToVec3, observeTheme } from "@/lib/color";
 import { GalleryA11y } from "@/lib/gallery/gallery-a11y";
 import { chromeScheme } from "@/lib/gallery/gallery-chrome";
 import { GalleryFallback } from "@/lib/gallery/gallery-fallback";
@@ -630,7 +630,12 @@ export function FormationGallery({
   const fallback = status === "fallback";
   const openedItem = open ? items[open.item] : undefined;
   useEffect(() => {
-    if (hostRef.current) accent.current = cssColorToVec3(accentColor, hostRef.current);
+    const host = hostRef.current;
+    if (!host) return;
+    const resolve = () => (accent.current = cssColorToVec3(accentColor, host));
+    resolve();
+    // A theme switch changes what the color resolves to.
+    return observeTheme(resolve);
   }, [accentColor, hostRef]);
 
   return (

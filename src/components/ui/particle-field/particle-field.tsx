@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ComponentProps } from "react";
+import { observeTheme } from "@/lib/color";
 import { cn } from "@/lib/utils";
 
 export interface ParticleFieldProps extends ComponentProps<"div"> {
@@ -175,12 +176,18 @@ export function ParticleField({
       run();
     });
     intersection.observe(root);
+    // A theme switch changes what the color resolves to.
+    const unobserveTheme = observeTheme(() => {
+      rgb = resolveColor(root, color);
+      draw();
+    });
     root.addEventListener("pointermove", onMove);
     root.addEventListener("pointerleave", onLeave);
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       intersection.disconnect();
+      unobserveTheme();
       root.removeEventListener("pointermove", onMove);
       root.removeEventListener("pointerleave", onLeave);
     };

@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useRef, type ComponentProps } from "react";
+import { observeTheme } from "@/lib/color";
 import { cn } from "@/lib/utils";
 
 export interface ShimmeringDotsProps extends ComponentProps<"div"> {
@@ -115,9 +116,12 @@ export function ShimmeringDots({
         phase[i] = Math.random() * Math.PI * 2;
         freq[i] = Math.random() < density ? 0.6 + Math.random() * 1.6 : 0;
       }
+      paint();
+      draw(performance.now());
+    };
+    const paint = () => {
       const [r, g, b] = resolveColor(root, color);
       ctx.fillStyle = `rgb(${r},${g},${b})`;
-      draw(performance.now());
     };
 
     layout();
@@ -132,10 +136,16 @@ export function ShimmeringDots({
       run();
     });
     intersection.observe(root);
+    // A theme switch changes what the color resolves to.
+    const unobserveTheme = observeTheme(() => {
+      paint();
+      draw(performance.now());
+    });
     return () => {
       cancelAnimationFrame(frame);
       resizeObserver.disconnect();
       intersection.disconnect();
+      unobserveTheme();
     };
   }, [gap, size, color, baseOpacity, peakOpacity, density, speed]);
 

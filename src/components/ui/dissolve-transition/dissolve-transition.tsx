@@ -4,7 +4,7 @@ import { useEffect, useLayoutEffect, useRef, useState, type ReactNode } from "re
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 import { ease } from "@/lib/motion";
-import { cssColorToVec3, type Vec3 } from "@/lib/color";
+import { cssColorToVec3, observeTheme, type Vec3 } from "@/lib/color";
 import { createGrid, createProgram, drawMesh, PROJECT_GLSL, type Mesh, type Program } from "@/lib/html-canvas/gl";
 import { createElementTexture, uploadElementTexture, type ElementTexture } from "@/lib/html-canvas/texture-webgl";
 import { syncElementGeometry } from "@/lib/html-canvas/sync-geometry";
@@ -225,6 +225,8 @@ export function DissolveTransition({
   });
 
   useEffect(() => onModeChange?.(native), [native, onModeChange]);
+  // The edge color is resolved on the next frame after a theme switch.
+  useEffect(() => observeTheme(() => (edge.current = null)), []);
 
   // A new outgoing slot starts a new transition; finishing one reports it.
   useLayoutEffect(() => {
