@@ -67,13 +67,12 @@ export function Afterimage({
 
   return (
     <div className={cn("relative", className)}>
-      {reduceMotion
-        ? null
-        : ghosts.map((g, i) => (
-            <motion.div key={i} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 select-none", i === 0 ? "text-primary" : "text-foreground")} style={{ x: g.x, y: g.y, opacity: g.o }}>
-              {children}
-            </motion.div>
-          ))}
+      {/* Always rendered, so server and client markup match; reduced motion hides them with CSS. */}
+      {ghosts.map((g, i) => (
+        <motion.div key={i} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 select-none motion-reduce:hidden", i === 0 ? "text-primary" : "text-foreground")} style={{ x: g.x, y: g.y, opacity: g.o }}>
+          {children}
+        </motion.div>
+      ))}
       <motion.div className="relative" style={{ x, y: leadY }}>
         {children}
       </motion.div>

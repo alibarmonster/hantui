@@ -345,6 +345,41 @@
   }
 }
 
+/* Landing hero: letters rise inside their word's clip on an eased stagger, then the support copy.
+   Once per visit: a tiny inline script marks <html data-hero-seen> on later visits. Under reduced
+   motion only the fade remains. */
+@keyframes hero-letter-rise {
+  from {
+    transform: translateY(0.62em);
+  }
+}
+@keyframes rise-in {
+  from {
+    opacity: 0;
+    transform: translateY(8px);
+  }
+}
+.hero-letter {
+  animation: hero-letter-rise 0.6s var(--ease-out) backwards;
+  animation-delay: var(--d, 0ms);
+}
+.rise-in {
+  animation: rise-in 0.45s var(--ease-out) backwards;
+  animation-delay: var(--delay, 0ms);
+}
+[data-hero-seen] .hero-letter,
+[data-hero-seen] .rise-in {
+  animation: none;
+}
+@media (prefers-reduced-motion: reduce) {
+  .hero-letter {
+    animation: none;
+  }
+  .rise-in {
+    animation-name: hero-fade-in;
+  }
+}
+
 /* Shiki output: let the container own background and spacing */
 .shiki,
 .shiki span {
