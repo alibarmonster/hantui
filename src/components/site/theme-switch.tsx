@@ -46,6 +46,17 @@ function subscribe(onChange: () => void) {
   };
 }
 
+function subscribePageTheme(onChange: () => void) {
+  const observer = new MutationObserver(onChange);
+  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
+  return () => observer.disconnect();
+}
+
+/** Whether the page is showing dark right now, following the switch and the OS. False on the server. */
+export function usePageDark() {
+  return useSyncExternalStore(subscribePageTheme, () => document.documentElement.dataset.theme === "dark", () => false);
+}
+
 const LABELS: Record<ThemeChoice, string> = { light: "Light", dark: "Dark", system: "System" };
 const ICONS = { light: Sun, dark: Moon, system: Monitor };
 

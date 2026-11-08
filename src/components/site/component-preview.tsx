@@ -3,7 +3,7 @@
 import { useState, type ReactNode } from "react";
 import { useReducedMotion } from "motion/react";
 import * as m from "motion/react-m";
-import { AppWindow, ArrowUpRight, Check, ChevronDown, Code2, Copy, Eye, FileCode, Maximize2, Menu, RotateCcw, Smartphone, Sparkles, Square, Terminal, X } from "lucide-react";
+import { AppWindow, ArrowUpRight, Check, ChevronDown, ClipboardCopy, Code2, Copy, ExternalLink, Eye, FileCode, Maximize2, Menu, Moon, RotateCcw, Smartphone, Square, Sun, Terminal, X } from "lucide-react";
 import { Dialog, DropdownMenu, Popover, ToggleGroup } from "radix-ui";
 import { cn } from "@/lib/utils";
 import { spring } from "@/lib/motion";
@@ -12,6 +12,7 @@ import { DemoRenderer } from "./demo-renderer";
 import { getComponent } from "@/content/components";
 import { backdrops, type Backdrop } from "./preview-backdrops";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
+import { usePageDark } from "./theme-switch";
 
 export interface PreviewVariant {
   name: string;
@@ -78,7 +79,7 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
         onClick={() => write("prompt", prompt)}
         className="focus-ring inline-flex cursor-pointer items-center gap-1.5 rounded-l-[9px] px-3 text-[13px] font-medium text-foreground hover:bg-surface-2"
       >
-        {done("prompt") ? <Check className="size-3.5 text-[color-mix(in_oklab,var(--success)_80%,var(--foreground))]" aria-hidden="true" /> : <Sparkles className="size-3.5" aria-hidden="true" />}
+        {done("prompt") ? <Check className="size-3.5 text-[color-mix(in_oklab,var(--success)_80%,var(--foreground))]" aria-hidden="true" /> : <ClipboardCopy className="size-3.5" aria-hidden="true" />}
         {done("prompt") ? "Prompt copied" : "Copy prompt"}
       </button>
       <Popover.Root>
@@ -87,10 +88,7 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
         </Popover.Trigger>
         <Popover.Portal>
           <Popover.Content align="end" sideOffset={8} className="z-50 w-80 rounded-2xl border border-border bg-background p-3 shadow-xl outline-none">
-            <p className="flex items-center gap-1.5 text-[13px] font-semibold text-foreground">
-              <Sparkles className="size-3.5 text-primary" aria-hidden="true" />
-              Use with AI
-            </p>
+            <p className="text-[13px] font-semibold text-foreground">Use with AI</p>
             <p className="mt-0.5 text-[12px] text-muted-foreground">Hand {copy.name} to your assistant, ready to drop in.</p>
 
             <div className="relative mt-3 rounded-xl border border-border bg-surface p-2.5 pr-10">
@@ -152,8 +150,26 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
 }
 
 /** The preview stage: surface fill and faint dots, which show its bounds and that a component's background is transparent. */
-export function PreviewStage({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("dot-grid relative overflow-hidden rounded-lg border border-border bg-surface", className)}>{children}</div>;
+export function PreviewStage({ children, className, theme }: { children: React.ReactNode; className?: string; theme?: "light" | "dark" }) {
+  return (
+    <div data-theme={theme} className={cn("dot-grid relative overflow-hidden rounded-lg border border-border bg-surface", className)}>
+      {children}
+    </div>
+  );
+}
+
+const stageButton =
+  "focus-ring touch-target relative inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-muted-foreground transition-colors hover:text-foreground active:scale-[0.96]";
+
+/** Previews the component in the theme the page isn't in, without switching the site. */
+function StageThemeButton({ pageDark, on, onToggle }: { pageDark: boolean; on: boolean; onToggle: () => void }) {
+  const Icon = pageDark ? Sun : Moon;
+  const label = pageDark ? "Preview in light" : "Preview in dark";
+  return (
+    <button type="button" onClick={onToggle} aria-pressed={on} aria-label={label} title={label} className={cn(stageButton, on && "bg-surface-2 text-foreground")}>
+      <Icon className="size-4" aria-hidden="true" />
+    </button>
+  );
 }
 
 function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void }) {
@@ -164,7 +180,7 @@ function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void
       onClick={onReplay}
       aria-label="Replay animation"
       title="Replay"
-      className="focus-ring touch-target relative inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-muted-foreground transition-colors hover:text-foreground active:scale-[0.96]"
+      className={stageButton}
     >
       <m.span animate={{ rotate: reduceMotion ? 0 : -360 * count }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="inline-flex">
         <RotateCcw className="size-4" aria-hidden="true" />
@@ -354,13 +370,14 @@ function PhoneViewport({ children }: { children: ReactNode }) {
   );
 }
 
-function StageContent({ mode, slug, variant, replays, tall = false }: { mode: Mode; slug: string; variant: string; replays: number; tall?: boolean }) {
+function StageContent({ mode, slug, variant, replays, theme, tall = false }: { mode: Mode; slug: string; variant: string; replays: number; theme?: string; tall?: boolean }) {
   const backdrop = backdrops[slug];
-  const demo = <DemoRenderer key={`${variant}:${replays}`} slug={slug} name={variant} />;
+  // Remounting on a stage theme change lets canvases resolve the new colors.
+  const demo = <DemoRenderer key={`${variant}:${replays}:${theme}`} slug={slug} name={variant} />;
   if (backdrop && mode !== "canvas") {
     const { props, tone } = backdropFor(backdrop, variant);
     const Bg = backdrop.Component;
-    const bg = <Bg key={`${variant}:${replays}`} {...props} className="absolute inset-0 size-full" />;
+    const bg = <Bg key={`${variant}:${replays}:${theme}`} {...props} className="absolute inset-0 size-full" />;
     if (mode === "background") return <div className="absolute inset-0">{bg}</div>;
     if (mode === "landing") {
       return (
@@ -403,6 +420,9 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
   const [variantName, setVariantName] = useState(variants[0]?.name ?? "");
   const [replays, setReplays] = useState(0);
   const [fullscreen, setFullscreen] = useState(false);
+  const [flipTheme, setFlipTheme] = useState(false);
+  const pageDark = usePageDark();
+  const stageTheme = flipTheme ? (pageDark ? "light" : "dark") : undefined;
   const variant = variants.find((v) => v.name === variantName) ?? variants[0];
   const fixedHeight = mode !== "canvas";
   // A new slug starts over in its first mode and style.
@@ -449,11 +469,22 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
       </div>
 
       <TabsContent value="preview" className="rounded-lg">
-        <PreviewStage className={cn(fixedHeight && "h-[38rem]")}>
+        <PreviewStage className={cn(fixedHeight && "h-[38rem]")} theme={stageTheme}>
           <div className={cn(fixedHeight ? "absolute inset-0" : "relative")}>
-            <StageContent mode={mode} slug={slug} variant={variant.name} replays={replays} />
+            <StageContent mode={mode} slug={slug} variant={variant.name} replays={replays} theme={stageTheme} />
           </div>
-          <div className="absolute top-3 right-3 z-30">
+          <div className="absolute top-3 right-3 z-30 flex items-center gap-2">
+            <StageThemeButton pageDark={pageDark} on={flipTheme} onToggle={() => setFlipTheme((v) => !v)} />
+            <a
+              href={`/preview/${slug}?variant=${encodeURIComponent(variant.name)}${stageTheme ? `&theme=${stageTheme}` : ""}`}
+              target="_blank"
+              rel="noopener"
+              aria-label="Open the preview in a new tab"
+              title="Open in new tab"
+              className={stageButton}
+            >
+              <ExternalLink className="size-4" aria-hidden="true" />
+            </a>
             <ReplayButton count={replays} onReplay={() => setReplays((n) => n + 1)} />
           </div>
         </PreviewStage>
@@ -465,10 +496,10 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
 
       <Dialog.Root open={fullscreen} onOpenChange={setFullscreen}>
         <Dialog.Portal>
-          <Dialog.Content className="fixed inset-0 z-[60] bg-background outline-none" aria-describedby={undefined}>
+          <Dialog.Content data-theme={stageTheme} className="fixed inset-0 z-[60] bg-background outline-none" aria-describedby={undefined}>
             <Dialog.Title className="sr-only">Full-screen preview</Dialog.Title>
             <div className="absolute inset-0 overflow-auto">
-              <StageContent mode={mode} slug={slug} variant={variant.name} replays={replays} tall />
+              <StageContent mode={mode} slug={slug} variant={variant.name} replays={replays} theme={stageTheme} tall />
             </div>
             <Dialog.Close className="focus-ring absolute top-4 right-4 z-30 inline-flex h-9 cursor-pointer pointer-coarse:h-11 items-center gap-1.5 rounded-full border border-border bg-background/90 px-3 text-[13px] font-medium text-foreground shadow-sm backdrop-blur">
               <X className="size-4" aria-hidden="true" />

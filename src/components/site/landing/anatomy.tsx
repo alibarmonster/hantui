@@ -1,11 +1,12 @@
 "use client";
 
-import { useState, useSyncExternalStore, type ReactNode } from "react";
+import { useState, type ReactNode } from "react";
 import Link from "next/link";
 import { MotionConfig } from "motion/react";
 import { ArrowRight, FileCode2, Folder, Trash2 } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { HoldToConfirmButton } from "@/components/ui/hold-to-confirm-button/hold-to-confirm-button";
+import { usePageDark } from "../theme-switch";
 
 function Toggle({ checked, onChange, label, hint }: { checked: boolean; onChange: (v: boolean) => void; label: string; hint: string }) {
   return (
@@ -27,14 +28,6 @@ function Toggle({ checked, onChange, label, hint }: { checked: boolean; onChange
   );
 }
 
-/** Whether the page is in dark mode, following the theme switch. */
-function subscribeTheme(onChange: () => void) {
-  const observer = new MutationObserver(onChange);
-  observer.observe(document.documentElement, { attributes: true, attributeFilter: ["data-theme"] });
-  return () => observer.disconnect();
-}
-const pageIsDark = () => document.documentElement.dataset.theme === "dark";
-
 /**
  * "Anatomy of a component": the real Hold to Confirm button, with switches that change it live
  * (reduced motion, a visible keyboard focus ring, the other theme, 10% speed), and under it the files
@@ -45,7 +38,7 @@ export function Anatomy({ files, source, sourceLines }: { files: string[]; sourc
   const [focusRing, setFocusRing] = useState(false);
   const [flip, setFlip] = useState(false);
   // The preview switch shows whichever theme the page isn't in.
-  const darkPage = useSyncExternalStore(subscribeTheme, pageIsDark, () => false);
+  const darkPage = usePageDark();
   const other = darkPage ? "light" : "dark";
   const [slow, setSlow] = useState(false);
   const [confirmed, setConfirmed] = useState(0);
