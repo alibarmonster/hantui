@@ -67,7 +67,7 @@ interface ToneColors {
 const TONES: Record<GlyphMapTone, ToneColors> = {
   green: { ground: "#eaf5ee", ink: "#17663f", soft: "#86bf9c", hot: "#1f9d55", panel: "#17663f", panelFg: "#f2fbf5", panelMuted: "#cfe9da" },
   indigo: { ground: "#edf0ff", ink: "#2b3fcf", soft: "#9ba7f3", hot: "#4d68ff", panel: "#2b3fcf", panelFg: "#f5f6ff", panelMuted: "#d3d9ff" },
-  ember: { ground: "#fff1e8", ink: "#b93a0c", soft: "#f0a47e", hot: "#ee6316", panel: "#b93a0c", panelFg: "#fff7f2", panelMuted: "#ffd9c4" },
+  ember: { ground: "#fff1e8", ink: "#a3320a", soft: "#f0a47e", hot: "#ee6316", panel: "#a3320a", panelFg: "#fff7f2", panelMuted: "#ffd9c4" },
   mono: { ground: "#f4f4f5", ink: "#18181b", soft: "#a1a1aa", hot: "#52525b", panel: "#18181b", panelFg: "#fafafa", panelMuted: "#d4d4d8" },
 };
 
