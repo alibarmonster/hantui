@@ -357,7 +357,8 @@
   overflow-x: auto;
   font-family: var(--font-mono);
   font-size: 13px;
-  line-height: 1.7;
+  line-height: 1.6;
+  font-variant-ligatures: none;
   tab-size: 2;
 }
 

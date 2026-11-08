@@ -151,9 +151,9 @@ function CopyForAI({ copy }: { copy: PreviewCopy }) {
   );
 }
 
-/** A plain white stage for previews. */
+/** The preview stage: surface fill and faint dots, which show its bounds and that a component's background is transparent. */
 export function PreviewStage({ children, className }: { children: React.ReactNode; className?: string }) {
-  return <div className={cn("relative overflow-hidden rounded-xl border border-border bg-background", className)}>{children}</div>;
+  return <div className={cn("bg-dot-grid relative overflow-hidden rounded-lg border border-border bg-surface", className)}>{children}</div>;
 }
 
 function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void }) {
@@ -164,7 +164,7 @@ function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void
       onClick={onReplay}
       aria-label="Replay animation"
       title="Replay"
-      className="focus-ring relative inline-flex size-8 cursor-pointer items-center justify-center rounded-lg border border-border bg-background/80 text-muted-foreground backdrop-blur transition-colors hover:text-foreground"
+      className="focus-ring relative inline-flex size-9 cursor-pointer items-center justify-center rounded-md border border-input bg-background text-muted-foreground transition-colors hover:text-foreground active:scale-[0.96]"
     >
       <m.span animate={{ rotate: reduceMotion ? 0 : -360 * count }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="inline-flex">
         <RotateCcw className="size-4" aria-hidden="true" />
@@ -437,7 +437,7 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
                 onClick={() => setFullscreen(true)}
                 aria-label="Open the preview full screen"
                 title="Full screen"
-                className="focus-ring inline-flex size-9 cursor-pointer items-center justify-center rounded-[10px] border border-border bg-surface text-muted-foreground hover:text-foreground"
+                className="focus-ring inline-flex size-10 cursor-pointer items-center justify-center rounded-md border border-input bg-transparent text-muted-foreground hover:bg-surface-2 hover:text-foreground active:scale-[0.96]"
               >
                 <Maximize2 className="size-4" aria-hidden="true" />
               </button>
@@ -448,7 +448,7 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
         </div>
       </div>
 
-      <TabsContent value="preview" className="rounded-xl">
+      <TabsContent value="preview" className="rounded-lg">
         <PreviewStage className={cn(fixedHeight && "h-[38rem]")}>
           <div className={cn(fixedHeight ? "absolute inset-0" : "relative")}>
             <StageContent mode={mode} slug={slug} variant={variant.name} replays={replays} />
@@ -459,7 +459,7 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
         </PreviewStage>
       </TabsContent>
 
-      <TabsContent value="code" className="rounded-xl">
+      <TabsContent value="code" className="rounded-lg">
         <CodeFrame html={variant.html} lines={variant.lines} title={`${slug}-demo.tsx`} collapsible />
       </TabsContent>
 

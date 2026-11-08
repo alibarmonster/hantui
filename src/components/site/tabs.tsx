@@ -5,20 +5,20 @@ import { LayoutGroup, useReducedMotion } from "motion/react";
 import * as m from "motion/react-m";
 import { Tabs as TabsPrimitive } from "radix-ui";
 import { cn } from "@/lib/utils";
-import { spring } from "@/lib/motion";
+import { ease, spring } from "@/lib/motion";
 
 type TabsVariant = "pill" | "underline";
 
 const TabsContext = createContext<{ value: string; variant: TabsVariant; onValueChange: (value: string) => void }>({
   value: "",
-  variant: "pill",
+  variant: "underline",
   onValueChange: () => {},
 });
 
 export function Tabs({
   value,
   onValueChange,
-  variant = "pill",
+  variant = "underline",
   className,
   children,
 }: {
@@ -44,7 +44,7 @@ export function TabsList({ className, ...props }: ComponentProps<typeof TabsPrim
     <TabsPrimitive.List
       className={cn(
         "relative inline-flex items-center",
-        variant === "pill" ? "gap-0.5 rounded-[10px] bg-surface-2 p-[3px]" : "h-full gap-1",
+        variant === "pill" ? "gap-0.5 rounded-md bg-surface-2 p-[3px]" : "gap-4 border-b border-border",
         className,
       )}
       {...props}
@@ -62,7 +62,8 @@ export function TabsTrigger({
   const context = useContext(TabsContext);
   const reduceMotion = useReducedMotion();
   const active = context.value === value;
-  const transition = reduceMotion ? { duration: 0 } : spring.snappy;
+  // The underline slides between tabs on a short ease-out; everything else switches instantly.
+  const transition = reduceMotion ? { duration: 0 } : context.variant === "pill" ? spring.snappy : { duration: 0.18, ease: ease.out };
 
   return (
     <TabsPrimitive.Trigger
@@ -76,11 +77,9 @@ export function TabsTrigger({
         context.onValueChange(value);
       }}
       className={cn(
-        "focus-ring relative inline-flex cursor-pointer items-center justify-center gap-1.5 text-[13px] font-medium whitespace-nowrap transition-colors select-none",
-        context.variant === "pill"
-          ? "h-8 rounded-[7px] px-3"
-          : "h-full px-2.5 rounded-md",
-        active ? "text-foreground" : "text-foreground/65 hover:text-foreground",
+        "focus-ring relative inline-flex cursor-pointer items-center justify-center gap-1.5 font-semibold whitespace-nowrap transition-colors duration-150 select-none",
+        context.variant === "pill" ? "h-8 rounded-[7px] px-3 text-[13px]" : "h-10 rounded-sm px-1 text-[14px]",
+        context.variant === "pill" ? (active ? "text-foreground" : "text-foreground/65 hover:text-foreground") : active ? "text-link" : "text-text-secondary hover:text-foreground",
         className,
       )}
       {...props}
@@ -96,7 +95,7 @@ export function TabsTrigger({
           <m.span
             layoutId="tab-indicator"
             transition={transition}
-            className="absolute inset-x-2 -bottom-px h-[1.5px] rounded-full bg-foreground"
+            className="absolute inset-x-0 -bottom-px h-0.5 rounded-full bg-primary"
           />
         )
       ) : null}

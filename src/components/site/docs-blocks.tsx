@@ -64,8 +64,8 @@ export function PageHeader({
   return (
     <header className="mb-10">
       {eyebrow ? <div className="mb-3">{eyebrow}</div> : null}
-      <h1 className="text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-[2.125rem]">{title}</h1>
-      <p className="mt-3 max-w-2xl text-base leading-7 text-pretty text-muted-foreground sm:text-[17px]">{description}</p>
+      <h1 className="font-display text-[clamp(2.25rem,4vw,3rem)] leading-[1.05] font-bold tracking-[-0.02em] text-balance text-foreground">{title}</h1>
+      <p className="mt-4 max-w-[68ch] text-[16px] leading-[1.6] text-pretty text-text-secondary sm:text-[17px]">{description}</p>
       {children}
     </header>
   );
@@ -81,14 +81,14 @@ export function PropsTable({ groups }: { groups: PropsGroup[] }) {
               {group.name.replace(/Props$/, "")}
             </h3>
           ) : null}
-          <div tabIndex={0} role="region" aria-label={`${group.name} props`} className="focus-ring overflow-x-auto rounded-xl border border-border">
+          <div tabIndex={0} role="region" aria-label={`${group.name} props`} className="focus-ring overflow-x-auto rounded-lg border border-border">
             <table className="w-full min-w-[640px] border-collapse text-left text-sm">
-              <thead className="bg-surface text-xs text-muted-foreground">
+              <thead className="bg-surface text-[11px] leading-[1.3] font-semibold tracking-[0.06em] text-muted-foreground uppercase">
                 <tr>
-                  <th scope="col" className="w-[22%] px-4 py-2.5 font-medium">Prop</th>
-                  <th scope="col" className="w-[30%] px-4 py-2.5 font-medium">Type</th>
-                  <th scope="col" className="w-[14%] px-4 py-2.5 font-medium">Default</th>
-                  <th scope="col" className="px-4 py-2.5 font-medium">Description</th>
+                  <th scope="col" className="w-[22%] px-4 py-3">Prop</th>
+                  <th scope="col" className="w-[30%] px-4 py-3">Type</th>
+                  <th scope="col" className="w-[14%] px-4 py-3">Default</th>
+                  <th scope="col" className="px-4 py-3">Description</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-border border-t border-border">
@@ -116,7 +116,7 @@ export function PropsTable({ groups }: { groups: PropsGroup[] }) {
                         </span>
                       )}
                     </td>
-                    <td className="px-4 py-3 leading-6 text-muted-foreground">{prop.description}</td>
+                    <td className="px-4 py-3 leading-6 text-text-secondary">{prop.description}</td>
                   </tr>
                 ))}
               </tbody>

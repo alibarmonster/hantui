@@ -1,7 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { ChevronRight } from "lucide-react";
 import { CodeBlock, InstallTabs } from "@/components/site/code-block";
 import { ComponentPreview } from "@/components/site/component-preview";
 import { Callout, PageHeader, Pager, PropsTable, SectionHeading, Step, Steps } from "@/components/site/docs-blocks";
@@ -89,26 +88,23 @@ export default async function ComponentPage({ params }: Params) {
 
   return (
     <DocsPage toc={<TableOfContents items={toc} />}>
-      <nav aria-label="Breadcrumb" className="mb-5 flex items-center gap-1.5 text-[13px] text-muted-foreground">
-        <Link href="/components" className="focus-ring rounded-sm hover:text-foreground">
-          Components
-        </Link>
-        <ChevronRight className="size-3.5" aria-hidden="true" />
-        <Link href={`/components?category=${category.id}`} className="focus-ring rounded-sm hover:text-foreground">
-          {category.name}
-        </Link>
-      </nav>
-
       <PageHeader
         title={entry.name}
         description={entry.description}
         eyebrow={
-          <span className="flex items-center gap-2">
-            <span className="inline-flex h-6 items-center rounded-full border border-border bg-surface px-2.5 text-xs font-medium text-muted-foreground">
+          <p className="flex flex-wrap items-center gap-x-2 gap-y-1 text-[14px] text-muted-foreground">
+            <Link href={`/components?category=${category.id}`} className="focus-ring rounded-sm text-link hover:underline hover:underline-offset-4">
               {category.name}
-            </span>
-            {entry.isNew ? <NewBadge /> : null}
-          </span>
+            </Link>
+            <span aria-hidden="true">·</span>
+            <span className="font-mono text-[12px] tabular-nums">v{entry.version}</span>
+            {entry.isNew ? (
+              <>
+                <span aria-hidden="true">·</span>
+                <NewBadge />
+              </>
+            ) : null}
+          </p>
         }
       />
 

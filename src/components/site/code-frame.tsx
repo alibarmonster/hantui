@@ -33,7 +33,7 @@ export function CodeFrame({
   return (
     <div
       ref={frameRef}
-      className={cn("code-block relative overflow-hidden rounded-xl border border-border bg-background", className)}
+      className={cn("code-block relative overflow-hidden rounded-lg border border-border bg-code", className)}
     >
       {title ? (
         <div className="flex h-11 items-center justify-between gap-3 border-b border-border bg-surface pr-1.5 pl-4">
@@ -55,7 +55,7 @@ export function CodeFrame({
       <div className={cn("relative", collapsed && "max-h-[22rem] overflow-hidden", !title && "[&_pre]:pr-14")}>
         <div dangerouslySetInnerHTML={{ __html: html }} />
         {collapsed ? (
-          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-background via-background/80 to-transparent" />
+          <div className="pointer-events-none absolute inset-x-0 bottom-0 h-28 bg-gradient-to-t from-code via-code/80 to-transparent" />
         ) : null}
       </div>
 
