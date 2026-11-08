@@ -16,6 +16,7 @@ const LIB_FILES: Record<string, string> = {
   "@/lib/random": "src/lib/random.ts",
   "@/lib/webgl/use-shader-canvas": "src/lib/webgl/use-shader-canvas.ts",
   "@/lib/webgl/noise.glsl": "src/lib/webgl/noise.glsl.ts",
+  "@/lib/webgl/ping-pong": "src/lib/webgl/ping-pong.ts",
   "@/lib/web3/format": "src/lib/web3/format.ts",
   "@/lib/web3/types": "src/lib/web3/types.ts",
   "@/lib/web3/icons": "src/lib/web3/icons.tsx",

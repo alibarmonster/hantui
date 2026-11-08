@@ -229,4 +229,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "dot-burst-feature-tabs": () => import("@/components/ui/dot-burst-feature-tabs/docs"),
   "foil-ticket-reel": () => import("@/components/ui/foil-ticket-reel/docs"),
   "coin-crew-hero": () => import("@/components/ui/coin-crew-hero/docs"),
+  "ink-bloom-footer": () => import("@/components/ui/ink-bloom-footer/docs"),
 };
