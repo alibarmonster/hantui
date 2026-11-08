@@ -35,6 +35,7 @@ export const releases: Release[] = [
           "Crumple Notes: paper notes that crumple into WebGL paper balls and unfold again, keeping faint creases.",
           "Merge Filter Chips: filter chips that melt into a results pill through a gooey neck and pinch back out, while the count rolls.",
           "Misprint Text: a paragraph that prints like a misregistered press, with shattering words, peeling stickers, plate offsets and band tears, then reprints on demand.",
+          "Dot Burst Feature Tabs: an autoplaying feature list beside a color stage where dot clusters burst and regrow and a product card blurs from one feature to the next.",
         ],
       },
       {

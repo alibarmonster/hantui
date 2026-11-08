@@ -227,4 +227,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "crumple-notes": () => import("@/components/ui/crumple-notes/demo"),
   "merge-filter-chips": () => import("@/components/ui/merge-filter-chips/demo"),
   "misprint-text": () => import("@/components/ui/misprint-text/demo"),
+  "dot-burst-feature-tabs": () => import("@/components/ui/dot-burst-feature-tabs/demo"),
 };

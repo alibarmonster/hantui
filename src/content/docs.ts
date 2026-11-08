@@ -226,4 +226,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "crumple-notes": () => import("@/components/ui/crumple-notes/docs"),
   "merge-filter-chips": () => import("@/components/ui/merge-filter-chips/docs"),
   "misprint-text": () => import("@/components/ui/misprint-text/docs"),
+  "dot-burst-feature-tabs": () => import("@/components/ui/dot-burst-feature-tabs/docs"),
 };
