@@ -10,7 +10,7 @@ function Signup() {
   const [done, setDone] = useState(false);
   return (
     <div className={page}>
-      <p className="text-[11px] tracking-[0.2em] text-[#8a8274] uppercase">Colophon</p>
+      <p className="text-[11px] tracking-[0.2em] text-[#746d60] uppercase">Colophon</p>
       <p className="mt-3">Want the next volume when it is printed?</p>
       {done ? (
         <p role="status" className="mt-4 font-sans text-[13px] font-medium text-[#2f6b3a]">
@@ -33,24 +33,24 @@ function Signup() {
           </button>
         </form>
       )}
-      <p className="mt-auto text-center text-[11px] text-[#8a8274]">6</p>
+      <p className="mt-auto text-center text-[11px] text-[#746d60]">6</p>
     </div>
   );
 }
 
 const pages = [
   <div key="1" className={`${page} items-center justify-center text-center`}>
-    <p className="text-[11px] tracking-[0.25em] text-[#8a8274] uppercase">A field guide</p>
+    <p className="text-[11px] tracking-[0.25em] text-[#746d60] uppercase">A field guide</p>
     <p className="mt-3 text-2xl leading-8 font-semibold">Pages That Stay Alive</p>
-    <p className="mt-3 text-[12px] text-[#8a8274]">Select any line. Follow any link.</p>
+    <p className="mt-3 text-[12px] text-[#746d60]">Select any line. Follow any link.</p>
   </div>,
   <div key="2" className={page}>
-    <p className="text-[11px] tracking-[0.2em] text-[#8a8274] uppercase">I · Paper</p>
+    <p className="text-[11px] tracking-[0.2em] text-[#746d60] uppercase">I · Paper</p>
     <p className="mt-3">Every page in this book is ordinary HTML. The canvas only borrows its pixels to bend them, so the words remain words: you can select this sentence and copy it.</p>
-    <p className="mt-auto text-center text-[11px] text-[#8a8274]">2</p>
+    <p className="mt-auto text-center text-[11px] text-[#746d60]">2</p>
   </div>,
   <div key="3" className={page}>
-    <p className="text-[11px] tracking-[0.2em] text-[#8a8274] uppercase">II · Ink</p>
+    <p className="text-[11px] tracking-[0.2em] text-[#746d60] uppercase">II · Ink</p>
     <p className="mt-3">
       Links work too. Read the{" "}
       <a href="https://github.com/WICG/html-in-canvas" target="_blank" rel="noreferrer" className="underline underline-offset-2">
@@ -58,17 +58,17 @@ const pages = [
       </a>{" "}
       to see how a page can be drawn, warped and still be clicked.
     </p>
-    <p className="mt-auto text-center text-[11px] text-[#8a8274]">3</p>
+    <p className="mt-auto text-center text-[11px] text-[#746d60]">3</p>
   </div>,
   <div key="4" className={page}>
     <div className="h-36 rounded-md bg-[radial-gradient(circle_at_30%_30%,#fde68a,#f59e0b_40%,#7c2d12)]" />
-    <p className="mt-3 text-[12px] text-[#8a8274] italic">Plate 1. A sun, painted with CSS.</p>
-    <p className="mt-auto text-center text-[11px] text-[#8a8274]">4</p>
+    <p className="mt-3 text-[12px] text-[#746d60] italic">Plate 1. A sun, painted with CSS.</p>
+    <p className="mt-auto text-center text-[11px] text-[#746d60]">4</p>
   </div>,
   <div key="5" className={page}>
-    <p className="text-[11px] tracking-[0.2em] text-[#8a8274] uppercase">III · Binding</p>
+    <p className="text-[11px] tracking-[0.2em] text-[#746d60] uppercase">III · Binding</p>
     <p className="mt-3">Turn with the arrow keys, the buttons below, or by dragging a page by its outer edge. The spine darkens where the paper curves in.</p>
-    <p className="mt-auto text-center text-[11px] text-[#8a8274]">5</p>
+    <p className="mt-auto text-center text-[11px] text-[#746d60]">5</p>
   </div>,
   <Signup key="6" />,
 ];
