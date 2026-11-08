@@ -31,7 +31,7 @@ function ReleaseComponents({ version }: { version: string }) {
           {shipped === added.length ? added.length : `${shipped} of ${added.length} shipped`}
         </span>
       </p>
-      <dl className="divide-y divide-border rounded-xl border border-border">
+      <dl className="divide-y divide-border rounded-lg border border-border">
         {groups.map(({ category, items }) => (
           <div key={category.id} className="grid gap-1.5 px-4 py-3 sm:grid-cols-[13rem_minmax(0,1fr)] sm:gap-4">
             <dt className="text-[13px] font-medium text-foreground">{category.name}</dt>
@@ -67,29 +67,25 @@ function ReleaseEntry({ release }: { release: Release }) {
   const id = releaseAnchor(release.version);
   const isCurrent = release.version === siteConfig.version;
   return (
-    <section aria-labelledby={id} className="border-t border-border pt-2 first:border-t-0 first:pt-0">
-      <SectionHeading id={id} className="mt-10 mb-1 flex items-center gap-3 text-2xl">
+    // One column, a release per stop on the timeline rule.
+    <section aria-labelledby={id} className="relative border-l border-border pb-4 pl-6 sm:pl-8">
+      <span aria-hidden="true" className={`absolute top-[2.85rem] -left-[5px] size-[9px] rounded-full ${isCurrent ? "bg-primary" : "bg-border"}`} />
+      <SectionHeading id={id} className="mt-10 mb-1 flex items-center gap-3 font-display text-[28px] leading-[1.2] font-bold tracking-[-0.01em]">
         v{release.version}
-      </SectionHeading>
-      <p className="flex flex-wrap items-center gap-2 text-[13px] text-muted-foreground">
-        {release.date ? (
-          <time dateTime={release.date}>{dateFormat.format(new Date(`${release.date}T00:00:00Z`))}</time>
-        ) : (
-          <span className="inline-flex items-center rounded-full border border-border bg-surface px-2 py-0.5 text-xs font-medium text-foreground">
-            In progress
-          </span>
-        )}
         {isCurrent ? <NewBadge /> : null}
+      </SectionHeading>
+      <p className="font-mono text-[13px] text-muted-foreground tabular-nums">
+        {release.date ? <time dateTime={release.date}>{dateFormat.format(new Date(`${release.date}T00:00:00Z`))}</time> : "In progress"}
       </p>
-      <h3 className="mt-4 text-base font-semibold text-foreground">{release.title}</h3>
-      <p className="mt-1.5 max-w-2xl text-[15px] leading-7 text-muted-foreground">{release.summary}</p>
+      <h3 className="mt-4 text-[17px] font-semibold text-foreground">{release.title}</h3>
+      <p className="mt-1.5 max-w-[68ch] text-[16px] leading-[1.6] text-text-secondary">{release.summary}</p>
 
       <ReleaseComponents version={release.version} />
 
       {release.changes.map((group) => (
         <div key={group.type} className="mt-6">
-          <h4 className="text-sm font-medium text-foreground">{group.type}</h4>
-          <ul className="mt-2 list-disc space-y-1.5 pl-5 text-[15px] leading-7 text-muted-foreground marker:text-border">
+          <h4 className="text-[11px] leading-[1.3] font-semibold tracking-[0.06em] text-muted-foreground uppercase">{group.type}</h4>
+          <ul className="mt-2 max-w-[72ch] list-disc space-y-1.5 pl-5 text-[16px] leading-[1.6] text-text-secondary marker:text-muted-foreground">
             {group.items.map((item) => (
               <li key={item}>{item}</li>
             ))}
