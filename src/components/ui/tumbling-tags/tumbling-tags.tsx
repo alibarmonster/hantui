@@ -32,8 +32,8 @@ export interface TumblingTagsProps {
 const TONES: Record<Exclude<TagTone, object>, { background: string; color: string }> = {
   ink: { background: "#1f2b27", color: "#f4f6f4" },
   mint: { background: "#c9e6dc", color: "#1f2b27" },
-  sand: { background: "#efd5b8", color: "#b44a14" },
-  ember: { background: "#cc5216", color: "#fff7ef" },
+  sand: { background: "#efd5b8", color: "#9a3d0f" },
+  ember: { background: "#b8480f", color: "#fff7ef" },
 };
 
 const hash = (n: number) => {

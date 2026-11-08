@@ -19,6 +19,6 @@ export const docs: ComponentDocs = {
   notes: [
     "The pile is laid out in rows of 2, 1, 2… blocks from the floor up; higher rows tilt more. Each block falls from above with its own spin and lands on a bouncy spring, floor first.",
     "Blocks drop when the group scrolls into view; change `replayKey` to drop them again.",
-    "Tones: ink, mint, sand and ember, or pass `{ background, color }`.",
+    "Tones: ink, mint, sand and ember, or pass `{ background, color }`. Each pair passes WCAG AA. They are fixed colors that don't follow the theme, made for a light surface, so on a dark page put the pile on a light panel, as the demo does.",
   ],
 };
