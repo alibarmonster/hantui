@@ -13,6 +13,9 @@ import {
 const LIB_FILES: Record<string, string> = {
   "@/lib/motion": "src/lib/motion.ts",
   "@/lib/clipboard": "src/lib/clipboard.ts",
+  "@/lib/pricing/types": "src/lib/pricing/types.ts",
+  "@/lib/pricing/format": "src/lib/pricing/format.ts",
+  "@/lib/pricing/use-billing": "src/lib/pricing/use-billing.ts",
   "@/lib/color": "src/lib/color.ts",
   "@/lib/webgl/use-shader-canvas": "src/lib/webgl/use-shader-canvas.ts",
   "@/lib/webgl/noise.glsl": "src/lib/webgl/noise.glsl.ts",
