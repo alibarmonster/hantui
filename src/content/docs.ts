@@ -12,6 +12,7 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "like-button": () => import("@/components/ui/like-button/docs"),
   "tactile-button": () => import("@/components/ui/tactile-button/docs"),
   "action-swap-button": () => import("@/components/ui/action-swap-button/docs"),
+  "invite-code-reveal": () => import("@/components/ui/invite-code-reveal/docs"),
   "money-input": () => import("@/components/ui/money-input/docs"),
   "otp-input": () => import("@/components/ui/otp-input/docs"),
   "floating-label-input": () => import("@/components/ui/floating-label-input/docs"),

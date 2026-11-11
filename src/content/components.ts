@@ -141,6 +141,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["copy-button", "Copy Button", "Copy icon cross-fades into a check with a soft blur.", "ready"],
     ["tactile-button", "Tactile 3D Button", "A keycap with real depth that sinks when pressed.", "ready"],
     ["action-swap-button", "Action Swap Button", "Label and icon swap with blur and a vertical slide.", "ready"],
+    ["invite-code-reveal", "Invite Code Reveal", "A ready pill that morphs into a labeled invite code with a copy button.", "ready", V040],
   ],
   inputs: [
     ["money-input", "Money Input", "Currency prefix, live separators and rolling digits (IDR/USD).", "ready"],

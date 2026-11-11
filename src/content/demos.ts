@@ -13,6 +13,7 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "like-button": () => import("@/components/ui/like-button/demo"),
   "tactile-button": () => import("@/components/ui/tactile-button/demo"),
   "action-swap-button": () => import("@/components/ui/action-swap-button/demo"),
+  "invite-code-reveal": () => import("@/components/ui/invite-code-reveal/demo"),
   "money-input": () => import("@/components/ui/money-input/demo"),
   "otp-input": () => import("@/components/ui/otp-input/demo"),
   "floating-label-input": () => import("@/components/ui/floating-label-input/demo"),
