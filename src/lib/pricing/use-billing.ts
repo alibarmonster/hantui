@@ -28,7 +28,13 @@ export function planAmount(plan: Plan, billing: Billing): number | null {
   const amount = plan.price?.amount;
   if (amount === undefined) return null;
   if (typeof amount === "number") return amount;
+  if (billing === "once") return amount.once ?? amount.monthly;
   return billing === "yearly" ? amount.yearly : amount.monthly;
+}
+
+/** True when a plan charges a different amount per billing period, so a billing toggle changes its price. */
+export function hasBillingPrices(plan: Plan) {
+  return typeof plan.price?.amount === "object";
 }
 
 /**

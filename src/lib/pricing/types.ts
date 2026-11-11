@@ -4,8 +4,8 @@ import type { ReactNode } from "react";
 export type Billing = "monthly" | "yearly" | "once";
 
 export interface Price {
-  /** One amount in major units (199 = $199), or one per billing period (yearly is the per-month equivalent). */
-  amount: number | { monthly: number; yearly: number };
+  /** One amount in major units (199 = $199), or one per billing period (yearly is the per-month equivalent; `once` falls back to monthly). */
+  amount: number | { monthly: number; yearly: number; once?: number };
   /** ISO 4217 currency code, e.g. "USD". */
   currency: string;
   /** Text after the price, e.g. "per user / month" or "One time". */

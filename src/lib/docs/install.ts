@@ -16,6 +16,7 @@ const LIB_FILES: Record<string, string> = {
   "@/lib/pricing/types": "src/lib/pricing/types.ts",
   "@/lib/pricing/format": "src/lib/pricing/format.ts",
   "@/lib/pricing/use-billing": "src/lib/pricing/use-billing.ts",
+  "@/lib/pricing/billing-toggle": "src/lib/pricing/billing-toggle.tsx",
   "@/lib/pixel-art/sprites": "src/lib/pixel-art/sprites.ts",
   "@/lib/color": "src/lib/color.ts",
   "@/lib/webgl/use-shader-canvas": "src/lib/webgl/use-shader-canvas.ts",
