@@ -155,6 +155,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["phone-input", "Phone Input", "Country selector with live number formatting.", "ready"],
     ["file-dropzone", "File Upload Dropzone", "Drag-over morph, progress rings and per-file states.", "ready"],
     ["stretch-pill-slider", "Stretch Pill Slider", "A dark pill stretches across the track as you drag and carries its own rolling label.", "ready", V040],
+    ["notch-datetime-picker", "Notch DateTime Picker", "Two dark pills joined by a stem to a popover that morphs between a calendar and time slots.", "ready", V040],
   ],
   toggles: [
     ["spring-switch", "Spring Switch", "A thumb with squash, stretch and a double bounce.", "ready"],

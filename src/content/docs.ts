@@ -229,4 +229,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "multiplayer-canvas-card": () => import("@/components/ui/multiplayer-canvas-card/docs"),
   "crumple-notes": () => import("@/components/ui/crumple-notes/docs"),
   "blueprint-plan-duo": () => import("@/components/ui/blueprint-plan-duo/docs"),
+  "notch-datetime-picker": () => import("@/components/ui/notch-datetime-picker/docs"),
 };
