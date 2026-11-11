@@ -270,6 +270,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["voice-orb", "Voice Orb", "A blob that reacts to audio level.", "ready"],
     ["agent-steps", "Agent Progress Steps", "Steps move from loading to done with drawn checks.", "ready"],
     ["swipe-row", "Swipeable List Row", "Swipe to reveal archive and delete actions.", "ready"],
+    ["voice-note-pill", "Voice Note Pill", "A mic button that grows into a recorder with a live waveform, review, playback and send.", "ready", V040],
   ],
   "web3-wallet": [
     ["connect-wallet-button", "Connect Wallet Button", "Opens a wallet list, spins while connecting, then morphs into an address pill.", "ready", V020],

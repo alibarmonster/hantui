@@ -231,4 +231,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "crumple-notes": () => import("@/components/ui/crumple-notes/demo"),
   "blueprint-plan-duo": () => import("@/components/ui/blueprint-plan-duo/demo"),
   "notch-datetime-picker": () => import("@/components/ui/notch-datetime-picker/demo"),
+  "voice-note-pill": () => import("@/components/ui/voice-note-pill/demo"),
 };

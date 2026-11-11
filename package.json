@@ -2,7 +2,7 @@
   "name": "alibar-ui",
   "version": "0.4.0",
   "private": true,
-  "description": "alibar/ui: 228 animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
+  "description": "alibar/ui: 229 animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
   "keywords": [
     "react",
     "nextjs",
