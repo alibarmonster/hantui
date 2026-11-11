@@ -235,4 +235,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "step-demo-showcase": () => import("@/components/ui/step-demo-showcase/demo"),
   "dot-screen-footer": () => import("@/components/ui/dot-screen-footer/demo"),
   "trip-card-rolodex": () => import("@/components/ui/trip-card-rolodex/demo"),
+  "pixel-build-progress": () => import("@/components/ui/pixel-build-progress/demo"),
 };

@@ -234,4 +234,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "step-demo-showcase": () => import("@/components/ui/step-demo-showcase/docs"),
   "dot-screen-footer": () => import("@/components/ui/dot-screen-footer/docs"),
   "trip-card-rolodex": () => import("@/components/ui/trip-card-rolodex/docs"),
+  "pixel-build-progress": () => import("@/components/ui/pixel-build-progress/docs"),
 };
