@@ -309,6 +309,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["tumbling-tags", "Tumbling Tags", "Labelled blocks drop in, tumble and settle into a tilted pile.", "ready", V030],
     ["layered-plan-card", "Layered Plan Card", "A white plan card resting on a colored base that peeks out as the call to action.", "ready", V040],
     ["glass-tier-pricing", "Glass Tier Pricing", "Frosted pricing tiers with a spotlight that glides to the one you hover.", "ready", V040],
+    ["blueprint-plan-duo", "Blueprint Plan Duo", "Two plans in a mono blueprint style with crop marks, wireframe boxes and scramble-in text.", "ready", V040],
   ],
   shaders: [
     ["cloud-shader", "Cloud Shader", "Soft procedural clouds drifting across a sky gradient.", "ready", V020],

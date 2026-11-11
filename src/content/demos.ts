@@ -229,4 +229,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "flow-line-chat-card": () => import("@/components/ui/flow-line-chat-card/demo"),
   "multiplayer-canvas-card": () => import("@/components/ui/multiplayer-canvas-card/demo"),
   "crumple-notes": () => import("@/components/ui/crumple-notes/demo"),
+  "blueprint-plan-duo": () => import("@/components/ui/blueprint-plan-duo/demo"),
 };
