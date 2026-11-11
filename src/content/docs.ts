@@ -232,4 +232,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "notch-datetime-picker": () => import("@/components/ui/notch-datetime-picker/docs"),
   "voice-note-pill": () => import("@/components/ui/voice-note-pill/docs"),
   "step-demo-showcase": () => import("@/components/ui/step-demo-showcase/docs"),
+  "dot-screen-footer": () => import("@/components/ui/dot-screen-footer/docs"),
 };

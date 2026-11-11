@@ -233,4 +233,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "notch-datetime-picker": () => import("@/components/ui/notch-datetime-picker/demo"),
   "voice-note-pill": () => import("@/components/ui/voice-note-pill/demo"),
   "step-demo-showcase": () => import("@/components/ui/step-demo-showcase/demo"),
+  "dot-screen-footer": () => import("@/components/ui/dot-screen-footer/demo"),
 };

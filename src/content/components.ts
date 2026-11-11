@@ -313,6 +313,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["glass-tier-pricing", "Glass Tier Pricing", "Frosted pricing tiers with a spotlight that glides to the one you hover.", "ready", V040],
     ["blueprint-plan-duo", "Blueprint Plan Duo", "Two plans in a mono blueprint style with crop marks, wireframe boxes and scramble-in text.", "ready", V040],
     ["step-demo-showcase", "Step Demo Showcase", "A step list that drives small live product scenes in a square card beside it.", "ready", V040],
+    ["dot-screen-footer", "Dot Screen Footer", "A footer whose giant wordmark is a halftone screen that parts around the pointer.", "ready", V040],
   ],
   shaders: [
     ["cloud-shader", "Cloud Shader", "Soft procedural clouds drifting across a sky gradient.", "ready", V020],
