@@ -12,6 +12,7 @@ import {
 /** Shared lib files that ship inside each registry item that imports them. */
 const LIB_FILES: Record<string, string> = {
   "@/lib/motion": "src/lib/motion.ts",
+  "@/lib/clipboard": "src/lib/clipboard.ts",
   "@/lib/color": "src/lib/color.ts",
   "@/lib/webgl/use-shader-canvas": "src/lib/webgl/use-shader-canvas.ts",
   "@/lib/webgl/noise.glsl": "src/lib/webgl/noise.glsl.ts",
