@@ -22,6 +22,7 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "range-slider": () => import("@/components/ui/range-slider/docs"),
   "phone-input": () => import("@/components/ui/phone-input/docs"),
   "file-dropzone": () => import("@/components/ui/file-dropzone/docs"),
+  "stretch-pill-slider": () => import("@/components/ui/stretch-pill-slider/docs"),
   "spring-switch": () => import("@/components/ui/spring-switch/docs"),
   "animated-checkbox": () => import("@/components/ui/animated-checkbox/docs"),
   "radio-card-group": () => import("@/components/ui/radio-card-group/docs"),

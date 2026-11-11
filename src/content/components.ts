@@ -153,6 +153,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["range-slider", "Range Slider", "Tick dots and a thumb that bounces as it snaps to steps.", "ready"],
     ["phone-input", "Phone Input", "Country selector with live number formatting.", "ready"],
     ["file-dropzone", "File Upload Dropzone", "Drag-over morph, progress rings and per-file states.", "ready"],
+    ["stretch-pill-slider", "Stretch Pill Slider", "A dark pill stretches across the track as you drag and carries its own rolling label.", "ready", V040],
   ],
   toggles: [
     ["spring-switch", "Spring Switch", "A thumb with squash, stretch and a double bounce.", "ready"],

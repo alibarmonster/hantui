@@ -23,6 +23,7 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "range-slider": () => import("@/components/ui/range-slider/demo"),
   "phone-input": () => import("@/components/ui/phone-input/demo"),
   "file-dropzone": () => import("@/components/ui/file-dropzone/demo"),
+  "stretch-pill-slider": () => import("@/components/ui/stretch-pill-slider/demo"),
   "spring-switch": () => import("@/components/ui/spring-switch/demo"),
   "animated-checkbox": () => import("@/components/ui/animated-checkbox/demo"),
   "radio-card-group": () => import("@/components/ui/radio-card-group/demo"),
