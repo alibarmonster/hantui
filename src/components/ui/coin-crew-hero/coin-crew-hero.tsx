@@ -236,7 +236,7 @@ export function CoinCrewHero({
     const measure = () => {
       width = card.clientWidth;
       height = card.clientHeight;
-      base = Math.max(84, Math.min(200, Math.min(width * 0.235, height * 0.42)));
+      base = Math.max(64, Math.min(200, Math.min(width * 0.235, height * 0.42)));
       card.style.setProperty("--coin", `${base}px`);
     };
 
@@ -507,10 +507,11 @@ export function CoinCrewHero({
   return (
     <section
       ref={cardRef}
-      className={cn("relative isolate flex min-h-[26rem] w-full touch-pan-y flex-col overflow-hidden rounded-[28px] bg-surface-2 p-8 select-none sm:p-10", className)}
+      className={cn("@container relative isolate flex min-h-[26rem] w-full touch-pan-y flex-col overflow-hidden rounded-[28px] bg-surface-2 p-8 select-none sm:p-10", className)}
       {...props}
     >
-      <div className="relative z-[60] flex max-w-[22rem] flex-col gap-4">
+      {/* On a narrow card the copy wraps before the coin line instead of running over the coins. */}
+      <div className="relative z-[60] flex max-w-[min(22rem,60cqw)] flex-col gap-4">
         <h2 className="text-[clamp(2rem,5vw,3rem)] leading-[1.02] font-semibold tracking-[-0.025em] text-balance text-foreground">{title}</h2>
         <p className="text-[15px] leading-relaxed text-text-secondary">{description}</p>
         {cta.href !== undefined ? (
