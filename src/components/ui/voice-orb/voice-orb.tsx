@@ -105,7 +105,8 @@ export function VoiceOrb({
       loudness.set(s === "idle" ? 0 : lv);
       const time = t / 1000;
       const base = reduce ? 0 : s === "idle" ? 0.025 : s === "thinking" ? 0.06 : 0.035;
-      const amp = base + (s === "listening" || s === "speaking" ? lv * 0.16 : 0);
+      // Under reduced motion the outline holds still; the glow still follows the voice.
+      const amp = reduce ? 0 : base + (s === "listening" || s === "speaking" ? lv * 0.16 : 0);
       const speed = s === "thinking" ? 1.6 : s === "idle" ? 0.6 : 1.1;
       const points = phases.map(([a, b, c], i): [number, number] => {
         const angle = (i / POINTS) * Math.PI * 2;
@@ -152,7 +153,7 @@ export function VoiceOrb({
         height={size}
         aria-hidden="true"
         className="relative overflow-visible"
-        style={{ scale }}
+        style={{ scale: reduceMotion ? 1 : scale }}
         // While thinking, the gradient slowly turns.
         animate={state === "thinking" && !reduceMotion ? { rotate: 360 } : { rotate: 0 }}
         transition={state === "thinking" && !reduceMotion ? { duration: 6, repeat: Infinity, ease: "linear" } : { duration: 0.8 }}
