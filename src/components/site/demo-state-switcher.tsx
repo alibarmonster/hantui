@@ -43,7 +43,7 @@ export function DemoStateSwitcher<T extends string>({
               onClick={() => onChange(option.value)}
               className={cn(
                 "relative h-7 cursor-pointer rounded-full px-2.5 text-xs font-medium capitalize outline-none transition-colors focus-visible:ring-2 focus-visible:ring-ring",
-                active ? "text-foreground" : "text-foreground/60 hover:text-foreground",
+                active ? "text-foreground" : "text-muted-foreground hover:text-foreground",
               )}
             >
               {active ? (
