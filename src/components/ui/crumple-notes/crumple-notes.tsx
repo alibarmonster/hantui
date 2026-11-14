@@ -666,7 +666,7 @@ export function CrumpleNotes({ notes = SAMPLE, activeId, defaultActiveId, onActi
       <p className="sr-only" aria-live="polite">
         {current ? `Showing note ${activeIndex + 1} of ${notes.length}: ${current.title ?? ""}` : ""}
       </p>
-      <p className="pointer-events-none absolute right-4 bottom-3 font-mono text-[11px] text-black/45">Click a paper ball to unfold it · throw the note to crumple it</p>
+      <p className="pointer-events-none absolute right-4 bottom-3 font-mono text-[11px] text-black/60">Click a paper ball to unfold it · throw the note to crumple it</p>
     </section>
   );
 }

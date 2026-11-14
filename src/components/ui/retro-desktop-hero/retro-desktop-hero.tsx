@@ -613,7 +613,7 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
                   className={cn(
                     PIXEL_FONT,
                     "max-w-full truncate px-1 text-[12px] text-white [text-shadow:1px_1px_0_rgb(0_0_0/0.6)]",
-                    selected === cfg.id ? "bg-[var(--rd-accent)] outline-1 outline-white outline-dotted" : "bg-black/45",
+                    selected === cfg.id ? "bg-[var(--rd-accent)] outline-1 outline-white outline-dotted" : "bg-black/60",
                   )}
                 >
                   {cfg.label}
