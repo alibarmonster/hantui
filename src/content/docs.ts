@@ -237,4 +237,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "pixel-build-progress": () => import("@/components/ui/pixel-build-progress/docs"),
   "burst-pack-opening": () => import("@/components/ui/burst-pack-opening/docs"),
   "pass-invite-hero": () => import("@/components/ui/pass-invite-hero/docs"),
+  "ink-walker-card": () => import("@/components/ui/ink-walker-card/docs"),
 };

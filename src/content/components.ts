@@ -347,6 +347,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["border-beam", "Border Beam", "A light segment travels around any card's border.", "ready", V020],
     ["node-network", "Node Network", "Floating connected nodes; lines highlight on hover.", "ready", V020],
     ["animated-grid-pattern", "Animated Grid Pattern", "Grid squares light up in a subtle random pattern.", "ready", V020],
+    ["ink-walker-card", "Ink Walker Card", "A line-art figure walks across a strip of paper, and you can poke it.", "ready", V040],
   ],
   galleries: [
     ["sleeve-rail", "Sleeve Rail", "A fanned rail of album sleeves; the focused record slides out and spins.", "ready", V030],
