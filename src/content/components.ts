@@ -247,6 +247,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["bento-grid", "Bento Grid", "Tiles lift on hover and animate their contents.", "ready"],
     ["sortable-list", "Sortable List", "Drag to reorder with layout animation.", "ready"],
     ["trip-card-rolodex", "Trip Card Rolodex", "A stack of trip cards that rolls one expanded card between collapsed one-line rows.", "ready", V040],
+    ["burst-pack-opening", "Burst Pack Opening", "A foil card pack you tear open in a burst of pixel rays, cards and confetti.", "ready", V040],
   ],
   media: [
     ["draggable-marquee", "Draggable Marquee", "An infinite loop you can pause and scrub.", "ready"],
