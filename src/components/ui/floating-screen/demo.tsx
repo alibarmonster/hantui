@@ -1,6 +1,6 @@
 "use client";
 
-import { useState } from "react";
+import { useEffect, useRef, useState, type RefObject } from "react";
 import { HtmlCanvasDemo } from "@/components/site/html-canvas-demo";
 import { FloatingScreen } from "@/components/ui/floating-screen/floating-screen";
 
@@ -46,15 +46,32 @@ function Dashboard() {
   );
 }
 
+/** The laptop needs about 32rem; below that (a phone), the demo shows the phone instead of cropping it. */
+function useFitsLaptop(ref: RefObject<HTMLElement | null>) {
+  const [fits, setFits] = useState(true);
+  useEffect(() => {
+    const el = ref.current;
+    if (!el) return;
+    const observer = new ResizeObserver(([entry]) => setFits(entry.contentRect.width >= 512));
+    observer.observe(el);
+    return () => observer.disconnect();
+  }, [ref]);
+  return fits;
+}
+
 export function Laptop() {
+  const ref = useRef<HTMLDivElement>(null);
+  const fits = useFitsLaptop(ref);
   return (
-    <HtmlCanvasDemo>
-      {({ rendering, onModeChange }) => (
-        <FloatingScreen rendering={rendering} onModeChange={onModeChange}>
-          <Dashboard />
-        </FloatingScreen>
-      )}
-    </HtmlCanvasDemo>
+    <div ref={ref} className="w-full">
+      <HtmlCanvasDemo>
+        {({ rendering, onModeChange }) => (
+          <FloatingScreen key={fits ? "laptop" : "phone"} device={fits ? "laptop" : "phone"} rendering={rendering} onModeChange={onModeChange}>
+            <Dashboard />
+          </FloatingScreen>
+        )}
+      </HtmlCanvasDemo>
+    </div>
   );
 }
 
