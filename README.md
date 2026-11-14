@@ -8,6 +8,7 @@ hantui (formerly alibar/ui) is 228 animated, accessible React components for Nex
 - **228 components** in 22 categories, each with live demos, variants, a props table and accessibility notes.
 - **Modern stack**: React 19, Next.js 16 (App Router), TypeScript (strict), Tailwind CSS v4, [Motion](https://motion.dev), [Radix UI](https://www.radix-ui.com) and [lucide-react](https://lucide.dev).
 - **Accessible by default**: full keyboard support, visible focus rings, ARIA roles, 40px touch targets and `prefers-reduced-motion` fallbacks.
+- **Follows your theme, light and dark**: components read shadcn-named CSS variables, so they take your colors and your dark mode as they are; canvases repaint when the theme switches, and the few extra tokens they need are added for you by the CLI.
 - **Smooth motion**: animates only `transform`, `opacity`, `filter` and `clip-path`, using shared duration, easing and spring tokens.
 - **No lock-in**: each component lives in one folder, with no global state, no external images and no runtime dependency on this repository.
 - **Web3-ready, safely**: wallet and DeFi components are presentational (data and callbacks in), use bigint math only and never touch a wallet themselves.
