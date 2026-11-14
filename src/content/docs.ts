@@ -236,4 +236,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "trip-card-rolodex": () => import("@/components/ui/trip-card-rolodex/docs"),
   "pixel-build-progress": () => import("@/components/ui/pixel-build-progress/docs"),
   "burst-pack-opening": () => import("@/components/ui/burst-pack-opening/docs"),
+  "pass-invite-hero": () => import("@/components/ui/pass-invite-hero/docs"),
 };

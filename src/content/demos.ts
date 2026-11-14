@@ -237,4 +237,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "trip-card-rolodex": () => import("@/components/ui/trip-card-rolodex/demo"),
   "pixel-build-progress": () => import("@/components/ui/pixel-build-progress/demo"),
   "burst-pack-opening": () => import("@/components/ui/burst-pack-opening/demo"),
+  "pass-invite-hero": () => import("@/components/ui/pass-invite-hero/demo"),
 };
