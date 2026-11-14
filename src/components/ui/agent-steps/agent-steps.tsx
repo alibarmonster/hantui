@@ -52,7 +52,7 @@ export function AgentSteps({ steps, className, "aria-label": ariaLabel = "Progre
               <p
                 className={cn(
                   "text-sm font-medium",
-                  step.status === "pending" && "text-muted-foreground/70",
+                  step.status === "pending" && "text-muted-foreground",
                   step.status === "done" && "text-foreground",
                   step.status === "error" && "text-destructive-text",
                 )}
@@ -61,13 +61,7 @@ export function AgentSteps({ steps, className, "aria-label": ariaLabel = "Progre
                 <span className="sr-only">, {SPOKEN[step.status]}</span>
               </p>
               {step.description ? (
-                <motion.div
-                  initial={false}
-                  animate={{ opacity: step.status === "pending" ? 0.6 : 1 }}
-                  className="mt-0.5 text-xs leading-5 text-muted-foreground"
-                >
-                  {step.description}
-                </motion.div>
+                <div className="mt-0.5 text-xs leading-5 text-muted-foreground">{step.description}</div>
               ) : null}
             </div>
           </li>
