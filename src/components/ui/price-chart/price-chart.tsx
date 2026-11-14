@@ -177,7 +177,7 @@ export function PriceChart({
                   onClick={() => choose(option)}
                   className={cn(
                     "relative h-8 min-w-10 cursor-pointer rounded-md px-2 font-mono text-xs font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                    selected ? "text-foreground" : "text-foreground/60 hover:text-foreground",
+                    selected ? "text-foreground" : "text-muted-foreground hover:text-foreground",
                   )}
                 >
                   {selected ? (

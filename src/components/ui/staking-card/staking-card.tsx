@@ -191,7 +191,7 @@ export function StakingCard({
               onClick={() => setMode(option)}
               className={cn(
                 "relative h-9 flex-1 cursor-pointer rounded-lg text-[13px] font-medium capitalize outline-none focus-visible:ring-2 focus-visible:ring-ring",
-                mode === option ? "text-foreground" : "text-foreground/60 hover:text-foreground",
+                mode === option ? "text-foreground" : "text-muted-foreground hover:text-foreground",
               )}
             >
               {mode === option ? (
