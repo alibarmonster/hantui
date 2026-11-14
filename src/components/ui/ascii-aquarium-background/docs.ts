@@ -20,7 +20,7 @@ const [mode, setMode] = useState<AquariumMode>("idle");
   a11y: [
     "The canvas is aria-hidden decoration. Your content stays as real DOM on top of it, so headings, inputs and buttons work as usual.",
     "Click ripples are pointer-only decoration. Clicks on links, buttons, form fields and anything inside focusRef never ripple. Add data-aquarium-ignore to opt out other elements.",
-    "With reduced motion, creatures drift at about a third of their speed, specks twinkle slowly, glints are off, and ripples and bursts are turned off.",
+    "With reduced motion, the scene holds a still frame (redrawn on resize or a mode change), and ripples and bursts are turned off.",
     "Glyphs are faint but busy. Put text that overlaps the creatures on a solid or blurred surface so it stays readable.",
   ],
   notes: [

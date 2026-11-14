@@ -244,6 +244,8 @@ export function AsciiAquariumBackground({
 
   useEffect(() => {
     modeRef.current = mode;
+    // Redraws the held frame under reduced motion (the loop is stopped there); a no-op while running.
+    api.current?.run();
   }, [mode]);
 
   useEffect(() => {
@@ -255,6 +257,7 @@ export function AsciiAquariumBackground({
     () => ({
       setMode: (next) => {
         modeRef.current = next;
+        api.current?.run();
       },
       ripple: (x, y) => api.current?.ripple(x, y),
     }),
@@ -992,7 +995,8 @@ export function AsciiAquariumBackground({
       }
       step(dt);
       render();
-      if (shouldRun()) raf = requestAnimationFrame(frame);
+      // Under reduced motion the scene holds this frame; resizes and mode changes call run() to redraw it.
+      if (shouldRun() && !reduce.matches) raf = requestAnimationFrame(frame);
       else last = 0;
     };
     const run = () => {
