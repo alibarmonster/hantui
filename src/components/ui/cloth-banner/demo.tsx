@@ -12,7 +12,7 @@ export function Default() {
         <div className="flex w-full flex-col items-center gap-3">
           <ClothBanner key={run} rendering={rendering} onModeChange={onModeChange}>
             <span className="mr-1.5 rounded-full bg-background/15 px-2 py-0.5 text-[11px] font-semibold">New</span>
-            Version 0.3.0 is out with 37 components.{" "}
+            Dark mode is here, and every component follows it.{" "}
             <a href="#" onClick={(e) => e.preventDefault()}>
               Read the changelog
             </a>
