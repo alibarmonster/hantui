@@ -309,6 +309,30 @@
   }
 }
 
+/* Tooltips (components/site/hint.tsx): only a delayed hover animates, from the trigger's side. */
+.hint {
+  transform-origin: var(--radix-tooltip-content-transform-origin);
+}
+.hint[data-state="delayed-open"] {
+  animation: hint-in 125ms var(--ease-out);
+}
+@keyframes hint-in {
+  from {
+    opacity: 0;
+    transform: scale(0.97);
+  }
+}
+@media (prefers-reduced-motion: reduce) {
+  .hint[data-state="delayed-open"] {
+    animation-name: hint-fade;
+  }
+}
+@keyframes hint-fade {
+  from {
+    opacity: 0;
+  }
+}
+
 @keyframes hero-fade-in {
   from {
     opacity: 0;

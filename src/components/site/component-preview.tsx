@@ -13,6 +13,7 @@ import { getComponent } from "@/content/components";
 import { backdrops, type Backdrop } from "./preview-backdrops";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "./tabs";
 import { usePageDark } from "./theme-switch";
+import { Hint } from "./hint";
 
 export interface PreviewVariant {
   name: string;
@@ -166,26 +167,24 @@ function StageThemeButton({ pageDark, on, onToggle }: { pageDark: boolean; on: b
   const Icon = pageDark ? Sun : Moon;
   const label = pageDark ? "Preview in light" : "Preview in dark";
   return (
-    <button type="button" onClick={onToggle} aria-pressed={on} aria-label={label} title={label} className={cn(stageButton, on && "bg-surface-2 text-foreground")}>
-      <Icon className="size-4" aria-hidden="true" />
-    </button>
+    <Hint label={label}>
+      <button type="button" onClick={onToggle} aria-pressed={on} aria-label={label} className={cn(stageButton, on && "bg-surface-2 text-foreground")}>
+        <Icon className="size-4" aria-hidden="true" />
+      </button>
+    </Hint>
   );
 }
 
 function ReplayButton({ count, onReplay }: { count: number; onReplay: () => void }) {
   const reduceMotion = useReducedMotion();
   return (
-    <button
-      type="button"
-      onClick={onReplay}
-      aria-label="Replay animation"
-      title="Replay"
-      className={stageButton}
-    >
-      <m.span animate={{ rotate: reduceMotion ? 0 : -360 * count }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="inline-flex">
-        <RotateCcw className="size-4" aria-hidden="true" />
-      </m.span>
-    </button>
+    <Hint label="Replay">
+      <button type="button" onClick={onReplay} aria-label="Replay" className={stageButton}>
+        <m.span animate={{ rotate: reduceMotion ? 0 : -360 * count }} transition={{ duration: 0.5, ease: [0.22, 1, 0.36, 1] }} className="inline-flex">
+          <RotateCcw className="size-4" aria-hidden="true" />
+        </m.span>
+      </button>
+    </Hint>
   );
 }
 
@@ -210,16 +209,16 @@ function ModeToggle({ modes, value, onChange }: { modes: Mode[]; value: Mode; on
         const { label, icon: Icon } = MODE_META[mode];
         const active = mode === value;
         return (
-          <ToggleGroup.Item
-            key={mode}
-            value={mode}
-            aria-label={label}
-            title={label}
-            className={cn("focus-ring relative inline-flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors pointer-coarse:size-11", active ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
-          >
-            {active ? <m.span layoutId="preview-mode" transition={reduceMotion ? { duration: 0 } : spring.snappy} className="absolute inset-0 rounded-lg border border-border bg-background shadow-xs" /> : null}
-            <Icon className="relative size-4" aria-hidden="true" />
-          </ToggleGroup.Item>
+          <Hint key={mode} label={label}>
+            <ToggleGroup.Item
+              value={mode}
+              aria-label={label}
+              className={cn("focus-ring relative inline-flex size-8 cursor-pointer items-center justify-center rounded-lg transition-colors pointer-coarse:size-11", active ? "text-foreground" : "text-muted-foreground hover:text-foreground")}
+            >
+              {active ? <m.span layoutId="preview-mode" transition={reduceMotion ? { duration: 0 } : spring.snappy} className="absolute inset-0 rounded-lg border border-border bg-background shadow-xs" /> : null}
+              <Icon className="relative size-4" aria-hidden="true" />
+            </ToggleGroup.Item>
+          </Hint>
         );
       })}
     </ToggleGroup.Root>
@@ -452,15 +451,16 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
           {tab === "preview" ? (
             <>
               <ModeToggle modes={modes} value={mode} onChange={setMode} />
-              <button
-                type="button"
-                onClick={() => setFullscreen(true)}
-                aria-label="Open the preview full screen"
-                title="Full screen"
-                className="focus-ring touch-target inline-flex size-10 cursor-pointer items-center justify-center rounded-md border border-input bg-transparent text-muted-foreground hover:bg-surface-2 hover:text-foreground active:scale-[0.96]"
-              >
-                <Maximize2 className="size-4" aria-hidden="true" />
-              </button>
+              <Hint label="Full screen">
+                <button
+                  type="button"
+                  onClick={() => setFullscreen(true)}
+                  aria-label="Full screen"
+                  className="focus-ring touch-target inline-flex size-10 cursor-pointer items-center justify-center rounded-md border border-input bg-transparent text-muted-foreground hover:bg-surface-2 hover:text-foreground active:scale-[0.96]"
+                >
+                  <Maximize2 className="size-4" aria-hidden="true" />
+                </button>
+              </Hint>
             </>
           ) : null}
           {variants.length > 1 ? <StyleMenu variants={variants} value={variant.name} onChange={setVariantName} /> : null}
@@ -475,16 +475,17 @@ export function ComponentPreview({ slug, variants, copy }: { slug: string; varia
           </div>
           <div className="absolute top-3 right-3 z-30 flex items-center gap-2">
             <StageThemeButton pageDark={pageDark} on={flipTheme} onToggle={() => setFlipTheme((v) => !v)} />
-            <a
-              href={`/preview/${slug}?variant=${encodeURIComponent(variant.name)}${stageTheme ? `&theme=${stageTheme}` : ""}`}
-              target="_blank"
-              rel="noopener"
-              aria-label="Open the preview in a new tab"
-              title="Open in new tab"
-              className={stageButton}
-            >
-              <ExternalLink className="size-4" aria-hidden="true" />
-            </a>
+            <Hint label="Open in new tab">
+              <a
+                href={`/preview/${slug}?variant=${encodeURIComponent(variant.name)}${stageTheme ? `&theme=${stageTheme}` : ""}`}
+                target="_blank"
+                rel="noopener"
+                aria-label="Open in new tab"
+                className={stageButton}
+              >
+                <ExternalLink className="size-4" aria-hidden="true" />
+              </a>
+            </Hint>
             <ReplayButton count={replays} onReplay={() => setReplays((n) => n + 1)} />
           </div>
         </PreviewStage>

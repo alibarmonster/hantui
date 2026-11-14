@@ -9,6 +9,7 @@ import { siteConfig } from "@/config/site";
 import { cn } from "@/lib/utils";
 import { GitHubIcon } from "./icons";
 import { ThemeSwitch } from "./theme-switch";
+import { Hint } from "./hint";
 import { Kbd } from "./kbd";
 import { Logo } from "./logo";
 
@@ -147,15 +148,17 @@ export function SiteHeader() {
               <Kbd>K</Kbd>
             </span>
           </button>
-          <a
-            href={siteConfig.github}
-            target="_blank"
-            rel="noreferrer"
-            aria-label="GitHub repository"
-            className="focus-ring touch-target inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
-          >
-            <GitHubIcon className="size-[18px]" />
-          </a>
+          <Hint label="GitHub repository">
+            <a
+              href={siteConfig.github}
+              target="_blank"
+              rel="noreferrer"
+              aria-label="GitHub repository"
+              className="focus-ring touch-target inline-flex size-10 items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
+            >
+              <GitHubIcon className="size-[18px]" />
+            </a>
+          </Hint>
           <ThemeSwitch />
         </div>
       </div>

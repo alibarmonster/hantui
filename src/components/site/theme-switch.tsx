@@ -2,6 +2,7 @@
 
 import { useSyncExternalStore } from "react";
 import { Monitor, Moon, Sun } from "lucide-react";
+import { Hint } from "./hint";
 
 export type ThemeChoice = "light" | "dark" | "system";
 
@@ -66,22 +67,23 @@ export function ThemeSwitch() {
   const next = ORDER[(ORDER.indexOf(choice) + 1) % ORDER.length];
   const Icon = ICONS[choice];
   return (
-    <button
-      type="button"
-      onClick={() => {
-        try {
-          localStorage.setItem(THEME_KEY, next);
-        } catch {
-          // Storage blocked: still switch for this page.
-        }
-        apply(next);
-        window.dispatchEvent(new Event(EVENT));
-      }}
-      aria-label={`Theme: ${LABELS[choice]}. Switch to ${LABELS[next]}`}
-      title={`Theme: ${LABELS[choice]}`}
-      className="focus-ring touch-target inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
-    >
-      <Icon className="size-[18px]" aria-hidden="true" />
-    </button>
+    <Hint label={`Theme: ${LABELS[choice]}`}>
+      <button
+        type="button"
+        onClick={() => {
+          try {
+            localStorage.setItem(THEME_KEY, next);
+          } catch {
+            // Storage blocked: still switch for this page.
+          }
+          apply(next);
+          window.dispatchEvent(new Event(EVENT));
+        }}
+        aria-label={`Theme: ${LABELS[choice]}. Switch to ${LABELS[next]}`}
+        className="focus-ring touch-target inline-flex size-10 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground transition-colors hover:bg-surface-2 hover:text-foreground"
+      >
+        <Icon className="size-[18px]" aria-hidden="true" />
+      </button>
+    </Hint>
   );
 }
