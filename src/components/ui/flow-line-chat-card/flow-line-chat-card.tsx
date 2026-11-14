@@ -148,7 +148,8 @@ export function FlowLines({ lines = 16, color = "#3b82f6", bend = 0.6, speed = 1
           strokeWidth={i % 4 === 0 ? 1.4 : 0.8}
           strokeLinecap="round"
           strokeDasharray={i % 3 === 0 ? "60 180" : i % 3 === 1 ? "2 10" : "24 36"}
-          className="motion-reduce:[animation:none]"
+          // The animation is an inline style, so the reduced-motion override needs !important.
+          className="motion-reduce:[animation:none]!"
           style={{ animation: `flow-line-dash ${6 + (i % 5) * 1.7}s linear infinite`, animationDelay: `${-i * 0.7}s` }}
         />
       ))}

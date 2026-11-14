@@ -227,7 +227,8 @@ export function MultiplayerCanvasCard({
               strokeOpacity="0.6"
               strokeWidth="1.2"
               strokeDasharray="3 7"
-              className="motion-reduce:[animation:none]"
+              // The animation is an inline style, so the reduced-motion override needs !important.
+              className="motion-reduce:[animation:none]!"
               style={{ animation: "mp-flow 1.2s linear infinite" }}
             />
           ))}
