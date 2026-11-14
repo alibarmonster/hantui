@@ -116,7 +116,8 @@ export function TokenAmountInput({
           </span>
         ) : null}
       </div>
-      <div className="mt-2 flex items-center gap-3">
+      {/* A size container, so the amount steps down on a narrow row instead of hiding under the token button. */}
+      <div className="@container mt-2 flex items-center gap-3">
         <div ref={scope} className="relative min-w-0 flex-1">
           <input
             id={id}
@@ -132,7 +133,7 @@ export function TokenAmountInput({
             aria-describedby={message ? `${id}-error` : `${id}-usd`}
             aria-busy={loading || undefined}
             className={cn(
-              "w-full min-w-0 bg-transparent font-mono text-[28px] leading-10 font-semibold tracking-tight tabular-nums outline-none placeholder:text-muted-foreground/50",
+              "w-full min-w-0 bg-transparent font-mono text-[clamp(20px,9.5cqi,28px)] leading-10 font-semibold text-ellipsis tracking-tight tabular-nums outline-none placeholder:text-muted-foreground/50",
               message ? "text-[color-mix(in_oklab,var(--destructive)_80%,var(--foreground))]" : "text-foreground",
               loading && "text-transparent",
               readOnly && "cursor-default",
