@@ -616,7 +616,7 @@ function Ticket({ ticket, torn, tearable, reduceMotion, onTear, onTearing, onSwi
             </div>
           </div>
           <div className="flex min-w-0 flex-1 flex-col gap-[2cqi]">
-            <p className="font-mono text-[1.9cqi] tracking-[0.18em] uppercase" style={{ color: accent === "#ffc95c" ? "#9a6b00" : "#5b5f7a" }}>
+            <p className="font-mono text-[1.9cqi] tracking-[0.18em] uppercase" style={{ color: accent === "#ffc95c" ? "#8a5f00" : "#5b5f7a" }}>
               {ticket.serial ?? `Nº 00${ticket.number} · ${ticket.title}`}
             </p>
             <p
