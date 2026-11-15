@@ -50,19 +50,22 @@ export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, so
   return (
     <motion.header
       ref={root}
-      className={cn("@container sticky top-0 z-40", className)}
+      className={cn("@container pointer-events-none sticky top-0 z-40", className)}
       initial={false}
       animate={{ y: hidden ? "-100%" : "0%" }}
       transition={reduceMotion ? { duration: 0 } : { duration: 0.32, ease: [0.22, 1, 0.36, 1] }}
     >
+      {/* The header keeps its 72px in the layout and only looks shorter when solid: the bar is 56px
+          (invisible until solid) and the row moves up 8px. Changing its real height moved the page, and
+          scroll anchoring then fought the threshold, so the header flickered just past it. */}
       <div
         className={cn(
-          "absolute inset-0 -z-10 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 motion-reduce:transition-none",
+          "pointer-events-auto absolute inset-x-0 top-0 -z-10 h-14 border-b transition-[background-color,border-color,box-shadow,backdrop-filter] duration-300 motion-reduce:transition-none",
           solid ? "border-black/[0.07] bg-white/80 shadow-[0_8px_24px_-18px_rgb(0_0_0/0.35)] backdrop-blur-xl" : "border-transparent bg-transparent",
         )}
         aria-hidden="true"
       />
-      <nav aria-label={label} className={cn("relative mx-auto flex max-w-6xl items-center gap-2 px-4 transition-[height] duration-300 motion-reduce:transition-none", solid ? "h-14" : "h-[72px]")}>
+      <nav aria-label={label} className={cn("relative mx-auto flex h-[72px] max-w-6xl items-center gap-2 px-4 transition-transform duration-300 *:pointer-events-auto motion-reduce:transition-none", solid && "-translate-y-2")}>
         <div className="mr-6">{brand}</div>
         <ul className="hidden items-center gap-0.5 @2xl:flex">
           {items.map((item) => {
@@ -127,11 +130,12 @@ export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, so
           ) : null}
         </div>
         <div className="ml-auto @2xl:hidden">
-          <MobileMenu items={items} actions={actions} />
+          {/* The panel hangs from the nav's bottom edge, which sits 8px below the solid bar. */}
+          <MobileMenu items={items} actions={actions} panelClassName={solid ? "mt-0" : undefined} />
         </div>
       </nav>
       {progress ? (
-        <div aria-hidden="true" className={cn("absolute inset-x-0 bottom-0 h-[2px] origin-left transition-opacity duration-300", solid ? "opacity-100" : "opacity-0")} style={{ background: accent, transform: `scaleX(${scroll.progress})` }} />
+        <div aria-hidden="true" className={cn("absolute inset-x-0 top-[54px] h-[2px] origin-left transition-opacity duration-300", solid ? "opacity-100" : "opacity-0")} style={{ background: accent, transform: `scaleX(${scroll.progress})` }} />
       ) : null}
     </motion.header>
   );

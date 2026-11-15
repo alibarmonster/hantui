@@ -10,7 +10,7 @@ export const docs: ComponentDocs = {
     "Motion is instant under reduced motion.",
   ],
   notes: [
-    "See-through until `solidAfter` px, then frosted with a hairline and a shorter height.",
+    "See-through until `solidAfter` px, then frosted with a hairline and a shorter bar. The bar only looks shorter: the header keeps its height in the layout, so the page never moves under it, and the strip below the bar lets clicks through.",
     "`hideOnScroll={false}` keeps it pinned; `progress={false}` drops the line.",
     "Pass `scrollContainer` when it lives in a scrolling panel.",
   ],
