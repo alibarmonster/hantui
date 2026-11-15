@@ -807,7 +807,7 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
         </div>
         <div className="flex h-9 items-center gap-2 border-2 border-[var(--rd-ink)] bg-[var(--rd-bg)] px-2 text-[13px] shadow-[inset_2px_2px_0_var(--rd-shade)]">
           <Clock />
-          <button type="button" aria-pressed={dark} aria-label="Dark theme" onClick={() => setDark((d) => !d)} className="focus-ring inline-flex size-6 cursor-pointer items-center justify-center">
+          <button type="button" aria-pressed={dark} aria-label="Dark theme" onClick={() => setDark((d) => !d)} className="relative after:absolute after:-inset-1 focus-ring inline-flex size-6 cursor-pointer items-center justify-center">
             {dark ? <Sun className="size-3.5" aria-hidden="true" /> : <Moon className="size-3.5" aria-hidden="true" />}
           </button>
         </div>
@@ -822,7 +822,7 @@ function WindowButton({ label, onClick, glyph }: { label: string; onClick: () =>
       type="button"
       aria-label={label}
       onClick={onClick}
-      className="focus-ring inline-flex size-6 shrink-0 cursor-pointer items-center justify-center border-2 border-[var(--rd-ink)] bg-[var(--rd-surface)] text-[var(--rd-text)] shadow-[inset_-2px_-2px_0_var(--rd-shade),inset_2px_2px_0_var(--rd-light)] active:shadow-[inset_2px_2px_0_var(--rd-shade)]"
+      className="relative after:absolute after:-inset-1 focus-ring inline-flex size-6 shrink-0 cursor-pointer items-center justify-center border-2 border-[var(--rd-ink)] bg-[var(--rd-surface)] text-[var(--rd-text)] shadow-[inset_-2px_-2px_0_var(--rd-shade),inset_2px_2px_0_var(--rd-light)] active:shadow-[inset_2px_2px_0_var(--rd-shade)]"
     >
       <svg viewBox="0 0 8 8" className="size-2.5" shapeRendering="crispEdges" aria-hidden="true">
         {glyph === "min" ? <rect x="1" y="6" width="6" height="1.5" fill="currentColor" /> : null}

@@ -377,7 +377,7 @@ export function FlowLineChatCard({
                       ].map(([Icon, label]) => {
                         const I = Icon as typeof Reply;
                         return (
-                          <button key={label as string} type="button" aria-label={label as string} className="inline-flex size-6 cursor-pointer items-center justify-center rounded-md text-white/70 outline-none hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-[#60a5fa]">
+                          <button key={label as string} type="button" aria-label={label as string} className="relative after:absolute after:inset-x-0 after:-inset-y-2 inline-flex size-6 cursor-pointer items-center justify-center rounded-md text-white/70 outline-none hover:bg-white/10 hover:text-white focus-visible:ring-2 focus-visible:ring-[#60a5fa]">
                             <I className="size-3.5" aria-hidden="true" />
                           </button>
                         );

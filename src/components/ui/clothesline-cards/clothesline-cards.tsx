@@ -397,7 +397,7 @@ export function ClotheslineCards({
                             aria-pressed={isFlipped}
                             aria-label={`Flip ${person.name}'s card`}
                             onClick={() => toggle(person.id)}
-                            className="focus-ring inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-foreground text-background transition-transform hover:translate-x-0.5"
+                            className="relative after:absolute after:-inset-1 focus-ring inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-foreground text-background transition-transform hover:translate-x-0.5"
                           >
                             <ArrowRight className="size-3.5" aria-hidden="true" />
                           </button>
