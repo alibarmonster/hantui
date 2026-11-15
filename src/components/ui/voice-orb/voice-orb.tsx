@@ -66,7 +66,9 @@ export function VoiceOrb({
   const scale = useTransform(smooth, (v) => 1 + v * 0.18);
   const glow = useTransform(smooth, (v) => 0.35 + v * 0.5);
 
-  // Measure the stream's level with a Web Audio analyser.
+  // Measure the stream's level with a Web Audio analyser. The drawing loop below reads it once per
+  // frame, so there is one loop, and nothing is measured while the orb is offscreen.
+  const meter = useRef<(() => number) | null>(null);
   useEffect(() => {
     if (!stream) return;
     const AudioCtx = window.AudioContext ?? (window as unknown as { webkitAudioContext: typeof AudioContext }).webkitAudioContext;
@@ -75,17 +77,14 @@ export function VoiceOrb({
     analyser.fftSize = 512;
     context.createMediaStreamSource(stream).connect(analyser);
     const data = new Uint8Array(analyser.fftSize);
-    let frame = 0;
-    const read = () => {
+    meter.current = () => {
       analyser.getByteTimeDomainData(data);
       let sum = 0;
       for (const v of data) sum += ((v - 128) / 128) ** 2;
-      live.current.level = Math.min(1, Math.sqrt(sum / data.length) * 4);
-      frame = requestAnimationFrame(read);
+      return Math.min(1, Math.sqrt(sum / data.length) * 4);
     };
-    read();
     return () => {
-      cancelAnimationFrame(frame);
+      meter.current = null;
       context.close();
     };
   }, [stream]);
@@ -100,7 +99,8 @@ export function VoiceOrb({
     let visible = true;
     let lv = 0;
     const draw = (t: number) => {
-      const { state: s, level: target, reduce } = live.current;
+      const { state: s, level, reduce } = live.current;
+      const target = meter.current ? meter.current() : level;
       lv += (target - lv) * 0.2;
       loudness.set(s === "idle" ? 0 : lv);
       const time = t / 1000;

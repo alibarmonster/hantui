@@ -16,6 +16,6 @@ const stream = await navigator.mediaDevices.getUserMedia({ audio: true });
   notes: [
     "The blob is a smooth closed curve whose wobble grows with the level; the whole orb swells and its glow brightens as the level rises.",
     "With `stream`, the level is measured with a Web Audio analyser. Requesting the microphone is up to you, so the browser's permission prompt stays under your control.",
-    "The shape is redrawn every frame directly in the DOM (no React re-renders), and drawing pauses while the orb is offscreen.",
+    "The shape is redrawn every frame directly in the DOM (no React re-renders) by a single loop that also reads the analyser. The loop pauses while the orb is offscreen, so a live stream isn't measured there.",
   ],
 };
