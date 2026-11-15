@@ -1,6 +1,6 @@
 "use client";
 
-import { RotateCcw, Sparkles } from "lucide-react";
+import { Cpu, RotateCcw } from "lucide-react";
 import { StreamingText, useTextStream } from "@/components/ui/streaming-text/streaming-text";
 
 const ANSWER = `Spring animations feel natural because they model physics instead of time. Rather than "move for 300ms", you describe stiffness and damping, and the motion settles on its own.
@@ -17,7 +17,7 @@ export function Default() {
       <div className="self-end rounded-2xl rounded-br-md bg-foreground px-4 py-2.5 text-sm text-background">Why do springs feel better than easing curves?</div>
       <div className="flex gap-3">
         <span className="flex size-7 shrink-0 items-center justify-center rounded-full border border-border bg-background shadow-xs" aria-hidden="true">
-          <Sparkles className="size-3.5 text-primary" />
+          <Cpu className="size-3.5 text-primary" />
         </span>
         <StreamingText text={text} streaming={streaming} aria-live="polite" className="min-h-40 pt-0.5 text-sm leading-relaxed text-foreground" />
       </div>
