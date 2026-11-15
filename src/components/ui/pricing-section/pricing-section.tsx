@@ -83,7 +83,7 @@ export function PricingSection({
                   aria-checked={active}
                   onClick={() => setPeriod(option)}
                   className={cn(
-                    "relative inline-flex h-9 cursor-pointer items-center gap-2 rounded-full px-4 text-[13px] font-medium capitalize outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                    "relative after:absolute after:inset-x-0 after:-inset-y-0.5 inline-flex h-9 cursor-pointer items-center gap-2 rounded-full px-4 text-[13px] font-medium capitalize outline-none focus-visible:ring-2 focus-visible:ring-ring",
                     active ? "text-background" : "text-foreground/65 hover:text-foreground",
                   )}
                 >
