@@ -84,7 +84,7 @@ export function GatherNav({ brand, items, cta, onSearch, searchLabel = "Search",
                 onPointerEnter={() => setHover(item.label)}
                 onFocus={() => setHover(item.label)}
                 onBlur={() => setHover(null)}
-                className="relative flex h-9 items-center rounded-full px-3.5 text-[14px] whitespace-nowrap text-[#27272a] outline-none transition-colors hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring"
+                className="after:absolute after:inset-x-0 after:-inset-y-0.5 relative flex h-9 items-center rounded-full px-3.5 text-[14px] whitespace-nowrap text-[#27272a] outline-none transition-colors hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {item.label}
               </a>

@@ -94,7 +94,7 @@ export function OverlayMenuNav({ brand, groups, features = [], tone = "light", o
           aria-controls={`${id}-overlay`}
           onClick={() => setOpen((o) => !o)}
           className={cn(
-            "group flex h-9 cursor-pointer items-center gap-2 rounded-md border px-3 font-mono text-[12px] tracking-[0.08em] uppercase outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#5b8cff] focus-visible:ring-offset-2",
+            "relative after:absolute after:inset-x-0 after:-inset-y-0.5 group flex h-9 cursor-pointer items-center gap-2 rounded-md border px-3 font-mono text-[12px] tracking-[0.08em] uppercase outline-none transition-colors duration-300 focus-visible:ring-2 focus-visible:ring-[#5b8cff] focus-visible:ring-offset-2",
             light ? "border-black/15 text-[#0b0b0c] hover:bg-black/[0.04] focus-visible:ring-offset-white" : "border-white/25 text-white hover:bg-white/10 focus-visible:ring-offset-[#0a0d14]",
           )}
         >

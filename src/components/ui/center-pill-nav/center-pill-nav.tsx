@@ -112,7 +112,7 @@ export function CenterPillNav({ brand, items, actions = [], accent = "#d4400a", 
                   key={a.label}
                   href={a.href}
                   className={cn(
-                    "flex h-9 items-center rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap text-[#27272a] outline-none hover:bg-black/[0.05] focus-visible:ring-2 focus-visible:ring-ring",
+                    "relative after:absolute after:inset-x-0 after:-inset-y-0.5 flex h-9 items-center rounded-full px-3.5 text-[14px] font-medium whitespace-nowrap text-[#27272a] outline-none hover:bg-black/[0.05] focus-visible:ring-2 focus-visible:ring-ring",
                     i > 0 && "hidden @4xl:flex",
                   )}
                 >
@@ -122,7 +122,7 @@ export function CenterPillNav({ brand, items, actions = [], accent = "#d4400a", 
               {primary ? (
                 <a
                   href={primary.href}
-                  className="flex h-9 whitespace-nowrap items-center rounded-full px-4 text-[14px] font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)] outline-none transition-[filter] hover:brightness-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 flex h-9 whitespace-nowrap items-center rounded-full px-4 text-[14px] font-semibold text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.3)] outline-none transition-[filter] hover:brightness-95 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                   style={{ background: accent }}
                 >
                   {primary.label}
