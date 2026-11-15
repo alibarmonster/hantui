@@ -35,7 +35,7 @@ export function SplitIslands({ brand, items, links = [], secondary, cta, label =
   const root = useRef<HTMLElement>(null);
   const menu = useMenu(root);
   const island = "flex h-12 items-center gap-0.5 rounded-xl border border-black/[0.05] bg-white px-1.5 shadow-[0_8px_24px_-12px_rgb(0_0_0/0.3)]";
-  const pill = "flex h-9 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring";
+  const pill = "flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring";
   return (
     <header ref={root} className={cn("@container sticky top-0 z-40 px-3 pt-3", className)}>
       <nav aria-label={label} className="relative flex items-start justify-between gap-3">
@@ -96,12 +96,12 @@ export function SplitIslands({ brand, items, links = [], secondary, cta, label =
             </a>
           ))}
           {secondary ? (
-            <a href={secondary.href} className="flex h-9 whitespace-nowrap items-center rounded-full border border-black/80 px-4 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
+            <a href={secondary.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-full border border-black/80 px-4 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
               {secondary.label}
             </a>
           ) : null}
           {cta ? (
-            <a href={cta.href} className="flex h-9 whitespace-nowrap items-center rounded-full bg-[#0b0b0c] px-4 text-[14px] font-medium text-white outline-none hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            <a href={cta.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-full bg-[#0b0b0c] px-4 text-[14px] font-medium text-white outline-none hover:bg-black/80 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               {cta.label}
             </a>
           ) : null}

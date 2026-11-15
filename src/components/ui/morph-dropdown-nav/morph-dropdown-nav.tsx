@@ -81,7 +81,7 @@ export function MorphDropdownNav({ brand, items, actions = [], label = "Main", c
             if (!item.items?.length) {
               return (
                 <li key={item.label}>
-                  <a href={item.href ?? "#"} className="flex h-9 whitespace-nowrap items-center rounded-full px-3.5 text-[14px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/50">
+                  <a href={item.href ?? "#"} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-full px-3.5 text-[14px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/50">
                     {item.label}
                   </a>
                 </li>
@@ -93,7 +93,7 @@ export function MorphDropdownNav({ brand, items, actions = [], label = "Main", c
                 <button
                   type="button"
                   {...menu.triggerProps(item.label, `${id}-panel`)}
-                  className={cn("flex h-9 whitespace-nowrap cursor-pointer items-center gap-1 rounded-full px-3.5 text-[14px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/50", open ? "bg-white/10 text-white" : "text-white/70 hover:text-white")}
+                  className={cn("flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap cursor-pointer items-center gap-1 rounded-full px-3.5 text-[14px] outline-none transition-colors focus-visible:ring-2 focus-visible:ring-white/50", open ? "bg-white/10 text-white" : "text-white/70 hover:text-white")}
                 >
                   {item.label}
                   <ChevronDown className={cn("size-3.5 opacity-60 transition-transform duration-200", open && "rotate-180")} aria-hidden="true" />
@@ -104,12 +104,12 @@ export function MorphDropdownNav({ brand, items, actions = [], label = "Main", c
         </ul>
         <div className="ml-auto hidden items-center gap-1 @2xl:flex">
           {actions.slice(0, -1).map((a) => (
-            <a key={a.label} href={a.href} className="flex h-9 whitespace-nowrap items-center rounded-full px-3.5 text-[14px] text-white/70 outline-none hover:text-white focus-visible:ring-2 focus-visible:ring-white/50">
+            <a key={a.label} href={a.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-full px-3.5 text-[14px] text-white/70 outline-none hover:text-white focus-visible:ring-2 focus-visible:ring-white/50">
               {a.label}
             </a>
           ))}
           {primary ? (
-            <a href={primary.href} className="flex h-9 whitespace-nowrap items-center rounded-full bg-white px-4 text-[14px] font-medium text-[#09090b] outline-none transition-colors hover:bg-white/85 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]">
+            <a href={primary.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-full bg-white px-4 text-[14px] font-medium text-[#09090b] outline-none transition-colors hover:bg-white/85 focus-visible:ring-2 focus-visible:ring-white/50 focus-visible:ring-offset-2 focus-visible:ring-offset-[#09090b]">
               {primary.label}
             </a>
           ) : null}

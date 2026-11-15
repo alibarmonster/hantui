@@ -57,7 +57,7 @@ export function CatalogMenu({ brand, items, actions = [], label = "Main", classN
                 <button
                   type="button"
                   {...menu.triggerProps(item.label, `${id}-panel`)}
-                  className={cn("flex h-9 cursor-pointer items-center gap-1 rounded-md px-3 text-[14px] text-[#3f3f46] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring", menu.open === item.label && "bg-black/[0.05] text-[#09090b]")}
+                  className={cn("flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 cursor-pointer items-center gap-1 rounded-md px-3 text-[14px] text-[#3f3f46] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring", menu.open === item.label && "bg-black/[0.05] text-[#09090b]")}
                 >
                   {item.label}
                   <ChevronDown className={cn("size-3.5 opacity-60 transition-transform", menu.open === item.label && "rotate-180")} aria-hidden="true" />
@@ -65,7 +65,7 @@ export function CatalogMenu({ brand, items, actions = [], label = "Main", classN
               </li>
             ) : (
               <li key={item.label}>
-                <a href={item.href ?? "#"} className="flex h-9 items-center rounded-md px-3 text-[14px] text-[#3f3f46] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring">
+                <a href={item.href ?? "#"} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 items-center rounded-md px-3 text-[14px] text-[#3f3f46] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring">
                   {item.label}
                 </a>
               </li>
@@ -78,7 +78,7 @@ export function CatalogMenu({ brand, items, actions = [], label = "Main", classN
               key={a.label}
               href={a.href}
               className={cn(
-                "h-9 items-center rounded-md px-3.5 text-[14px] whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                "h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 items-center rounded-md px-3.5 text-[14px] whitespace-nowrap outline-none focus-visible:ring-2 focus-visible:ring-ring",
                 // Middle actions wait for room; the first and last always show.
                 i > 0 && i < actions.length - 1 ? "hidden @4xl:flex" : "flex",
                 i === actions.length - 1 ? "border border-[#c2410c]/40 bg-[#fff7ed] font-medium text-[#9a3412] hover:bg-[#ffedd5]" : "text-[#3f3f46] hover:text-[#09090b]",

@@ -83,7 +83,7 @@ export function TickerHeader({ brand, items, actions = [], announcements, durati
         <ul className="hidden items-center @2xl:flex">
           {items.map((item) => (
             <li key={item.label}>
-              <a href={item.href ?? item.items?.[0]?.href ?? "#"} className="flex h-9 items-center rounded-md px-3 text-[14px] text-[#3f3f46] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring">
+              <a href={item.href ?? item.items?.[0]?.href ?? "#"} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 items-center rounded-md px-3 text-[14px] text-[#3f3f46] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring">
                 {item.label}
               </a>
             </li>
@@ -91,7 +91,7 @@ export function TickerHeader({ brand, items, actions = [], announcements, durati
         </ul>
         <div className="ml-auto hidden items-center gap-2 @2xl:flex">
           {actions.map((a, i) => (
-            <a key={a.label} href={a.href} className={cn("flex h-9 items-center rounded-md px-3.5 text-[14px] outline-none focus-visible:ring-2 focus-visible:ring-ring", i === actions.length - 1 ? "bg-[#09090b] font-medium text-white hover:bg-black/80" : "text-[#3f3f46] hover:text-[#09090b]")}>
+            <a key={a.label} href={a.href} className={cn("flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 items-center rounded-md px-3.5 text-[14px] outline-none focus-visible:ring-2 focus-visible:ring-ring", i === actions.length - 1 ? "bg-[#09090b] font-medium text-white hover:bg-black/80" : "text-[#3f3f46] hover:text-[#09090b]")}>
               {a.label}
             </a>
           ))}

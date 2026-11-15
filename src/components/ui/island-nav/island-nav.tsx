@@ -54,14 +54,14 @@ export function IslandNav({ brand, items, cta, scrollContainer, label = "Main", 
         <ul className="hidden items-center @md:flex">
           {items.map((item) => (
             <li key={item.label}>
-              <a href={item.href ?? item.items?.[0]?.href ?? "#"} className="flex h-8 whitespace-nowrap items-center rounded-lg px-3 text-[13px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/60">
+              <a href={item.href ?? item.items?.[0]?.href ?? "#"} className="flex h-8 relative after:absolute after:inset-x-0 after:-inset-y-1 whitespace-nowrap items-center rounded-lg px-3 text-[13px] text-white/70 outline-none transition-colors hover:text-white focus-visible:ring-2 focus-visible:ring-white/60">
                 {item.label}
               </a>
             </li>
           ))}
         </ul>
         {cta ? (
-          <a href={cta.href} className="ml-2 hidden h-8 items-center rounded-[10px] bg-white px-3.5 text-[13px] font-medium text-[#0b0b0c] outline-none transition-transform hover:-translate-y-px focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0c] @md:inline-flex">
+          <a href={cta.href} className="ml-2 hidden h-8 relative after:absolute after:inset-x-0 after:-inset-y-1 items-center rounded-[10px] bg-white px-3.5 text-[13px] font-medium text-[#0b0b0c] outline-none transition-transform hover:-translate-y-px focus-visible:ring-2 focus-visible:ring-white/60 focus-visible:ring-offset-2 focus-visible:ring-offset-[#0b0b0c] @md:inline-flex">
             {cta.label}
           </a>
         ) : null}

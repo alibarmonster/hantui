@@ -18,7 +18,7 @@ export function KiteMark({ className }: { className?: string }) {
 /** `inherit` takes the text color from the navbar, for navbars that recolor when a menu opens. */
 export function KiteBrand({ dark = false, inherit = false }: { dark?: boolean; inherit?: boolean }) {
   return (
-    <a href="#" onClick={(e) => e.preventDefault()} className={`flex items-center gap-2 rounded-md text-[15px] font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring ${inherit ? "" : dark ? "text-white" : "text-[#0b0b0c]"}`}>
+    <a href="#" onClick={(e) => e.preventDefault()} className={`relative flex items-center gap-2 rounded-md text-[15px] after:absolute after:inset-x-0 after:-inset-y-2 font-semibold tracking-tight outline-none focus-visible:ring-2 focus-visible:ring-ring ${inherit ? "" : dark ? "text-white" : "text-[#0b0b0c]"}`}>
       <KiteMark className={inherit || dark ? "size-5" : "size-5 text-[#2563eb]"} />
       Kite
     </a>

@@ -45,7 +45,7 @@ export function FloatBar({ brand, items, secondary, cta, accent = "#1463ff", lab
             if (!item.items?.length) {
               return (
                 <li key={item.label}>
-                  <a href={item.href ?? "#"} className="flex h-9 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#27272a] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
+                  <a href={item.href ?? "#"} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#27272a] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
                     {item.label}
                   </a>
                 </li>
@@ -54,7 +54,7 @@ export function FloatBar({ brand, items, secondary, cta, accent = "#1463ff", lab
             const open = menu.open === item.label;
             return (
               <li key={item.label} className="relative">
-                <button type="button" {...menu.triggerProps(item.label, panelId)} className="flex h-9 whitespace-nowrap cursor-pointer items-center gap-1 rounded-lg px-3 text-[14px] font-medium text-[#27272a] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
+                <button type="button" {...menu.triggerProps(item.label, panelId)} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap cursor-pointer items-center gap-1 rounded-lg px-3 text-[14px] font-medium text-[#27272a] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
                   {item.label}
                   <ChevronDown className={cn("size-3.5 text-[#71717a] transition-transform duration-200", open && "rotate-180")} aria-hidden="true" />
                 </button>
@@ -88,12 +88,12 @@ export function FloatBar({ brand, items, secondary, cta, accent = "#1463ff", lab
         </ul>
         <div className="ml-auto hidden items-center gap-1 @2xl:flex">
           {secondary ? (
-            <a href={secondary.href} className="flex h-9 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#27272a] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
+            <a href={secondary.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#27272a] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
               {secondary.label}
             </a>
           ) : null}
           {cta ? (
-            <a href={cta.href} className="flex h-9 whitespace-nowrap items-center rounded-[10px] px-4 text-[14px] font-medium text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] outline-none transition-[filter] hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" style={{ background: accent }}>
+            <a href={cta.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-[10px] px-4 text-[14px] font-medium text-white shadow-[inset_0_1px_0_rgb(255_255_255/0.25)] outline-none transition-[filter] hover:brightness-110 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2" style={{ background: accent }}>
               {cta.label}
             </a>
           ) : null}

@@ -49,7 +49,7 @@ export function DuoPanelMenu({ brand, items, actions = [], label = "Main", class
                 <button
                   type="button"
                   {...menu.triggerProps(item.label, `${id}-panel`)}
-                  className={cn("flex h-9 whitespace-nowrap cursor-pointer items-center gap-1 rounded-lg px-3 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring", menu.open === item.label && "bg-black/[0.06]")}
+                  className={cn("flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap cursor-pointer items-center gap-1 rounded-lg px-3 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring", menu.open === item.label && "bg-black/[0.06]")}
                 >
                   {item.label}
                   <ChevronDown className={cn("size-3.5 transition-transform", menu.open === item.label && "rotate-180")} aria-hidden="true" />
@@ -57,7 +57,7 @@ export function DuoPanelMenu({ brand, items, actions = [], label = "Main", class
               </li>
             ) : (
               <li key={item.label}>
-                <a href={item.href ?? "#"} className="flex h-9 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
+                <a href={item.href ?? "#"} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-lg px-3 text-[14px] font-medium text-[#18181b] outline-none hover:bg-black/[0.04] focus-visible:ring-2 focus-visible:ring-ring">
                   {item.label}
                 </a>
               </li>
@@ -70,7 +70,7 @@ export function DuoPanelMenu({ brand, items, actions = [], label = "Main", class
               key={a.label}
               href={a.href}
               className={cn(
-                "flex h-9 whitespace-nowrap items-center rounded-full px-4 text-[14px] font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
+                "flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-full px-4 text-[14px] font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2",
                 i === actions.length - 1 ? "bg-[#111] text-white hover:bg-black/80" : "border border-black/15 text-[#18181b] hover:bg-black/[0.04]",
               )}
             >

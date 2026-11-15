@@ -73,7 +73,7 @@ export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, so
             if (!item.items?.length) {
               return (
                 <li key={item.label}>
-                  <a href={item.href ?? "#"} className="flex h-9 whitespace-nowrap items-center rounded-md px-3 text-[14px] font-medium text-[#3f3f46] outline-none transition-colors hover:text-[#0b0b0c] focus-visible:ring-2 focus-visible:ring-ring">
+                  <a href={item.href ?? "#"} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-md px-3 text-[14px] font-medium text-[#3f3f46] outline-none transition-colors hover:text-[#0b0b0c] focus-visible:ring-2 focus-visible:ring-ring">
                     {item.label}
                   </a>
                 </li>
@@ -82,7 +82,7 @@ export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, so
             const open = menu.open === item.label;
             return (
               <li key={item.label} className="relative">
-                <button type="button" {...menu.triggerProps(item.label, panelId)} className="flex h-9 whitespace-nowrap cursor-pointer items-center gap-1 rounded-md px-3 text-[14px] font-medium text-[#3f3f46] outline-none transition-colors hover:text-[#0b0b0c] focus-visible:ring-2 focus-visible:ring-ring">
+                <button type="button" {...menu.triggerProps(item.label, panelId)} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap cursor-pointer items-center gap-1 rounded-md px-3 text-[14px] font-medium text-[#3f3f46] outline-none transition-colors hover:text-[#0b0b0c] focus-visible:ring-2 focus-visible:ring-ring">
                   {item.label}
                   <ChevronDown className={cn("size-3.5 opacity-60 transition-transform duration-200", open && "rotate-180")} aria-hidden="true" />
                 </button>
@@ -119,12 +119,12 @@ export function ScrollAwareNav({ brand, items, actions = [], scrollContainer, so
         </ul>
         <div className="ml-auto hidden items-center gap-1 @2xl:flex">
           {actions.slice(0, -1).map((a) => (
-            <a key={a.label} href={a.href} className="flex h-9 whitespace-nowrap items-center rounded-md px-3 text-[14px] font-medium text-[#3f3f46] outline-none hover:text-[#0b0b0c] focus-visible:ring-2 focus-visible:ring-ring">
+            <a key={a.label} href={a.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-md px-3 text-[14px] font-medium text-[#3f3f46] outline-none hover:text-[#0b0b0c] focus-visible:ring-2 focus-visible:ring-ring">
               {a.label}
             </a>
           ))}
           {primary ? (
-            <a href={primary.href} className="flex h-9 whitespace-nowrap items-center rounded-lg bg-[#0b0b0c] px-4 text-[14px] font-medium text-white outline-none transition-colors hover:bg-[#27272a] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+            <a href={primary.href} className="flex h-9 relative after:absolute after:inset-x-0 after:-inset-y-0.5 whitespace-nowrap items-center rounded-lg bg-[#0b0b0c] px-4 text-[14px] font-medium text-white outline-none transition-colors hover:bg-[#27272a] focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
               {primary.label}
             </a>
           ) : null}
