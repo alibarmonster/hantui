@@ -304,6 +304,7 @@ export function DepthRail<T extends DepthRailItem>({ items, label, index, onInde
             tabIndex={-1}
             onClick={() => goTo(i)}
             layout
+            layoutDependency={front}
             transition={{ duration: reduceMotion ? 0 : duration.base, ease: ease.out }}
             style={{ borderRadius: 3 }}
             className={cn("h-1.5 cursor-pointer transition-[background-color] duration-300 motion-reduce:transition-none", i === front ? "w-5 bg-foreground" : "w-1.5 bg-foreground/20 hover:bg-foreground/40")}
