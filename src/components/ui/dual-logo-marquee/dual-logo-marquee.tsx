@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ComponentProps, type ReactNode, type RefObject } from "react";
-import { motion, useAnimationFrame, useMotionValue, useReducedMotion } from "motion/react";
+import { motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion } from "motion/react";
 import { cn } from "@/lib/utils";
 
 export interface MarqueeLogo {
@@ -38,8 +38,11 @@ function Row({ items, direction, speed, paused }: { items: MarqueeLogo[]; direct
     return () => observer.disconnect();
   }, []);
 
+  // Offscreen, the loop does no work (it resumes just before the track scrolls back into view).
+  const inView = useInView(track, { margin: "200px" });
+
   useAnimationFrame((_, delta) => {
-    if (reduceMotion || width === 0) return;
+    if (!inView || reduceMotion || width === 0) return;
     const target = paused.current ? 0 : 1;
     velocity.current += (target - velocity.current) * Math.min(1, delta / 200);
     if (Math.abs(target - velocity.current) < 0.005) velocity.current = target;

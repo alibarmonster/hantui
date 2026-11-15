@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ComponentProps, type RefObject } from "react";
-import { motion, useAnimationFrame, useMotionValue, useReducedMotion } from "motion/react";
+import { motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion } from "motion/react";
 import { Star } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -91,8 +91,11 @@ function Column({ items, speed, paused, className }: { items: Testimonial[]; spe
     return () => observer.disconnect();
   }, []);
 
+  // Offscreen, the loop does no work (it resumes just before the track scrolls back into view).
+  const inView = useInView(track, { margin: "200px" });
+
   useAnimationFrame((_, delta) => {
-    if (reduceMotion || height === 0) return;
+    if (!inView || reduceMotion || height === 0) return;
     const target = paused.current ? 0 : 1;
     velocity.current += (target - velocity.current) * Math.min(1, delta / 220);
     if (Math.abs(target - velocity.current) < 0.005) velocity.current = target;
