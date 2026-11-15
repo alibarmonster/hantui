@@ -212,7 +212,7 @@ export function CollapsibleSidebar({
           aria-expanded={!isCollapsed}
           aria-controls={navId}
           aria-label={isCollapsed ? "Expand sidebar" : "Collapse sidebar"}
-          className="flex h-9 w-full cursor-pointer items-center gap-3 rounded-md px-2.5 text-sm text-muted-foreground outline-none transition-colors hover:bg-accent/60 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring [&_svg]:size-[18px] [&_svg]:shrink-0"
+          className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 flex h-9 w-full cursor-pointer items-center gap-3 rounded-md px-2.5 text-sm text-muted-foreground outline-none transition-colors hover:bg-accent/60 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring [&_svg]:size-[18px] [&_svg]:shrink-0"
         >
           <motion.span layout="position" transition={layout} className="flex" aria-hidden="true">
             {isCollapsed ? <PanelLeftOpen /> : <PanelLeftClose />}
