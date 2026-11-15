@@ -73,6 +73,7 @@ export const releases: Release[] = [
           "Visible focus rings on Sliding Tabs, Foil Ticket Reel's stub and Token Amount Input; covered Retro Desktop icons leave the tab order.",
           "On phones, Token Amount Input's figure stays readable, Coin Crew Hero wraps its copy before the coins, and Floating Screen's demo shows the phone.",
           "Position lines, pagination dots, ruler ticks, contact shadows and selection boxes in six components animate with transforms instead of layout properties.",
+          "Links and buttons in 11 navbars, small icon buttons in 20 components and 36px buttons in 12 more components now catch clicks at 40px without changing how they look.",
           "Search closes reliably and returns focus to its button; demos no longer invent component counts or a release.",
         ],
       },
