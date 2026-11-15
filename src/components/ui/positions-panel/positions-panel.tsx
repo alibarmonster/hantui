@@ -146,7 +146,7 @@ export function PositionsPanel({ positions, cash = 0, valueHistory = [], onSell,
             <p className="mt-3 text-sm font-medium text-foreground">No {tab === "open" ? "open positions" : tab === "resolved" ? "resolved markets" : "history"} yet</p>
             <p className="mt-1 text-[13px] text-muted-foreground">Make a prediction to see it here.</p>
             {onExplore ? (
-              <button type="button" onClick={onExplore} className="mt-4 h-9 cursor-pointer rounded-full bg-foreground px-4 text-sm font-medium text-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
+              <button type="button" onClick={onExplore} className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 mt-4 h-9 cursor-pointer rounded-full bg-foreground px-4 text-sm font-medium text-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2">
                 Explore markets
               </button>
             ) : null}
