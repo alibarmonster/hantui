@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type ComponentProps } from "react";
 import { observeTheme } from "@/lib/color";
+import { createRandom } from "@/lib/random";
 import { cn } from "@/lib/utils";
 
 export interface ShimmeringDotsProps extends ComponentProps<"div"> {
@@ -21,6 +22,8 @@ export interface ShimmeringDotsProps extends ComponentProps<"div"> {
   speed?: number;
   /** Fade the grid out toward the edges. @default true */
   fade?: boolean;
+  /** Seed for which dots twinkle and when; the same seed and size give the same pattern. @default "dots" */
+  seed?: string | number;
 }
 
 type RGBA = [number, number, number, number];
@@ -50,6 +53,7 @@ export function ShimmeringDots({
   density = 0.22,
   speed = 1,
   fade = true,
+  seed = "dots",
   className,
   style,
   children,
@@ -81,8 +85,9 @@ export function ShimmeringDots({
       for (let i = 0; i < cols * rows; i++) {
         let o = baseOpacity;
         if (freq[i]) {
-          // Sharpened sine: dots spend most of their time dim and flash briefly.
-          const s = reduce ? 0.5 : Math.sin(t * 0.001 * freq[i] * speed + phase[i]);
+          // Sharpened sine: dots spend most of their time dim and flash briefly. With reduced motion
+          // the still frame is one moment of it, so a few dots stay lit.
+          const s = Math.sin((reduce ? 0 : t * 0.001 * freq[i] * speed) + phase[i]);
           if (s > 0) o += (peakOpacity - baseOpacity) * s ** 6;
         }
         ctx.globalAlpha = o;
@@ -112,9 +117,10 @@ export function ShimmeringDots({
       rows = Math.floor(height / gap) + 1;
       phase = new Float32Array(cols * rows);
       freq = new Float32Array(cols * rows);
+      const random = createRandom(seed);
       for (let i = 0; i < cols * rows; i++) {
-        phase[i] = Math.random() * Math.PI * 2;
-        freq[i] = Math.random() < density ? 0.6 + Math.random() * 1.6 : 0;
+        phase[i] = random.next() * Math.PI * 2;
+        freq[i] = random.chance(density) ? random.range(0.6, 2.2) : 0;
       }
       paint();
       draw(performance.now());
@@ -147,7 +153,7 @@ export function ShimmeringDots({
       intersection.disconnect();
       unobserveTheme();
     };
-  }, [gap, size, color, baseOpacity, peakOpacity, density, speed]);
+  }, [gap, size, color, baseOpacity, peakOpacity, density, speed, seed]);
 
   return (
     <div ref={rootRef} className={cn("relative isolate overflow-hidden", className)} style={style} {...props}>

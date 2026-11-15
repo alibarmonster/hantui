@@ -2,6 +2,7 @@
 
 import { useEffect, useRef, type ComponentProps } from "react";
 import { observeTheme } from "@/lib/color";
+import { createRandom } from "@/lib/random";
 import { cn } from "@/lib/utils";
 
 export interface ParticleFieldProps extends ComponentProps<"div"> {
@@ -19,6 +20,8 @@ export interface ParticleFieldProps extends ComponentProps<"div"> {
   repelStrength?: number;
   /** Drift speed in px per frame. @default 0.25 */
   speed?: number;
+  /** Seed for where particles start and how they drift; the same seed and size give the same field. @default "particles" */
+  seed?: string | number;
 }
 
 type RGBA = [number, number, number, number];
@@ -45,6 +48,7 @@ export function ParticleField({
   repelRadius = 120,
   repelStrength = 1,
   speed = 0.25,
+  seed = "particles",
   className,
   children,
   ...props
@@ -68,13 +72,14 @@ export function ParticleField({
     let frame = 0;
     let visible = true;
 
-    const seed = () => {
+    const scatter = () => {
+      const random = createRandom(seed);
       n = Math.min(180, Math.round(((width * height) / 10_000) * density));
       p = new Float32Array(n * 7);
       for (let i = 0; i < n; i++) {
-        const angle = Math.random() * Math.PI * 2;
-        const s = speed * (0.4 + Math.random() * 0.6);
-        p.set([Math.random() * width, Math.random() * height, Math.cos(angle) * s, Math.sin(angle) * s, Math.cos(angle) * s, Math.sin(angle) * s, 1 + Math.random() * 1.3], i * 7);
+        const angle = random.next() * Math.PI * 2;
+        const s = speed * random.range(0.4, 1);
+        p.set([random.next() * width, random.next() * height, Math.cos(angle) * s, Math.sin(angle) * s, Math.cos(angle) * s, Math.sin(angle) * s, random.range(1, 2.3)], i * 7);
       }
     };
 
@@ -154,7 +159,7 @@ export function ParticleField({
       canvas.height = Math.round(height * dpr);
       ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
       rgb = resolveColor(root, color);
-      seed();
+      scatter();
       draw();
     };
 
@@ -191,7 +196,7 @@ export function ParticleField({
       root.removeEventListener("pointermove", onMove);
       root.removeEventListener("pointerleave", onLeave);
     };
-  }, [density, color, links, linkDistance, repelRadius, repelStrength, speed]);
+  }, [density, color, links, linkDistance, repelRadius, repelStrength, speed, seed]);
 
   return (
     <div ref={rootRef} className={cn("relative isolate overflow-hidden", className)} {...props}>

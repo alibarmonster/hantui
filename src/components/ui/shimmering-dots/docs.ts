@@ -12,10 +12,11 @@ export function Panel() {
 }`,
   a11y: [
     "The canvas is decorative and aria-hidden.",
-    "Twinkles are brief and spread out rather than strobing. With reduced motion enabled, the grid is static.",
+    "Twinkles are brief and spread out rather than strobing. With reduced motion enabled, the grid is a still frame: a scattering of dots stays lit and nothing flashes.",
   ],
   notes: [
     "Each twinkling dot follows its own sharpened sine wave, so dots spend most of their time dim and flash briefly at different moments.",
     "Drawn on a canvas and paused while offscreen; the grid fades out toward the edges unless fade={false}.",
+    "Which dots twinkle, and when, comes from `seed`, so a grid of the same size looks the same on every load. Pass a different seed to vary it.",
   ],
 };

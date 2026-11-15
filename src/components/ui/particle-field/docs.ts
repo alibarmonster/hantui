@@ -18,5 +18,6 @@ export function Hero() {
     "Particles drift slowly, get pushed away by the cursor, and ease back to their own drift. Nearby particles are linked by faint lines.",
     "The simulation pauses while offscreen. Density is per area (capped at 180 particles), so larger fields get more particles.",
     "Colors accept any CSS color, including theme variables.",
+    "Starting positions and drift come from `seed`, so a field of the same size starts the same way on every load (and the reduced-motion still frame matches). Pass a different seed to vary it.",
   ],
 };
