@@ -349,7 +349,7 @@ export function BridgeWidget({
                     if (status === "complete") setAmount("");
                     onReset?.();
                   }}
-                  className="inline-flex h-9 cursor-pointer items-center rounded-lg bg-foreground px-3.5 text-[13px] font-medium text-background outline-none hover:bg-foreground/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+                  className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 inline-flex h-9 cursor-pointer items-center rounded-lg bg-foreground px-3.5 text-[13px] font-medium text-background outline-none hover:bg-foreground/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
                 >
                   {status === "complete" ? "Bridge more" : "Try again"}
                 </button>

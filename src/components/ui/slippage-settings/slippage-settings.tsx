@@ -80,7 +80,7 @@ export function SlippageSettings({
         {trigger ?? (
           <button
             type="button"
-            className="inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-[13px] font-medium text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[state=open]:bg-accent data-[state=open]:text-foreground"
+            className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full px-2.5 text-[13px] font-medium text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring data-[state=open]:bg-accent data-[state=open]:text-foreground"
           >
             <Settings2 className="size-4" aria-hidden="true" />
             <span>
