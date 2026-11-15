@@ -62,7 +62,7 @@ export function FaqSection({
             type="button"
             onClick={() => setQuery("")}
             aria-label="Clear search"
-            className="absolute top-1/2 right-1.5 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+            className="after:absolute after:-inset-1 absolute top-1/2 right-1.5 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
           >
             <X className="size-3.5" aria-hidden="true" />
           </button>
