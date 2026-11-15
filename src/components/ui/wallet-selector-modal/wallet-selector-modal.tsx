@@ -278,7 +278,7 @@ export function WalletSelectorModal({
                           <button
                             type="button"
                             onClick={copyLink}
-                            className="mt-3 inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg border border-border bg-background px-3 text-[13px] font-medium text-foreground shadow-xs outline-none transition-colors hover:bg-surface focus-visible:ring-2 focus-visible:ring-ring"
+                            className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 mt-3 inline-flex h-9 cursor-pointer items-center gap-2 rounded-lg border border-border bg-background px-3 text-[13px] font-medium text-foreground shadow-xs outline-none transition-colors hover:bg-surface focus-visible:ring-2 focus-visible:ring-ring"
                           >
                             {copied ? <Check className="size-3.5 text-success" aria-hidden="true" /> : <Copy className="size-3.5" aria-hidden="true" />}
                             {copied ? "Link copied" : "Copy link"}

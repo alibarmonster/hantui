@@ -181,7 +181,7 @@ export function NetworkSwitcher({
               <button
                 type="button"
                 onClick={() => onSwitch(recommended.id)}
-                className="inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 self-start rounded-lg bg-foreground px-3 text-[13px] font-medium text-background outline-none transition-colors hover:bg-foreground/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:self-auto"
+                className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 inline-flex h-9 shrink-0 cursor-pointer items-center gap-2 self-start rounded-lg bg-foreground px-3 text-[13px] font-medium text-background outline-none transition-colors hover:bg-foreground/90 focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 sm:self-auto"
               >
                 <ChainIcon chain={recommended} size={18} />
                 {error ? "Try again" : `Switch to ${recommended.shortName ?? recommended.name}`}
