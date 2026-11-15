@@ -199,10 +199,13 @@ export function ParallaxSlider({
               aria-current={i === current || undefined}
               className="group flex h-6 cursor-pointer items-center outline-none"
             >
+              {/* The current dot widens with a layout (transform) animation, so its neighbors slide over too. */}
               <motion.span
-                className="block h-1.5 rounded-full bg-foreground group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2"
+                className={cn("block h-1.5 bg-foreground group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2", i === current ? "w-[22px]" : "w-1.5")}
+                style={{ borderRadius: 3 }}
+                layout
                 initial={false}
-                animate={{ width: i === current ? 22 : 6, opacity: i === current ? 1 : 0.25 }}
+                animate={{ opacity: i === current ? 1 : 0.25 }}
                 transition={reduceMotion ? { duration: 0 } : SNAP}
               />
             </button>
