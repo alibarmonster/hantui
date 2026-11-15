@@ -41,9 +41,9 @@ export default function IntroductionPage() {
             or shows a change in state. If it does none of those, it doesn&apos;t ship.
           </li>
           <li>
-            <strong>Compositor-only animation.</strong> Components animate transform, opacity, filter and
-            clip-path, and never width, height, top or left directly. Size changes use layout animations or the
-            grid-rows technique.
+            <strong>Compositor-first animation.</strong> Components animate transform, opacity, filter and
+            clip-path. Size changes use layout animations or the grid-rows technique; only a few rows and panels
+            that must push neighboring content animate their height or width.
           </li>
           <li>
             <strong>Accessible by default.</strong> Full keyboard support, visible focus, correct roles and labels,
