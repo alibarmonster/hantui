@@ -2,6 +2,7 @@
 
 import { useEffect, useImperativeHandle, useRef, type ComponentProps, type CSSProperties, type Ref, type RefObject } from "react";
 import { observeTheme } from "@/lib/color";
+import { createRandom } from "@/lib/random";
 import { cn } from "@/lib/utils";
 import { hash3, WakeField } from "@/lib/glyph/ascii-life";
 
@@ -55,6 +56,8 @@ export interface AsciiAquariumBackgroundProps extends Omit<ComponentProps<"div">
   burst?: boolean;
   /** Freezes the scene on its current frame. @default false */
   paused?: boolean;
+  /** Seed for where creatures start and how the water sparkles; the same seed and size give the same opening scene. @default "aquarium" */
+  seed?: string | number;
   /** Imperative handle with `setMode()` and `ripple()`. */
   ref?: Ref<AsciiAquariumHandle>;
 }
@@ -150,8 +153,6 @@ const ALPHA_EDGE = 0.38;
 const IGNORE = "a, button, input, textarea, select, label, summary, [role='button'], [contenteditable='true'], [data-aquarium-ignore]";
 
 const clamp = (v: number, lo: number, hi: number) => (v < lo ? lo : v > hi ? hi : v);
-const rand = (lo: number, hi: number) => lo + Math.random() * (hi - lo);
-const randInt = (lo: number, hi: number) => Math.floor(rand(lo, hi + 1));
 const smoothstep = (a: number, b: number, x: number) => {
   const t = clamp((x - a) / (b - a), 0, 1);
   return t * t * (3 - 2 * t);
@@ -223,6 +224,7 @@ export function AsciiAquariumBackground({
   interactive = true,
   burst = true,
   paused = false,
+  seed = "aquarium",
   ref,
   className,
   style,
@@ -235,11 +237,12 @@ export function AsciiAquariumBackground({
   const api = useRef<{ run: () => void; ripple: (x: number, y: number) => void } | null>(null);
   const colors = resolvePalette(palette);
   const paletteKey = `${colors.ink}|${colors.accent}`;
-  const creaturesKey = JSON.stringify(creatures ?? {});
-  const latest = useRef({ creatures, paletteKey, colors, focusRef, interactive, burst, paused, creaturesKey });
+  // A new seed re-rolls the scene the same way new creature counts do.
+  const creaturesKey = JSON.stringify([creatures ?? {}, seed]);
+  const latest = useRef({ creatures, seed, paletteKey, colors, focusRef, interactive, burst, paused, creaturesKey });
 
   useEffect(() => {
-    latest.current = { creatures, paletteKey, colors, focusRef, interactive, burst, paused, creaturesKey };
+    latest.current = { creatures, seed, paletteKey, colors, focusRef, interactive, burst, paused, creaturesKey };
   });
 
   useEffect(() => {
@@ -276,6 +279,11 @@ export function AsciiAquariumBackground({
     const probe = probeCanvas.getContext("2d", { willReadFrequently: true });
     if (!host || !el || !ctx || !lctx || !probe) return;
     const reduce = window.matchMedia("(prefers-reduced-motion: reduce)");
+    // One seeded stream for the scene. spawn() restarts it, so the opening frame (and the
+    // reduced-motion still frame) is the same on every load.
+    let random = createRandom(latest.current.seed);
+    const rand = (lo: number, hi: number) => random.range(lo, hi);
+    const randInt = (lo: number, hi: number) => random.int(lo, hi);
 
     let width = 0;
     let height = 0;
@@ -369,6 +377,7 @@ export function AsciiAquariumBackground({
     // --- creatures ----------------------------------------------------------------------------
     const spawn = () => {
       creaturesKey = latest.current.creaturesKey;
+      random = createRandom(latest.current.seed);
       const { rays = 1, jellyfish = 3, schools = 2, fishPerSchool = 7 } = latest.current.creatures ?? {};
       const make = (kind: Kind, rel: number, z: number): Creature => {
         const angle = rand(0, TAU);
@@ -458,7 +467,7 @@ export function AsciiAquariumBackground({
           dy: randInt(-2, 2),
           freq: rand(0.5, 1.4),
           phase: rand(0, TAU),
-          accent: Math.random() < 0.12,
+          accent: random.chance(0.12),
         })),
       };
     };
