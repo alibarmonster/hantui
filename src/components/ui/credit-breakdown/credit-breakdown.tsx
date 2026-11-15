@@ -271,7 +271,7 @@ export function CreditBreakdown({
           </p>
         </div>
         {onChangePlan ? (
-          <button type="button" onClick={onChangePlan} className="h-9 cursor-pointer rounded-full border border-border bg-background px-4 text-[13px] font-medium text-foreground outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
+          <button type="button" onClick={onChangePlan} className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 h-9 cursor-pointer rounded-full border border-border bg-background px-4 text-[13px] font-medium text-foreground outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
             Change plan
           </button>
         ) : null}
@@ -388,14 +388,14 @@ export function CreditBreakdown({
                 value={query}
                 onChange={(e) => setQuery(e.target.value)}
                 placeholder="Search"
-                className="h-9 w-36 rounded-full border border-border bg-background pr-3 pl-8 text-[13px] text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:w-44"
+                className="h-10 w-36 rounded-full border border-border bg-background pr-3 pl-8 text-[13px] text-foreground outline-none placeholder:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring sm:w-44"
               />
             </label>
             <button
               type="button"
               onClick={exportCsv}
               aria-label={exporting === "loading" ? "Exporting" : exporting === "done" ? "Exported" : "Export CSV"}
-              className="relative inline-flex h-9 min-w-[6.5rem] cursor-pointer items-center justify-center gap-1.5 overflow-hidden rounded-full bg-foreground px-3.5 text-[13px] font-medium text-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="relative inline-flex h-10 min-w-[6.5rem] cursor-pointer items-center justify-center gap-1.5 overflow-hidden rounded-full bg-foreground px-3.5 text-[13px] font-medium text-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <AnimatePresence mode="popLayout" initial={false}>
                 <motion.span
