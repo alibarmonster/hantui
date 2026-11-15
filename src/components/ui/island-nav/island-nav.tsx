@@ -45,6 +45,7 @@ export function IslandNav({ brand, items, cta, scrollContainer, label = "Main", 
         <motion.span
           aria-hidden="true"
           layout
+          layoutDependency={scrolled}
           className={cn("absolute -z-10 bg-[#0b0b0c] shadow-[0_12px_30px_-12px_rgb(0_0_0/0.5)] ring-1 ring-white/10", scrolled ? "inset-x-[3px] inset-y-[2px]" : "inset-0")}
           style={{ borderRadius: 18 }}
           transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
