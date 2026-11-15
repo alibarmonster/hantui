@@ -190,7 +190,7 @@ export function WalletSelectorModal({
                             type="button"
                             onClick={() => setView("list")}
                             aria-label="Back to wallets"
-                            className="-ml-2 inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                            className="relative after:absolute after:-inset-0.5 -ml-2 inline-flex size-9 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                           >
                             <ArrowLeft className="size-4" aria-hidden="true" />
                           </button>
