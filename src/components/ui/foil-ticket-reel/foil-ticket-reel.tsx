@@ -415,7 +415,8 @@ export function FoilTicketReel({ tickets = DEFAULT_TICKETS, autoplay = true, int
       <div ref={grainRef} aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 opacity-[0.09] mix-blend-screen" />
       <div aria-hidden="true" className="pointer-events-none absolute inset-0 -z-10 bg-[radial-gradient(ellipse_at_50%_40%,rgb(120_110_255/0.16),transparent_60%)]" />
 
-      <div className="relative grid w-full max-w-[40rem] place-items-center [perspective:1100px]" style={{ aspectRatio: "2.35" }}>
+      {/* z-[1]: the tickets' drop shadow falls over the position line below, which is transformed. */}
+      <div className="relative z-[1] grid w-full max-w-[40rem] place-items-center [perspective:1100px]" style={{ aspectRatio: "2.35" }}>
         <AnimatePresence initial={false} custom={direction}>
           <motion.div
             key={ticket.id}
@@ -445,9 +446,9 @@ export function FoilTicketReel({ tickets = DEFAULT_TICKETS, autoplay = true, int
       {/* Position: a gradient line that grows to the current ticket. */}
       <div className="mt-10 h-[3px] w-full max-w-[28rem] overflow-hidden rounded-full bg-white/10" aria-hidden="true">
         <motion.div
-          className="h-full rounded-full bg-[linear-gradient(90deg,#d6dee9,#ffeea0,#b2d4ff,#d6c4ff)]"
+          className="h-full origin-left rounded-full bg-[linear-gradient(90deg,#d6dee9,#ffeea0,#b2d4ff,#d6c4ff)]"
           initial={false}
-          animate={{ width: `${((index + 1) / count) * 100}%` }}
+          animate={{ scaleX: (index + 1) / count }}
           transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 220, damping: 30 }}
         />
       </div>
