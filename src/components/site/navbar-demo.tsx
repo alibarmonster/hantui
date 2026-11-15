@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, type ReactNode, type RefObject } from "react";
-import { BarChart3, BookOpen, Bot, Boxes, Cable, LifeBuoy, Lock, Newspaper, Plug, Sparkles, Workflow } from "lucide-react";
+import { BarChart3, BookOpen, Boxes, Cable, History, LifeBuoy, Lock, Newspaper, NotebookPen, Plug, Workflow } from "lucide-react";
 import type { NavAction, NavItem, NavLink } from "@/lib/nav/types";
 
 /** Demo-only data and a scrolling sample page for the navbar previews. Fictional brand "Kite". */
@@ -26,7 +26,7 @@ export function KiteBrand({ dark = false, inherit = false }: { dark?: boolean; i
 }
 
 export const productLinks: NavLink[] = [
-  { label: "Agent notebooks", href: "#", description: "Explore data with an assistant beside you.", icon: <Bot /> },
+  { label: "Agent notebooks", href: "#", description: "Explore data with an assistant beside you.", icon: <NotebookPen /> },
   { label: "Dashboards", href: "#", description: "Share live views with your whole team.", icon: <BarChart3 /> },
   { label: "Workflows", href: "#", description: "Automate the busywork between tools.", icon: <Workflow /> },
   { label: "Integrations", href: "#", description: "Connect the stack you already use.", icon: <Plug /> },
@@ -41,7 +41,7 @@ export const capabilityLinks: NavLink[] = [
 export const resourceLinks: NavLink[] = [
   { label: "Docs", href: "#", description: "Guides and API reference.", icon: <BookOpen /> },
   { label: "Blog", href: "#", description: "Product news and stories.", icon: <Newspaper /> },
-  { label: "Changelog", href: "#", description: "Every release, every week.", icon: <Sparkles /> },
+  { label: "Changelog", href: "#", description: "Every release, every week.", icon: <History /> },
   { label: "Support", href: "#", description: "We reply within a day.", icon: <LifeBuoy /> },
 ];
 

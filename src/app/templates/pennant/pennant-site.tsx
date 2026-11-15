@@ -1,7 +1,7 @@
 "use client";
 
 import Link from "next/link";
-import { ArrowRight, Bot, CreditCard, Receipt, ShieldCheck, Users, Zap } from "lucide-react";
+import { ArrowRight, Cpu, CreditCard, Receipt, ShieldCheck, Users, Zap } from "lucide-react";
 import { placeholderLogos } from "@/components/site/placeholder-logos";
 import { AgentSteps } from "@/components/ui/agent-steps/agent-steps";
 import { CreditTrend } from "@/components/ui/credit-trend/credit-trend";
@@ -84,7 +84,7 @@ function Hero() {
             "Spend control for",
             { icons: [<Users key="u" className={icon} />, <CreditCard key="c" className={icon} />], backgrounds: ["#0f7a5f", "#2563eb"] },
             "teams and",
-            { icons: [<Bot key="b" className={icon} />, <Zap key="z" className={icon} />], backgrounds: ["#7c3aed", "#ea580c"] },
+            { icons: [<Cpu key="c2" className={icon} />, <Zap key="z" className={icon} />], backgrounds: ["#7c3aed", "#ea580c"] },
             "their AI agents",
           ]}
         />
@@ -176,7 +176,7 @@ function AgentCardFace({ name, tint }: { name: string; tint: string }) {
   return (
     <div className="absolute inset-0 flex flex-col justify-between p-5 text-white" style={{ background: tint }}>
       <span className="inline-flex items-center gap-1.5 text-[12px] font-medium opacity-90">
-        <Bot className="size-3.5" aria-hidden="true" /> Agent card
+        <Cpu className="size-3.5" aria-hidden="true" /> Agent card
       </span>
       <span className="font-mono text-[13px] tracking-wide">{name}</span>
     </div>
