@@ -88,7 +88,7 @@ function TradeButton({ market, outcomeId, side, price, label, onTrade, compact }
         whileTap={reduceMotion ? undefined : { scale: 0.97 }}
         className={cn(
           "flex w-full cursor-pointer items-center justify-center gap-1.5 rounded-xl font-medium outline-none focus-visible:ring-2 focus-visible:ring-ring",
-          compact ? "h-9 text-[13px]" : "h-10 text-sm",
+          compact ? "relative after:absolute after:inset-x-0 after:-inset-y-0.5 h-9 text-[13px]" : "h-10 text-sm",
           side === "yes" ? "bg-success/12 text-[color-mix(in_oklab,var(--success)_70%,var(--foreground))] hover:bg-success/18" : "bg-destructive/10 text-[color-mix(in_oklab,var(--destructive)_75%,var(--foreground))] hover:bg-destructive/15",
         )}
       >
