@@ -1,12 +1,12 @@
 "use client";
 
-import { ArrowRight, Sparkles, Wand2 } from "lucide-react";
+import { ArrowRight, MousePointer2, Zap } from "lucide-react";
 import { ShimmerButton } from "@/components/ui/shimmer-button/shimmer-button";
 
 export function Default() {
   return (
     <ShimmerButton size="lg">
-      <Sparkles aria-hidden="true" />
+      <Zap aria-hidden="true" />
       Upgrade to Pro
     </ShimmerButton>
   );
@@ -15,7 +15,7 @@ export function Default() {
 export function OnHover() {
   return (
     <ShimmerButton trigger="hover" variant="outline" size="lg">
-      <Wand2 aria-hidden="true" />
+      <MousePointer2 aria-hidden="true" />
       Hover to shimmer
     </ShimmerButton>
   );

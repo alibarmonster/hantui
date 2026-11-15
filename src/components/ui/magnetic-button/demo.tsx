@@ -1,6 +1,6 @@
 "use client";
 
-import { ArrowUpRight, Mail, Plus, Sparkles } from "lucide-react";
+import { ArrowUpRight, Magnet, Mail, Plus } from "lucide-react";
 import { MagneticButton } from "@/components/ui/magnetic-button/magnetic-button";
 
 export function Default() {
@@ -31,7 +31,7 @@ export function IconButtons() {
 export function StrongPull() {
   return (
     <MagneticButton variant="primary" size="lg" radius={140} strength={0.6} contentStrength={0.6}>
-      <Sparkles aria-hidden="true" />
+      <Magnet aria-hidden="true" />
       Come closer
     </MagneticButton>
   );
