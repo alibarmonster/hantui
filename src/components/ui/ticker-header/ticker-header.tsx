@@ -29,19 +29,24 @@ export interface TickerHeaderProps {
 
 /**
  * A header with a scrolling announcement strip above the navigation. The strip pauses on hover or
- * focus, can be dismissed, and tucks away (grid-rows collapse) once the page scrolls.
+ * focus, can be dismissed, and scrolls away with the page while the nav stays pinned.
  */
 export function TickerHeader({ brand, items, actions = [], announcements, duration = 28, scrollContainer, label = "Main", className }: TickerHeaderProps) {
   const reduceMotion = useReducedMotion();
   const { y } = useScrollState(scrollContainer);
   const [dismissed, setDismissed] = useState(false);
   const [paused, setPaused] = useState(false);
-  const showStrip = !dismissed && y < 24;
+  // The header sticks 32px above the top (-top-8), so the strip scrolls off with the page and the nav
+  // pins. Nothing changes size on scroll, so the page never moves under the reader. Collapsing the
+  // strip at a scroll threshold used to shift the page, and scroll anchoring then undid the scroll,
+  // so the strip opened and shut without settling.
+  const stripInView = !dismissed && y < 32;
   const loop = [...announcements, ...announcements];
   return (
-    <header className={cn("@container sticky top-0 z-40 border-b border-black/[0.06] bg-white/90 backdrop-blur-xl", className)}>
-      <div className={cn("grid transition-[grid-template-rows] duration-300 motion-reduce:transition-none", showStrip ? "grid-rows-[1fr]" : "grid-rows-[0fr]")}>
-        <div className="min-h-0 overflow-hidden" inert={!showStrip}>
+    <header className={cn("@container sticky z-40 border-b border-black/[0.06] bg-white/90 backdrop-blur-xl", dismissed ? "top-0" : "-top-8", className)}>
+      {/* Dismissing folds the strip away (grid rows); scrolling never does. */}
+      <div className={cn("grid transition-[grid-template-rows] duration-300 motion-reduce:transition-none", dismissed ? "grid-rows-[0fr]" : "grid-rows-[1fr]")}>
+        <div className="min-h-0 overflow-hidden" inert={!stripInView}>
           <div
             role="region"
             aria-label="Announcements"
@@ -56,7 +61,7 @@ export function TickerHeader({ brand, items, actions = [], announcements, durati
             ) : (
               <motion.div
                 className="flex shrink-0 gap-10 pr-10 whitespace-nowrap"
-                animate={paused ? undefined : { x: ["0%", "-50%"] }}
+                animate={paused || !stripInView ? undefined : { x: ["0%", "-50%"] }}
                 transition={{ duration, ease: "linear", repeat: Infinity }}
               >
                 {loop.map((msg, i) => (

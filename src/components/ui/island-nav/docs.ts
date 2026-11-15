@@ -7,7 +7,7 @@ export const docs: ComponentDocs = {
   a11y: [
     "A labelled `<nav>` inside a sticky `<header>`; every entry is a real link.",
     "Below the container's md width the links move into a menu button with `aria-expanded`; Escape closes it and returns focus.",
-    "The scroll tightening is skipped under reduced motion.",
+    "Under reduced motion the island tightens at once instead of springing.",
   ],
   notes: [
     "Pass `scrollContainer` when the navbar lives in a scrolling panel instead of the page.",

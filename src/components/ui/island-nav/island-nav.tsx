@@ -34,11 +34,21 @@ export function IslandNav({ brand, items, cta, scrollContainer, label = "Main", 
     <header className={cn("@container sticky top-0 z-40 flex justify-center px-3 pt-3", className)}>
       <motion.nav
         aria-label={label}
-        className="relative flex items-center gap-1 rounded-[18px] bg-[#0b0b0c] text-white shadow-[0_12px_30px_-12px_rgb(0_0_0/0.5)] ring-1 ring-white/10"
+        className="relative isolate flex items-center gap-1 py-2 pr-2 pl-3 text-white"
         initial={false}
-        animate={{ paddingLeft: scrolled ? 8 : 12, paddingRight: scrolled ? 6 : 8, paddingTop: scrolled ? 6 : 8, paddingBottom: scrolled ? 6 : 8, y: scrolled ? 4 : 0 }}
+        animate={{ y: scrolled ? 4 : 0 }}
         transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
       >
+        {/* The island tightens on scroll by insetting its backing, animated as a layout (transform)
+            animation. The nav itself keeps its size, so the header's height never changes; animating
+            its padding moved the page, and scroll anchoring then wobbled it around the threshold. */}
+        <motion.span
+          aria-hidden="true"
+          layout
+          className={cn("absolute -z-10 bg-[#0b0b0c] shadow-[0_12px_30px_-12px_rgb(0_0_0/0.5)] ring-1 ring-white/10", scrolled ? "inset-x-[3px] inset-y-[2px]" : "inset-0")}
+          style={{ borderRadius: 18 }}
+          transition={reduceMotion ? { duration: 0 } : { type: "spring", stiffness: 380, damping: 32 }}
+        />
         <div className="mr-3 flex items-center">{brand}</div>
         <ul className="hidden items-center @md:flex">
           {items.map((item) => (
