@@ -29,6 +29,7 @@
 
 import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import { observeTheme } from "@/lib/color";
+import { createRandom } from "@/lib/random";
 import { cn } from "@/lib/utils";
 import { runCanvasLoop, type CanvasLoop } from "@/lib/glyph/canvas-loop";
 import { getGlyphAtlas, loadGlyphFont, monoFontFamily, resolveCanvasColors, type GlyphAtlas } from "@/lib/glyph/glyph-atlas";
@@ -83,6 +84,8 @@ export interface AsciiSharkSeaProps extends Omit<ComponentProps<"div">, "childre
   interactive?: boolean;
   /** Freezes the sea on its current frame. @default false */
   paused?: boolean;
+  /** Seed for where sharks and schools start and how they wander; the same seed and size give the same sea. @default "shark-sea" */
+  seed?: string | number;
 }
 
 const PALETTES: Record<"light" | "dark", SharkSeaColors> = {
@@ -325,6 +328,7 @@ export function AsciiSharkSea({
   palette = "light",
   interactive = true,
   paused = false,
+  seed = "shark-sea",
   className,
   style,
   ...props
@@ -436,9 +440,12 @@ export function AsciiSharkSea({
 
     /* ---------------------------------------------------------- world */
 
-    const rand = (a: number, b: number) => a + Math.random() * (b - a);
+    // One seeded stream drives the whole sea, so the opening frame, and the settled still frame
+    // shown with reduced motion, are the same on every load.
+    const random = createRandom(seed);
+    const rand = (a: number, b: number) => random.range(a, b);
 
-    const seed = () => {
+    const populate = () => {
       seeded = true;
       const minSide = Math.min(width, height);
       const base = Math.max(160, Math.min(440, minSide * 0.54));
@@ -476,8 +483,8 @@ export function AsciiSharkSea({
         const sp = FISH[kind];
         const cx = rand(width * 0.08, width * 0.92);
         const cy = rand(height * 0.1, height * 0.9);
-        const dir = (Math.random() < 0.5 ? 0 : Math.PI) + rand(-0.5, 0.5);
-        const mill: 1 | -1 = Math.random() < 0.5 ? 1 : -1;
+        const dir = (random.chance(0.5) ? 0 : Math.PI) + rand(-0.5, 0.5);
+        const mill: 1 | -1 = random.chance(0.5) ? 1 : -1;
         for (let f = 0; f < fishPerSchool; f++) {
           fish.push({
             x: cx + rand(-1, 1) * sepX[kind] * Math.sqrt(fishPerSchool),
@@ -664,8 +671,8 @@ export function AsciiSharkSea({
         if (f.y < m) ay += (m - f.y) * 7;
         else if (f.y > height - m) ay -= (f.y - (height - m)) * 7;
         const [ux, uy] = current(f.x, f.y);
-        ax += ux * 0.5 + (Math.random() - 0.5) * sp.jitter;
-        ay += uy * 0.5 + (Math.random() - 0.5) * sp.jitter;
+        ax += ux * 0.5 + (random.next() - 0.5) * sp.jitter;
+        ay += uy * 0.5 + (random.next() - 0.5) * sp.jitter;
         ay -= f.vy * sp.drag * (1 - 0.7 * f.alarm);
         const preferred = sp.cruise * (1 + 1.3 * f.alarm);
         ax += (preferred - speed) * hx * 1.6;
@@ -728,7 +735,7 @@ export function AsciiSharkSea({
         sh.hunger = Math.min(1, sh.hunger + dt * 0.03);
         let dx = Math.cos(sh.heading);
         let dy = Math.sin(sh.heading);
-        sh.wander = Math.max(-1.1, Math.min(1.1, sh.wander + (Math.random() - 0.5) * dt * 3.2));
+        sh.wander = Math.max(-1.1, Math.min(1.1, sh.wander + (random.next() - 0.5) * dt * 3.2));
         dx += Math.cos(sh.heading + sh.wander) * 0.45;
         dy += Math.sin(sh.heading + sh.wander) * 0.45;
         if (time >= sh.retargetAt) {
@@ -824,13 +831,13 @@ export function AsciiSharkSea({
       if (!due.length || (due.length < 6 && time - lastSpawn < 9)) return;
       lastSpawn = time;
       // A new school swims in from an edge.
-      const side = Math.floor(Math.random() * 4);
+      const side = random.int(0, 3);
       const along = rand(0.15, 0.85);
       const x = side === 0 ? -20 : side === 1 ? width + 20 : along * width;
       const y = side === 2 ? -20 : side === 3 ? height + 20 : along * height;
       const inward = Math.atan2(height / 2 - y, width / 2 - x) + rand(-0.5, 0.5);
-      const kind = Math.floor(Math.random() * FISH.length);
-      const mill: 1 | -1 = Math.random() < 0.5 ? 1 : -1;
+      const kind = random.int(0, FISH.length - 1);
+      const mill: 1 | -1 = random.chance(0.5) ? 1 : -1;
       for (const f of due.slice(0, fishPerSchool)) {
         Object.assign(f, {
           alive: true,
@@ -1065,7 +1072,7 @@ export function AsciiSharkSea({
         buildAtlas();
         paintBackground();
         if (!seeded) {
-          seed();
+          populate();
           // A still frame (reduced motion) shows the sea after it has settled.
           if (frame.still) for (let k = 0; k < 240; k++) step(STEP);
         } else {
@@ -1133,7 +1140,7 @@ export function AsciiSharkSea({
       root.removeEventListener("pointerleave", onLeave);
       root.removeEventListener("pointerdown", onDown);
     };
-  }, [sharkKey, colorKey, schools, fishPerSchool, cell, themeKey]);
+  }, [sharkKey, colorKey, schools, fishPerSchool, cell, themeKey, seed]);
 
   return (
     <div ref={rootRef} className={cn("relative isolate min-h-96 overflow-hidden font-mono", className)} style={{ background: colors.background, ...style }} {...props}>
