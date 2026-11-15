@@ -30,6 +30,12 @@ Work toward 0.4.0: sixteen components. Ten (#213–222) form a new category, Stu
 - `src/lib/glyph/ascii-life.ts`, shared helpers for ASCII creatures: a terminal-shaped cell grid (cells 1.45 times as tall as wide), a diffusing wake field, follow-the-leader spines with a travelling body wave and body-coordinate hit tests, sub-sample offsets for soft edges, and a cell buffer that batches shaded blocks by color and blits glyphs from the atlas.
 - Caveat (OFL, from `@fontsource/caveat`, not preloaded) as `--font-hand` on the site, for handwritten notes.
 - Geist Serif (from the `geist` package, not preloaded) as `--font-geist-serif` on the site, for display titles in components that fall back to the system serif elsewhere.
+- Dark mode for the site: a Light, Dark and System switch in the header, applied before the first paint so pages never flash the wrong theme. Light and dark also work as islands through `[data-theme]` on any element. All 228 components were checked in both themes.
+- Theme tokens `--success-foreground`, for text on solid success fills, and `--link` and `--destructive-text`, for terracotta and red text that stays readable in dark. Installed components read the last two as `var(--link, var(--primary))` and `var(--destructive-text, var(--destructive))`, so a theme that doesn't set them looks the same.
+- A `seed` prop (string or number) on Particle Field, Shimmering Dots, ASCII Aquarium Background and ASCII Shark Sea, drawn through the shared `src/lib/random.ts`. The same seed and size give the same opening scene on every load, and the reduced-motion still frame matches.
+- Component pages preview a demo in the other theme, and Open in new tab shows it alone at `/preview/<slug>` (228 static pages, noindex and disallowed in robots.txt).
+- Tooltips on the site's icon-only controls: 150ms before the first, instant between neighbors, never on touch.
+- Docs pages show a section select where the table of contents rail doesn't fit.
 
 ### Changed
 
@@ -48,6 +54,26 @@ Work toward 0.4.0: sixteen components. Ten (#213–222) form a new category, Stu
 - The README credits ascii-sharks (MIT), which ASCII Shark Sea, ASCII Koi Pond, ASCII Aquarium Background and the ASCII look of Dither Wildlife learn from.
 - The README and package description count 228 components in 22 categories, and the last category card on the landing page fills the rest of its row.
 - Version 0.4.0 in progress: the navbar badge and the New badges follow it, so components from 0.3.0 no longer show New. The landing page showcases 0.3.0, the latest shipped release.
+- Search opens and closes without animation, groups results into Components, Categories and Docs (the short groups first before you type), shows each component's category and New badge, and uses a 16px input so phones don't zoom.
+- Code blocks have a dark theme in dark mode (light and dark Shiki themes from one scope table, light colors at least 4.88:1) and line numbers on multi-line blocks.
+- Docs prose is 16px with a 1.6 line height and a 72-character measure.
+- Site controls get a 44px touch target on touch screens; desktop density is unchanged.
+- The README and the docs overview describe motion accurately: components animate transform, opacity, filter and clip-path, size changes use layout animations or a grid-rows reveal, and only a few rows and panels that must push neighboring content animate their height or width.
+
+### Fixed
+
+- Canvases that draw with theme colors (Dot Grid, Particle Field, Shimmering Dots, Dotted Globe, Ring Reel, Formation Gallery, Dissolve Transition, Dot Burst Feature Tabs and the ASCII scenes) repaint when the theme switches.
+- Text that fell short of 4.5:1 in dark or light now passes: success states and Swipeable List Row actions, small terracotta and red text in 24 components, the Center Pill Nav button, Tumbling Tags tones, Market Leaderboard ranks, the ember Glyph Map Card, the Living Book demo, the shared demo state switcher, Candlestick Chart's and Staking Card's inactive tabs, Agent Progress Steps' pending steps, Foil Ticket Reel's gold serial, Retro Desktop Hero's icon labels, Crumple Notes' hint and the last faint text in the site chrome.
+- Stacked Cards and Swipe Card Stack demos use theme tokens instead of hardcoded white cards.
+- Scroll-Aware Nav, Ticker Header and Island Nav no longer change their height as the page scrolls. That moved the page, the browser's scroll anchoring moved it back, and a reader resting just past the threshold saw the header flicker (Ticker Header's strip opened and shut) while the scroll position jumped by up to 32px. Scroll-Aware Nav now only looks shorter, Ticker Header's strip scrolls away with the page (the header sticks 32px above the top), and Island Nav's backing insets with a layout animation.
+- Retro Desktop Hero: a dropped icon or window flashed back to where it started and slid out again. Both now land where they were let go, an icon dropped on another slides back as documented, and the desktop icons leave the tab order while a maximized window covers them.
+- Reduced motion: Voice Orb's outline and size hold still (its glow still follows the voice), ASCII Aquarium Background holds a still frame, the marching dashes in Flow Line Chat Card and Multiplayer Canvas Card stop, and Shimmering Dots' still frame shows a scattering of lit dots instead of a flat grid.
+- Offscreen: Dual Logo Marquee, Testimonial Wall, Live Price Ticker and Foil Card Drift pause offscreen. Voice Orb reads the microphone level inside its drawing loop and Dot Burst Feature Tabs runs its autoplay timer on its canvas loop, so neither keeps a second loop ticking offscreen.
+- Focus rings show on Sliding Tabs' panel (an overflow clip hid it), Foil Ticket Reel's stub (its mask clipped it) and around the whole Token Amount Input field.
+- Phones: Token Amount Input's figure scales with its row and ends in an ellipsis instead of clipping, Coin Crew Hero wraps its copy before the coin line, and the Floating Screen demo shows the phone when the laptop won't fit.
+- Foil Ticket Reel's position line, Depth Rail's and Parallax Slider's dots, Sleeve Rail's ticks, Crumple Notes' contact shadows and Multiplayer Canvas Card's selection box animate with transforms instead of width, height or position.
+- Search closes reliably after a quick Escape (an invisible overlay could stay and swallow clicks) and returns focus to its button.
+- Radio Card Group and Lens Tab Bar fit their gallery cards, and the CTA with Border Beam, Pricing Section and Cloth Banner demos no longer invent component counts or a release.
 
 ## [0.3.0] - 2026-11-07
 
