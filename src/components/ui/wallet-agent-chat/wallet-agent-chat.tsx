@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useLayoutEffect, useRef, useState } from "react";
 import { AnimatePresence, motion, useAnimate, useReducedMotion } from "motion/react";
-import { ArrowDown, ArrowRight, ExternalLink, RotateCcw, ShieldAlert, Sparkles } from "lucide-react";
+import { ArrowDown, ArrowRight, Cpu, ExternalLink, RotateCcw, ShieldAlert } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { duration, ease, spring, stagger } from "@/lib/motion";
 import { AddressPill } from "@/components/ui/address-pill/address-pill";
@@ -461,7 +461,7 @@ function AgentMessage({
   return (
     <div className="flex gap-2.5">
       <span aria-hidden="true" className="mt-0.5 grid size-7 shrink-0 place-items-center rounded-full bg-foreground text-background">
-        <Sparkles className="size-3.5" />
+        <Cpu className="size-3.5" />
       </span>
       <div className="min-w-0 flex-1">
         <AgentSteps steps={steps} aria-label="Agent steps" className="[&_li]:pb-2.5" />
@@ -543,7 +543,7 @@ export function WalletAgentChat({
     <section aria-labelledby={`${id}-title`} className={cn("flex h-[38rem] w-full max-w-xl flex-col overflow-hidden rounded-2xl border border-border bg-background", className)}>
       <header className="flex flex-wrap items-center gap-3 border-b border-border px-4 py-3">
         <span aria-hidden="true" className="grid size-9 shrink-0 place-items-center rounded-full bg-[conic-gradient(from_140deg,#6366f1,#22d3ee,#a855f7,#6366f1)] text-white">
-          <Sparkles className="size-4" />
+          <Cpu className="size-4" />
         </span>
         <div className="min-w-0">
           <h3 id={`${id}-title`} className="flex items-center gap-2 text-sm font-semibold text-foreground">
