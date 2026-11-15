@@ -421,13 +421,15 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
     if (!d) return;
     const dx = event.clientX - d.startX;
     const dy = event.clientY - d.startY;
+    const el = d.kind === "icon" ? iconRefs.current.get(d.id) : winRefs.current.get(d.id);
     if (!d.moved && Math.hypot(dx, dy) > 4) {
       d.moved = true;
       // Capture once it is a drag, so double clicks and buttons still work.
       event.currentTarget.setPointerCapture(event.pointerId);
+      // An icon follows the pointer 1:1; its eased transition comes back on drop.
+      if (el && d.kind === "icon") el.style.transition = "none";
     }
     if (!d.moved) return;
-    const el = d.kind === "icon" ? iconRefs.current.get(d.id) : winRefs.current.get(d.id);
     if (el) el.style.translate = `${dx}px ${dy}px`;
   };
 
@@ -439,8 +441,20 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
     const dx = event.clientX - d.startX;
     const dy = event.clientY - d.startY;
     const el = d.kind === "icon" ? iconRefs.current.get(d.id) : winRefs.current.get(d.id);
-    if (el) el.style.translate = "";
     if (d.kind === "icon") {
+      // Settle from where it was dropped (FLIP): jump to the destination cell with a translate that keeps
+      // it in place, then ease the translate to zero. Clearing the translate first made the icon flash
+      // back to its old cell and slide out from there.
+      const settle = (col: number, row: number) => {
+        if (!el) return;
+        const x = col * CELL.w;
+        const y = row * CELL.h;
+        el.style.transform = `translate(${x}px, ${y}px)`;
+        el.style.translate = `${d.originX + dx - x}px ${d.originY + dy - y}px`;
+        el.getBoundingClientRect();
+        el.style.transition = "";
+        el.style.translate = "";
+      };
       // Snap to the nearest free cell.
       let col = Math.round((d.originX + dx) / CELL.w);
       let row = Math.round((d.originY + dy) / CELL.h);
@@ -454,13 +468,18 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
         }),
       );
       // Dropped on another icon: it slides back.
-      if (taken.has(`${col}:${row}`)) return;
+      if (taken.has(`${col}:${row}`)) {
+        settle(Math.round(d.originX / CELL.w), Math.round(d.originY / CELL.h));
+        return;
+      }
+      settle(col, row);
       const next: Positions = {};
       windows.forEach((w, i) => {
         next[w.id] = w.id === d.id ? { col, row } : cellOf(w.id, i);
       });
       writePositions(storeKey, next, persistKey !== null);
     } else {
+      if (el) el.style.translate = "";
       const w = open.find((o) => o.id === d.id);
       if (w) patch(d.id, { x: Math.min(size.w - 60, Math.max(-w.w + 80, d.originX + dx)), y: Math.min(size.h - 30, Math.max(0, d.originY + dy)) });
     }
@@ -609,10 +628,10 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
                 onDragStart={(e) => e.preventDefault()}
                 className={cn(
                   "group flex w-[80px] cursor-default flex-col items-center gap-1 rounded-sm p-1.5 outline-none focus-visible:ring-2 focus-visible:ring-white/90",
-                  !compact && "absolute touch-none transition-[left,top] duration-200 motion-reduce:transition-none",
+                  !compact && "absolute top-0 left-0 touch-none transition-[transform,translate] duration-200 motion-reduce:transition-none",
                   compact && "w-full",
                 )}
-                style={compact ? undefined : { left: x, top: y }}
+                style={compact ? undefined : { transform: `translate(${x}px, ${y}px)` }}
               >
                 <PixelArt art={PIXEL_ICONS[cfg.icon]} className="size-12 drop-shadow-[2px_2px_0_rgb(0_0_0/0.25)]" />
                 <span
@@ -650,6 +669,9 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
                 inert={win.minimized}
                 aria-hidden={win.minimized || undefined}
                 layout={!reduceMotion}
+                // Only maximize and restore animate the box. A dropped window lands where it was let go;
+                // animating that change replayed the drag from the old spot.
+                layoutDependency={full}
                 onPointerDownCapture={() => focusWindow(win.id)}
                 onKeyDown={(e) => {
                   if (e.key === "Escape") {

@@ -79,7 +79,7 @@ export function MultiplayerCanvasCard({
   const stageRef = useRef<HTMLDivElement>(null);
   const cursorRefs = useRef<(HTMLDivElement | null)[]>([]);
   const linkRefs = useRef<(SVGPathElement | null)[]>([]);
-  const selectRef = useRef<HTMLDivElement>(null);
+  const selectRef = useRef<SVGRectElement>(null);
   const shapesRef = useRef<HTMLDivElement>(null);
   const typedRef = useRef<HTMLSpanElement>(null);
   const caretRef = useRef<HTMLSpanElement>(null);
@@ -125,10 +125,11 @@ export function MultiplayerCanvasCard({
         const x0 = Math.min(16, end[0]);
         const y0 = Math.min(18, end[1]);
         sel.style.opacity = on ? (t > 3.6 ? String(1 - seg(t, 3.6, 4.2)) : "1") : "0";
-        sel.style.left = `${x0}%`;
-        sel.style.top = `${y0}%`;
-        sel.style.width = `${Math.abs(end[0] - 16)}%`;
-        sel.style.height = `${Math.abs(end[1] - 18)}%`;
+        // An SVG rect, so redrawing it every frame never touches the page layout.
+        sel.setAttribute("x", `${x0}%`);
+        sel.setAttribute("y", `${y0}%`);
+        sel.setAttribute("width", `${Math.abs(end[0] - 16)}%`);
+        sel.setAttribute("height", `${Math.abs(end[1] - 18)}%`);
         shapesRef.current?.toggleAttribute("data-selected", t > 2.4 && t < 4.2);
       }
       // Typing.
@@ -241,7 +242,9 @@ export function MultiplayerCanvasCard({
               <span className="absolute right-0 bottom-0 size-[44%] rounded-full bg-[#f59e0b]/80 ring-2 ring-transparent transition-shadow group-data-[selected]/shapes:ring-[#60a5fa]" />
               <span className="absolute bottom-[8%] left-[8%] h-[30%] w-[36%] rotate-[-6deg] rounded-sm bg-[#fde68a] ring-2 ring-transparent transition-shadow group-data-[selected]/shapes:ring-[#60a5fa]" />
             </div>
-            <div ref={selectRef} className="absolute rounded-sm border border-[#60a5fa] bg-[#3b82f6]/15 opacity-0" style={{ left: "16%", top: "18%" }} />
+            <svg className="pointer-events-none absolute inset-0 size-full overflow-visible">
+              <rect ref={selectRef} x="16%" y="18%" width="0" height="0" rx={4} className="fill-[#3b82f6]/15 stroke-[#60a5fa] opacity-0" strokeWidth={1} />
+            </svg>
 
             {/* Text block. */}
             <div className="absolute top-[20%] right-[6%] w-[34%] rounded-lg border border-white/15 bg-white/5 px-2.5 py-2 text-[11.5px] leading-4 text-white/85">

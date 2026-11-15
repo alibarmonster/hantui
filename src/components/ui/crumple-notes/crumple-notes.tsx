@@ -440,8 +440,10 @@ export function CrumpleNotes({ notes = SAMPLE, activeId, defaultActiveId, onActi
             const sheet = s.sheets[i];
             if (!sheet) return;
             const w = (sheet.crumple > 0.5 ? geo.noteW * 0.5 : geo.noteW * 0.92) * sheet.scale;
-            el.style.transform = `translate3d(${(sheet.x - w / 2).toFixed(1)}px, ${(sheet.y + (sheet.crumple > 0.5 ? geo.noteW * 0.2 : geo.noteH * 0.47) * sheet.scale).toFixed(1)}px, 0)`;
-            el.style.width = `${w.toFixed(1)}px`;
+            // A fixed width (a no-op write once set) scaled per frame, so following the sheet stays off layout.
+            const base = geo.noteW * 0.92;
+            el.style.width = `${base.toFixed(1)}px`;
+            el.style.transform = `translate3d(${(sheet.x - w / 2).toFixed(1)}px, ${(sheet.y + (sheet.crumple > 0.5 ? geo.noteW * 0.2 : geo.noteH * 0.47) * sheet.scale).toFixed(1)}px, 0) scaleX(${(w / base).toFixed(3)})`;
           });
         },
       });
@@ -558,7 +560,7 @@ export function CrumpleNotes({ notes = SAMPLE, activeId, defaultActiveId, onActi
     <section aria-label="Notes" className={cn("@container relative h-[480px] w-full overflow-hidden rounded-2xl bg-[#efece6]", className)} style={paperStyle} {...props}>
       <div ref={stageRef} className="absolute inset-0">
         {/* Contact shadows (moved by the WebGL loop). */}
-        {mode === "webgl" ? notes.map((n) => <span key={n.id} data-shadow aria-hidden="true" className="pointer-events-none absolute top-0 left-0 h-5 rounded-[50%] bg-black/25 blur-md" />) : null}
+        {mode === "webgl" ? notes.map((n) => <span key={n.id} data-shadow aria-hidden="true" className="pointer-events-none absolute top-0 left-0 h-5 origin-left rounded-[50%] bg-black/25 blur-md" />) : null}
         <canvas ref={canvasRef} aria-hidden="true" className={cn("pointer-events-none absolute inset-0 size-full transition-opacity duration-300", mode === "webgl" ? "opacity-100" : "opacity-0")} />
 
         {/* The flat note, as real text. */}
