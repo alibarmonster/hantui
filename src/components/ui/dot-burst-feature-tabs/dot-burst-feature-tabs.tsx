@@ -270,9 +270,11 @@ export function DotBurstFeatureTabs({
   const canvasRef = useRef<HTMLCanvasElement>(null);
   const tabRefs = useRef<(HTMLButtonElement | null)[]>([]);
   const pause = useRef({ hover: false, focus: false, inView: true });
-  const live = useRef({ index, items, onActiveChange, dotDensity });
+  // Autoplay runs only with motion allowed and more than one item.
+  const autoplaying = playing && !reduceMotion && items.length > 1;
+  const live = useRef({ index, items, onActiveChange, dotDensity, autoplaying, interval });
   useEffect(() => {
-    live.current = { index, items, onActiveChange, dotDensity };
+    live.current = { index, items, onActiveChange, dotDensity, autoplaying, interval };
   });
 
   const go = (next: number, fromUser: boolean) => {
@@ -282,32 +284,6 @@ export function DotBurstFeatureTabs({
     if (fromUser) setPlaying(false);
     onActiveChange?.(items[i].id);
   };
-
-  // The autoplay timer: one rAF loop that fills the open item's bar, then opens the next item.
-  const autoplaying = playing && !reduceMotion && items.length > 1;
-  useEffect(() => {
-    if (!autoplaying) return;
-    let raf = 0;
-    let last = 0;
-    const tick = (now: number) => {
-      const dt = last ? Math.min(0.1, (now - last) / 1000) : 0;
-      last = now;
-      const p = pause.current;
-      if (!p.hover && !p.focus && p.inView && !document.hidden) {
-        const next = progress.get() + dt / Math.max(0.5, interval);
-        if (next >= 1) {
-          const { index: i, items: list, onActiveChange: cb } = live.current;
-          const n = (i + 1) % list.length;
-          progress.set(0);
-          setIndex(n);
-          cb?.(list[n].id);
-        } else progress.set(next);
-      }
-      raf = requestAnimationFrame(tick);
-    };
-    raf = requestAnimationFrame(tick);
-    return () => cancelAnimationFrame(raf);
-  }, [autoplaying, interval, progress]);
 
   // Feature colors may be theme variables: re-resolve them after a theme switch.
   const [themeKey, setThemeKey] = useState(0);
@@ -373,6 +349,19 @@ export function DotBurstFeatureTabs({
       },
       render: ({ dt, still, dpr, width, height }) => {
         clock += dt;
+        // The autoplay timer rides this loop (one loop per component): it fills the open item's bar,
+        // then opens the next item. The loop only runs in view, in a visible tab and with motion allowed.
+        const p = pause.current;
+        if (live.current.autoplaying && !p.hover && !p.focus && p.inView) {
+          const next = progress.get() + dt / Math.max(0.5, live.current.interval);
+          if (next >= 1) {
+            const { index: i, items: list, onActiveChange: cb } = live.current;
+            const n = (i + 1) % list.length;
+            progress.set(0);
+            setIndex(n);
+            cb?.(list[n].id);
+          } else progress.set(next);
+        }
         const { items: list, index: i } = live.current;
         relayout(list[Math.min(i, list.length - 1)], !still);
         ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
@@ -417,7 +406,7 @@ export function DotBurstFeatureTabs({
       unobserveTheme();
       dotsRef.current = null;
     };
-  }, [id]);
+  }, [id, progress]);
 
   // Redraw the still frame when the feature changes under reduced motion.
   useEffect(() => {
