@@ -204,6 +204,7 @@ export function ParallaxSlider({
                 className={cn("block h-1.5 bg-foreground group-focus-visible:ring-2 group-focus-visible:ring-ring group-focus-visible:ring-offset-2", i === current ? "w-[22px]" : "w-1.5")}
                 style={{ borderRadius: 3 }}
                 layout
+                layoutDependency={current}
                 initial={false}
                 animate={{ opacity: i === current ? 1 : 0.25 }}
                 transition={reduceMotion ? { duration: 0 } : SNAP}
