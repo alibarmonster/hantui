@@ -299,13 +299,13 @@ export function LivingBook({
 
   const controls = (
     <div className="mt-3 flex items-center justify-center gap-3">
-      <button type="button" onClick={() => start(-1)} disabled={spread === 0 || turn !== null} aria-label="Previous pages" className="grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40">
+      <button type="button" onClick={() => start(-1)} disabled={spread === 0 || turn !== null} aria-label="Previous pages" className="relative after:absolute after:-inset-0.5 grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40">
         <ChevronLeft className="size-4" aria-hidden="true" />
       </button>
       <span className="min-w-[6rem] text-center text-[12px] text-muted-foreground tabular-nums" aria-live="polite">
         Pages {counter}
       </span>
-      <button type="button" onClick={() => start(1)} disabled={spread >= spreads - 1 || turn !== null} aria-label="Next pages" className="grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40">
+      <button type="button" onClick={() => start(1)} disabled={spread >= spreads - 1 || turn !== null} aria-label="Next pages" className="relative after:absolute after:-inset-0.5 grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40">
         <ChevronRight className="size-4" aria-hidden="true" />
       </button>
     </div>

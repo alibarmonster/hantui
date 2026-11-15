@@ -225,7 +225,7 @@ export function LiquidGlassOverlay({ children, toolbar, defaultPosition = { x: 2
         data-glass-handle
         aria-label="Move toolbar (arrow keys)"
         onKeyDown={onHandleKey}
-        className="grid size-8 cursor-grab place-items-center rounded-full text-foreground/60 outline-none focus-visible:ring-2 focus-visible:ring-ring"
+        className="relative after:absolute after:-inset-1 grid size-8 cursor-grab place-items-center rounded-full text-foreground/60 outline-none focus-visible:ring-2 focus-visible:ring-ring"
       >
         <GripVertical className="size-4" aria-hidden="true" />
       </button>

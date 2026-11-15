@@ -182,7 +182,7 @@ export function ClothBanner({ children, variant = "dark", dismissible = true, on
     >
       <div className="min-w-0 flex-1">{children}</div>
       {dismissible ? (
-        <button type="button" onClick={dismiss} aria-label="Dismiss announcement" className="grid size-8 shrink-0 cursor-pointer place-items-center rounded-full opacity-80 outline-none transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-current">
+        <button type="button" onClick={dismiss} aria-label="Dismiss announcement" className="relative after:absolute after:-inset-1 grid size-8 shrink-0 cursor-pointer place-items-center rounded-full opacity-80 outline-none transition-opacity hover:opacity-100 focus-visible:ring-2 focus-visible:ring-current">
           <X className="size-4" aria-hidden="true" />
         </button>
       ) : null}

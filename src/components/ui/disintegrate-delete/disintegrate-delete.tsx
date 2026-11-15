@@ -343,7 +343,7 @@ export function DisintegrateDelete({
         type="button"
         onClick={() => remove(item)}
         aria-label={`Delete ${item.title}`}
-        className="grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-destructive/10 hover:text-destructive focus-visible:ring-2 focus-visible:ring-ring"
+        className="relative after:absolute after:-inset-0.5 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none transition-colors hover:bg-destructive/10 hover:text-destructive focus-visible:ring-2 focus-visible:ring-ring"
       >
         <Trash2 className="size-4" aria-hidden="true" />
       </button>
