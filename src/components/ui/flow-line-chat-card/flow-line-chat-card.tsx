@@ -1,8 +1,8 @@
 "use client";
 
-import { useEffect, useId, useRef, useState, type ComponentProps } from "react";
+import { useEffect, useId, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { Hash, MoreHorizontal, Reply, SmilePlus, Users } from "lucide-react";
+import { Eye, Flame, Hash, Heart, MoreHorizontal, Reply, Rocket, SmilePlus, Users } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { duration, ease, spring } from "@/lib/motion";
 
@@ -160,7 +160,10 @@ export function FlowLines({ lines = 16, color = "#3b82f6", bend = 0.6, speed = 1
 /* ------------------------------------------------------------------ chat card */
 
 export interface FlowChatReaction {
-  emoji: string;
+  /** The reaction's icon, such as a lucide icon. It is drawn at 12px in the card's light blue. */
+  icon: ReactNode;
+  /** What screen readers hear for it, such as "rocket". Also the reaction's key, so keep it unique per message. */
+  label: string;
   count: number;
 }
 
@@ -190,11 +193,11 @@ export interface FlowLineChatCardProps extends Omit<ComponentProps<"article">, "
 }
 
 const SAMPLE: FlowChatMessage[] = [
-  { id: "m1", author: "Maya", color: "#2563eb", time: "9:41", text: "Pushed the new onboarding flow to staging.", reactions: [{ emoji: "🚀", count: 4 }] },
-  { id: "m2", author: "Jonas", color: "#0ea5e9", time: "9:42", text: "Step transitions feel really smooth now.", reactions: [{ emoji: "🔥", count: 3 }, { emoji: "👀", count: 2 }] },
+  { id: "m1", author: "Maya", color: "#2563eb", time: "9:41", text: "Pushed the new onboarding flow to staging.", reactions: [{ icon: <Rocket />, label: "rocket", count: 4 }] },
+  { id: "m2", author: "Jonas", color: "#0ea5e9", time: "9:42", text: "Step transitions feel really smooth now.", reactions: [{ icon: <Flame />, label: "fire", count: 3 }, { icon: <Eye />, label: "eyes", count: 2 }] },
   { id: "j1", author: "Sana", text: "Sana joined the server", system: true },
   { id: "m3", author: "Lena", color: "#6366f1", time: "9:44", text: "Could the progress bar be a little bouncier?" },
-  { id: "m4", author: "Raka", color: "#1d4ed8", time: "9:45", text: "On it, shipping a spring preset tonight.", reactions: [{ emoji: "💙", count: 5 }] },
+  { id: "m4", author: "Raka", color: "#1d4ed8", time: "9:45", text: "On it, shipping a spring preset tonight.", reactions: [{ icon: <Heart />, label: "heart", count: 5 }] },
 ];
 
 const STEP_MS = 1100;
@@ -351,14 +354,14 @@ export function FlowLineChatCard({
                         <ul className="mt-1 flex gap-1" aria-label="Reactions">
                           {m.reactions.map((r, k) => (
                             <motion.li
-                              key={r.emoji}
+                              key={r.label}
                               initial={run ? { scale: 0, opacity: 0 } : false}
                               animate={{ scale: 1, opacity: 1 }}
                               transition={{ ...spring.bouncy, delay: run ? 0.35 + k * 0.12 : 0 }}
                               className="inline-flex items-center gap-1 rounded-full border border-[#3b82f6]/50 bg-[#1e3a8a]/40 px-1.5 py-px text-[11.5px]"
                             >
-                              <span aria-hidden="true">{r.emoji}</span>
-                              <span className="sr-only">{r.emoji}</span>
+                              <span aria-hidden="true" className="flex text-[#bfdbfe] [&_svg]:size-3">{r.icon}</span>
+                              <span className="sr-only">{r.label}</span>
                               <Count to={r.count} run={run} />
                             </motion.li>
                           ))}

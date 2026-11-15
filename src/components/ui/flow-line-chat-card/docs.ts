@@ -1,14 +1,15 @@
 import type { ComponentDocs } from "@/lib/docs/types";
 
 export const docs: ComponentDocs = {
-  usage: `import { FlowLineChatCard } from "@/components/ui/flow-line-chat-card/flow-line-chat-card";
+  usage: `import { Rocket } from "lucide-react";
+import { FlowLineChatCard } from "@/components/ui/flow-line-chat-card/flow-line-chat-card";
 
 <FlowLineChatCard
   title="Conversations that keep flowing"
   description="Channels, threads and reactions that update live."
   channel={{ name: "launch-room", members: 42 }}
   messages={[
-    { id: "a", author: "Maya", text: "Pushed the new flow to staging.", reactions: [{ emoji: "🚀", count: 4 }] },
+    { id: "a", author: "Maya", text: "Pushed the new flow to staging.", reactions: [{ icon: <Rocket />, label: "rocket", count: 4 }] },
     { id: "b", author: "Sana", text: "Sana joined the server", system: true },
   ]}
 />
