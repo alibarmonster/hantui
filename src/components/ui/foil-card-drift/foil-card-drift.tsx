@@ -183,7 +183,7 @@ export function FoilCardDrift({ cards, speed = 46, spacing = 1.1, cardWidth = 24
           onClick={() => setPaused((p) => !p)}
           aria-label={paused ? "Play the card drift" : "Pause the card drift"}
           aria-pressed={paused}
-          className="absolute right-3 bottom-3 grid size-9 cursor-pointer place-items-center rounded-full border border-border bg-background/80 text-foreground backdrop-blur outline-none hover:bg-background focus-visible:ring-2 focus-visible:ring-ring"
+          className="after:absolute after:-inset-0.5 absolute right-3 bottom-3 grid size-9 cursor-pointer place-items-center rounded-full border border-border bg-background/80 text-foreground backdrop-blur outline-none hover:bg-background focus-visible:ring-2 focus-visible:ring-ring"
         >
           {paused ? <Play className="size-4" aria-hidden="true" /> : <Pause className="size-4" aria-hidden="true" />}
         </button>
