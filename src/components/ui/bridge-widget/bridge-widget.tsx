@@ -200,7 +200,7 @@ export function BridgeWidget({
             aria-label={`Swap direction: bridge from ${to.name} to ${from.name}`}
             animate={{ rotate: turns * 180 }}
             transition={reduceMotion ? { duration: 0 } : spring.snappy}
-            className="relative z-10 mt-6 grid size-9 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground shadow-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
+            className="after:absolute after:-inset-0.5 relative z-10 mt-6 grid size-9 cursor-pointer place-items-center rounded-full border border-border bg-background text-foreground shadow-sm outline-none transition-colors hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-50"
           >
             <ArrowLeftRight className="size-4" aria-hidden="true" />
           </motion.button>
