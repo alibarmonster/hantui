@@ -239,4 +239,5 @@ export const demoLoaders: Record<string, () => Promise<Record<string, unknown>>>
   "burst-pack-opening": () => import("@/components/ui/burst-pack-opening/demo"),
   "pass-invite-hero": () => import("@/components/ui/pass-invite-hero/demo"),
   "ink-walker-card": () => import("@/components/ui/ink-walker-card/demo"),
+  "line-art-street": () => import("@/components/ui/line-art-street/demo"),
 };

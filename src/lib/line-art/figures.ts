@@ -29,6 +29,8 @@ export interface Figure {
 export interface FigureOptions {
   /** Flat accent for one small area: the scarf, the cap, the vest or the frame. */
   accent?: string;
+  /** Leave out what the figure carries (the parcel, the briefcase and scarf), for a plain passer-by. */
+  bare?: boolean;
 }
 
 const UPPER = 16;
@@ -45,7 +47,7 @@ const REACTIONS = {
   cyclist: { label: "rings the bell", length: 1.1 },
 } as const;
 
-function walker(parent: Element, kind: Exclude<FigureKind, "cyclist">, accent: string): Figure {
+function walker(parent: Element, kind: Exclude<FigureKind, "cyclist">, accent: string, bare: boolean): Figure {
   const group = el("g", {}, parent);
   const running = kind === "jogger";
   const options = running ? { stride: 40, duty: 0.36, lift: 7 } : { stride: 26, duty: 0.62 };
@@ -57,14 +59,14 @@ function walker(parent: Element, kind: Exclude<FigureKind, "cyclist">, accent: s
   const farArm = limb(group, 4.2);
   const farLeg = limb(group, 5.4);
   const farFoot = line(group);
-  const bag = kind === "commuter" ? shape(group) : null;
-  const bagHandle = kind === "commuter" ? line(group, "", DETAIL_PEN) : null;
-  const parcel = kind === "courier" ? shape(group) : null;
-  const parcelTape = kind === "courier" ? line(group, "", DETAIL_PEN) : null;
+  const bag = kind === "commuter" && !bare ? shape(group) : null;
+  const bagHandle = bag ? line(group, "", DETAIL_PEN) : null;
+  const parcel = kind === "courier" && !bare ? shape(group) : null;
+  const parcelTape = parcel ? line(group, "", DETAIL_PEN) : null;
   const torso = kind === "jogger" ? paint(group, accent) : shape(group);
   const nearLeg = limb(group, 5.4);
   const nearFoot = line(group);
-  const scarf = kind === "commuter" ? limb(group, 3.4, accent) : null;
+  const scarf = kind === "commuter" && !bare ? limb(group, 3.4, accent) : null;
   const head = shape(group);
   const hat = kind === "commuter" ? shape(group) : kind === "courier" ? paint(group, accent) : line(group);
   const nearArm = limb(group, 4.2);
@@ -107,7 +109,7 @@ function walker(parent: Element, kind: Exclude<FigureKind, "cyclist">, accent: s
     const [farElbow, farHand] = arm(amplitude * pose.swing, bend + Math.max(0, pose.swing) * 0.3 * moving);
     farArm.set([[sx, sy + 2], farElbow, farHand]);
     // The courier's near arm holds the parcel instead of swinging.
-    let [nearElbow, nearHand] = kind === "courier" ? arm(0.25, 1.25) : arm(-amplitude * pose.swing, bend + Math.max(0, -pose.swing) * 0.3 * moving);
+    let [nearElbow, nearHand] = parcel ? arm(0.25, 1.25) : arm(-amplitude * pose.swing, bend + Math.max(0, -pose.swing) * 0.3 * moving);
     if (w > 0) {
       const t = reactionAt;
       const target: Point =
@@ -293,5 +295,5 @@ function cyclist(parent: Element, accent: string): Figure {
 /** Builds a figure inside `parent`. It draws nothing until its first `step` or `still`. */
 export function createFigure(parent: Element, kind: FigureKind, options: FigureOptions = {}): Figure {
   const accent = options.accent ?? "#c8553d";
-  return kind === "cyclist" ? cyclist(parent, accent) : walker(parent, kind, accent);
+  return kind === "cyclist" ? cyclist(parent, accent) : walker(parent, kind, accent, options.bare ?? false);
 }

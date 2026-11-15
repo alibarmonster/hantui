@@ -238,4 +238,5 @@ export const docsLoaders: Record<string, () => Promise<{ docs: ComponentDocs }>>
   "burst-pack-opening": () => import("@/components/ui/burst-pack-opening/docs"),
   "pass-invite-hero": () => import("@/components/ui/pass-invite-hero/docs"),
   "ink-walker-card": () => import("@/components/ui/ink-walker-card/docs"),
+  "line-art-street": () => import("@/components/ui/line-art-street/docs"),
 };
