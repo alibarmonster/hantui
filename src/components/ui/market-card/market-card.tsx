@@ -2,7 +2,7 @@
 
 import { useState, type ReactNode } from "react";
 import { motion, useReducedMotion } from "motion/react";
-import { CloudSun, Clapperboard, Coins, Cpu, FlaskConical, MessageCircle, Sparkles, Star, Trophy } from "lucide-react";
+import { CloudSun, Clapperboard, Coins, Cpu, FlaskConical, MessageCircle, Star, Tag, Trophy } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { MarketAvatar } from "@/lib/markets/avatar";
 import { formatChange, formatPrice, formatProbability, formatUsd, timeLeft } from "@/lib/markets/format";
@@ -150,13 +150,13 @@ export function MarketCard({ market, watched = false, onWatchChange, onTrade, va
             // eslint-disable-next-line @next/next/no-img-element -- plain img keeps the component framework-agnostic
             <img src={market.image} alt="" className="size-full object-cover" />
           ) : (
-            (TOPIC_ICONS[topicKey] ?? <Sparkles />)
+            (TOPIC_ICONS[topicKey] ?? <Tag />)
           )}
         </span>
         <div className="min-w-0 flex-1">
           <p className="flex items-center gap-1.5 text-[12px] text-muted-foreground">
             <span className="inline-flex items-center gap-1 [&>svg]:size-3">
-              {TOPIC_ICONS[topicKey] ?? <Sparkles />}
+              {TOPIC_ICONS[topicKey] ?? <Tag />}
               {market.topic}
             </span>
             {market.status === "closing" ? (
