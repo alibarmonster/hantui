@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useId, useRef, useState, type FormEvent } from "react";
-import { ArrowUp, Sparkles } from "lucide-react";
+import { ArrowUp, Fish, Waves } from "lucide-react";
 import { DemoStateSwitcher } from "@/components/site/demo-state-switcher";
 import {
   AsciiAquariumBackground,
@@ -58,7 +58,7 @@ export function ChatHero() {
     >
       <div className="flex w-full max-w-lg flex-col items-center text-center">
         <span className="inline-flex items-center gap-1.5 rounded-full border border-border bg-background/85 px-3 py-1 text-xs font-medium text-muted-foreground backdrop-blur-sm [[data-preview-card]_&]:hidden">
-          <Sparkles className="size-3.5 text-primary" aria-hidden="true" />
+          <Fish className="size-3.5 text-primary" aria-hidden="true" />
           Reef assistant
         </span>
         <h2 className="mt-4 text-3xl font-semibold tracking-tight text-balance text-foreground sm:text-4xl [[data-preview-card]_&]:mt-0 [[data-preview-card]_&]:text-xl">What should we explore?</h2>
@@ -152,7 +152,7 @@ export function DarkModes() {
       >
         <div ref={orb} className="flex items-center gap-2.5 rounded-full border border-white/15 bg-zinc-950/80 py-2 pr-4 pl-2.5 backdrop-blur-sm">
           <span className="grid size-7 place-items-center rounded-full bg-blue-400/15">
-            <Sparkles className="size-3.5 text-blue-300" aria-hidden="true" />
+            <Waves className="size-3.5 text-blue-300" aria-hidden="true" />
           </span>
           <span className="text-sm font-medium text-zinc-100 capitalize">{mode}</span>
         </div>
