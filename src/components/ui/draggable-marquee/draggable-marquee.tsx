@@ -173,7 +173,7 @@ export function DraggableMarquee({
           onClick={() => setPaused((p) => !p)}
           aria-label={paused ? "Play" : "Pause"}
           aria-pressed={paused}
-          className="absolute top-1/2 right-2 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-background/90 text-foreground shadow-sm backdrop-blur outline-none hover:bg-background focus-visible:ring-2 focus-visible:ring-ring motion-reduce:hidden"
+          className="after:absolute after:-inset-1 absolute top-1/2 right-2 inline-flex size-8 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full border border-border bg-background/90 text-foreground shadow-sm backdrop-blur outline-none hover:bg-background focus-visible:ring-2 focus-visible:ring-ring motion-reduce:hidden"
         >
           {paused ? <Play className="size-3.5" aria-hidden="true" /> : <Pause className="size-3.5" aria-hidden="true" />}
         </button>
