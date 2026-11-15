@@ -155,7 +155,8 @@ export function SlidingTabs({
       </LayoutGroup>
 
       {activeItem?.content !== undefined ? (
-        <div className="relative mt-4 overflow-hidden">
+        // The padding (offset by negative margins) leaves room for the panel's focus ring inside the clip.
+        <div className="relative mt-3 -mx-1 -mb-1 overflow-hidden p-1">
           <AnimatePresence mode="popLayout" initial={false} custom={direction}>
             <TabsPrimitive.Content key={activeItem.value} value={activeItem.value} forceMount asChild>
               <motion.div
@@ -169,7 +170,7 @@ export function SlidingTabs({
                 animate="center"
                 exit="exit"
                 transition={{ duration: duration.base, ease: ease.out }}
-                className="outline-none focus-visible:ring-2 focus-visible:ring-ring"
+                className="rounded-lg outline-none focus-visible:ring-2 focus-visible:ring-ring"
               >
                 {activeItem.content}
               </motion.div>
