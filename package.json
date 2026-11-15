@@ -2,7 +2,7 @@
   "name": "hantui",
   "version": "0.4.0",
   "private": true,
-  "description": "hantui: 228 animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
+  "description": "hantui: 243 animated, accessible React components for Next.js and Tailwind CSS. Copy, paste, or install with the shadcn CLI.",
   "keywords": [
     "react",
     "nextjs",

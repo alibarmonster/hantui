@@ -141,6 +141,7 @@ const rows: Record<CategoryId, Row[]> = {
     ["copy-button", "Copy Button", "Copy icon cross-fades into a check with a soft blur.", "ready"],
     ["tactile-button", "Tactile 3D Button", "A keycap with real depth that sinks when pressed.", "ready"],
     ["action-swap-button", "Action Swap Button", "Label and icon swap with blur and a vertical slide.", "ready"],
+    ["invite-code-reveal", "Invite Code Reveal", "A ready pill that morphs into a labeled invite code with a copy button.", "ready", V040],
   ],
   inputs: [
     ["money-input", "Money Input", "Currency prefix, live separators and rolling digits (IDR/USD).", "ready"],
@@ -153,6 +154,8 @@ const rows: Record<CategoryId, Row[]> = {
     ["range-slider", "Range Slider", "Tick dots and a thumb that bounces as it snaps to steps.", "ready"],
     ["phone-input", "Phone Input", "Country selector with live number formatting.", "ready"],
     ["file-dropzone", "File Upload Dropzone", "Drag-over morph, progress rings and per-file states.", "ready"],
+    ["stretch-pill-slider", "Stretch Pill Slider", "A dark pill stretches across the track as you drag and carries its own rolling label.", "ready", V040],
+    ["notch-datetime-picker", "Notch DateTime Picker", "Two dark pills joined by a stem to a popover that morphs between a calendar and time slots.", "ready", V040],
   ],
   toggles: [
     ["spring-switch", "Spring Switch", "A thumb with squash, stretch and a double bounce.", "ready"],
@@ -246,6 +249,8 @@ const rows: Record<CategoryId, Row[]> = {
     ["bento-grid", "Bento Grid", "Tiles lift on hover and animate their contents.", "ready"],
     ["sortable-list", "Sortable List", "Drag to reorder with layout animation.", "ready"],
     ["foil-ticket-reel", "Foil Ticket Reel", "Holographic event tickets in a shuffling reel; tilt them and tear off the stub.", "ready", V040],
+    ["trip-card-rolodex", "Trip Card Rolodex", "A stack of trip cards that rolls one expanded card between collapsed one-line rows.", "ready", V040],
+    ["burst-pack-opening", "Burst Pack Opening", "A foil card pack you tear open in a burst of pixel rays, cards and confetti.", "ready", V040],
   ],
   media: [
     ["draggable-marquee", "Draggable Marquee", "An infinite loop you can pause and scrub.", "ready"],
@@ -270,6 +275,8 @@ const rows: Record<CategoryId, Row[]> = {
     ["voice-orb", "Voice Orb", "A blob that reacts to audio level.", "ready"],
     ["agent-steps", "Agent Progress Steps", "Steps move from loading to done with drawn checks.", "ready"],
     ["swipe-row", "Swipeable List Row", "Swipe to reveal archive and delete actions.", "ready"],
+    ["voice-note-pill", "Voice Note Pill", "A mic button that grows into a recorder with a live waveform, review, playback and send.", "ready", V040],
+    ["pixel-build-progress", "Pixel Build Progress", "Pixel workers build a brick wall across a pill-shaped window as progress.", "ready", V040],
   ],
   "web3-wallet": [
     ["connect-wallet-button", "Connect Wallet Button", "Opens a wallet list, spins while connecting, then morphs into an address pill.", "ready", V020],
@@ -311,6 +318,12 @@ const rows: Record<CategoryId, Row[]> = {
     ["dot-burst-feature-tabs", "Dot Burst Feature Tabs", "Autoplaying feature tabs beside a color stage with dot bursts and a product card.", "ready", V040],
     ["coin-crew-hero", "Coin Crew Hero", "A hero card with a parade of coin characters you can poke, flip and fling.", "ready", V040],
     ["ink-bloom-footer", "Ink Bloom Footer", "A footer where dragging drops ink that blooms behind a giant wordmark.", "ready", V040],
+    ["layered-plan-card", "Layered Plan Card", "A white plan card resting on a colored base that peeks out as the call to action.", "ready", V040],
+    ["glass-tier-pricing", "Glass Tier Pricing", "Frosted pricing tiers with a spotlight that glides to the one you hover.", "ready", V040],
+    ["blueprint-plan-duo", "Blueprint Plan Duo", "Two plans in a mono blueprint style with crop marks, wireframe boxes and scramble-in text.", "ready", V040],
+    ["step-demo-showcase", "Step Demo Showcase", "A step list that drives small live product scenes in a square card beside it.", "ready", V040],
+    ["dot-screen-footer", "Dot Screen Footer", "A footer whose giant wordmark is a halftone screen that parts around the pointer.", "ready", V040],
+    ["pass-invite-hero", "Pass Invite Hero", "An invite hero where a holographic pass with a ghost floats in, spins and reveals a code.", "ready", V040],
   ],
   shaders: [
     ["cloud-shader", "Cloud Shader", "Soft procedural clouds drifting across a sky gradient.", "ready", V020],
@@ -340,6 +353,8 @@ const rows: Record<CategoryId, Row[]> = {
     ["border-beam", "Border Beam", "A light segment travels around any card's border.", "ready", V020],
     ["node-network", "Node Network", "Floating connected nodes; lines highlight on hover.", "ready", V020],
     ["animated-grid-pattern", "Animated Grid Pattern", "Grid squares light up in a subtle random pattern.", "ready", V020],
+    ["ink-walker-card", "Ink Walker Card", "A line-art figure walks across a strip of paper, and you can poke it.", "ready", V040],
+    ["line-art-street", "Line Art Street", "A living line-art street that runs from day to night and reacts to the pointer.", "ready", V040],
   ],
   galleries: [
     ["sleeve-rail", "Sleeve Rail", "A fanned rail of album sleeves; the focused record slides out and spins.", "ready", V030],

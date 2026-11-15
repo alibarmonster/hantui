@@ -3,9 +3,9 @@
 [![CI](https://github.com/alibarmonster/hantui/actions/workflows/ci.yml/badge.svg)](https://github.com/alibarmonster/hantui/actions/workflows/ci.yml)
 [![License: MIT](https://img.shields.io/badge/license-MIT-blue.svg)](./LICENSE)
 
-hantui (formerly alibar/ui) is 228 animated, accessible React components for Next.js and Tailwind CSS. The name is *hantu*, Indonesian for "ghost", plus *ui*. Copy the source or install a component with the shadcn CLI. Once a component is in your project, the code is yours to edit.
+hantui (formerly alibar/ui) is 243 animated, accessible React components for Next.js and Tailwind CSS. The name is *hantu*, Indonesian for "ghost", plus *ui*. Copy the source or install a component with the shadcn CLI. Once a component is in your project, the code is yours to edit.
 
-- **228 components** in 22 categories, each with live demos, variants, a props table and accessibility notes.
+- **243 components** in 22 categories, each with live demos, variants, a props table and accessibility notes.
 - **Modern stack**: React 19, Next.js 16 (App Router), TypeScript (strict), Tailwind CSS v4, [Motion](https://motion.dev), [Radix UI](https://www.radix-ui.com) and [lucide-react](https://lucide.dev).
 - **Accessible by default**: full keyboard support, visible focus rings, ARIA roles, 40px touch targets and `prefers-reduced-motion` fallbacks.
 - **Follows your theme, light and dark**: components read shadcn-named CSS variables, so they take your colors and your dark mode as they are; canvases repaint when the theme switches, and the few extra tokens they need are added for you by the CLI.
@@ -123,6 +123,8 @@ Issues and pull requests are welcome. Please read the [contributing guide](./CON
 hantui was built and is maintained with help from [Claude](https://www.anthropic.com/claude) by Anthropic. Claude worked as a pair programmer through the whole process: designing and implementing the components and the docs site, testing accessibility and performance, and preparing the repository for open source.
 
 ASCII Shark Sea, ASCII Koi Pond, ASCII Aquarium Background and the ASCII look of Dither Wildlife learn their top-down bodies, shaded blocks with density-matched glyphs, soft sub-sampled edges and glowing wake field from [ascii-sharks](https://github.com/stackedlol/ascii-sharks) by drewdi (MIT). The implementations are our own; ASCII Shark Sea carries the ascii-sharks copyright and MIT notice in its source.
+
+Ink Walker Card and the `src/lib/line-art` toolkit learn their line style and motion rules (thin wobbly ink on paper, faceless open-stroke figures, a solved gait) from [line-art-animation](https://github.com/JDhruv14/line-art-animation) by JDhruv14 (MIT). The implementation, figures and scenes are our own; no code was copied.
 
 ## License
 

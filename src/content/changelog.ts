@@ -18,7 +18,7 @@ export const releases: Release[] = [
     version: "0.4.0",
     title: "Studio pieces and glyph art",
     summary:
-      "Sixteen components: a new category of portfolio heroes, hanging cards, crumpling paper, feature cards and images redrawn as glyphs and dithered pixels on a shared glyph engine, plus merging filter chips, a misprinted paragraph, a feature tab stage, holographic tickets, a coin parade and an ink footer.",
+      "31 components: a new category of portfolio heroes, hanging cards, crumpling paper, feature cards and images redrawn as glyphs and dithered pixels on a shared glyph engine, plus merging filter chips, a misprinted paragraph, a feature tab stage, holographic tickets, a coin parade, ink and halftone footers, pricing sections, invite pieces, a date and time picker, a voice recorder, and pixel-art and line-art scenes.",
     changes: [
       {
         type: "Added",
@@ -39,7 +39,18 @@ export const releases: Release[] = [
           "Foil Ticket Reel: holographic event tickets that shuffle through a reel on a grainy grid; tilt them and tear off the stub to get stamped in.",
           "Coin Crew Hero: a hero card with a parade of coin characters that blink, follow your pointer, flip when poked and tumble when flung.",
           "Ink Bloom Footer: a footer on warm paper where dragging drops watercolor ink that blooms, mixes and dries behind a giant wordmark.",
-          "Dark mode for the site: a Light, Dark and System switch in the header, applied before the first paint so pages never flash the wrong theme. All 228 components were checked in dark.",
+          "Burst Pack Opening: a foil card pack you tear open in a burst of pixel rays, cards and confetti.",
+          "Pixel Build Progress: pixel workers build a brick wall across a pill-shaped window as progress fills, on shared pixel sprite sheets.",
+          "Layered Plan Card, Glass Tier Pricing and Blueprint Plan Duo: three pricing sections, a plan card on a colored base, frosted tiers with a gliding spotlight and two plans in a mono blueprint style, sharing pricing helpers and a billing toggle.",
+          "Notch DateTime Picker: two dark pills joined by a stem to a popover that morphs between a calendar and time slots.",
+          "Line Art Street and Ink Walker Card: a line-art street that runs from day to night and reacts to the pointer, and a card where one ink figure walks across a strip of paper, on a shared line-art toolkit.",
+          "Dot Screen Footer: a footer whose giant wordmark is a halftone screen that parts around the pointer.",
+          "Stretch Pill Slider: a dark pill stretches across the track as you drag and carries its own rolling label.",
+          "Voice Note Pill: a mic button that grows into a recorder with a live waveform, review, playback and send.",
+          "Invite Code Reveal and Pass Invite Hero: a ready pill that morphs into an invite code with a copy button, and a hero where a holographic pass floats in, spins and reveals a code.",
+          "Step Demo Showcase: a step list that drives small live product scenes in a square card beside it.",
+          "Trip Card Rolodex: a stack of trip cards that rolls one expanded card between collapsed one-line rows.",
+          "Dark mode for the site: a Light, Dark and System switch in the header, applied before the first paint so pages never flash the wrong theme. Every component up to #228 was checked in dark.",
           "Theme tokens --success-foreground, for text on solid success fills, plus --link and --destructive-text for terracotta and red text. Installed components map the last two with a fallback to --primary and --destructive, so your theme looks the same unless you set them.",
           "A seed prop on Particle Field, Shimmering Dots, ASCII Aquarium Background and ASCII Shark Sea: the same seed and size give the same opening scene on every load, and the reduced-motion still frame matches.",
           "Component pages preview a demo in the other theme or open it alone in a new tab, icon-only controls on the site have tooltips, and docs pages get a section select where the table of contents doesn't fit.",

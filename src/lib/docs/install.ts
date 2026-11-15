@@ -16,6 +16,18 @@ import {
 /** Shared lib files that ship inside each registry item that imports them. */
 const LIB_FILES: Record<string, string> = {
   "@/lib/motion": "src/lib/motion.ts",
+  "@/lib/clipboard": "src/lib/clipboard.ts",
+  "@/lib/pricing/types": "src/lib/pricing/types.ts",
+  "@/lib/pricing/format": "src/lib/pricing/format.ts",
+  "@/lib/pricing/use-billing": "src/lib/pricing/use-billing.ts",
+  "@/lib/pricing/billing-toggle": "src/lib/pricing/billing-toggle.tsx",
+  "@/lib/pixel-art/sprites": "src/lib/pixel-art/sprites.ts",
+  "@/lib/line-art/ink": "src/lib/line-art/ink.ts",
+  "@/lib/line-art/gait": "src/lib/line-art/gait.ts",
+  "@/lib/line-art/physics": "src/lib/line-art/physics.ts",
+  "@/lib/line-art/daynight": "src/lib/line-art/daynight.ts",
+  "@/lib/line-art/figures": "src/lib/line-art/figures.ts",
+  "@/lib/line-art/loop": "src/lib/line-art/loop.ts",
   "@/lib/color": "src/lib/color.ts",
   "@/lib/random": "src/lib/random.ts",
   "@/lib/webgl/use-shader-canvas": "src/lib/webgl/use-shader-canvas.ts",
