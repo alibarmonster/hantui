@@ -1,6 +1,6 @@
 "use client";
 
-import { BarChart3, Bell, Globe2, Lock, Sparkles } from "lucide-react";
+import { BarChart3, Bell, Globe2, Lightbulb, Lock } from "lucide-react";
 import { BentoGrid, BentoTile } from "@/components/ui/bento-grid/bento-grid";
 
 // Visuals animate with group-hover: (and group-focus-within:) classes from the tile.
@@ -62,7 +62,7 @@ export function Default() {
         <Orbit />
       </BentoTile>
       <BentoTile headingLevel={2} icon={<Lock />} title="Private by design" description="Your data stays in your region." />
-      <BentoTile headingLevel={2} icon={<Sparkles />} title="Thoughtful AI" description="Suggestions you can always see the source of." href="#ai">
+      <BentoTile headingLevel={2} icon={<Lightbulb />} title="Thoughtful AI" description="Suggestions you can always see the source of." href="#ai">
         <div className="flex h-full items-center justify-center">
           <span className={`rounded-full border border-border bg-background px-3 py-1.5 text-xs whitespace-nowrap text-muted-foreground shadow-xs ${ease} group-hover:-translate-y-1`}>
             Summarise this thread ↵
