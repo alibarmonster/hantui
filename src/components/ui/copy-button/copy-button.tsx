@@ -1,9 +1,10 @@
 "use client";
 
-import { useEffect, useRef, useState, type ComponentProps, type MouseEvent } from "react";
+import type { ComponentProps, MouseEvent } from "react";
 import { AnimatePresence, motion, useReducedMotion, type Variants } from "motion/react";
 import { Check, Copy } from "lucide-react";
 import { cn } from "@/lib/utils";
+import { useCopy } from "@/lib/clipboard";
 import { duration, ease } from "@/lib/motion";
 
 export interface CopyButtonProps extends Omit<ComponentProps<"button">, "value" | "children" | "onCopy"> {
@@ -34,24 +35,6 @@ const sizeClasses = {
   md: { base: "h-10 gap-2 rounded-md px-3.5 text-sm", icon: "size-10 rounded-md" },
 } as const;
 
-async function writeClipboard(text: string) {
-  if (navigator.clipboard?.writeText) {
-    await navigator.clipboard.writeText(text);
-    return;
-  }
-  // Fallback for insecure contexts where the async Clipboard API is unavailable.
-  const textarea = document.createElement("textarea");
-  textarea.value = text;
-  textarea.setAttribute("readonly", "");
-  textarea.style.position = "fixed";
-  textarea.style.opacity = "0";
-  document.body.appendChild(textarea);
-  textarea.select();
-  const ok = document.execCommand("copy");
-  textarea.remove();
-  if (!ok) throw new Error("Copy command was rejected");
-}
-
 export function CopyButton({
   value,
   label,
@@ -66,24 +49,13 @@ export function CopyButton({
   "aria-label": ariaLabel,
   ...props
 }: CopyButtonProps) {
-  const [copied, setCopied] = useState(false);
-  const timer = useRef<number | undefined>(undefined);
+  const { copied, copy } = useCopy(value, { resetAfter: timeout, onCopy: onCopied });
   const reduceMotion = useReducedMotion();
 
-  useEffect(() => () => window.clearTimeout(timer.current), []);
-
-  async function handleClick(event: MouseEvent<HTMLButtonElement>) {
+  function handleClick(event: MouseEvent<HTMLButtonElement>) {
     onClick?.(event);
     if (event.defaultPrevented) return;
-    try {
-      await writeClipboard(value);
-    } catch {
-      return;
-    }
-    setCopied(true);
-    onCopied?.(value);
-    window.clearTimeout(timer.current);
-    timer.current = window.setTimeout(() => setCopied(false), timeout);
+    void copy();
   }
 
   const swap: Variants = reduceMotion
