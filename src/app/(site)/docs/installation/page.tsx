@@ -3,7 +3,7 @@ import Link from "next/link";
 import { CodeBlock, InstallTabs } from "@/components/site/code-block";
 import { Callout, PageHeader, Pager, Prose, SectionHeading, Step, Steps } from "@/components/site/docs-blocks";
 import { DocsPage } from "@/components/site/docs-layout";
-import { registryUrl } from "@/config/site";
+import { installTarget, registryNamespace, registryTemplate, registryUrl } from "@/config/site";
 import { readyComponents } from "@/content/components";
 import { readProjectFile } from "@/lib/docs/source";
 
@@ -23,6 +23,8 @@ const usage = `import { CopyButton } from "@/components/ui/copy-button/copy-butt
 export default function Page() {
   return <CopyButton value="Hello" label="Copy" />;
 }`;
+
+const registriesJson = JSON.stringify({ registries: { [registryNamespace]: registryTemplate } }, null, 2);
 
 export default async function InstallationPage() {
   const [utils, motion] = await Promise.all([readProjectFile("src/lib/utils.ts"), readProjectFile("src/lib/motion.ts")]);
@@ -50,12 +52,24 @@ export default async function InstallationPage() {
         <Step title="Initialize shadcn (skip if you already use it)">
           <InstallTabs kind="dlx" command="shadcn@latest init" />
         </Step>
-        <Step title="Add a component by URL">
+        <Step title="Add the hantui registry">
+          <p className="text-sm leading-6 text-muted-foreground">
+            Add the <code className="rounded-[5px] bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">{registryNamespace}</code>{" "}
+            namespace to <code className="rounded-[5px] bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">components.json</code>{" "}
+            once, so the CLI knows where to find hantui components.
+          </p>
+          <CodeBlock code={registriesJson} lang="json" title="components.json" />
+        </Step>
+        <Step title="Add a component">
           <p className="text-sm leading-6 text-muted-foreground">
             Every component page lists its own command. The CLI writes the component, the shared motion tokens and
             any theme tokens it needs, and installs its dependencies.
           </p>
-          <InstallTabs kind="dlx" command={`shadcn@latest add ${registryUrl(example)}`} />
+          <InstallTabs kind="dlx" command={`shadcn@latest add ${installTarget(example)}`} />
+          <p className="text-sm leading-6 text-muted-foreground">
+            Without the registry entry, pass the full URL instead:{" "}
+            <code className="rounded-[5px] bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] break-all text-foreground">{registryUrl(example)}</code>.
+          </p>
         </Step>
         <Step title="Use it">
           <CodeBlock code={usage} title="app/page.tsx" />

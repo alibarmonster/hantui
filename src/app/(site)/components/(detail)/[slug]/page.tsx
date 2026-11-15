@@ -8,7 +8,7 @@ import { DocsPage } from "@/components/site/docs-layout";
 import { HtmlCanvasNotice } from "@/components/site/html-canvas-status";
 import { NewBadge } from "@/components/site/sidebar-nav";
 import type { TocItem } from "@/components/site/toc";
-import { registryUrl, siteConfig } from "@/config/site";
+import { installTarget, registryNamespace, registryTemplate, siteConfig } from "@/config/site";
 import { getCategory, getComponent, getSiblings, readyComponents } from "@/content/components";
 import { docsLoaders } from "@/content/docs";
 import { highlight } from "@/lib/docs/highlight";
@@ -99,12 +99,19 @@ export default async function ComponentPage({ params }: Params) {
       <ComponentPreview
         slug={slug}
         variants={variants}
-        copy={{ name: entry.name, description: entry.description, install: `npx shadcn@latest add ${registryUrl(slug)}`, usage: docs.usage, source: componentSource }}
+        copy={{ name: entry.name, description: entry.description, install: `npx shadcn@latest add ${installTarget(slug)}`, registry: `"${registryNamespace}": "${registryTemplate}"`, usage: docs.usage, source: componentSource }}
       />
 
       <SectionHeading id="installation">Installation</SectionHeading>
       <h3 className="mb-3 text-[15px] font-semibold text-foreground">CLI</h3>
-      <InstallTabs kind="dlx" command={`shadcn@latest add ${registryUrl(slug)}`} />
+      <InstallTabs kind="dlx" command={`shadcn@latest add ${installTarget(slug)}`} />
+      <p className="mt-3 text-sm leading-6 text-muted-foreground">
+        First time? Add the hantui registry to <code className="rounded-[5px] bg-surface-2 px-1.5 py-0.5 font-mono text-[0.85em] text-foreground">components.json</code> once, as shown in{" "}
+        <Link href="/docs/installation#cli" className="font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground">
+          Installation
+        </Link>
+        .
+      </p>
 
       <h3 id="manual" className="mt-10 mb-5 scroll-mt-24 text-[15px] font-semibold text-foreground">
         Manual

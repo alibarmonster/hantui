@@ -31,6 +31,8 @@ export interface PreviewCopy {
   description: string;
   /** shadcn CLI command. */
   install: string;
+  /** The `registries` entry components.json needs for the command's namespace, e.g. `"@hantui": "…/r/{name}.json"`. */
+  registry: string;
   /** Usage snippet from docs.ts. */
   usage: string;
   /** The component's full source. */
@@ -42,9 +44,11 @@ function promptFor(copy: PreviewCopy) {
     `Add the ${copy.name} component from hantui to my React + Tailwind project.`,
     copy.description,
     "",
-    `Install it with:\n${copy.install}`,
+    `components.json needs this entry under "registries"; add it if it is missing:\n${copy.registry}`,
     "",
-    `Then use it like this:\n${copy.usage}`,
+    `Then install it with:\n${copy.install}`,
+    "",
+    `Use it like this:\n${copy.usage}`,
     "",
     "Match my project's existing styles and keep its accessibility and reduced-motion behavior.",
   ].join("\n");

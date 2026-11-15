@@ -20,12 +20,24 @@ Components target a React 19 + Tailwind CSS v4 project that has been set up with
 
 ### With the shadcn CLI
 
-```bash
-npx shadcn@latest init
-npx shadcn@latest add <site-url>/r/spring-press-button.json
+Add the hantui registry to `components.json` once:
+
+```json
+{
+  "registries": {
+    "@hantui": "https://hantui.alibar.xyz/r/{name}.json"
+  }
+}
 ```
 
-`<site-url>` is the address of the docs site. Every component page shows its exact command. The CLI installs the npm dependencies, the shared `cn` and motion helpers, the design tokens and any other hantui components it relies on.
+Then add components by name:
+
+```bash
+npx shadcn@latest init
+npx shadcn@latest add @hantui/spring-press-button
+```
+
+The full URL works too, with no registry entry: `npx shadcn@latest add https://hantui.alibar.xyz/r/spring-press-button.json`. Every component page shows its exact command. The CLI installs the npm dependencies, the shared `cn` and motion helpers, the design tokens and any other hantui components it relies on.
 
 ### Manually
 

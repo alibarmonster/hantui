@@ -23,3 +23,14 @@ export const siteConfig = {
 export function registryUrl(slug: string) {
   return `${siteConfig.url}/r/${slug}.json`;
 }
+
+/** The shadcn CLI namespace for this registry, as in `shadcn add @hantui/copy-button`. */
+export const registryNamespace = "@hantui";
+
+/** The `registries` entry a project adds to components.json so the CLI resolves the namespace. */
+export const registryTemplate = `${siteConfig.url}/r/{name}.json`;
+
+/** What to pass to `shadcn add` for a component. */
+export function installTarget(slug: string) {
+  return `${registryNamespace}/${slug}`;
+}

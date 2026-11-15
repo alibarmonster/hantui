@@ -59,7 +59,8 @@ export const releases: Release[] = [
       {
         type: "Changed",
         items: [
-          "The project is now hantui (formerly alibar/ui), at hantui.dev.",
+          "The project is now hantui (formerly alibar/ui), at hantui.alibar.xyz.",
+          "Install components by name with the @hantui namespace, after adding the hantui registry to components.json once. Full registry URLs still work.",
           "The site takes on the hantui look: warm stone neutrals, terracotta actions, Source Sans 3, Playfair Display and Fira Code.",
           "Accent colors in components follow your theme's primary color instead of a fixed blue.",
           "ASCII Koi Pond is redrawn from above with shaded, patterned bodies, translucent fins, soft edges and wakes that light the water. Its props are unchanged.",

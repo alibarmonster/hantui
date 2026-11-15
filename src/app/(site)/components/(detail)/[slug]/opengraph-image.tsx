@@ -33,7 +33,7 @@ export default async function ComponentImage({ params }: { params: Promise<{ slu
             color: "#1c1917",
           }}
         >
-          <span style={{ color: "#8a827c" }}>$&nbsp;</span>npx shadcn@latest add …/r/{entry?.slug}.json
+          <span style={{ color: "#8a827c" }}>$&nbsp;</span>npx shadcn@latest add @hantui/{entry?.slug}
         </div>
       </OgFrame>
     ),

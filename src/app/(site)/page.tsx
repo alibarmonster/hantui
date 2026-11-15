@@ -6,7 +6,7 @@ import { CategoryIndex, type IndexCategory } from "@/components/site/landing/cat
 import { LandingHero } from "@/components/site/landing/hero";
 import { LandingReel, type ReelItem } from "@/components/site/landing/reel";
 import { NewBadge } from "@/components/site/sidebar-nav";
-import { registryUrl, siteConfig } from "@/config/site";
+import { installTarget, siteConfig } from "@/config/site";
 import { releaseAnchor, releases } from "@/content/changelog";
 import { categories, getCategory, getComponent, readyComponents } from "@/content/components";
 import { componentFiles, extractDemoVariants, readProjectFile } from "@/lib/docs/source";
@@ -84,7 +84,7 @@ export default async function HomePage() {
       <LandingHero
         headline={HEADLINE}
         subhead={`${readyComponents.length} React components with motion, keyboard support and a reduced-motion fallback. Copy the source or install with the shadcn CLI.`}
-        installCommand={`npx shadcn@latest add ${registryUrl("lens-tab-bar")}`}
+        installCommand={`npx shadcn@latest add ${installTarget("lens-tab-bar")}`}
         release={release}
       />
 
@@ -113,8 +113,14 @@ export default async function HomePage() {
         <div className="grid grid-cols-[minmax(0,1fr)] gap-6 lg:grid-cols-2">
           <div className="flex min-w-0 flex-col gap-3">
             <h3 className="text-[20px] leading-[1.4] font-semibold text-foreground">With the shadcn CLI</h3>
-            <p className="text-[16px] leading-[1.6] text-text-secondary">One command adds the component, its dependencies and the shared helpers to your project.</p>
-            <InstallTabs kind="dlx" command={`shadcn@latest add ${registryUrl("hold-to-confirm-button")}`} />
+            <p className="text-[16px] leading-[1.6] text-text-secondary">
+              Add the hantui registry to <code className="font-mono text-[0.9em] text-foreground">components.json</code> once, as shown in{" "}
+              <Link href="/docs/installation#cli" className="font-medium text-foreground underline decoration-border underline-offset-4 hover:decoration-foreground">
+                Installation
+              </Link>
+              . After that, one command adds a component, its dependencies and the shared helpers.
+            </p>
+            <InstallTabs kind="dlx" command={`shadcn@latest add ${installTarget("hold-to-confirm-button")}`} />
           </div>
           <div className="flex flex-col gap-3">
             <h3 className="text-[20px] leading-[1.4] font-semibold text-foreground">By copying the source</h3>
