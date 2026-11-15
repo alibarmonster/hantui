@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
-import { ChevronDown, Sparkles } from "lucide-react";
+import { ChevronDown, Zap } from "lucide-react";
 import { AIPromptInput } from "@/components/ui/ai-prompt-input/ai-prompt-input";
 
 export function Default() {
@@ -33,7 +33,7 @@ export function Default() {
         }}
         toolbar={
           <button type="button" className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-lg px-2 text-[13px] text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring">
-            <Sparkles className="size-3.5" aria-hidden="true" />
+            <Zap className="size-3.5" aria-hidden="true" />
             Fast model
             <ChevronDown className="size-3.5" aria-hidden="true" />
           </button>
