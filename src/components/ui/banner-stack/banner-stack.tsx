@@ -2,7 +2,7 @@
 
 import { useEffect, useRef, useState, type ComponentProps, type ReactNode } from "react";
 import { AnimatePresence, motion, useReducedMotion } from "motion/react";
-import { CircleAlert, CircleCheck, Info, Sparkles, X } from "lucide-react";
+import { CircleAlert, CircleCheck, Info, Megaphone, X } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { duration, ease } from "@/lib/motion";
 
@@ -35,7 +35,7 @@ const toneStyles = {
   info: { chip: "bg-primary/10 text-link", icon: Info },
   success: { chip: "bg-success/12 text-[color-mix(in_oklab,var(--success)_70%,var(--foreground))]", icon: CircleCheck },
   warning: { chip: "bg-warning/12 text-warning", icon: CircleAlert },
-  promo: { chip: "bg-foreground text-background", icon: Sparkles },
+  promo: { chip: "bg-foreground text-background", icon: Megaphone },
 } as const;
 
 // Each card behind the front one peeks out by this much.
