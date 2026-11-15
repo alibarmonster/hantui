@@ -450,7 +450,7 @@ export function DarkroomStream({
               type="button"
               aria-label="Close photo"
               onClick={() => openItem(null)}
-              className={cn("grid size-8 shrink-0 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring", scheme === "dark" ? "hover:bg-white/10" : "hover:bg-surface-2")}
+              className={cn("relative after:absolute after:-inset-1 grid size-8 shrink-0 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring", scheme === "dark" ? "hover:bg-white/10" : "hover:bg-surface-2")}
             >
               <X className="size-4" aria-hidden="true" />
             </button>
@@ -465,7 +465,7 @@ export function DarkroomStream({
           aria-pressed={!flowing}
           onClick={togglePause}
           className={cn(
-            "absolute right-3 bottom-3 grid size-9 cursor-pointer place-items-center rounded-full border outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring",
+            "after:absolute after:-inset-0.5 absolute right-3 bottom-3 grid size-9 cursor-pointer place-items-center rounded-full border outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring",
             open ? "pointer-events-none opacity-0" : "opacity-100",
             scheme === "dark" ? "border-white/15 bg-zinc-900/70 text-white hover:bg-zinc-800" : "border-border bg-background/85 text-foreground hover:bg-surface-2",
           )}

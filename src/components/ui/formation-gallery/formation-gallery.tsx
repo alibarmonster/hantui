@@ -683,7 +683,7 @@ export function FormationGallery({
               type="button"
               aria-label="Close photo"
               onClick={() => openCard(null)}
-              className={cn("grid size-8 shrink-0 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring", scheme === "dark" ? "hover:bg-white/10" : "hover:bg-surface-2")}
+              className={cn("relative after:absolute after:-inset-1 grid size-8 shrink-0 cursor-pointer place-items-center rounded-full outline-none focus-visible:ring-2 focus-visible:ring-ring", scheme === "dark" ? "hover:bg-white/10" : "hover:bg-surface-2")}
             >
               <X className="size-4" aria-hidden="true" />
             </button>
