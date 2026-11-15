@@ -83,7 +83,7 @@ export function extractProps(source: string): PropsGroup[] {
  */
 export function extractDemoVariants(source: string): DemoVariant[] {
   const sf = parse(source, "demo.tsx");
-  const imports: { text: string; names: string[] }[] = [];
+  const imports: { text: string; names: string[]; trim: (code: string) => string }[] = [];
   const helpers: { text: string; names: string[] }[] = [];
   const variants: { name: string; text: string }[] = [];
   let useClient = false;
@@ -93,13 +93,23 @@ export function extractDemoVariants(source: string): DemoVariant[] {
       if (st.expression.text === "use client") useClient = true;
     } else if (ts.isImportDeclaration(st)) {
       const names: string[] = [];
+      const text = st.getText(sf);
       const clause = st.importClause;
       if (clause?.name) names.push(clause.name.text);
+      const named = clause?.namedBindings && ts.isNamedImports(clause.namedBindings) ? clause.namedBindings.elements : null;
       if (clause?.namedBindings) {
         if (ts.isNamespaceImport(clause.namedBindings)) names.push(clause.namedBindings.name.text);
         else clause.namedBindings.elements.forEach((el) => names.push(el.name.text));
       }
-      imports.push({ text: st.getText(sf), names });
+      // Drop the named bindings a variant doesn't use, so `import { A, B }` becomes `import { A }`.
+      const trim = (code: string) => {
+        if (!clause || !named || named.every((el) => references(code, el.name.text))) return text;
+        const kept = named.filter((el) => references(code, el.name.text)).map((el) => el.getText(sf));
+        const usesDefault = clause.name && references(code, clause.name.text);
+        const parts = [usesDefault ? clause.name?.text : null, kept.length ? `{ ${kept.join(", ")} }` : null].filter(Boolean);
+        return `import ${clause.isTypeOnly ? "type " : ""}${parts.join(", ")} from ${st.moduleSpecifier.getText(sf)};`;
+      };
+      imports.push({ text, names, trim });
     } else if (ts.isFunctionDeclaration(st) && st.name && isExported(st)) {
       variants.push({ name: st.name.text, text: st.getText(sf) });
     } else {
@@ -135,7 +145,7 @@ export function extractDemoVariants(source: string): DemoVariant[] {
     const code = [...helperText, variant.text].join("\n\n");
     const importText = imports
       .filter((imp) => imp.names.length === 0 || imp.names.some((n) => references(code, n)))
-      .map((imp) => imp.text)
+      .map((imp) => imp.trim(code))
       .join("\n");
 
     return {
