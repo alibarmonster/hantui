@@ -104,7 +104,7 @@ export function AnimatedPagination({
                   aria-label={`Page ${slot}`}
                   aria-current={active ? "page" : undefined}
                   className={cn(
-                    "relative inline-flex h-9 min-w-[1.875rem] cursor-pointer items-center justify-center rounded-md px-1.5 text-sm font-medium tabular-nums outline-none sm:min-w-9 sm:px-2",
+                    "relative after:absolute after:inset-x-0 after:-inset-y-0.5 inline-flex h-9 min-w-[1.875rem] cursor-pointer items-center justify-center rounded-md px-1.5 text-sm font-medium tabular-nums outline-none sm:min-w-9 sm:px-2",
                     "transition-colors duration-150 focus-visible:ring-2 focus-visible:ring-ring",
                     active ? "text-background" : "text-muted-foreground hover:bg-accent hover:text-foreground",
                   )}
