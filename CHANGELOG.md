@@ -58,6 +58,7 @@ Work toward 0.4.0: sixteen components. Ten (#213–222) form a new category, Stu
 - Code blocks have a dark theme in dark mode (light and dark Shiki themes from one scope table, light colors at least 4.88:1) and line numbers on multi-line blocks.
 - Docs prose is 16px with a 1.6 line height and a 72-character measure.
 - Site controls get a 44px touch target on touch screens; desktop density is unchanged.
+- No sparkle, magic-wand or robot icons: Wallet Agent Chat's agent avatar (now a chip), Staking Card's APY badge (a trend arrow), Market Card's fallback for unknown topics (a tag) and Banner Stack's promo banners (a megaphone) use icons that say what they mean, as do nine demos, the navbar demos and the Pennant template.
 - The README and the docs overview describe motion accurately: components animate transform, opacity, filter and clip-path, size changes use layout animations or a grid-rows reveal, and only a few rows and panels that must push neighboring content animate their height or width.
 
 ### Fixed

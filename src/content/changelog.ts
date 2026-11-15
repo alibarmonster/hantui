@@ -56,6 +56,7 @@ export const releases: Release[] = [
           "Dither Wildlife now draws its horses, flock and grove as shaded, dithered ASCII with dust and trails; look=\"dither\" keeps the pixel look.",
           "The New badge moves to 0.4.0 components; components from 0.3.0 no longer show it.",
           "Search opens instantly, groups results into Components, Categories and Docs, and shows each component's category.",
+          "Sparkle and robot icons give way to ones that say what they mean, in Wallet Agent Chat, Staking Card, Market Card, Banner Stack and the demos.",
           "Code blocks have a dark theme in dark mode and line numbers; docs prose is 16px with a 72-character measure; site controls get 44px touch targets on touch screens.",
         ],
       },
