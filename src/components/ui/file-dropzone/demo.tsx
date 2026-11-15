@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef } from "react";
-import { Sparkles } from "lucide-react";
+import { Files } from "lucide-react";
 import { FileDropzone } from "@/components/ui/file-dropzone/file-dropzone";
 
 let uploads = 0;
@@ -63,7 +63,7 @@ export function Default() {
         onClick={() => dropSamples(zone.current)}
         className="inline-flex h-8 cursor-pointer items-center gap-1.5 rounded-md px-2.5 text-[13px] font-medium text-muted-foreground transition-colors hover:bg-accent hover:text-foreground"
       >
-        <Sparkles className="size-3.5" aria-hidden="true" />
+        <Files className="size-3.5" aria-hidden="true" />
         Drop sample files
       </button>
     </div>
