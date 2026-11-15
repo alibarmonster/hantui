@@ -226,7 +226,7 @@ export function SpendMeter({
             aria-label={`Lower the limit by ${money.format(step)}`}
             disabled={budget <= min}
             onClick={() => setBudget(budget - step)}
-            className="grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40"
+            className="relative after:absolute after:-inset-0.5 grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40"
           >
             <Minus className="size-4" aria-hidden="true" />
           </button>
@@ -238,7 +238,7 @@ export function SpendMeter({
             aria-label={`Raise the limit by ${money.format(step)}`}
             disabled={budget >= max}
             onClick={() => setBudget(budget + step)}
-            className="grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40"
+            className="relative after:absolute after:-inset-0.5 grid size-9 cursor-pointer place-items-center rounded-full border border-border text-foreground outline-none transition-colors hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring disabled:cursor-not-allowed disabled:opacity-40"
           >
             <Plus className="size-4" aria-hidden="true" />
           </button>
