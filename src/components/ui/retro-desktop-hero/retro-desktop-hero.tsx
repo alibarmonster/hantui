@@ -563,7 +563,13 @@ export function RetroDesktopHero({ owner = OWNER, windows = WINDOWS, background,
 
       {/* Desktop area above the taskbar. */}
       <div ref={deskRef} className="absolute inset-x-0 top-0" style={{ bottom: TASKBAR }} onPointerMove={moveDrag} onPointerUp={endDrag} onPointerCancel={endDrag} onPointerDown={(e) => e.target === e.currentTarget && setSelected(null)}>
-        <div role="group" aria-label="Desktop icons" className={cn(compact ? "grid grid-cols-3 gap-2 p-4" : "absolute inset-2")}>
+        {/* A full-size window covers the icons, so they leave the tab order until it closes or minimizes. */}
+        <div
+          role="group"
+          aria-label="Desktop icons"
+          inert={open.some((w) => !w.minimized && (compact || w.maximized))}
+          className={cn(compact ? "grid grid-cols-3 gap-2 p-4" : "absolute inset-2")}
+        >
           {windows.map((cfg, i) => {
             const cell = cellOf(cfg.id, i);
             const x = cell.col * CELL.w;
