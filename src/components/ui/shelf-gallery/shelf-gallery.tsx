@@ -175,7 +175,7 @@ export function ShelfGallery({ items, perShelf = 5, emptyShelves = 0, onSelect, 
                   </h3>
                   {open.subtitle ? <p className="text-sm text-muted-foreground">{open.subtitle}</p> : null}
                   {renderDetail?.(open)}
-                  <button ref={closeRef} type="button" onClick={close} className="mt-3 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background px-4 text-[13px] font-medium text-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
+                  <button ref={closeRef} type="button" onClick={close} className="relative after:absolute after:inset-x-0 after:-inset-y-0.5 mt-3 inline-flex h-9 cursor-pointer items-center gap-1.5 rounded-full border border-border bg-background px-4 text-[13px] font-medium text-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
                     <X className="size-3.5" aria-hidden="true" />
                     Back to the shelf
                   </button>
