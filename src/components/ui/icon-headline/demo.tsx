@@ -1,6 +1,6 @@
 "use client";
 
-import { Camera, Heart, Leaf, MessageCircle, Music, Rocket, Sparkles, Sun } from "lucide-react";
+import { Camera, Heart, Leaf, MessageCircle, Music, Package, Rocket, Sun } from "lucide-react";
 import { IconHeadline } from "@/components/ui/icon-headline/icon-headline";
 
 const icon = "size-[0.5em] text-white";
@@ -41,7 +41,7 @@ export function Single() {
       className="text-center text-[clamp(1.75rem,5vw,3rem)]"
       parts={[
         "Ship",
-        { icons: [<Sparkles key="a" className={icon} />, <MessageCircle key="b" className={icon} />, <Rocket key="c" className={icon} />], backgrounds: ["#111827", "#2563eb", "#16a34a"] },
+        { icons: [<Package key="a" className={icon} />, <MessageCircle key="b" className={icon} />, <Rocket key="c" className={icon} />], backgrounds: ["#111827", "#2563eb", "#16a34a"] },
         "faster",
       ]}
     />
