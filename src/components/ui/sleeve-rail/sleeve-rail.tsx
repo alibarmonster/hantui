@@ -500,8 +500,9 @@ export function SleeveRail({
                 <span
                   key={`${item.src}-${i}`}
                   className={cn(
-                    "absolute bottom-3 w-px -translate-x-1/2 rounded-full transition-[height,background-color] duration-200 motion-reduce:transition-none",
-                    i === input.index ? (record ? "h-0" : "h-5 bg-[var(--sleeve-accent)]") : i % 5 === 0 ? cn("h-4", muted) : cn("h-2.5", muted),
+                    // Ticks are 20px tall and scale down from the base (transform only).
+                    "absolute bottom-3 h-5 w-px origin-bottom -translate-x-1/2 rounded-full transition-[scale,background-color] duration-200 motion-reduce:transition-none",
+                    i === input.index ? (record ? "scale-y-0" : "scale-y-100 bg-[var(--sleeve-accent)]") : i % 5 === 0 ? cn("scale-y-80", muted) : cn("scale-y-50", muted),
                   )}
                   style={{ left: i * TICK }}
                 />

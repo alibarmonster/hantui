@@ -297,12 +297,16 @@ export function DepthRail<T extends DepthRailItem>({ items, label, index, onInde
       {/* Position ticks: clickable, but out of the tab order (the rail itself handles the keys). */}
       <div aria-hidden="true" className="mt-2 flex justify-center gap-1.5">
         {items.map((entry, i) => (
-          <button
+          // The front dot widens with a layout (transform) animation; its neighbors slide over the same way.
+          <motion.button
             key={entry.id}
             type="button"
             tabIndex={-1}
             onClick={() => goTo(i)}
-            className={cn("h-1.5 cursor-pointer rounded-full transition-[width,background-color] duration-300 motion-reduce:transition-none", i === front ? "w-5 bg-foreground" : "w-1.5 bg-foreground/20 hover:bg-foreground/40")}
+            layout
+            transition={{ duration: reduceMotion ? 0 : duration.base, ease: ease.out }}
+            style={{ borderRadius: 3 }}
+            className={cn("h-1.5 cursor-pointer transition-[background-color] duration-300 motion-reduce:transition-none", i === front ? "w-5 bg-foreground" : "w-1.5 bg-foreground/20 hover:bg-foreground/40")}
           />
         ))}
       </div>
