@@ -165,7 +165,7 @@ export function TradeTicket({
           </p>
         </div>
         {onClose ? (
-          <button type="button" aria-label="Close trade ticket" onClick={onClose} className="-mt-1 -mr-1 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
+          <button type="button" aria-label="Close trade ticket" onClick={onClose} className="relative after:absolute after:-inset-0.5 -mt-1 -mr-1 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
             <X className="size-4" aria-hidden="true" />
           </button>
         ) : null}
@@ -249,13 +249,13 @@ export function TradeTicket({
           </label>
           {limitMode ? (
             <div className="flex items-center gap-1" role="group" aria-label="Limit price">
-              <button type="button" aria-label="Lower limit by 1 cent" onClick={() => setLimitPrice((p) => Math.max(100, p - 100))} className="grid size-8 cursor-pointer place-items-center rounded-full border border-border outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
+              <button type="button" aria-label="Lower limit by 1 cent" onClick={() => setLimitPrice((p) => Math.max(100, p - 100))} className="relative after:absolute after:-inset-1 grid size-8 cursor-pointer place-items-center rounded-full border border-border outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
                 <Minus className="size-3.5" aria-hidden="true" />
               </button>
               <span aria-live="polite" className="w-12 text-center text-sm font-medium tabular-nums">
                 {formatPrice(limitPrice)}
               </span>
-              <button type="button" aria-label="Raise limit by 1 cent" onClick={() => setLimitPrice((p) => Math.min(FULL - 100, p + 100))} className="grid size-8 cursor-pointer place-items-center rounded-full border border-border outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
+              <button type="button" aria-label="Raise limit by 1 cent" onClick={() => setLimitPrice((p) => Math.min(FULL - 100, p + 100))} className="relative after:absolute after:-inset-1 grid size-8 cursor-pointer place-items-center rounded-full border border-border outline-none hover:bg-surface-2 focus-visible:ring-2 focus-visible:ring-ring">
                 <Plus className="size-3.5" aria-hidden="true" />
               </button>
             </div>

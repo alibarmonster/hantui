@@ -179,7 +179,7 @@ export function MarketCard({ market, watched = false, onWatchChange, onTrade, va
             setPop((n) => n + 1);
             onWatchChange?.(!watched);
           }}
-          className="-mt-1 -mr-1 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:bg-surface-2 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+          className="relative after:absolute after:-inset-0.5 -mt-1 -mr-1 grid size-9 shrink-0 cursor-pointer place-items-center rounded-full text-muted-foreground outline-none hover:bg-surface-2 hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
         >
           <motion.span key={pop} initial={pop && !reduceMotion ? { scale: 0.6 } : false} animate={{ scale: 1 }} transition={{ type: "spring", stiffness: 500, damping: 15 }}>
             <Star className={cn("size-4", watched && "fill-warning text-warning")} aria-hidden="true" />
