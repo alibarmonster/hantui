@@ -72,7 +72,7 @@ export function TickerHeader({ brand, items, actions = [], announcements, durati
                 ))}
               </motion.div>
             )}
-            <button type="button" onClick={() => setDismissed(true)} aria-label="Dismiss announcements" className="absolute right-1.5 grid size-6 cursor-pointer place-items-center rounded-md bg-[#fafafa] text-[#71717a] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring">
+            <button type="button" onClick={() => setDismissed(true)} aria-label="Dismiss announcements" className="after:absolute after:-inset-2 absolute right-1.5 grid size-6 cursor-pointer place-items-center rounded-md bg-[#fafafa] text-[#71717a] outline-none hover:text-[#09090b] focus-visible:ring-2 focus-visible:ring-ring">
               <X className="size-3.5" aria-hidden="true" />
             </button>
           </div>

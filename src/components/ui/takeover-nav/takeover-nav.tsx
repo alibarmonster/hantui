@@ -153,7 +153,7 @@ export function TakeoverNav({ name, nameHref = "/", items, corners = {}, accent 
             aria-controls={`${id}-menu`}
             aria-label={open ? "Close menu" : "Open menu"}
             onClick={() => (open ? close() : setOpen(true))}
-            className="group -mr-2 grid size-9 shrink-0 cursor-pointer place-items-center rounded-lg outline-none hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/70"
+            className="relative after:absolute after:-inset-0.5 group -mr-2 grid size-9 shrink-0 cursor-pointer place-items-center rounded-lg outline-none hover:bg-white/10 focus-visible:ring-2 focus-visible:ring-white/70"
           >
             <svg viewBox="-8 -8 16 16" className="size-4 overflow-visible" aria-hidden="true">
               {dots.map(([x, y], i) => (
