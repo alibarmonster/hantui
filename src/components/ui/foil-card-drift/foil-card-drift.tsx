@@ -1,7 +1,7 @@
 "use client";
 
 import { useRef, useState, type ReactNode } from "react";
-import { motion, useAnimationFrame, useMotionTemplate, useMotionValue, useReducedMotion, useTransform, type MotionValue } from "motion/react";
+import { motion, useAnimationFrame, useInView, useMotionTemplate, useMotionValue, useReducedMotion, useTransform, type MotionValue } from "motion/react";
 import { Pause, Play } from "lucide-react";
 import { cn } from "@/lib/utils";
 
@@ -142,9 +142,12 @@ export function FoilCardDrift({ cards, speed = 46, spacing = 1.1, cardWidth = 24
   const height = Math.round(cardWidth / 1.586);
   const spacingPx = width * spacing;
   const still = paused || !!reduceMotion;
+  const root = useRef<HTMLDivElement>(null);
+  // Offscreen, the drift does no work (it resumes just before the cards scroll back into view).
+  const inView = useInView(root, { margin: "200px" });
 
   useAnimationFrame((_, delta) => {
-    if (drag.current) return;
+    if (!inView || drag.current) return;
     const target = still ? 0 : hover.current ? 0.15 : 1;
     rate.current += (target - rate.current) * Math.min(1, delta / 250);
     if (Math.abs(rate.current) < 0.001) return;
@@ -153,6 +156,7 @@ export function FoilCardDrift({ cards, speed = 46, spacing = 1.1, cardWidth = 24
 
   return (
     <div
+      ref={root}
       className={cn("relative w-full touch-pan-y overflow-hidden select-none [perspective:1400px]", className)}
       style={{ height: height + 140 }}
       onPointerEnter={(e) => e.pointerType !== "touch" && (hover.current = true)}
