@@ -100,7 +100,7 @@ export function TokenAmountInput({
     <div
       className={cn(
         "rounded-2xl border bg-surface p-4 transition-colors focus-within:bg-background",
-        message ? "border-destructive/40" : "border-border focus-within:border-ring/50",
+        message ? "border-destructive/40" : "border-border focus-within:border-ring focus-within:ring-3 focus-within:ring-ring/15",
         disabled && "opacity-60",
         className,
       )}
