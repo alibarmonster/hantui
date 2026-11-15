@@ -118,7 +118,7 @@ export function SlippageSettings({
                         onValueChange(bps);
                       }}
                       className={cn(
-                        "relative h-9 flex-1 cursor-pointer rounded-lg font-mono text-[13px] font-medium tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-ring",
+                        "relative after:absolute after:inset-x-0 after:-inset-y-0.5 h-9 flex-1 cursor-pointer rounded-lg font-mono text-[13px] font-medium tabular-nums outline-none focus-visible:ring-2 focus-visible:ring-ring",
                         active ? "text-foreground" : "text-foreground/65 hover:text-foreground",
                       )}
                     >
