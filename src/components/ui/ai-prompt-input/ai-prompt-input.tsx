@@ -183,7 +183,7 @@ export function AIPromptInput({
                       type="button"
                       onClick={() => setAttachments((list) => list.filter((a) => a.id !== attachment.id))}
                       aria-label={`Remove ${attachment.name}`}
-                      className="inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                      className="relative after:absolute after:-inset-2 inline-flex size-6 shrink-0 cursor-pointer items-center justify-center rounded-md text-muted-foreground outline-none hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
                     >
                       <X className="size-3" aria-hidden="true" />
                     </button>
@@ -214,7 +214,7 @@ export function AIPromptInput({
                 type="button"
                 onClick={() => fileRef.current?.click()}
                 aria-label="Attach files"
-                className="inline-flex size-8 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
+                className="relative after:absolute after:-inset-1 inline-flex size-8 cursor-pointer items-center justify-center rounded-lg text-muted-foreground outline-none transition-colors hover:bg-accent hover:text-foreground focus-visible:ring-2 focus-visible:ring-ring"
               >
                 <Paperclip className="size-4" aria-hidden="true" />
               </button>
@@ -227,7 +227,7 @@ export function AIPromptInput({
               type="button"
               onClick={onStop}
               aria-label="Stop generating"
-              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-foreground text-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
+              className="relative after:absolute after:-inset-1 inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-foreground text-background outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
             >
               <Square className="size-3 fill-current" aria-hidden="true" />
             </button>
@@ -238,7 +238,7 @@ export function AIPromptInput({
               disabled={!canSend}
               animate={{ scale: canSend || reduceMotion ? 1 : 0.92 }}
               transition={{ type: "spring", stiffness: 500, damping: 28 }}
-              className="inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-foreground text-background outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
+              className="relative after:absolute after:-inset-1 inline-flex size-8 cursor-pointer items-center justify-center rounded-full bg-foreground text-background outline-none transition-opacity focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 disabled:cursor-not-allowed disabled:opacity-30"
             >
               <ArrowUp className="size-4" aria-hidden="true" />
             </motion.button>
