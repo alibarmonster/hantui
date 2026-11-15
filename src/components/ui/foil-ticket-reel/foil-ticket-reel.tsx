@@ -666,7 +666,7 @@ function Ticket({ ticket, torn, tearable, reduceMotion, onTear, onTearing, onSwi
               onPointerUp={stubUp}
               onPointerCancel={stubUp}
               className={cn(
-                "relative flex h-full w-[32%] gap-[2.4cqi] overflow-hidden rounded-r-[2.4cqi] border-l-[0.45cqi] border-dotted border-[#141625]/35 bg-[#f4efe6] py-[3.6cqi] pr-[3.4cqi] pl-[2.4cqi] outline-none focus-visible:ring-[0.6cqi] focus-visible:ring-[#b2d4ff]",
+                "relative flex h-full w-[32%] gap-[2.4cqi] overflow-hidden rounded-r-[2.4cqi] border-l-[0.45cqi] border-dotted border-[#141625]/35 bg-[#f4efe6] py-[3.6cqi] pr-[3.4cqi] pl-[2.4cqi] outline-none focus-visible:ring-[0.6cqi] focus-visible:ring-[#141625] focus-visible:ring-inset",
                 tearable && (tearing ? "cursor-grabbing" : "cursor-grab"),
               )}
               style={{ x: stubX, rotate: stubRotate, transformOrigin: "0% 100%", mask: notches("left"), WebkitMask: notches("left") } as unknown as CSSProperties}
