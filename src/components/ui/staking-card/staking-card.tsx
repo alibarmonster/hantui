@@ -2,7 +2,7 @@
 
 import { useEffect, useId, useState, type ComponentProps } from "react";
 import { AnimatePresence, LayoutGroup, motion, useReducedMotion } from "motion/react";
-import { Check, Sparkles } from "lucide-react";
+import { Check, TrendingUp } from "lucide-react";
 import { RangeSlider } from "@/components/ui/range-slider/range-slider";
 import { cn } from "@/lib/utils";
 import { duration, ease, spring } from "@/lib/motion";
@@ -100,7 +100,7 @@ export function StakingCard({
           </div>
         </div>
         <span className="inline-flex items-center gap-1 rounded-full bg-success/10 px-2.5 py-1 font-mono text-xs font-semibold text-[color-mix(in_oklab,var(--success)_70%,var(--foreground))] tabular-nums">
-          <Sparkles className="size-3" aria-hidden="true" />
+          <TrendingUp className="size-3" aria-hidden="true" />
           {formatBps(apyBps)} APY
         </span>
       </div>
