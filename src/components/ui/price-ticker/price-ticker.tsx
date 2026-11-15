@@ -1,7 +1,7 @@
 "use client";
 
 import { useEffect, useRef, useState, type ComponentProps } from "react";
-import { motion, useAnimationFrame, useMotionValue, useReducedMotion } from "motion/react";
+import { motion, useAnimationFrame, useInView, useMotionValue, useReducedMotion } from "motion/react";
 import { TrendingDown, TrendingUp } from "lucide-react";
 import { cn } from "@/lib/utils";
 import { formatPercent, formatUsd, USD_DECIMALS } from "@/lib/web3/format";
@@ -89,8 +89,11 @@ export function PriceTicker({
     return () => observer.disconnect();
   }, []);
 
+  // Offscreen, the loop does no work (it resumes just before the track scrolls back into view).
+  const inView = useInView(track, { margin: "200px" });
+
   useAnimationFrame((_, delta) => {
-    if (reduceMotion || width === 0) return;
+    if (!inView || reduceMotion || width === 0) return;
     // Ease the speed toward 0 (paused) or 1, so hovering slows rather than snaps.
     const target = paused.current ? 0 : 1;
     velocity.current += (target - velocity.current) * Math.min(1, delta / 180);
