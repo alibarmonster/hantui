@@ -33,8 +33,8 @@ export interface DotScreenFooterProps extends Omit<ComponentProps<"footer">, "ch
   columns?: DotScreenFooterColumn[];
   /** Show the Back to top button; pass a string to change its label. @default true */
   backToTop?: boolean | string;
-  /** Color preset. @default "ink" */
-  tone?: "ink" | "paper" | "terracotta" | "cobalt";
+  /** Color preset: dark grounds (ink, terracotta, cobalt, forest, plum, midnight, oxblood) or light ones (paper, riso, mint, blush, butter). @default "ink" */
+  tone?: "ink" | "paper" | "terracotta" | "cobalt" | "forest" | "plum" | "midnight" | "oxblood" | "riso" | "mint" | "blush" | "butter";
   /** Colors that override the preset, as any CSS colors. */
   palette?: DotScreenFooterPalette;
   /** Distance between dots in px. Kept at 4 or more so the dot count stays bounded. @default 6 */
@@ -63,12 +63,27 @@ export interface DotScreenFooterProps extends Omit<ComponentProps<"footer">, "ch
   height?: string | number;
 }
 
-const TONES: Record<NonNullable<DotScreenFooterProps["tone"]>, Required<DotScreenFooterPalette>> = {
+/** Name of a color preset. */
+export type DotScreenFooterTone = NonNullable<DotScreenFooterProps["tone"]>;
+
+/** Color presets: ground, ink for text and resting dots, warm for pushed dots and the second plate. */
+const TONES: Record<DotScreenFooterTone, Required<DotScreenFooterPalette>> = {
   ink: { ground: "#141312", ink: "#f3efe6", warm: "#ff6a1a" },
   paper: { ground: "#f2ecdf", ink: "#141312", warm: "#d8321c" },
   terracotta: { ground: "#a3442a", ink: "#fbeee2", warm: "#ffd08a" },
   cobalt: { ground: "#1b3fd6", ink: "#eef2ff", warm: "#ffd84a" },
+  forest: { ground: "#17301f", ink: "#eef0e0", warm: "#f2b632" },
+  plum: { ground: "#2e1630", ink: "#f7e8ef", warm: "#ff7a5c" },
+  midnight: { ground: "#0e1a2f", ink: "#e7edf8", warm: "#4fd8b8" },
+  oxblood: { ground: "#4a1214", ink: "#f8e7da", warm: "#f59e5b" },
+  riso: { ground: "#f6f0e2", ink: "#123f8c", warm: "#f0458f" },
+  mint: { ground: "#d9efe2", ink: "#0f2a1d", warm: "#e2482f" },
+  blush: { ground: "#f5ddd5", ink: "#2b1411", warm: "#2f56c9" },
+  butter: { ground: "#f3e39b", ink: "#1d1a10", warm: "#d7381f" },
 };
+
+/** Every preset name, in the order above. */
+export const DOT_SCREEN_FOOTER_TONES = Object.keys(TONES) as DotScreenFooterTone[];
 
 /** Warmth is quantized to this many colors, so dots are filled one batch per color. */
 const BUCKETS = 8;

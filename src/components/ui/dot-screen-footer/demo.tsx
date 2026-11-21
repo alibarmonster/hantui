@@ -1,7 +1,7 @@
 "use client";
 
 import { useState } from "react";
-import { DotScreenFooter, type DotScreenFooterProps } from "@/components/ui/dot-screen-footer/dot-screen-footer";
+import { DOT_SCREEN_FOOTER_TONES, DotScreenFooter, type DotScreenFooterProps, type DotScreenFooterTone } from "@/components/ui/dot-screen-footer/dot-screen-footer";
 
 const columns = [
   { title: "Studio", links: [{ label: "Work", href: "#work" }, { label: "Approach", href: "#approach" }, { label: "Journal", href: "#journal" }] },
@@ -13,7 +13,7 @@ const field = "flex flex-col gap-1 text-xs font-medium text-muted-foreground";
 const control = "h-10 rounded-lg border border-border bg-background px-2.5 text-sm text-foreground outline-none focus-visible:ring-2 focus-visible:ring-ring";
 
 export function Default() {
-  const [tone, setTone] = useState<NonNullable<DotScreenFooterProps["tone"]>>("ink");
+  const [tone, setTone] = useState<DotScreenFooterTone>("ink");
   const [shape, setShape] = useState<NonNullable<DotScreenFooterProps["shape"]>>("round");
   const [angle, setAngle] = useState(0);
   const [plates, setPlates] = useState<1 | 2>(1);
@@ -25,10 +25,11 @@ export function Default() {
         <label className={field}>
           Tone
           <select className={control} value={tone} onChange={(event) => setTone(event.target.value as typeof tone)}>
-            <option value="ink">Ink</option>
-            <option value="paper">Paper</option>
-            <option value="terracotta">Terracotta</option>
-            <option value="cobalt">Cobalt</option>
+            {DOT_SCREEN_FOOTER_TONES.map((name) => (
+              <option key={name} value={name}>
+                {name[0].toUpperCase() + name.slice(1)}
+              </option>
+            ))}
           </select>
         </label>
         <label className={field}>

@@ -32,6 +32,6 @@ export function SiteFooter() {
     "The word is laid out again after resizes (debounced) and once document.fonts.ready resolves, so a late web font is picked up. gap is clamped to 4px or more.",
     "plates={2} adds a second screen at 75° in the warm color, slightly offset and at low opacity.",
     "Until the canvas has drawn, and for good where 2D canvas is unavailable, the word shows as plain text behind a CSS dot mask.",
-    "tone picks one of four palettes (ink, paper, terracotta, cobalt) and palette overrides any of its colors. They are CSS variables, so the text always matches the dots. The mono text is small and uppercase by design; keep link labels short.",
+    "tone picks one of twelve palettes, dark grounds (ink, terracotta, cobalt, forest, plum, midnight, oxblood) or light ones (paper, riso, mint, blush, butter), and palette overrides any of its colors. DOT_SCREEN_FOOTER_TONES lists the names. They are CSS variables, so the text always matches the dots. The mono text is small and uppercase by design; keep link labels short.",
   ],
 };
